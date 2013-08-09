@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet id="1466412359126-1" author="Shiv">
+		<insert tableName="user">
+			<column name="username" value="root"></column>
+			<column name="password" value="root"></column>
+			<column name="first_name" value="root"></column>
+			<column name="last_name" value="root"></column>
+			<column name="email" value="root@gmail.com"></column>
+			<column name="enabled" valueNumeric="1"></column>
+		</insert>
+	</changeSet>
+
+	<changeSet id="1466412359126-2" author="Shiv">
+		<insert tableName="role">
+			<column name="name" value="Admin"></column>
+			<column name="role_name" value="role_admin"></column>
+			<column name="description" value="Admin User"></column>
+		</insert>
+		<insert tableName="role">
+			<column name="name" value="User"></column>
+			<column name="role_name" value="role_user"></column>
+			<column name="description" value="Normal User"></column>
+		</insert>
+	</changeSet>
+
+	<changeSet id="1466412359126-3" author="Shiv">
+		<insert tableName="user_role">
+			<column name="user_id" value="1"></column>
+			<column name="role_id" value="1"></column>
+		</insert>
+	</changeSet>
+		<changeSet author="Shiv" id="1370006636842-10">
+			<update tableName="user">
+				<column name="password" value="630d1d8c41c910cb54214edb7fd78d592c85c87c40b4c9fc4cd4b3ad228fcc43"></column>
+				<where>username='root'</where>
+			</update>
+		</changeSet>
+</databaseChangeLog>

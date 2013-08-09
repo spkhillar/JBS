@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="base.definition"
+		template="/WEB-INF/views/tiles/base/layout.jsp">
+		<put-attribute name="main-content" value="/WEB-INF/views/tiles/base/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/base/footer.jsp" />
+	</definition>
+
+	<definition name="home" extends="base.definition">
+		<put-attribute name="title" value="Home" />
+		<put-attribute name="body" value="/WEB-INF/views/tiles/home/home.jsp" />
+	</definition>
+	<definition name="base.login.definition"
+		template="/WEB-INF/views/tiles/base/login-layout.jsp">
+		<put-attribute name="body" value="" />
+	</definition>	
+	
+	
+	<definition name="admin.users" extends="base.definition">
+		<put-attribute name="title" value="User Administration" />
+		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/users.jsp" />
+	</definition>
+	<definition name="login" extends="base.login.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/login.jsp" />
+	</definition>
+	<definition name="denied" extends="base.login.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/denied.jsp" />
+	</definition>
+	<definition name="sessiontimeout" extends="base.login.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/session-timed-out.jsp" />
+	</definition>
+	<definition name="under.construction" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/under-construction.jsp" />
+	</definition>
+</tiles-definitions>
