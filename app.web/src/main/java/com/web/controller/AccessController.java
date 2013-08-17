@@ -18,7 +18,7 @@ import com.web.http.session.management.LogoutEventPublisher;
 /**
  * The Class AccessController.
  * 
- * @author 
+ * @author
  */
 @Controller
 public class AccessController extends BaseController {
@@ -42,7 +42,7 @@ public class AccessController extends BaseController {
   public String login(final Model model,
       @RequestParam(required = false) final String message) {
     model.addAttribute("message", message);
-    return "login";
+    return "index";
   }
 
   /**

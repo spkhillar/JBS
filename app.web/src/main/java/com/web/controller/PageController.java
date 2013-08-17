@@ -9,11 +9,13 @@ public class PageController extends BaseController {
 
   @RequestMapping("/page1")
   public String page1Example(){
-    return "test";
+    return "index";
   }
 
   @RequestMapping("/page2")
   public String page2Example(){
     return "test2";
   }
+
+
 }
