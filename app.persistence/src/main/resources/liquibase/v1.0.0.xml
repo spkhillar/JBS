@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-    <changeSet author="shiv" id="1376829106667-1">
-        <insert tableName="user_groups">
-            <column name="id" valueNumeric="1"/>
-            <column name="group_id" valueNumeric="1"/>
-            <column name="parent_group_id"/>
-            <column name="level" valueNumeric="0"/>
-            <column name="position" value=""/>
-            <column name="created_at" valueDate="2013-07-27T20:04:52.0"/>
-            <column name="updated_at" valueDate="2013-07-27T20:04:52.0"/>
-            <column name="version" valueNumeric="0"/>
-        </insert>
-    </changeSet>
+  
     <changeSet author="shiv" id="1376829106667-2">
         <insert tableName="role">
             <column name="id" valueNumeric="1"/>
@@ -71,6 +60,18 @@
             <column name="id" valueNumeric="1"/>
             <column name="user_id" valueNumeric="1"/>
             <column name="role_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+      <changeSet author="shiv" id="1376829106667-1">
+        <insert tableName="user_groups">
+            <column name="id" valueNumeric="1"/>
+            <column name="group_id" valueNumeric="1"/>
+            <column name="parent_group_id"/>
+            <column name="level" valueNumeric="0"/>
+            <column name="position" value=""/>
+            <column name="created_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="updated_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="version" valueNumeric="0"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

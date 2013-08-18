@@ -571,61 +571,61 @@
         </createTable>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-25">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="accounts"  constraintName="FK1_accounts_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="accounts"  constraintName="FK1_accounts_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-26">
-        <addForeignKeyConstraint baseColumnNames="receiver_user_id" baseTableName="deposit_intimator"  constraintName="FK2_dep_rec_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="receiver_user_id" baseTableName="deposit_intimator"  constraintName="FK2_dep_rec_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-27">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="deposit_intimator"  constraintName="FK1_dep_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="deposit_intimator"  constraintName="FK1_dep_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-28">
-        <addForeignKeyConstraint baseColumnNames="redeem_id" baseTableName="payment"  constraintName="FK1_payment_redeem_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="redeem_history" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="redeem_id" baseTableName="payment"  constraintName="FK1_payment_redeem_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="redeem_history"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-29">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="qualification"  constraintName="FK1_qualification_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="qualification"  constraintName="FK1_qualification_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-30">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="redeem_history"  constraintName="FK1_reedem_history_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="redeem_history"  constraintName="FK1_reedem_history_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-31">
-        <addForeignKeyConstraint baseColumnNames="permission_id" baseTableName="role_permission"  constraintName="role_permission_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="permission" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="permission_id" baseTableName="role_permission"  constraintName="role_permission_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="permission"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-32">
-        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="role_permission"  constraintName="role_permission_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="role_permission"  constraintName="role_permission_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-33">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="skill"  constraintName="FK1_user_skill" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="skill"  constraintName="FK1_user_skill" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-34">
-        <addForeignKeyConstraint baseColumnNames="derived_from" baseTableName="subscription"  constraintName="FK2_subs_derived_from" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="subscription" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="derived_from" baseTableName="subscription"  constraintName="FK2_subs_derived_from" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="subscription"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-35">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="subscription"  constraintName="FK1_subs_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="subscription"  constraintName="FK1_subs_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-36">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="ticket"  constraintName="FK1_ticket_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="ticket"  constraintName="FK1_ticket_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-37">
-        <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="user"  constraintName="FK1_User_address_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="address" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="user"  constraintName="FK1_User_address_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="address"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-38">
-        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="user_groups"  constraintName="FK1_GRP_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="user_groups"  constraintName="FK1_GRP_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-39">
-        <addForeignKeyConstraint baseColumnNames="parent_group_id" baseTableName="user_groups"  constraintName="FK2_PARENT_GRP_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="parent_group_id" baseTableName="user_groups"  constraintName="FK2_PARENT_GRP_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-40">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_points_history"  constraintName="FK1_user_points_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_points_history"  constraintName="FK1_user_points_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-41">
-        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_role"  constraintName="user_role_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_role"  constraintName="user_role_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-42">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_role"  constraintName="user_role_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_role"  constraintName="user_role_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1376828722508-43">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_security_question"  constraintName="FK1_sec_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_security_question"  constraintName="FK1_sec_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
     </changeSet>
     <changeSet author="shiv" id="1367592120329-1">
 		<createTable tableName="QRTZ_BLOB_TRIGGERS">
