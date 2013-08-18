@@ -2,6 +2,8 @@
 package com.jpa.entities;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +12,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,8 +29,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  * User.
- *
- * @author  
+ * 
+ * @author
  */
 @Entity
 @Table(name = "user")
@@ -82,16 +87,31 @@ public class User implements BaseEntity, java.io.Serializable {
   @JsonProperty
   private Long roleId;
 
-  /**
-   * Instantiates a new user.
-   */
-  public User() {
-  }
+  /** The address. */
+  private Address address;
+
+  /** The user groupses for parent group id. */
+  private Set<UserGroups> userGroupsesForParentGroupId = new HashSet<UserGroups>(0);
+
+  /** The user groupses for group id. */
+  private Set<UserGroups> userGroupsesForGroupId = new HashSet<UserGroups>(0);
+
+  /** The qualifications. */
+  private Set<Qualification> qualifications = new HashSet<Qualification>(0);
+
+  /** The skills. */
+  private Set<Skill> skills = new HashSet<Skill>(0);
 
   /**
    * Instantiates a new user.
-   *
-   * @param createdAt the created at
+   */
+  public User() {}
+
+  /**
+   * Instantiates a new user.
+   * 
+   * @param createdAt
+   *          the created at
    */
   public User(final Date createdAt) {
     this.createdAt = createdAt;
@@ -99,20 +119,28 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Instantiates a new user.
-   *
-   * @param username the username
-   * @param password the password
-   * @param firstName the first name
-   * @param lastName the last name
-   * @param email the email
-   * @param enabled the enabled
-   * @param createdAt the created at
-   * @param userRole the user role
-   * @param phone the phone
+   * 
+   * @param username
+   *          the username
+   * @param password
+   *          the password
+   * @param firstName
+   *          the first name
+   * @param lastName
+   *          the last name
+   * @param email
+   *          the email
+   * @param enabled
+   *          the enabled
+   * @param createdAt
+   *          the created at
+   * @param userRole
+   *          the user role
+   * @param phone
+   *          the phone
    */
-  public User(final String username, final String password, final String firstName,
-      final String lastName, final String email, final Boolean enabled, final Date createdAt,
-      final UserRole userRole, final String phone) {
+  public User(final String username, final String password, final String firstName, final String lastName,
+      final String email, final Boolean enabled, final Date createdAt, final UserRole userRole, final String phone) {
     userName = username;
     this.password = password;
     this.firstName = firstName;
@@ -126,17 +154,24 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Instantiates a new user.
-   *
-   * @param userName the user name
-   * @param password the password
-   * @param firstName the first name
-   * @param lastName the last name
-   * @param email the email
-   * @param enabled the enabled
-   * @param phone the phone
+   * 
+   * @param userName
+   *          the user name
+   * @param password
+   *          the password
+   * @param firstName
+   *          the first name
+   * @param lastName
+   *          the last name
+   * @param email
+   *          the email
+   * @param enabled
+   *          the enabled
+   * @param phone
+   *          the phone
    */
-  public User(final String userName, final String password, final String firstName,
-      final String lastName, final String email, final Boolean enabled, final String phone) {
+  public User(final String userName, final String password, final String firstName, final String lastName,
+      final String email, final Boolean enabled, final String phone) {
     super();
     this.userName = userName;
     this.password = password;
@@ -149,7 +184,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   @Id
@@ -161,8 +196,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(final Long id) {
     this.id = id;
@@ -170,7 +206,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the user name.
-   *
+   * 
    * @return the user name
    */
   @Column(name = "username", length = 250)
@@ -180,8 +216,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the user name.
-   *
-   * @param userName the new user name
+   * 
+   * @param userName
+   *          the new user name
    */
   public void setUserName(final String userName) {
     this.userName = userName;
@@ -189,7 +226,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the password.
-   *
+   * 
    * @return the password
    */
   @Column(name = "password", length = 250)
@@ -199,8 +236,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the password.
-   *
-   * @param password the new password
+   * 
+   * @param password
+   *          the new password
    */
   public void setPassword(final String password) {
     this.password = password;
@@ -208,7 +246,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the first name.
-   *
+   * 
    * @return the first name
    */
   @Column(name = "first_name", length = 250)
@@ -218,8 +256,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the first name.
-   *
-   * @param firstName the new first name
+   * 
+   * @param firstName
+   *          the new first name
    */
   public void setFirstName(final String firstName) {
     this.firstName = firstName;
@@ -227,7 +266,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the last name.
-   *
+   * 
    * @return the last name
    */
   @Column(name = "last_name", length = 250)
@@ -237,8 +276,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the last name.
-   *
-   * @param lastName the new last name
+   * 
+   * @param lastName
+   *          the new last name
    */
   public void setLastName(final String lastName) {
     this.lastName = lastName;
@@ -246,7 +286,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the email.
-   *
+   * 
    * @return the email
    */
   @Column(name = "email", length = 250)
@@ -256,8 +296,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the email.
-   *
-   * @param email the new email
+   * 
+   * @param email
+   *          the new email
    */
   public void setEmail(final String email) {
     this.email = email;
@@ -265,7 +306,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the enabled.
-   *
+   * 
    * @return the enabled
    */
   @Column(name = "enabled")
@@ -275,8 +316,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the enabled.
-   *
-   * @param enabled the new enabled
+   * 
+   * @param enabled
+   *          the new enabled
    */
   public void setEnabled(final Boolean enabled) {
     this.enabled = enabled;
@@ -284,7 +326,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the phone.
-   *
+   * 
    * @return the phone
    */
   @Column(name = "phone", length = 25)
@@ -294,8 +336,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the phone.
-   *
-   * @param phone the new phone
+   * 
+   * @param phone
+   *          the new phone
    */
   public void setPhone(final String phone) {
     this.phone = phone;
@@ -303,7 +346,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the created at.
-   *
+   * 
    * @return the created at
    */
   @Temporal(TemporalType.TIMESTAMP)
@@ -314,8 +357,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the created at.
-   *
-   * @param createdAt the new created at
+   * 
+   * @param createdAt
+   *          the new created at
    */
   public void setCreatedAt(final Date createdAt) {
     this.createdAt = createdAt;
@@ -323,7 +367,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the version.
-   *
+   * 
    * @return the version
    */
   @Version
@@ -334,8 +378,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the version.
-   *
-   * @param version the new version
+   * 
+   * @param version
+   *          the new version
    */
   public void setVersion(final Integer version) {
     this.version = version;
@@ -343,7 +388,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the user role.
-   *
+   * 
    * @return the user role
    */
   @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
@@ -353,8 +398,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the user role.
-   *
-   * @param userRole the new user role
+   * 
+   * @param userRole
+   *          the new user role
    */
   public void setUserRole(final UserRole userRole) {
     this.userRole = userRole;
@@ -365,7 +411,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the role id.
-   *
+   * 
    * @return the role id
    */
   @Transient
@@ -375,14 +421,114 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the role id.
-   *
-   * @param roleId the new role id
+   * 
+   * @param roleId
+   *          the new role id
    */
   public void setRoleId(final Long roleId) {
     this.roleId = roleId;
   }
 
-  /* (non-Javadoc)
+  /**
+   * Gets the address.
+   *
+   * @return the address
+   */
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "address_id")
+  public Address getAddress() {
+    return this.address;
+  }
+
+  /**
+   * Sets the address.
+   *
+   * @param address the new address
+   */
+  public void setAddress(Address address) {
+    this.address = address;
+  }
+
+  /**
+   * Gets the user groupses for parent group id.
+   *
+   * @return the user groupses for parent group id
+   */
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userByParentGroupId")
+  public Set<UserGroups> getUserGroupsesForParentGroupId() {
+    return this.userGroupsesForParentGroupId;
+  }
+
+  /**
+   * Sets the user groupses for parent group id.
+   *
+   * @param userGroupsesForParentGroupId the new user groupses for parent group id
+   */
+  public void setUserGroupsesForParentGroupId(Set<UserGroups> userGroupsesForParentGroupId) {
+    this.userGroupsesForParentGroupId = userGroupsesForParentGroupId;
+  }
+
+  /**
+   * Gets the user groupses for group id.
+   *
+   * @return the user groupses for group id
+   */
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userByGroupId")
+  public Set<UserGroups> getUserGroupsesForGroupId() {
+    return this.userGroupsesForGroupId;
+  }
+
+  /**
+   * Sets the user groupses for group id.
+   *
+   * @param userGroupsesForGroupId the new user groupses for group id
+   */
+  public void setUserGroupsesForGroupId(Set<UserGroups> userGroupsesForGroupId) {
+    this.userGroupsesForGroupId = userGroupsesForGroupId;
+  }
+
+  /**
+   * Gets the qualifications.
+   *
+   * @return the qualifications
+   */
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+  public Set<Qualification> getQualifications() {
+    return this.qualifications;
+  }
+
+  /**
+   * Sets the qualifications.
+   *
+   * @param qualifications the new qualifications
+   */
+  public void setQualifications(Set<Qualification> qualifications) {
+    this.qualifications = qualifications;
+  }
+
+  /**
+   * Gets the skills.
+   *
+   * @return the skills
+   */
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+  public Set<Skill> getSkills() {
+    return this.skills;
+  }
+
+  /**
+   * Sets the skills.
+   *
+   * @param skills the new skills
+   */
+  public void setSkills(Set<Skill> skills) {
+    this.skills = skills;
+  }
+
+  /**
+   * To string.
+   *
+   * @return the string
    * @see java.lang.Object#toString()
    */
   @Override
@@ -426,20 +572,23 @@ public class User implements BaseEntity, java.io.Serializable {
     return builder.toString();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((email == null) ? 0 : email.hashCode());
-    result = prime * result
-        + ((userName == null) ? 0 : userName.hashCode());
+    result = prime * result + (email == null ? 0 : email.hashCode());
+    result = prime * result + (userName == null ? 0 : userName.hashCode());
     return result;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override

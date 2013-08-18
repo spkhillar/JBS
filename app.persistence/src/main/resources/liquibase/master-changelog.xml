@@ -1,103 +1,633 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-	<changeSet author="" id="1366412359126-4">
-		<createTable tableName="permission">
-			<column autoIncrement="true" name="id" type="BIGINT">
-				<constraints nullable="false" primaryKey="true" />
-			</column>
-			<column name="name" type="VARCHAR(250)" />
-		</createTable>
-		<modifySql dbms="mysql">
-			<append value=" engine innodb" />
-		</modifySql>
-	</changeSet>
-	<changeSet author="" id="1366412359126-5">
-		<createTable tableName="role">
-			<column autoIncrement="true" name="id" type="BIGINT">
-				<constraints nullable="false" primaryKey="true" />
-			</column>
-			<column name="name" type="VARCHAR(250)" />
-		</createTable>
-		<modifySql dbms="mysql">
-			<append value=" engine innodb" />
-		</modifySql>
-	</changeSet>
-	<changeSet author="" id="1366412359126-6">
-		<createTable tableName="role_permission">
-			<column autoIncrement="true" name="id" type="BIGINT">
-				<constraints nullable="false" primaryKey="true" />
-			</column>
-			<column name="role_id" type="BIGINT" />
-			<column name="permission_id" type="BIGINT" />
-		</createTable>
-		<modifySql dbms="mysql">
-			<append value=" engine innodb" />
-		</modifySql>
-	</changeSet>
-	<changeSet author="" id="1366412359126-9">
-		<createTable tableName="user">
-			<column autoIncrement="true" name="id" type="BIGINT">
-				<constraints nullable="false" primaryKey="true" />
-			</column>
-			<column name="username" type="VARCHAR(250)" />
-			<column name="password" type="VARCHAR(250)" />
-			<column name="first_name" type="VARCHAR(250)" />
-			<column name="last_name" type="VARCHAR(250)" />
-			<column name="email" type="VARCHAR(250)" />
-			<column name="enabled" type="BIT" />
-			<column defaultValueComputed="CURRENT_TIMESTAMP" name="created_at"
-				type="TIMESTAMP">
-				<constraints nullable="false" />
-			</column>
-			<column name="version" type="INT" />
-		</createTable>
-		<modifySql dbms="mysql">
-			<append value=" engine innodb" />
-		</modifySql>
-	</changeSet>
-	<changeSet author="" id="1366412359126-10">
-		<createTable tableName="user_role">
-			<column autoIncrement="true" name="id" type="BIGINT">
-				<constraints nullable="false" primaryKey="true" />
-			</column>
-			<column name="user_id" type="BIGINT" />
-			<column name="role_id" type="BIGINT" />
-		</createTable>
-		<modifySql dbms="mysql">
-			<append value=" engine innodb" />
-		</modifySql>
-	</changeSet>
-	<changeSet author="" id="1366412359126-17">
-		<addForeignKeyConstraint baseColumnNames="permission_id"
-			baseTableName="role_permission" constraintName="role_permission_ibfk_2"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="permission"
-			referencesUniqueColumn="false" />
-	</changeSet>
-	<changeSet author="" id="1366412359126-18">
-		<addForeignKeyConstraint baseColumnNames="role_id"
-			baseTableName="role_permission" constraintName="role_permission_ibfk_1"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role"
-			referencesUniqueColumn="false" />
-	</changeSet>
-	<changeSet author="" id="1366412359126-21">
-		<addForeignKeyConstraint baseColumnNames="role_id"
-			baseTableName="user_role" constraintName="user_role_ibfk_1"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role"
-			referencesUniqueColumn="false" />
-	</changeSet>
-	<changeSet author="" id="1366412359126-22">
-		<addForeignKeyConstraint baseColumnNames="user_id"
-			baseTableName="user_role" constraintName="user_role_ibfk_2"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"
-			referencesUniqueColumn="false" />
-	</changeSet>
-	<changeSet author="" id="1367592120329-1">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet author="shiv" id="1376828722508-1">
+        <createTable tableName="accounts">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+            <column name="particular" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="debit" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="credit_commision" type="DECIMAL(10,2)"/>
+            <column name="credit_to_root" type="DECIMAL(10,2)"/>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="version" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-2">
+        <createTable tableName="address">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="address_line1" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_line2" type="VARCHAR(250)"/>
+            <column name="city" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="state" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pin" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="version" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-3">
+        <createTable tableName="advertisement">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="title" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="BLOB"/>
+            <column name="description" type="VARCHAR(500)"/>
+            <column name="type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valid_duration" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="BIT"/>
+            <column name="ceated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-4">
+        <createTable tableName="commision_level">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="level" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(100)"/>
+            <column name="percentage" type="DECIMAL(6,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-5">
+        <createTable tableName="deposit_intimator">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount_deposited" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transacted_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mode_of_payment" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="receiver_user_id" type="BIGINT"/>
+            <column name="transaction_number" type="BIGINT"/>
+            <column name="receipt_copy" type="BLOB"/>
+            <column name="cheque_number" type="VARCHAR(50)"/>
+            <column name="cheque_date" type="DATE"/>
+            <column name="cheque_drawn_on_bank" type="VARCHAR(100)"/>
+            <column name="cheque_drawn_branch" type="VARCHAR(100)"/>
+            <column name="status" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-6">
+        <createTable tableName="job">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="job_title" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="job_description" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="job_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="job_code" type="VARCHAR(50)"/>
+            <column name="posted_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="industry" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="job_valid_duration" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="BIT"/>
+            <column name="company_name" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_url" type="VARCHAR(250)"/>
+            <column name="qualification" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="salary" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="keyword" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="skill" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="designation" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="experiance" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-7">
+        <createTable tableName="job_history">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="job_name" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="path" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(500)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="start_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="end_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-8">
+        <createTable tableName="jobs_functional_area">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(200)"/>
+            <column name="category" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-9">
+        <createTable tableName="payment">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="redeem_id" type="BIGINT"/>
+            <column name="amount" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-10">
+        <createTable tableName="permission">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(250)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-11">
+        <createTable tableName="qualification">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="certification" type="VARCHAR(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="board_or_university" type="VARCHAR(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="year_of_passing" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="percentage" type="DECIMAL(5,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-12">
+        <createTable tableName="redeem_history">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="points" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mode_of_redemption" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mode_details" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-13">
+        <createTable tableName="role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(250)"/>
+            <column name="role_name" type="VARCHAR(100)"/>
+            <column name="description" type="VARCHAR(250)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-14">
+        <createTable tableName="role_permission">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="role_id" type="BIGINT"/>
+            <column name="permission_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-15">
+        <createTable tableName="security_question">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="question" type="VARCHAR(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-16">
+        <createTable tableName="skill">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="skills" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resume" type="MEDIUMTEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="functional_area" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-17">
+        <createTable tableName="subscription">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="BIT"/>
+            <column name="derived_from" type="BIGINT"/>
+            <column name="start_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-18">
+        <createTable tableName="system_configuration">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="key" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-19">
+        <createTable tableName="ticket">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enquiry_or_complain_text" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reply_text" type="VARCHAR(1000)"/>
+            <column name="discriminator" type="VARCHAR(50)"/>
+            <column name="status" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-20">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="username" type="VARCHAR(250)"/>
+            <column name="password" type="VARCHAR(250)"/>
+            <column name="first_name" type="VARCHAR(250)"/>
+            <column name="last_name" type="VARCHAR(250)"/>
+            <column name="email" type="VARCHAR(250)"/>
+            <column name="enabled" type="BIT"/>
+            <column name="phone" type="VARCHAR(25)"/>
+            <column name="address_id" type="BIGINT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-21">
+        <createTable tableName="user_groups">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="group_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_group_id" type="BIGINT"/>
+            <column name="level" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="position" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="version" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-22">
+        <createTable tableName="user_points_history">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="point" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-23">
+        <createTable tableName="user_role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+            <column name="role_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-24">
+        <createTable tableName="user_security_question">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="question_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="answer" type="VARCHAR(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-25">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="accounts"  constraintName="FK1_accounts_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-26">
+        <addForeignKeyConstraint baseColumnNames="receiver_user_id" baseTableName="deposit_intimator"  constraintName="FK2_dep_rec_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-27">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="deposit_intimator"  constraintName="FK1_dep_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-28">
+        <addForeignKeyConstraint baseColumnNames="redeem_id" baseTableName="payment"  constraintName="FK1_payment_redeem_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="redeem_history" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-29">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="qualification"  constraintName="FK1_qualification_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-30">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="redeem_history"  constraintName="FK1_reedem_history_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-31">
+        <addForeignKeyConstraint baseColumnNames="permission_id" baseTableName="role_permission"  constraintName="role_permission_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="permission" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-32">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="role_permission"  constraintName="role_permission_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-33">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="skill"  constraintName="FK1_user_skill" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-34">
+        <addForeignKeyConstraint baseColumnNames="derived_from" baseTableName="subscription"  constraintName="FK2_subs_derived_from" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="subscription" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-35">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="subscription"  constraintName="FK1_subs_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-36">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="ticket"  constraintName="FK1_ticket_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-37">
+        <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="user"  constraintName="FK1_User_address_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="address" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-38">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="user_groups"  constraintName="FK1_GRP_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-39">
+        <addForeignKeyConstraint baseColumnNames="parent_group_id" baseTableName="user_groups"  constraintName="FK2_PARENT_GRP_ID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-40">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_points_history"  constraintName="FK1_user_points_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-41">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_role"  constraintName="user_role_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-42">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_role"  constraintName="user_role_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1376828722508-43">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_security_question"  constraintName="FK1_sec_user_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user" referencedTableSchemaName="test" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1367592120329-1">
 		<createTable tableName="QRTZ_BLOB_TRIGGERS">
 			<column name="TRIGGER_NAME" type="VARCHAR(200)">
 				<constraints nullable="false" />
@@ -111,7 +641,7 @@
 			<append value=" engine innodb" />
 		</modifySql>
 	</changeSet>
-	<changeSet author="" id="1367592120329-2">
+	<changeSet author="shiv" id="1367592120329-2">
 		<createTable tableName="QRTZ_CALENDARS">
 			<column name="CALENDAR_NAME" type="VARCHAR(200)">
 				<constraints nullable="false" primaryKey="true" />
@@ -124,7 +654,7 @@
 			<append value=" engine innodb" />
 		</modifySql>
 	</changeSet>
-	<changeSet author="" id="1367592120329-3">
+	<changeSet author="shiv" id="1367592120329-3">
 		<createTable tableName="QRTZ_CRON_TRIGGERS">
 			<column name="TRIGGER_NAME" type="VARCHAR(200)">
 				<constraints nullable="false" />
@@ -141,7 +671,7 @@
 			<append value=" engine innodb" />
 		</modifySql>
 	</changeSet>
-	<changeSet author="" id="1367592120329-4">
+	<changeSet author="shiv" id="1367592120329-4">
 		<createTable tableName="QRTZ_FIRED_TRIGGERS">
 			<column name="ENTRY_ID" type="VARCHAR(95)">
 				<constraints nullable="false" primaryKey="true" />
@@ -176,7 +706,7 @@
 			<append value=" engine innodb" />
 		</modifySql>
 	</changeSet>
-	<changeSet author="" id="1367592120329-5">
+	<changeSet author="shiv" id="1367592120329-5">
 		<createTable tableName="QRTZ_JOB_DETAILS">
 			<column name="JOB_NAME" type="VARCHAR(200)">
 				<constraints nullable="false" />
@@ -206,7 +736,7 @@
 			<append value=" engine innodb" />
 		</modifySql>
 	</changeSet>
-	<changeSet author="" id="1367592120329-6">
+	<changeSet author="shiv" id="1367592120329-6">
 		<createTable tableName="QRTZ_JOB_LISTENERS">
 			<column name="JOB_NAME" type="VARCHAR(200)">
 				<constraints nullable="false" />
@@ -222,7 +752,7 @@
 			<append value=" engine innodb" />
 		</modifySql>
 	</changeSet>
-	<changeSet author="" id="1367592120329-7">
+	<changeSet author="shiv" id="1367592120329-7">
 		<createTable tableName="QRTZ_LOCKS">
 			<column name="LOCK_NAME" type="VARCHAR(40)">
 				<constraints nullable="false" primaryKey="true" />
@@ -232,7 +762,7 @@
 			<append value=" engine innodb" />
 		</modifySql>
 	</changeSet>
-	<changeSet author="" id="1367592120329-8">
+	<changeSet author="shiv" id="1367592120329-8">
 		<createTable tableName="QRTZ_PAUSED_TRIGGER_GRPS">
 			<column name="TRIGGER_GROUP" type="VARCHAR(200)">
 				<constraints nullable="false" primaryKey="true" />
@@ -242,7 +772,7 @@
 			<append value=" engine innodb" />
 		</modifySql>
 	</changeSet>
-	<changeSet author="" id="1367592120329-9">
+	<changeSet author="shiv" id="1367592120329-9">
 		<createTable tableName="QRTZ_SCHEDULER_STATE">
 			<column name="INSTANCE_NAME" type="VARCHAR(200)">
 				<constraints nullable="false" primaryKey="true" />
@@ -258,7 +788,7 @@
 			<append value=" engine innodb" />
 		</modifySql>
 	</changeSet>
-	<changeSet author="" id="1367592120329-10">
+	<changeSet author="shiv" id="1367592120329-10">
 		<createTable tableName="QRTZ_SIMPLE_TRIGGERS">
 			<column name="TRIGGER_NAME" type="VARCHAR(200)">
 				<constraints nullable="false" />
@@ -280,7 +810,7 @@
 			<append value=" engine innodb" />
 		</modifySql>
 	</changeSet>
-	<changeSet author="" id="1367592120329-11">
+	<changeSet author="shiv" id="1367592120329-11">
 		<createTable tableName="QRTZ_TRIGGER_LISTENERS">
 			<column name="TRIGGER_NAME" type="VARCHAR(200)">
 				<constraints nullable="false" />
@@ -296,7 +826,7 @@
 			<append value=" engine innodb" />
 		</modifySql>
 	</changeSet>
-	<changeSet author="" id="1367592120329-12">
+	<changeSet author="shiv" id="1367592120329-12">
 		<createTable tableName="QRTZ_TRIGGERS">
 			<column name="TRIGGER_NAME" type="VARCHAR(200)">
 				<constraints nullable="false" />
@@ -335,77 +865,77 @@
 			<append value=" engine innodb" />
 		</modifySql>
 	</changeSet>
-	<changeSet author="" id="1367592120329-13">
+	<changeSet author="shiv" id="1367592120329-13">
 		<addPrimaryKey columnNames="TRIGGER_NAME, TRIGGER_GROUP"
 			tableName="QRTZ_BLOB_TRIGGERS" />
 	</changeSet>
-	<changeSet author="" id="1367592120329-14">
+	<changeSet author="shiv" id="1367592120329-14">
 		<addPrimaryKey columnNames="TRIGGER_NAME, TRIGGER_GROUP"
 			tableName="QRTZ_CRON_TRIGGERS" />
 	</changeSet>
-	<changeSet author="" id="1367592120329-15">
+	<changeSet author="shiv" id="1367592120329-15">
 		<addPrimaryKey columnNames="JOB_NAME, JOB_GROUP"
 			tableName="QRTZ_JOB_DETAILS" />
 	</changeSet>
-	<changeSet author="" id="1367592120329-16">
+	<changeSet author="shiv" id="1367592120329-16">
 		<addPrimaryKey columnNames="JOB_NAME, JOB_GROUP, JOB_LISTENER"
 			tableName="QRTZ_JOB_LISTENERS" />
 	</changeSet>
-	<changeSet author="" id="1367592120329-17">
+	<changeSet author="shiv" id="1367592120329-17">
 		<addPrimaryKey columnNames="TRIGGER_NAME, TRIGGER_GROUP"
 			tableName="QRTZ_SIMPLE_TRIGGERS" />
 	</changeSet>
-	<changeSet author="" id="1367592120329-18">
+	<changeSet author="shiv" id="1367592120329-18">
 		<addPrimaryKey columnNames="TRIGGER_NAME, TRIGGER_GROUP"
 			tableName="QRTZ_TRIGGERS" />
 	</changeSet>
-	<changeSet author="" id="1367592120329-19">
+	<changeSet author="shiv" id="1367592120329-19">
 		<addPrimaryKey columnNames="TRIGGER_NAME, TRIGGER_GROUP, TRIGGER_LISTENER"
 			tableName="QRTZ_TRIGGER_LISTENERS" />
 	</changeSet>
-	<changeSet author="" id="1367592120329-20">
+	<changeSet author="shiv" id="1367592120329-20">
 		<addForeignKeyConstraint baseColumnNames="TRIGGER_NAME, TRIGGER_GROUP"
 			baseTableName="QRTZ_BLOB_TRIGGERS" constraintName="QRTZ_BLOB_TRIGGERS_ibfk_1"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="TRIGGER_NAME, TRIGGER_GROUP"
 			referencedTableName="QRTZ_TRIGGERS" referencesUniqueColumn="false" />
 	</changeSet>
-	<changeSet author="" id="1367592120329-21">
+	<changeSet author="shiv" id="1367592120329-21">
 		<addForeignKeyConstraint baseColumnNames="TRIGGER_NAME, TRIGGER_GROUP"
 			baseTableName="QRTZ_CRON_TRIGGERS" constraintName="QRTZ_CRON_TRIGGERS_ibfk_1"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="TRIGGER_NAME, TRIGGER_GROUP"
 			referencedTableName="QRTZ_TRIGGERS" referencesUniqueColumn="false" />
 	</changeSet>
-	<changeSet author="" id="1367592120329-22">
+	<changeSet author="shiv" id="1367592120329-22">
 		<addForeignKeyConstraint baseColumnNames="JOB_NAME, JOB_GROUP"
 			baseTableName="QRTZ_JOB_LISTENERS" constraintName="QRTZ_JOB_LISTENERS_ibfk_1"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="JOB_NAME, JOB_GROUP"
 			referencedTableName="QRTZ_JOB_DETAILS" referencesUniqueColumn="false" />
 	</changeSet>
-	<changeSet author="" id="1367592120329-23">
+	<changeSet author="shiv" id="1367592120329-23">
 		<addForeignKeyConstraint baseColumnNames="TRIGGER_NAME, TRIGGER_GROUP"
 			baseTableName="QRTZ_SIMPLE_TRIGGERS" constraintName="QRTZ_SIMPLE_TRIGGERS_ibfk_1"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="TRIGGER_NAME, TRIGGER_GROUP"
 			referencedTableName="QRTZ_TRIGGERS" referencesUniqueColumn="false" />
 	</changeSet>
-	<changeSet author="" id="1367592120329-24">
+	<changeSet author="shiv" id="1367592120329-24">
 		<addForeignKeyConstraint baseColumnNames="TRIGGER_NAME, TRIGGER_GROUP"
 			baseTableName="QRTZ_TRIGGER_LISTENERS" constraintName="QRTZ_TRIGGER_LISTENERS_ibfk_1"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="TRIGGER_NAME, TRIGGER_GROUP"
 			referencedTableName="QRTZ_TRIGGERS" referencesUniqueColumn="false" />
 	</changeSet>
-	<changeSet author="" id="1367592120329-25">
+	<changeSet author="shiv" id="1367592120329-25">
 		<addForeignKeyConstraint baseColumnNames="JOB_NAME, JOB_GROUP"
 			baseTableName="QRTZ_TRIGGERS" constraintName="QRTZ_TRIGGERS_ibfk_1"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="JOB_NAME, JOB_GROUP"
 			referencedTableName="QRTZ_JOB_DETAILS" referencesUniqueColumn="false" />
 	</changeSet>
-	<changeSet id="1367592120329-26" author="">
+	<changeSet id="1367592120329-26" author="shiv">
 		<insert tableName="QRTZ_LOCKS">
 			<column name="LOCK_NAME" value="CALENDAR_ACCESS"></column>
 		</insert>
@@ -422,56 +952,5 @@
 			<column name="LOCK_NAME" value="TRIGGER_ACCESS"></column>
 		</insert>
 	</changeSet>
-
-	<changeSet author="" id="1367592120329-27">
-		<createTable tableName="job_history">
-			<column autoIncrement="true" name="id" type="BIGINT">
-				<constraints nullable="false" primaryKey="true" />
-			</column>
-			<column name="job_name" type="VARCHAR(250)">
-				<constraints nullable="false" />
-			</column>
-			<column name="status" type="VARCHAR(20)">
-				<constraints nullable="false" />
-			</column>
-			<column name="description" type="VARCHAR(500)" />
-			<column name="start_time" type="TIMESTAMP" />
-			<column name="end_time" type="TIMESTAMP" />
-			<column name="version" type="INT" />
-		</createTable>
-		<modifySql dbms="mysql">
-			<append value=" engine innodb" />
-		</modifySql>
-	</changeSet>
-
-	<changeSet author="" id="1367592120329-28">
-		<addColumn tableName="role">
-			<column name="description" type="varchar(250)"></column>
-		</addColumn>
-	</changeSet>
-
-		<changeSet author="" id="1367592120329-36">
-		<addColumn tableName="user">
-			<column name="phone" type="VARCHAR(25)"></column>
-		</addColumn>
-		<modifySql dbms="mysql">
-			<append value=" after enabled" />
-		</modifySql>
-	</changeSet>
-	<changeSet author="" id="1367592120329-37">
-		<addColumn tableName="role">
-			<column name="role_name" type="VARCHAR(100)"></column>
-		</addColumn>
-		<modifySql dbms="mysql">
-			<append value=" after name"/>
-		</modifySql>
-	</changeSet>
-	<changeSet author=" srivastava" id="1367592120329-38">
-		<addColumn tableName="job_history">
-			<column name="path" type="VARCHAR(255)"></column>
-		</addColumn>
-		<modifySql dbms="mysql">
-			<append value=" after status"/>
-		</modifySql>
-	</changeSet>	
+    
 </databaseChangeLog>

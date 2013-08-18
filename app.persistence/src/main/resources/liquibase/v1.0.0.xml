@@ -1,42 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-
-	<changeSet id="1466412359126-1" author="Shiv">
-		<insert tableName="user">
-			<column name="username" value="root"></column>
-			<column name="password" value="root"></column>
-			<column name="first_name" value="root"></column>
-			<column name="last_name" value="root"></column>
-			<column name="email" value="root@gmail.com"></column>
-			<column name="enabled" valueNumeric="1"></column>
-		</insert>
-	</changeSet>
-
-	<changeSet id="1466412359126-2" author="Shiv">
-		<insert tableName="role">
-			<column name="name" value="Admin"></column>
-			<column name="role_name" value="role_admin"></column>
-			<column name="description" value="Admin User"></column>
-		</insert>
-		<insert tableName="role">
-			<column name="name" value="User"></column>
-			<column name="role_name" value="role_user"></column>
-			<column name="description" value="Normal User"></column>
-		</insert>
-	</changeSet>
-
-	<changeSet id="1466412359126-3" author="Shiv">
-		<insert tableName="user_role">
-			<column name="user_id" value="1"></column>
-			<column name="role_id" value="1"></column>
-		</insert>
-	</changeSet>
-		<changeSet author="Shiv" id="1370006636842-10">
-			<update tableName="user">
-				<column name="password" value="630d1d8c41c910cb54214edb7fd78d592c85c87c40b4c9fc4cd4b3ad228fcc43"></column>
-				<where>username='root'</where>
-			</update>
-		</changeSet>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet author="shiv" id="1376829106667-1">
+        <insert tableName="user_groups">
+            <column name="id" valueNumeric="1"/>
+            <column name="group_id" valueNumeric="1"/>
+            <column name="parent_group_id"/>
+            <column name="level" valueNumeric="0"/>
+            <column name="position" value=""/>
+            <column name="created_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="updated_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="version" valueNumeric="0"/>
+        </insert>
+    </changeSet>
+    <changeSet author="shiv" id="1376829106667-2">
+        <insert tableName="role">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="Admin"/>
+            <column name="role_name" value="ROLE_ADMIN"/>
+            <column name="description" value="Admin User"/>
+        </insert>
+        <insert tableName="role">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="User"/>
+            <column name="role_name" value="ROLE_USER"/>
+            <column name="description" value="Normal User"/>
+        </insert>
+        <insert tableName="role">
+            <column name="id" valueNumeric="3"/>
+            <column name="name" value="MLM"/>
+            <column name="role_name" value="ROLE_MLM"/>
+            <column name="description" value="MLM User"/>
+        </insert>
+        <insert tableName="role">
+            <column name="id" valueNumeric="4"/>
+            <column name="name" value="Premium"/>
+            <column name="role_name" value="ROLE_PREMIUM"/>
+            <column name="description" value="Premium User"/>
+        </insert>
+    </changeSet>
+    <changeSet author="shiv" id="1376829106667-3">
+        <insert tableName="address">
+            <column name="id" valueNumeric="1"/>
+            <column name="address_line1" value="root"/>
+            <column name="address_line2" value="roo"/>
+            <column name="city" value="bangalore"/>
+            <column name="state" value="karnatka"/>
+            <column name="pin" value="111111"/>
+            <column name="created_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="updated_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="version" valueNumeric="0"/>
+        </insert>
+    </changeSet>
+    <changeSet author="shiv" id="1376829106667-4">
+        <insert tableName="user">
+            <column name="id" valueNumeric="1"/>
+            <column name="username" value="root"/>
+            <column name="password" value="630d1d8c41c910cb54214edb7fd78d592c85c87c40b4c9fc4cd4b3ad228fcc43"/>
+            <column name="first_name" value="root"/>
+            <column name="last_name" value="root"/>
+            <column name="email" value="root@gmail.com"/>
+            <column name="enabled" valueBoolean="true"/>
+            <column name="phone" value="11111"/>
+            <column name="address_id" valueNumeric="1"/>
+            <column name="created_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="version" valueNumeric="0"/>
+        </insert>
+    </changeSet>
+    <changeSet author="shiv" id="1376829106667-5">
+        <insert tableName="user_role">
+            <column name="id" valueNumeric="1"/>
+            <column name="user_id" valueNumeric="1"/>
+            <column name="role_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
