@@ -115,9 +115,9 @@ return false;
 <table border="0"  id="logotb">
  <tr>
  
- <td width="24%" height="79"><img name="" src="../resources/images/JBS_LOGO.png" width="231" height="45" alt="" id="logo"/></td>
- <td width="38%"><img src="../resources/images/job2.jpg" alt="job2" width="364" height="77" id="wows1_1" title="job2"/></td>
- <td width="38%" align="center"><img src="../resources/images/job1.jpg" alt="job1" width="290" height="69" id="wows1_0" title="job1"/></td>
+ <td width="24%" height="79"><img name="" src="resources/images/JBS_LOGO.png" width="231" height="45" alt="" id="logo"/></td>
+ <td width="38%"><img src="resources/images/job2.jpg" alt="job2" width="364" height="77" id="wows1_1" title="job2"/></td>
+ <td width="38%" align="center"><img src="resources/images/job1.jpg" alt="job1" width="290" height="69" id="wows1_0" title="job1"/></td>
  </tr>
 
  
@@ -128,14 +128,14 @@ return false;
   <span>
   <script id="sothink_widgets:dwwidget_dhtmlmenu7_15_2013.pgt" type="text/javascript">
 <!--
-stm_bm(["menu1849",980,"","../resources/images/blank.gif",0,"","",0,0,250,0,1000,1,0,0,"","100%",67108955,0,1,2,"default","hand","",1,25],this);
-stm_bp("p0",[0,4,0,0,0,0,18,0,100,"",-2,"",-2,50,0,0,"#799BD8","transparent","../resources/images/tclback.gif",3,0,0,"#000000"]);
-stm_ai("p0i0",[0,"HOME","","",-1,-1,0,"index.jsp","_self","","","","../resources/images/tclarrow.gif",18,7,0,"","",0,0,0,0,1,"#FFFFF7",1,"#B5BED6",1,"","../resources/images/tclbackup.gif",2,3,0,0,"#FFFFF7","#000000","#666666","#FFFFFF","bold 10pt Arial","bold 8pt Arial",0,0,"","","","",0,0,0]);
-stm_aix("p0i2","p0i0",[0,"REGISTER","","",-1,-1,0,"newuser.jsp"]);
-stm_aix("p0i3","p0i0",[0,"LOGIN","","",-1,-1,0,"login.jsp"]);
-stm_aix("p0i4","p0i0",[0,"ENQUIRY","","",-1,-1,0,"enquiry.jsp"]);
-stm_aix("p0i5","p0i0",[0,"CONTACT US","","",-1,-1,0,"contactus.jsp"]);
-stm_aix("p0i6","p0i0",[0,"ABOUT US","","",-1,-1,0,"aboutus.jsp"]);
+stm_bm(["menu1849",980,"","resources/images/blank.gif",0,"","",0,0,250,0,1000,1,0,0,"","100%",67108955,0,1,2,"default","hand","",1,25],this);
+stm_bp("p0",[0,4,0,0,0,0,18,0,100,"",-2,"",-2,50,0,0,"#799BD8","transparent","resources/images/tclback.gif",3,0,0,"#000000"]);
+stm_ai("p0i0",[0,"HOME","","",-1,-1,0,"index.jsp","_self","","","","resources/images/tclarrow.gif",18,7,0,"","",0,0,0,0,1,"#FFFFF7",1,"#B5BED6",1,"","resources/images/tclbackup.gif",2,3,0,0,"#FFFFF7","#000000","#666666","#FFFFFF","bold 10pt Arial","bold 8pt Arial",0,0,"","","","",0,0,0]);
+stm_aix("p0i2","p0i0",[0,"REGISTER","","",-1,-1,0,"mypage/register/"]);
+stm_aix("p0i3","p0i0",[0,"LOGIN","","",-1,-1,0,"mypage/login/"]);
+stm_aix("p0i4","p0i0",[0,"ENQUIRY","","",-1,-1,0,"mypage/enquiry/"]);
+stm_aix("p0i5","p0i0",[0,"CONTACT US","","",-1,-1,0,"mypage/contact/"]);
+stm_aix("p0i6","p0i0",[0,"ABOUT US","","",-1,-1,0,"mypage/aboutus/"]);
 stm_ep();
 stm_em();
 //-->
@@ -204,7 +204,7 @@ stm_em();
       <li><a href="#tab-2">Private Sector Jobs</a></li>
       <li><a href="#tab-3">International Jobs</a></li>
       </ul>   </td>
-    <td width="295" align="right"><img name="" src="../resources/images/Ad_mlm.png" width="198" height="115" alt="" /></td>
+    <td width="295" align="right"><img name="" src="resources/images/Ad_mlm.png" width="198" height="115" alt="" /></td>
     </tr>
     </table>
     <div id="tab-1">
