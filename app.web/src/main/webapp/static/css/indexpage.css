@@ -1,0 +1,145 @@
+@charset "utf-8";
+/* CSS Document */
+
+#indextb{
+	width:80%;
+	background:rgba(205,194,100,0,4);
+	font-size: 14px;
+	font-family:Arial;
+	margin:auto;
+	border:1px solid #CCC;
+	border-radius: 10px 10px 1px 1px;
+}
+#scroller{
+	border:10px solid #CCC;
+	border-radius: 10px 10px 10px 10px;
+}
+
+#infotb{
+	width:100%;
+	background:rgba(205,194,100,0,4);
+	font-size: 10px;
+	font-family:Arial;
+	border:2px solid #CCC;
+	border-radius: 10px 10px 10px 10px;
+	margin: auto;
+	text-align: center;
+}
+#plugintb{
+	
+	width:100%;
+	background:rgba(205,194,100,0,4);
+	font-size: 10px;
+	font-family:Arial;
+	border:2px solid #CCC;
+	border-radius: 10px 10px 10px 10px;
+	margin:auto;
+	text-align: center
+}
+	
+#adbanner{
+	width:100%;
+	height:30%;
+	margin:auto;
+	text-align: center;
+}
+
+#jobtb{
+	width:100%;
+	border:2px solid #CCC;
+	border-radius: 10px 10px 10px 10px;
+	font-size: 12px;
+	font-family:Arial;
+	margin:auto;
+	
+	
+}
+
+td.joblist{
+	width:20%;
+	text-align: justify;
+}
+td.cationinfo{
+ font-family:Arial, Helvetica, sans-serif;
+ font-size:10px;
+ font-weight:100;
+ margin:auto;
+ background-color:#DCE0FA;
+ text-align:center
+ 
+ 	
+}
+#govttb,#govtorgtb{
+	width:100%;
+	border:2px solid #CCC;
+	border-radius: 1px 1px 10px 10px;
+	font-size: 12px;
+	font-family:Arial;
+	margin:auto;
+	
+}
+#govttb2{
+	width:80%;
+	border:2px solid #CCC;
+	border-radius: 1px 1px 10px 10px;
+	font-size: 12px;
+	font-family:Arial;
+	margin:auto;
+	font-weight: bold;
+	text-align: left;
+	
+}
+#privatetb,#privateorgtb{
+	width:100%;
+	border:2px solid #CCC;
+	border-radius: 1px 1px 10px 10px;
+	font-size: 12px;
+	font-family:Arial;
+	margin:auto;
+	
+}
+td.pvtinfo{
+ font-weight:bold;	
+ text-align:left;
+}
+
+#abroadtb{
+	width:100%;
+	border:2px solid #CCC;
+	border-radius: 1px 1px 10px 10px;
+	font-size: 12px;
+	font-family:Arial;
+	margin:auto;
+}
+#subscribetb,#logintb{
+	width:100%;
+	border:2px solid #CCC;
+	border-radius: 1px 1px 10px 10px;
+	margin:auto;
+	text-align: center;
+}
+tr.footer{
+
+ border-bottom-color:#000;
+}
+
+
+
+#logo{
+	height:30px;
+	width:150px;
+
+
+}
+
+td.menutd{
+   width:15%;	
+   text-align:center;
+   color:#FFF;
+   font-family:Arial, Helvetica, sans-serif;
+   font-size:12px;
+   
+}
+a.menulink{
+	color:#FFF;
+}
