@@ -1,8 +1,10 @@
 /* Copyright (C) 2013 , Inc. All rights reserved */
 package com.jpa.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,8 +14,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -90,6 +90,11 @@ public class User implements BaseEntity, java.io.Serializable {
   /** The address. */
   private Address address;
 
+  private UserSecurityQuestion userSecurityQuestion;
+
+  /** The skills. */
+  private Skill skill;
+
   /** The user groupses for parent group id. */
   private Set<UserGroups> userGroupsesForParentGroupId = new HashSet<UserGroups>(0);
 
@@ -97,10 +102,7 @@ public class User implements BaseEntity, java.io.Serializable {
   private Set<UserGroups> userGroupsesForGroupId = new HashSet<UserGroups>(0);
 
   /** The qualifications. */
-  private Set<Qualification> qualifications = new HashSet<Qualification>(0);
-
-  /** The skills. */
-  private Set<Skill> skills = new HashSet<Skill>(0);
+  private List<Qualification> qualifications = new ArrayList<Qualification>(0);
 
   /**
    * Instantiates a new user.
@@ -391,7 +393,7 @@ public class User implements BaseEntity, java.io.Serializable {
    * 
    * @return the user role
    */
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+  @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
   public UserRole getUserRole() {
     return userRole;
   }
@@ -431,27 +433,30 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the address.
-   *
+   * 
    * @return the address
    */
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "address_id")
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
   public Address getAddress() {
     return this.address;
   }
 
   /**
    * Sets the address.
-   *
-   * @param address the new address
+   * 
+   * @param address
+   *          the new address
    */
   public void setAddress(Address address) {
     this.address = address;
+    if (this.address != null) {
+      this.address.setUser(this);
+    }
   }
 
   /**
    * Gets the user groupses for parent group id.
-   *
+   * 
    * @return the user groupses for parent group id
    */
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userByParentGroupId")
@@ -461,8 +466,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the user groupses for parent group id.
-   *
-   * @param userGroupsesForParentGroupId the new user groupses for parent group id
+   * 
+   * @param userGroupsesForParentGroupId
+   *          the new user groupses for parent group id
    */
   public void setUserGroupsesForParentGroupId(Set<UserGroups> userGroupsesForParentGroupId) {
     this.userGroupsesForParentGroupId = userGroupsesForParentGroupId;
@@ -470,7 +476,7 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the user groupses for group id.
-   *
+   * 
    * @return the user groupses for group id
    */
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userByGroupId")
@@ -480,8 +486,9 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Sets the user groupses for group id.
-   *
-   * @param userGroupsesForGroupId the new user groupses for group id
+   * 
+   * @param userGroupsesForGroupId
+   *          the new user groupses for group id
    */
   public void setUserGroupsesForGroupId(Set<UserGroups> userGroupsesForGroupId) {
     this.userGroupsesForGroupId = userGroupsesForGroupId;
@@ -489,87 +496,57 @@ public class User implements BaseEntity, java.io.Serializable {
 
   /**
    * Gets the qualifications.
-   *
+   * 
    * @return the qualifications
    */
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-  public Set<Qualification> getQualifications() {
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+  public List<Qualification> getQualifications() {
     return this.qualifications;
   }
 
   /**
    * Sets the qualifications.
-   *
-   * @param qualifications the new qualifications
+   * 
+   * @param qualifications
+   *          the new qualifications
    */
-  public void setQualifications(Set<Qualification> qualifications) {
+  public void setQualifications(List<Qualification> qualifications) {
     this.qualifications = qualifications;
   }
 
   /**
    * Gets the skills.
-   *
+   * 
    * @return the skills
    */
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-  public Set<Skill> getSkills() {
-    return this.skills;
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+  public Skill getSkill() {
+    return this.skill;
   }
 
   /**
    * Sets the skills.
-   *
-   * @param skills the new skills
+   * 
+   * @param skills
+   *          the new skills
    */
-  public void setSkills(Set<Skill> skills) {
-    this.skills = skills;
+  public void setSkill(Skill skill) {
+    this.skill = skill;
+    if (this.skill != null) {
+      this.skill.setUser(this);
+    }
   }
 
-  /**
-   * To string.
-   *
-   * @return the string
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("User [");
-    if (id != null) {
-      builder.append("id=").append(id).append(", ");
+  @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+  public UserSecurityQuestion getUserSecurityQuestion() {
+    return userSecurityQuestion;
+  }
+
+  public void setUserSecurityQuestion(UserSecurityQuestion userSecurityQuestion) {
+    this.userSecurityQuestion = userSecurityQuestion;
+    if (this.userSecurityQuestion != null) {
+      this.userSecurityQuestion.setUser(this);
     }
-    if (version != null) {
-      builder.append("version=").append(version).append(", ");
-    }
-    if (userName != null) {
-      builder.append("username=").append(userName).append(", ");
-    }
-    if (password != null) {
-      builder.append("password=").append(password).append(", ");
-    }
-    if (firstName != null) {
-      builder.append("firstName=").append(firstName).append(", ");
-    }
-    if (lastName != null) {
-      builder.append("lastName=").append(lastName).append(", ");
-    }
-    if (email != null) {
-      builder.append("email=").append(email).append(", ");
-    }
-    if (enabled != null) {
-      builder.append("enabled=").append(enabled).append(", ");
-    }
-    if (createdAt != null) {
-      builder.append("createdAt=").append(createdAt).append(", ");
-    }
-    if (roleId != null) {
-      builder.append("roleId=").append(roleId).append(", ");
-    }
-    if (userRole != null) {
-      builder.append("userRole=").append(userRole);
-    }
-    builder.append("]");
-    return builder.toString();
   }
 
   /*
@@ -619,4 +596,47 @@ public class User implements BaseEntity, java.io.Serializable {
     }
     return true;
   }
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("User [");
+    if (userName != null) {
+      builder.append("userName=");
+      builder.append(userName);
+      builder.append(", ");
+    }
+    if (firstName != null) {
+      builder.append("firstName=");
+      builder.append(firstName);
+      builder.append(", ");
+    }
+    if (lastName != null) {
+      builder.append("lastName=");
+      builder.append(lastName);
+      builder.append(", ");
+    }
+    if (createdAt != null) {
+      builder.append("createdAt=");
+      builder.append(createdAt);
+      builder.append(", ");
+    }
+    if (userRole != null) {
+      builder.append("userRole=");
+      builder.append(userRole);
+      builder.append(", ");
+    }
+    if (address != null) {
+      builder.append("address=");
+      builder.append(address);
+      builder.append(", ");
+    }
+    if (userSecurityQuestion != null) {
+      builder.append("userSecurityQuestion=");
+      builder.append(userSecurityQuestion);
+    }
+    builder.append("]");
+    return builder.toString();
+  }
+
 }

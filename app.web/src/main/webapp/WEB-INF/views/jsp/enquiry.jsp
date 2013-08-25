@@ -130,7 +130,7 @@ input.submit-button { margin: -10px 0 0 0; }
           </li>
         
         <li>
-          <a class="fNiv" href="../register">Register</a>
+          <a class="fNiv" href="../../register/">Register</a>
           </li>
         
         <li>

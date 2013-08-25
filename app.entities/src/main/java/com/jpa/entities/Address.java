@@ -1,22 +1,21 @@
 package com.jpa.entities;
 
-
-
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  * Address
@@ -36,12 +35,11 @@ public class Address implements BaseEntity, java.io.Serializable {
   private String city;
   private String state;
   private String pin;
-  private Date createdAt;
+  private Date createdAt = new Date();
   private Date updatedAt;
-  private Set<User> users = new HashSet<User>(0);
+  private User user;
 
-  public Address() {
-  }
+  public Address() {}
 
   public Address(String addressLine1, String city, String state, String pin) {
     this.addressLine1 = addressLine1;
@@ -50,22 +48,19 @@ public class Address implements BaseEntity, java.io.Serializable {
     this.pin = pin;
   }
 
-  public Address(String addressLine1, String addressLine2, String city,
-      String state, String pin, Date createdAt, Date updatedAt,
-      Set<User> users) {
+  public Address(String addressLine1, String addressLine2, String city, String state, String pin, User user) {
     this.addressLine1 = addressLine1;
     this.addressLine2 = addressLine2;
     this.city = city;
     this.state = state;
     this.pin = pin;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-    this.users = users;
+    this.user = user;
   }
 
   @Id
   @Column(name = "id", unique = true, nullable = false)
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(generator = "gen")
+  @GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
   public Long getId() {
     return this.id;
   }
@@ -130,7 +125,7 @@ public class Address implements BaseEntity, java.io.Serializable {
   }
 
   @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_at", length = 19)
+  @Column(name = "created_at", length = 19, updatable = false)
   public Date getCreatedAt() {
     return this.createdAt;
   }
@@ -140,7 +135,7 @@ public class Address implements BaseEntity, java.io.Serializable {
   }
 
   @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "updated_at", length = 19)
+  @Column(name = "updated_at", length = 19, nullable = false)
   public Date getUpdatedAt() {
     return this.updatedAt;
   }
@@ -149,13 +144,108 @@ public class Address implements BaseEntity, java.io.Serializable {
     this.updatedAt = updatedAt;
   }
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "address")
-  public Set<User> getUsers() {
-    return this.users;
+  @OneToOne(fetch = FetchType.LAZY, optional = false)
+  @PrimaryKeyJoinColumn
+  public User getUser() {
+    return this.user;
   }
 
-  public void setUsers(Set<User> users) {
-    this.users = users;
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (addressLine1 == null ? 0 : addressLine1.hashCode());
+    result = prime * result + (city == null ? 0 : city.hashCode());
+    result = prime * result + (pin == null ? 0 : pin.hashCode());
+    result = prime * result + (state == null ? 0 : state.hashCode());
+    result = prime * result + (user == null ? 0 : user.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    Address other = (Address) obj;
+    if (addressLine1 == null) {
+      if (other.addressLine1 != null) {
+        return false;
+      }
+    } else if (!addressLine1.equals(other.addressLine1)) {
+      return false;
+    }
+    if (city == null) {
+      if (other.city != null) {
+        return false;
+      }
+    } else if (!city.equals(other.city)) {
+      return false;
+    }
+    if (pin == null) {
+      if (other.pin != null) {
+        return false;
+      }
+    } else if (!pin.equals(other.pin)) {
+      return false;
+    }
+    if (state == null) {
+      if (other.state != null) {
+        return false;
+      }
+    } else if (!state.equals(other.state)) {
+      return false;
+    }
+    if (user == null) {
+      if (other.user != null) {
+        return false;
+      }
+    } else if (!user.equals(other.user)) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("Address [");
+    if (addressLine1 != null) {
+      builder.append("addressLine1=");
+      builder.append(addressLine1);
+      builder.append(", ");
+    }
+    if (city != null) {
+      builder.append("city=");
+      builder.append(city);
+      builder.append(", ");
+    }
+    if (state != null) {
+      builder.append("state=");
+      builder.append(state);
+      builder.append(", ");
+    }
+    if (pin != null) {
+      builder.append("pin=");
+      builder.append(pin);
+      builder.append(", ");
+    }
+    if (createdAt != null) {
+      builder.append("createdAt=");
+      builder.append(createdAt);
+    }
+    builder.append("]");
+    return builder.toString();
   }
 
 }

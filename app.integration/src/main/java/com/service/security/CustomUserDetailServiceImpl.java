@@ -16,15 +16,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.service.UserService;
 import com.jpa.entities.Role;
 import com.jpa.entities.User;
 import com.jpa.entities.UserRole;
+import com.service.UserService;
 
 /**
  * The Class CustomUserDetailServiceImpl.
  * 
- * @author 
+ * @author
  */
 @Service("customUserDetailService")
 @Transactional(readOnly = true)
@@ -36,16 +36,17 @@ public class CustomUserDetailServiceImpl implements UserDetailsService {
 
   /**
    * Load user by username.
-   *
-   * @param username the username
+   * 
+   * @param username
+   *          the username
    * @return the user details
-   * @throws UsernameNotFoundException the username not found exception
+   * @throws UsernameNotFoundException
+   *           the username not found exception
    * @see org.springframework.security.core.userdetails.UserDetailsService#
-   * loadUserByUsername(java.lang.String)
+   *      loadUserByUsername(java.lang.String)
    */
   @Override
-  public UserDetails loadUserByUsername(final String username)
-      throws UsernameNotFoundException {
+  public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 
     try {
       User user = userService.findByUserName(username);
@@ -54,12 +55,10 @@ public class CustomUserDetailServiceImpl implements UserDetailsService {
       boolean accountNonExpired = true;
       boolean credentialsNonExpired = true;
       boolean accountNonLocked = true;
-
-      return new org.springframework.security.core.userdetails.User(
-        user.getUserName(), user.getPassword(), enabled,
-        accountNonExpired, credentialsNonExpired, accountNonLocked,
-        getAuthorities(user.getUserRole()));
+      return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), enabled,
+        accountNonExpired, credentialsNonExpired, accountNonLocked, getAuthorities(user.getUserRole()));
     } catch (Exception e) {
+      e.printStackTrace();
       throw new RuntimeException(e);
     }
 
@@ -69,11 +68,10 @@ public class CustomUserDetailServiceImpl implements UserDetailsService {
    * Gets the authorities.
    * 
    * @param userRole
-   *            the user role
+   *          the user role
    * @return the authorities
    */
-  private Collection<? extends GrantedAuthority> getAuthorities(
-    final UserRole userRole) {
+  private Collection<? extends GrantedAuthority> getAuthorities(final UserRole userRole) {
 
     Role role = userRole.getRole();
     List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();

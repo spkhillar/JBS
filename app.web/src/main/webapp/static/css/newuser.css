@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* CSS Document */
+
+#logo{
+	height:30px;
+	width:150px;
+}
+
+td.header{
+	heigth:30px;
+	font-size:10px;
+}
+
+#usertbdesign{
+	width:80%;
+	-webkit-border-radius: 27px 24px 2px 25px;
+	-moz-border-radius: 27px 24px 2px 25px;
+	border-radius: 1px 1px 2px 1px;
+	border:1px solid #CCC;
+	background:rgba(205,194,100,0,4);
+	-webkit-box-shadow: #1FBFF0  14px 4px 4px;
+	-moz-box-shadow: #1FBFF0 1px 4px 4px;
+	box-shadow:  4px 4px 4px;
+	font-size: 14px;
+	font-family:Arial;
+}
+
+#logininfotb,#addressinfotb,#workinfotb,#educationinfotb{
+width:80%;
+-webkit-border-radius: 10px 2px 26px 25px;
+-moz-border-radius: 27px 24px 26px 25px;
+border-radius: 10px 10px 10px 10px;
+border:2px solid #CCC;
+background:rgba(205,194,100,0,4);
+-webkit-box-shadow: #1FBFF0 4px 4px 4px;
+-moz-box-shadow: #1FBFF0 1px 4px 4px; 
+box-shadow: #1FBFF0 4px 4px 4px;
+	font-family:Arial;
+	margin:auto;
+
+}
+
+#heading{
+	width:100%;
+-webkit-border-radius: 10px 2px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+border-radius: 10px 10px 10px 10px;
+border:2px solid #CCC;
+
+box-shadow: #1FBFF0 4px 4px 4px;
+	font-family:Arial;
+	height:40%;
+}
+
+}
+
+tr.header1 {
+	border-collapse:collapse;
+	
+	font-family:Arial;
+	background-color:#CCC;
+	color:#FFF;
+	
+	
+	
+}
+
+tr.header2 {
+	border-collapse:collapse;
+	font-family:Arial;
+	font-size:16px;
+	color:#003;
+	font-weight: bold;
+	
+}
+
+#he{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:20px;
+	color:#FFF;
+	
+	
+}
+
+#submitbutton{
+	width:200px;
+	height:30px;
+     	
+}

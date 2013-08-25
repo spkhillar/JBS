@@ -131,7 +131,7 @@ return false;
 stm_bm(["menu1849",980,"","resources/images/blank.gif",0,"","",0,0,250,0,1000,1,0,0,"","100%",67108955,0,1,2,"default","hand","",1,25],this);
 stm_bp("p0",[0,4,0,0,0,0,18,0,100,"",-2,"",-2,50,0,0,"#799BD8","transparent","resources/images/tclback.gif",3,0,0,"#000000"]);
 stm_ai("p0i0",[0,"HOME","","",-1,-1,0,"index.jsp","_self","","","","resources/images/tclarrow.gif",18,7,0,"","",0,0,0,0,1,"#FFFFF7",1,"#B5BED6",1,"","resources/images/tclbackup.gif",2,3,0,0,"#FFFFF7","#000000","#666666","#FFFFFF","bold 10pt Arial","bold 8pt Arial",0,0,"","","","",0,0,0]);
-stm_aix("p0i2","p0i0",[0,"REGISTER","","",-1,-1,0,"mypage/register/"]);
+stm_aix("p0i2","p0i0",[0,"REGISTER","","",-1,-1,0,"register/"]);
 stm_aix("p0i3","p0i0",[0,"LOGIN","","",-1,-1,0,"mypage/login/"]);
 stm_aix("p0i4","p0i0",[0,"ENQUIRY","","",-1,-1,0,"mypage/enquiry/"]);
 stm_aix("p0i5","p0i0",[0,"CONTACT US","","",-1,-1,0,"mypage/contact/"]);

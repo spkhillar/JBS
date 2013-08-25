@@ -74,4 +74,237 @@
             <column name="version" valueNumeric="0"/>
         </insert>
     </changeSet>
+    <changeSet author="shiv" id="1376829106667-6">
+        <insert tableName="security_question">
+            <column name="question" value="Who is your favorite teacher?"/>
+            <column name="created_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="updated_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="version" valueNumeric="0"/>
+        </insert>
+        <insert tableName="security_question">
+            <column name="question" value="What is your favorite film?"/>
+            <column name="created_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="updated_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="version" valueNumeric="0"/>
+        </insert>
+        <insert tableName="security_question">
+            <column name="question" value="What is the name of your first child?"/>
+            <column name="created_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="updated_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="version" valueNumeric="0"/>
+        </insert>
+        <insert tableName="security_question">
+            <column name="question" value="How many laguages do you know?"/>
+            <column name="created_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="updated_at" valueDate="2013-07-27T20:04:52.0"/>
+            <column name="version" valueNumeric="0"/>
+        </insert>
+    </changeSet>
+    <changeSet author="shiv" id="1376829106667-7">
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Finance"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Corporate Planning/Consulting/Strategy"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Business Mgmt./Consultants/Freelancers"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Export/Import"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Front Office Staff/Secretarial/Computer Operator"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="HR/PM/IR/Training"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Administration"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Legal/Law"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Marketing/MR/Media Planning"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Doctors/Nurses/Medical Professional"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Operations/Customer Service/Telecalling/Backend"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Materials/Logistics/Supply Chain Mgmt/Procurement"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Advertising/PR/Events"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Production/Manufacturing/Maintenance/Packaging"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Quality/Process Control"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Engg. project Mgmt./site Engg./Civil Engg."/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Bio Tech/R&amp;D/Scientist"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Sales/Business Development"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Teaching/Education"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="IT/Telecom - Software"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="IT/Telecom - Hardware"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Ticketing/Reservation/Travel Agent/Airlines"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Anchoring/TV/Films/Production"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Architects/Interior Design/Naval Arch"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Top Management"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Banks/Insurance/Financial Services"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+	</changeSet>
+	<changeSet author="shiv" id="1376829106667-8">
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Accounting/Tax/Company Secretary/Audit"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Hotel/Restaurant"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="jobs_functional_area">
+            <column name="name" value="Content/Editors/Journalists"/>
+            <column name="category" value="Default"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+	</changeSet>            
 </databaseChangeLog>

@@ -1,7 +1,5 @@
 package com.jpa.entities;
 
-
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -36,23 +34,18 @@ public class Qualification implements BaseEntity, java.io.Serializable {
   private String boardOrUniversity;
   private int yearOfPassing;
   private BigDecimal percentage;
-  private Date createdAt;
+  private Date createdAt = new Date();
   private Date updatedAt;
 
-  public Qualification() {
-  }
+  public Qualification() {}
 
-  public Qualification(long id, User user, String certification,
-      String boardOrUniversity, int yearOfPassing, BigDecimal percentage,
-      Date createdAt, Date updatedAt) {
-    this.id = id;
+  public Qualification(User user, String certification, String boardOrUniversity, int yearOfPassing,
+      BigDecimal percentage) {
     this.user = user;
     this.certification = certification;
     this.boardOrUniversity = boardOrUniversity;
     this.yearOfPassing = yearOfPassing;
     this.percentage = percentage;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
   }
 
   @Id
@@ -76,7 +69,7 @@ public class Qualification implements BaseEntity, java.io.Serializable {
     this.version = version;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, optional = true)
   @JoinColumn(name = "user_id", nullable = false)
   public User getUser() {
     return this.user;
@@ -140,6 +133,56 @@ public class Qualification implements BaseEntity, java.io.Serializable {
 
   public void setUpdatedAt(Date updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (boardOrUniversity == null ? 0 : boardOrUniversity.hashCode());
+    result = prime * result + (certification == null ? 0 : certification.hashCode());
+    result = prime * result + (percentage == null ? 0 : percentage.hashCode());
+    result = prime * result + yearOfPassing;
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    Qualification other = (Qualification) obj;
+    if (boardOrUniversity == null) {
+      if (other.boardOrUniversity != null) {
+        return false;
+      }
+    } else if (!boardOrUniversity.equals(other.boardOrUniversity)) {
+      return false;
+    }
+    if (certification == null) {
+      if (other.certification != null) {
+        return false;
+      }
+    } else if (!certification.equals(other.certification)) {
+      return false;
+    }
+    if (percentage == null) {
+      if (other.percentage != null) {
+        return false;
+      }
+    } else if (!percentage.equals(other.percentage)) {
+      return false;
+    }
+    if (yearOfPassing != other.yearOfPassing) {
+      return false;
+    }
+    return true;
   }
 
 }

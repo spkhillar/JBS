@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -10,22 +8,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>JOBSbySMS-Administration</title>
 <spring:url value="/resources/css/adminhome.css" var="resourceAdminHomeCssUrl"/>
 <spring:url value="/resources/css/admindesign.css" var="resourceAdminDesignCssUrl"/>
 
 <spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJqUrl"/>
-<spring:url value="/resources/js/jquery-ui.js" var="resourceUserInterfaceUrl"/>
+<spring:url value="/resources/js/jquery-ui-1.10.2.custom.js" var="resourceUserInterfaceUrl"/>
 <spring:url value="/resources/js/jMenu.jquery.js" var="resourceJMenuUrl"/>
+<spring:url value="/resources/js/menuinfo.js" var="resourceMenuInfoUrl"/>
 
 <script type="text/javascript" src="${resourceJqUrl}"></script>
 <script type="text/javascript" src="${resourceUserInterfaceUrl}"></script>
 <script type="text/javascript" src="${resourceJMenuUrl}"></script>
+<script type="text/javascript" src="${resourceMenuInfoUrl}"></script>
+
+<link rel="stylesheet" type="text/css" href="${resourceAdminHomeCssUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceAdminDesignCssUrl}"/>
 
 </head>
 
 <body>
+
+	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <table id="menutab" align="center" width="80%">
 <tr>
   <td >&nbsp;</td>
@@ -47,7 +51,7 @@
   <td width="1%">&nbsp;</td>
   <td width="1%">&nbsp;</td>
   <td width="4%" class="logoheader"><img name="" src="file:///D|/projectframeworkworkspace/jobsbysms/WebContent/images/logout.jpg" width="30" height="30" alt="" /><br />
-    Log Out</td>
+     <a href="${contextPath}/j_spring_security_logout">Log Out</a> </td>
 </tr>
 
 <tr>
@@ -138,7 +142,6 @@
     
     </tr>
     </table>
-<script type="text/javascript" src="js/menuinfo.js"></script>
 <br />
 <div id="">
 <table id="menupreferencetb">

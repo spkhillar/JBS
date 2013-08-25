@@ -4,7 +4,9 @@
 package com.web.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,46 +25,45 @@ import com.web.rest.RestResponse;
 /**
  * The Class BaseController.
  * 
- * @author 
+ * @author
  */
 public class BaseController {
 
-	@InitBinder
-	public void initBinder(final WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(
-				new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"), true));
-	}
+  @InitBinder
+  public void initBinder(final WebDataBinder binder) {
+    binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"), true));
+  }
 
-	/** The Constant logger. */
-	private static final Logger logger = LoggerFactory
-			.getLogger(BaseController.class);
+  /** The Constant logger. */
+  private static final Logger logger = LoggerFactory.getLogger(BaseController.class);
 
-	/**
-	 * Handle internal service exception.
-	 * 
-	 * @param ex
-	 *            the ex
-	 * @param request
-	 *            the request
-	 * @return the rest response
-	 */
-	@ExceptionHandler(Throwable.class)
-	@ResponseBody
-	public RestResponse handleInternalServiceException(final Exception ex,
-			final HttpServletRequest request) {
-		logger.error("handleInternalServiceException-User-", ex);
-		RestResponse restResponse = new RestResponse(500, ex.getMessage());
-		return restResponse;
-	}
+  /**
+   * Handle internal service exception.
+   * 
+   * @param ex
+   *          the ex
+   * @param request
+   *          the request
+   * @return the rest response
+   */
+  @ExceptionHandler(Throwable.class)
+  @ResponseBody
+  public RestResponse handleInternalServiceException(final Exception ex, final HttpServletRequest request) {
+    logger.error("handleInternalServiceException-User-", ex);
+    RestResponse restResponse = new RestResponse(500, ex.getMessage());
+    return restResponse;
+  }
 
-	public String getCurrentLoggedinUserName() {
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) auth
-				.getPrincipal();
-		String username = principal.getUsername();
-		return username;
-	}
-	
+  public String getCurrentLoggedinUserName() {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    org.springframework.security.core.userdetails.User principal =
+        (org.springframework.security.core.userdetails.User) auth.getPrincipal();
+    String username = principal.getUsername();
+    return username;
+  }
+
+  public List<String> getWorkExperiance() {
+    return Arrays.asList(new String[] { "<1", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10+" });
+  }
 
 }

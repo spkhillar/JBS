@@ -953,4 +953,29 @@
 		</insert>
 	</changeSet>
     
+    <changeSet author="shiv" id="1367592120330-27">
+        <addForeignKeyConstraint baseColumnNames="question_id" baseTableName="user_security_question"  constraintName="FK2_sec_question" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="security_question"  referencesUniqueColumn="false"/>
+    </changeSet>
+     <changeSet author="shiv" id="1367592120330-28">
+		<modifyDataType tableName="skill" columnName="resume" newDataType="BLOB"/>   
+    </changeSet>
+     <changeSet author="shiv" id="1367592120330-29">
+		<modifyDataType tableName="skill" columnName="resume" newDataType="BLOB"/>   
+		<addColumn tableName="skill">
+		    <column name="resume_filename" type="varchar(200)"></column>
+		</addColumn>
+		<addColumn tableName="skill">
+		    <column name="year_of_experiance" type="varchar(5)"></column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after functional_area" />
+		</modifySql>   
+    </changeSet>
+    <changeSet author="shiv" id="1367592120330-30">
+        <dropForeignKeyConstraint baseTableName="user_security_question" constraintName="FK1_sec_user_id"/>
+        <dropForeignKeyConstraint baseTableName="skill" constraintName="FK1_user_skill"/>
+        <dropColumn tableName="user_security_question" columnName="user_id"/>
+        <dropColumn tableName="skill" columnName="user_id"/>
+    </changeSet>
+    
 </databaseChangeLog>
