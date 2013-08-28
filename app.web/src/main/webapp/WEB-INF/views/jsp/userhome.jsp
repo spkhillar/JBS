@@ -70,7 +70,7 @@
     <nav>
       <ul class="menu">
         <li>
-          <a class="fNiv" href="/nitin_swadhin/">Home</a>
+          <a class="fNiv" href="${contextPath}/">Home</a>
           </li>
         
         <li>

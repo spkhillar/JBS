@@ -111,6 +111,7 @@ input.submit-button { margin: -10px 0 0 0; }
 </head>
 
 <body>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <table height="134" border="0" id="indextb">
   <tr>
     <td height="30"><img src="../../resources/images/JBS_LOGO.png" id="logo"></img></td>
@@ -126,7 +127,7 @@ input.submit-button { margin: -10px 0 0 0; }
     <nav>
       <ul class="menu">
         <li>
-          <a class="fNiv" href="/nitin_swadhin/">Home</a>
+          <a class="fNiv" href="${contextPath}/">Home</a>
           </li>
         
         <li>

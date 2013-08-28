@@ -138,6 +138,7 @@
 </head>
 
 <body>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <form:form name="registration" commandName="registration" id="registrationForm" enctype="multipart/form-data" method="POST" action="/register/newuser">
 <table  border="0" id="usertbdesign" align="center">
 <tr bgcolor="#FFFFFF" class="menuhd">
@@ -146,7 +147,7 @@
   <td width="1%" class="header"  >&nbsp;</td>
   <td width="28%" class="header" ></td>
   <td width="23%" class="header"  ><a href="#"></a></td>
-  <td width="18%" class="header" ><a href="/nitin_swadhin/">Already registered?Sign in</a></td>
+  <td width="18%" class="header" ><a href="${contextPath}/">Already registered?Sign in</a></td>
   <td class="header"  >&nbsp;</td>
 </tr>
 <tr id="he">
