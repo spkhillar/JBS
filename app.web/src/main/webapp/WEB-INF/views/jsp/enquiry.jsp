@@ -90,7 +90,7 @@ form br { display: none; }
 }
 </style>
 
-<!--[if IE]>
+
 <style type="text/css">
 
 /* ==================== Form style sheet for IE ==================== */
@@ -106,19 +106,19 @@ input.submit-button { margin: -10px 0 0 0; }
 /* ==================== Form style sheet for IE end ==================== */
 
 </style>
-<![endif]-->
+
 
 </head>
 
 <body>
 <table height="134" border="0" id="indextb">
   <tr>
-    <td height="30"><img src="../resources/images/JBS_LOGO.png" id="logo"></img></td>
+    <td height="30"><img src="../../resources/images/JBS_LOGO.png" id="logo"></img></td>
     <td height="30">&nbsp;</td>
     <td height="30">&nbsp;</td>
     <td height="30">&nbsp;</td>
     <td height="30" class="cationinfo"><a href="#logintb">Login</a> | New User? <a href="../register">Click to Register</a></td>
-    <td height="30" class="cationinfo">Privacy Policy</td>
+    <td height="30" class="cationinfo"><a href="#">Privacy Policy</a></td>
   </tr>
   <tr>
     <td height="96" colspan="6" class="menutd"><div class="wrap" align="center">
@@ -165,13 +165,13 @@ input.submit-button { margin: -10px 0 0 0; }
               <div class="main-slider-content" style="width:980px; height:340px; margin:auto; " align="center">
                 <ul class="sliders-wrap-inner">
                     <li>
-                      <img src="../resources/images/job5.jpg" title="Newsflash 9" width="" >            
+                      <img src="../../resources/images/job5.jpg" title="Newsflash 9" width="" >            
                      </li> 
                      <li>
-                      <img src="../resources/images/job4.jpg" title="Newsflash 10" >            
+                      <img src="../../resources/images/job4.jpg" title="Newsflash 10" >            
                      </li> 
                      <li>
-                      <img src="../resources/images/job2.jpg" title="Newsflash 11" >            
+                      <img src="../../resources/images/job2.jpg" title="Newsflash 11" >            
                      </li> 
                   </ul>  	
             </div>

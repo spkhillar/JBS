@@ -42,15 +42,15 @@
   <td class="logoheader">&nbsp;</td>
 </tr>
 <tr>
-  <td width="84%" ><img name="" src="file:///D|/projectframeworkworkspace/jobsbysms/WebContent/images/JBS_LOGO.png" width="150" height="30" alt="" /></td>
+  <td width="84%" ><img name="" src="resources/images/JBS_LOGO.png" width="150" height="30" alt="" /></td>
   <td width="1%">&nbsp;</td>
   <td width="2%">&nbsp;</td>
-  <td width="6%" class="logoheader"><img name="" src="file:///D|/projectframeworkworkspace/jobsbysms/WebContent/images/messages-icon.png" width="30" height="30" alt="" /><br />
+  <td width="6%" class="logoheader"><img name="" src="resources/images/messages-icon.png" width="30" height="30" alt="" /><br />
     Messages</td>
   <td width="1%">&nbsp;</td>
   <td width="1%">&nbsp;</td>
   <td width="1%">&nbsp;</td>
-  <td width="4%" class="logoheader"><img name="" src="file:///D|/projectframeworkworkspace/jobsbysms/WebContent/images/logout.jpg" width="30" height="30" alt="" /><br />
+  <td width="4%" class="logoheader"><img name="" src="resources/images/logout.jpg" width="30" height="30" alt="" /><br />
      <a href="${contextPath}/j_spring_security_logout">Log Out</a> </td>
 </tr>
 

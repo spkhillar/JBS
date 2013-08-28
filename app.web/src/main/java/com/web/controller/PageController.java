@@ -31,6 +31,11 @@ public class PageController extends BaseController {
     return "aboutus";
   }
 
+  @RequestMapping("/userhome")
+  public String userPage(){
+    return "userhome";
+  }
+
   @RequestMapping("/admincontrol")
   public String adminPage(){
     return "adminhome";

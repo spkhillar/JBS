@@ -11,7 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Register on JobsbySMS.com</title>
-<link rel="shortcut icon" href="images/titleimg.png"/>
+<link rel="shortcut icon" href="resources/images/favico.png"/>
 <style>
 #usertbdesign.menuhd td {
 	font-size: 12px;
@@ -35,6 +35,91 @@
 #usertbdesign {
 	font-size: 14px;
 }
+
+ body
+            {
+                margin: 0;
+                padding: 0;
+            }
+            #wrapper
+            {
+                width: 80%;
+                height: 80%;
+            }
+            #popup
+            {
+                display: none;
+                width: 50%;
+                height: auto;
+                overflow: auto;
+                left: 35%;
+                top: 20%;
+                position: absolute;
+                z-index: 2000;
+                border: 2px solid #d57111;
+                background: #f9f9f9;
+                padding-bottom: 20px
+            }
+            #main
+            {
+                width: 600px;
+                height: 150px;
+                margin-top: 200px;
+                margin-left: 250px;
+                margin-right: auto;
+                padding: 30px;
+                border: 1px solid #ddd;
+                font-size: 25px;
+                color: #555;
+                line-height: 35px;
+                letter-spacing: 2px;
+                padding-left: 250px;
+            }
+            #main input
+            {
+                width: 350px;
+                height: 50px;
+                background: transparent;
+                border: 1px solid #222;
+                background: deepskyblue;
+                color: #fff;
+                font-size: 20px;
+                line-height: 35px;
+                letter-spacing: 2px;
+            }
+            #main input:hover
+            {
+                cursor: pointer;
+                background: dodgerblue;
+            }
+            #overlay
+            {
+                display: none;
+                width: 80%;
+                height: 700px;
+                left: 0;
+                top: 0;
+                position: absolute;
+                z-index: 1000;
+                background: opaque;
+               
+            }
+            #popup input
+            {
+                float: right;
+                margin-right: 30px;
+                border: none;
+                background: transparent;
+                width: 100px;
+                height: 30px;
+                background: #d57111;
+                color: #fff;
+            }
+            #popup input:hover
+            {
+                cursor: pointer;
+                background: #444;
+            }
 </style>
 
 <spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJqUrl"/>
@@ -54,11 +139,11 @@
 <table  border="0" id="usertbdesign" align="center">
 <tr bgcolor="#FFFFFF" class="menuhd">
   <td class="header" align="center" >&nbsp;</td>
-  <td width="28%" class="header"><img name="" src="images/JBS_LOGO.png" id="logo" alt="" /></td>
+  <td width="28%" class="header"><img name="" src="../resources/images/JBS_LOGO.png" id="logo" alt="" /></td>
   <td width="1%" class="header"  >&nbsp;</td>
-  <td width="28%" class="header" ><a href="#">Already registered?Sign in</a></td>
-  <td width="23%" class="header"  ><a href="#">Forgot Login Details</a></td>
-  <td width="18%" class="header" ><a href="#">Report Problem</a></td>
+  <td width="28%" class="header" ></td>
+  <td width="23%" class="header"  ><a href="#"></a></td>
+  <td width="18%" class="header" ><a href="/nitin_swadhin/">Already registered?Sign in</a></td>
   <td class="header"  >&nbsp;</td>
 </tr>
 <tr id="he">
@@ -88,7 +173,7 @@
     </tr>
      <tr>
       <td height="27">Select your security Question</td>
-      <td> <form:select path="securityQuestion" items="${securityQuestions}"></form:select>
+      <td> <form:select path="securityQuestion" items="${securityQuestions}" ></form:select>
       </td>
     </tr>
     <tr>
@@ -119,36 +204,36 @@
     <table width="206" border="0" id="addressinfotb">
       <tr>
         <td width="270">First Name</td>
-        <td width="480"> <form:input path="user.firstName"></form:input></td>
+        <td width="480"> <form:input path="user.firstName" ></form:input></td>
       </tr>
       <tr>
         <td>Last Name</td>
-        <td><form:input path="user.lastName"></form:input></td>
+        <td><form:input path="user.lastName" ></form:input></td>
       </tr>
       <tr>
         <td>Address Line1</td>
-        <td><form:input path="user.address.addressLine1"></form:input> </td>
+        <td><form:input path="user.address.addressLine1" ></form:input> </td>
       </tr>
       <tr>
         <td>Address Line2</td>
-        <td><form:input path="user.address.addressLine2"></form:input> </td>
+        <td><form:input path="user.address.addressLine2" ></form:input> </td>
       </tr>
       <tr>
         <td>State</td>
-        <td><form:select path="user.address.state" items="${states}"></form:select> </td>
+        <td><form:select path="user.address.state" items="${states}" ></form:select> </td>
       </tr>
       <tr>
         <td>City</td>
         <td>
-          <form:input path="user.address.city"></form:input></td>
+          <form:input path="user.address.city" ></form:input></td>
       </tr>
       <tr>
         <td>Mobile Number</td>
-        <td><form:input path="user.phone"></form:input></td>
+        <td><form:input path="user.phone" ></form:input></td>
       </tr>
       <tr>
         <td>Pin code</td>
-        <td><form:input path="user.address.pin"></form:input></td>
+        <td><form:input path="user.address.pin" ></form:input></td>
       </tr>
     </table></td>
   <td>&nbsp;</td>
@@ -192,19 +277,19 @@
     <tr>
       <td width="274">Work Experience</td>
       <td width="476">
-      <form:select path="user.skill.yearOfExperiance" items="${workExperianceList}"></form:select>
+      <form:select path="user.skill.yearOfExperiance" items="${workExperianceList}" ></form:select>
       </td>
     </tr>
     <tr>
       <td>Key Skills</td>
       <td>
-      <form:textarea path="user.skill.skills"/>
+      <form:textarea path="user.skill.skills" />
       </td>
     </tr>
     <tr>
       <td>Which Functional area do you work in?</td>
       <td>
-      <form:select path="user.skill.functionalArea" items="${jobsFunctionalAreaList}"></form:select>
+      <form:select path="user.skill.functionalArea" items="${jobsFunctionalAreaList}" ></form:select>
       </td>
     </tr>
   </table></td>
@@ -224,16 +309,16 @@
       </tr>
     <tr>
       <td>
-      	<input type="text" name="user.qualifications[0].certification" autofocus required/>
+      	<input type="text" name="user.qualifications[0].certification" />
       </td>
       <td>
-      	<input type="text" name="user.qualifications[0].boardOrUniversity" autofocus required/>
+      	<input type="text" name="user.qualifications[0].boardOrUniversity" />
       </td>
       <td>
-       <input type="text" name="user.qualifications[0].yearOfPassing" autofocus required/>
+       <input type="text" name="user.qualifications[0].yearOfPassing" />
       </td>
       <td>
-       <input type="text" name="user.qualifications[0].percentage" autofocus required/>
+       <input type="text" name="user.qualifications[0].percentage" />
       </td>
     </tr>
   </table>
@@ -263,8 +348,8 @@
   <form:checkbox path="notifySms" value="false"/>
     Notifications from JobsbySMS</h5></td>
   <td colspan="4" bgcolor="#FFFFFF"><h5>
-    <input type="checkbox" name="terms" id="terms" autofocus required/>
-    I have read and understood and agree to the Terms &amp; Conditions governing the use of JobsbySMS.com</h5>
+    <input type="checkbox" name="terms" id="terms" />
+    I have read and understood and agree to the <a href="#" id="showpopup">Terms &amp; Conditions</a> governing the use of JobsbySMS.com</h5>
   </td>
   <td >
   
@@ -277,5 +362,36 @@
 </tr>
 </table>
 </form:form>
+<div id="wrapper">
+            <div id="popup">
+                <div align="left">
+                   <textarea cols="80" rows="10" scrollable="both" align="center" readonly="readonly"></textarea>                    
+                </div>
+                <input type="submit" value="CLOSE" id="hidepopup" /> 
+            </div>
+            <div id="overlay"></div>
+           </div>
+        <script>
+            $(document).ready(function(){
+                            $("a#showpopup").click(function(){
+                                $("div#overlay").fadeIn('500');       
+                                $("div#popup").delay('200');
+                                $("div#popup").fadeIn('500');         
+                           });                            
+                        
+                        
+                    $("div#overlay").click(function(){                       
+                                $("div#popup").fadeOut('500');      
+                                $("div#overlay").delay('200');
+                                $("div#overlay").fadeOut('500');   
+                    });
+                    
+                    $("input#hidepopup").click(function(){                       
+                                $("div#popup").fadeOut('500');      
+                                $("div#overlay").delay('200');
+                                $("div#overlay").fadeOut('500');   
+                    });
+                });
+        </script>
 </body>
 </html>
