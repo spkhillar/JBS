@@ -131,6 +131,9 @@
 <script type="text/javascript" src="${resourceUserRegisterJqUrl}"></script>
 
 <link rel="stylesheet" type="text/css" href="${resourceNewUserCssUrl}"/>
+<script>
+	qualificationRowIndex = parseInt("<c:out value="${qualificationCount}" />");
+</script>
 
 </head>
 
@@ -165,11 +168,11 @@
     </tr>
     <tr>
       <td>Create a Password for your account</td>
-      <td> <form:input path="user.password" /></td>
+      <td> <form:password path="user.password" /></td>
     </tr>
     <tr>
       <td height="27">Confirm the Password</td>
-      <td> <form:input path="confirmPassword" /></td>
+      <td> <form:password path="confirmPassword" /></td>
     </tr>
      <tr>
       <td height="27">Select your security Question</td>
@@ -307,7 +310,10 @@
         <td width="189">Year of Passing</td>
         <td width="234">Percentage/CGPA</td>
       </tr>
-    <tr>
+      
+     <c:choose>
+  <c:when test="${currentLoggedInUserId eq null}">
+      <tr>
       <td>
       	<input type="text" name="user.qualifications[0].certification" />
       </td>
@@ -320,7 +326,28 @@
       <td>
        <input type="text" name="user.qualifications[0].percentage" />
       </td>
-    </tr>
+      </tr>
+  </c:when>
+  <c:otherwise>
+	  <c:forEach var="qualification" items="${qualifications}" varStatus="status">
+	  <tr>
+	   <td>
+      	<input type="text" name="user.qualifications[${status.index}].certification" value="${qualification.certification}"/>
+      </td>
+      <td>
+      	<input type="text" name="user.qualifications[${status.index}].boardOrUniversity" value="${qualification.boardOrUniversity}"/>
+      </td>
+      <td>
+       <input type="text" name="user.qualifications[${status.index}].yearOfPassing" value="${qualification.yearOfPassing}"/>
+      </td>
+      <td>
+       <input type="text" name="user.qualifications[${status.index}].percentage" value="${qualification.percentage}"/>
+      </td>
+	  </tr>
+	  </c:forEach>
+	  
+  </c:otherwise>
+  </c:choose>
   </table>
     <br /><input type="button" value="Add Another Certification" id="add"/></td>
   <td>&nbsp;</td>
@@ -357,7 +384,14 @@
 </tr>
 <tr class="header2">
   <td >&nbsp;</td>
-  <td colspan="5" align="center" bgcolor="#FFFFFF"><input type="submit" name="submitbutton" id="submitbutton" value="Join to JobsbySMS" /></td>
+  <c:choose>
+  <c:when test="${currentLoggedInUserId eq null}">
+	  <td colspan="5" align="center" bgcolor="#FFFFFF"><input type="submit" name="submitbutton" id="submitbutton" value="Join to JobsbySMS" /></td>
+  </c:when>
+  <c:otherwise>
+	  <td colspan="5" align="center" bgcolor="#FFFFFF"><input type="submit" name="submitbutton" id="submitbutton" value="Submit" /></td>
+  </c:otherwise>
+  </c:choose>
   <td ></td>
 </tr>
 </table>

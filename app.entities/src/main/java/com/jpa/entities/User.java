@@ -499,7 +499,7 @@ public class User implements BaseEntity, java.io.Serializable {
    * 
    * @return the qualifications
    */
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
   public List<Qualification> getQualifications() {
     return this.qualifications;
   }

@@ -132,7 +132,7 @@
 				<version>2.3</version>
 				<configuration>
 					<archiveClasses>true</archiveClasses>
-					<warName>nitin_swadhin</warName>
+					<warName>jbs</warName>
 				</configuration>
 			</plugin>
 

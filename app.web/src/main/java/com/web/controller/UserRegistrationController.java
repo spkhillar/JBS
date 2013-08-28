@@ -43,7 +43,11 @@ public class UserRegistrationController extends BaseController {
     User existingUser = userRegistrationService.retrieveUser(userId);
     userRegistrationForm.setUser(existingUser);
     userRegistrationForm.setSecurityQuestion(existingUser.getUserSecurityQuestion().getSecurityQuestion().getId());
+    userRegistrationForm.setSecurityAnswer(existingUser.getUserSecurityQuestion().getAnswer());
     map.put("registration", userRegistrationForm);
+    map.put("currentLoggedInUserId", existingUser.getId());
+    map.put("qualifications", existingUser.getQualifications());
+    map.put("qualificationCount", existingUser.getQualifications().size() - 1);
     prepareObjectsForRendering(map);
     return "newuser";
   }

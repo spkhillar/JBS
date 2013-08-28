@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,22 +48,20 @@ public class HomeController extends BaseController {
    */
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
-  public String home(final Locale locale, final Model model) {
+  public String home(final Locale locale, final ModelMap map) {
     logger.info("Welcome home! The client locale is {}.", locale);
 
     Date date = new Date();
     DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
-    String formattedDate = dateFormat.format(date);
-
-    model.addAttribute("serverTime", formattedDate);
-
     String username = this.getCurrentLoggedinUserName();
     User user = userService.findByUserName(username);
+    map.put("currentLoggedInUser", username);
+    map.put("currentLoggedInUserId", user.getId());
     if (user.getUserRole().getRole().getId().equals(1L)) {
       return "adminhome";
     } else {
-      return "test";
+      return "userhome";
     }
   }
 
