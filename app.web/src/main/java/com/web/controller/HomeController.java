@@ -59,7 +59,7 @@ public class HomeController extends BaseController {
     map.put("currentLoggedInUser", username);
     map.put("currentLoggedInUserId", user.getId());
     if (user.getUserRole().getRole().getId().equals(1L)) {
-      return "adminhome";
+      return "admin.home";
     } else {
       return "userhome";
     }

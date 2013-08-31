@@ -34,4 +34,22 @@
 	<definition name="under.construction" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/views/tiles/under-construction.jsp" />
 	</definition>
+	
+	<!-- New Definition -->
+	
+	<definition name="admin.base.definition"
+		template="/WEB-INF/views/tiles/base/layout.jsp">
+		<put-attribute name="main-content" value="/WEB-INF/views/tiles/base/admin-header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/base/footer.jsp" />
+	</definition>
+	
+	<definition name="admin.home" extends="admin.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/adminhome.jsp" />
+	</definition>
+	
+	<definition name="admin.new.job" extends="admin.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/new-job.jsp" />
+	</definition>
+	
 </tiles-definitions>

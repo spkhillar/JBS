@@ -8,14 +8,9 @@
 
 </head>
 <body>
-<div id="templatemo_body_wrapper">
-	<div id="templatemo_wrapper">
+
 <tiles:insertAttribute name="main-content" />
- <div id="templatemo_main">
 <tiles:insertAttribute name="body"/>
-</div>
-</div>
-</div>
 <tiles:insertAttribute name="footer" />
 
 

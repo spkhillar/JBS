@@ -11,13 +11,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>JOBSbySMS-Enquiry</title>
-<link rel="shortcut icon" href="resources/images/favico.png">
+<link rel="shortcut icon" href="resources/images/favico.png"/>
 
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
 <spring:url value="/resources/css/enquirymenu.css" var="resourceEnquiryCssUrl"/>
 <spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
 
-<spring:url value="/resources/js/jquery.js" var="resourceJq2Url"/>
+<spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJq2Url"/>
 <spring:url value="/resources/js/jquery.easing.js" var="resourceEasingUrl"/>
 <spring:url value="/resources/js/jquery.touchSwipe.min.js" var="resourceTouchSwipeUrl"/>
 <spring:url value="/resources/js/script.js" var="resourceScriptUrl"/>
