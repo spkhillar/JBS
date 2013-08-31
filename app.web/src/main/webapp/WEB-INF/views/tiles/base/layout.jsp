@@ -4,7 +4,7 @@
 <html >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Field Service Application</title>
+<title>JOBSbySMS-Enquiry</title>
 
 </head>
 <body>
