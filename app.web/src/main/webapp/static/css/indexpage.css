@@ -10,6 +10,15 @@
 	border:1px solid #CCC;
 	border-radius: 10px 10px 1px 1px;
 }
+#enquirytable{
+	width:80%;
+	background:rgba(205,194,100,0,4);
+	font-size: 14px;
+	font-family:Arial;
+	margin:auto;
+	border:1px solid #CCC;
+	border-radius: 10px 10px 1px 1px;
+}
 #scroller{
 	border:10px solid #CCC;
 	border-radius: 10px 10px 10px 10px;
@@ -111,7 +120,7 @@ td.pvtinfo{
 	font-family:Arial;
 	margin:auto;
 }
-#subscribetb,#logintb{
+#jobsearch,#logintb{
 	width:100%;
 	border:2px solid #CCC;
 	border-radius: 1px 1px 10px 10px;
@@ -126,8 +135,8 @@ tr.footer{
 
 
 #logo{
-	height:30px;
-	width:150px;
+	height:50px;
+	width:250px;
 
 
 }

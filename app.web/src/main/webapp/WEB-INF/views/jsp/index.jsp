@@ -10,14 +10,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>JOBSbySMS-Enquiry</title>
+<title>JOBSbySMS-Home Page</title>
 <link rel="shortcut icon" href="resources/images/favico.png"/>
 
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
-<spring:url value="/resources/css/enquirymenu.css" var="resourceEnquiryCssUrl"/>
+
 <spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
 
-<spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJq2Url"/>
+<spring:url value="/resources/js/jquery.js" var="resourceJq2Url"/>
 <spring:url value="/resources/js/jquery.easing.js" var="resourceEasingUrl"/>
 <spring:url value="/resources/js/jquery.touchSwipe.min.js" var="resourceTouchSwipeUrl"/>
 <spring:url value="/resources/js/script.js" var="resourceScriptUrl"/>
@@ -33,26 +33,6 @@
 <link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
 
-<script type="text/javascript">
- $(document).ready( function(){	
-		// buttons for next and previous item						 
-		var buttons = { previous:$('#jslidernews1 .button-previous') ,
-						next:$('#jslidernews1 .button-next') };			
-		 $('#jslidernews1').lofJSidernews( { interval : 4000,
-											direction		: 'opacitys',	
-											easing			: 'easeInOutExpo',
-											duration		: 1200,
-											auto		 	: true,
-											maxItemDisplay  : 4,
-                      mobile   : true,
-											navPosition     : 'horizontal', // horizontal
-											navigatorHeight : 32,
-											navigatorWidth  : 80,
-											mainWidth		: 980,
-											buttons			: buttons } );	
-	});
-</script>
-
 
 <style>    
 * { margin: 0; padding: 0; }
@@ -65,43 +45,19 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
 #indextb tr td #jobtb tr .joblist form fieldset label {
 	text-align: left;
 }
-</style>
-
-
-<style type="text/css">
-
-/* ==================== Form style sheet for IE ==================== */
-
-fieldset { padding: 22px 17px 12px 17px; position: relative; margin: 12px 0 34px 0; }
-legend { position: absolute; top: -12px; left: 10px; }
-label.float { margin: 5px 0 0 0; }
-label { margin: 0 0 5px 0; }
-label.spam-protection { display: inline; width: auto; position: relative; top: -3px; }
-input.choose { border: 0; margin: 0; }
-input.submit-button { margin: -10px 0 0 0; }
-
-/* ==================== Form style sheet for IE end ==================== */
-
+#indextb tr td #infotb .footer td img {
+	text-align: center;
+}
 </style>
 
 
 </head>
 
 <body>
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<table height="134" border="0" id="indextb">
+<table border="0" id="indextb">
   <tr>
-    <td height="30"><img src="resources/images/JBS_LOGO.png" id="logo"></img></td>
-    <td height="30">&nbsp;</td>
-    <td height="30">&nbsp;</td>
-    <td height="30">&nbsp;</td>
-    <td height="30" class="cationinfo"><a href="#logintb">Login</a> | New User? <a href="register">Click to Register</a></td>
-    <td height="30" class="cationinfo"><a href="#">Privacy Policy</a></td>
-  </tr>
-  <tr>
-    <td height="96" colspan="6" class="menutd"><div class="wrap" align="center">
-    
+    <td><img src="resources/images/JBS_LOGO.png" id="logo"></img></td>
+    <td><div class="wrap" align="center">
     <nav>
       <ul class="menu">
         <li>
@@ -130,45 +86,36 @@ input.submit-button { margin: -10px 0 0 0; }
       </nav>
     </div></td>
   </tr>
+  <tr>
+    <td height="27" colspan="2" class="menutd"><div class="wrap" align="center">
+    <nav>
+      <ul class="menu">
+        <li>
+          <a class="fNiv">Central Govt Jobs</a>
+          </li>
+        
+        <li>
+          <a class="fNiv" href="#">State Govt Jobs</a>
+          </li>
+        
+        <li>
+          <a class="fNiv" href="#">Private Jobs</a>
+          </li>
+        
+        <li>
+          <a class="fNiv" href="#">IT Jobs</a> </li>
+    
+        <li>
+          <a class="fNiv">Banking Jobs</a>
+          </li>
+      </ul>
+    </nav>
+    </div></td>
+  </tr>
   
   <tr>
-    <td height="22" colspan="6">
-    
-    <table  height="44%" id="adbanner">
-    <tr>
-      <td height="141"> <table align="center" id="scroller" border="2"><div id="container" align="center">
-    		<!------------------------------------- THE CONTENT ------------------------------------------------->
-<div id="jslidernews1" class="lof-slidecontent" style="width:980px; height:340px; margin:auto;" align="center">
-	<div class="preload"><div></div></div>
-    		 <!-- MAIN CONTENT --> 
-              <div class="main-slider-content" style="width:980px; height:340px; margin:auto; " align="center">
-                <ul class="sliders-wrap-inner">
-                    <li>
-                      <img src="resources/images/job5.jpg" title="Newsflash 9" width="" >            
-                     </li> 
-                     <li>
-                      <img src="resources/images/job4.jpg" title="Newsflash 10" >            
-                     </li> 
-                     <li>
-                      <img src="resources/images/job2.jpg" title="Newsflash 11" >            
-                     </li> 
-                  </ul>  	
-            </div>
- 		   	<div class="navigator-content">
-                  <div class="button-next">Next</div>
-                  <div class="navigator-wrapper">
-                   </div>
-                  <div  class="button-previous">Previous</div>
-             </div> 
-          <!-- BUTTON PLAY-STOP -->
-          <div class="button-control"><span></span></div>
-           <!-- END OF BUTTON PLAY-STOP -->
-          
- </div></div></table>
-</td></tr>
-    </table>
-     <table id="jobtb">
-     <tr bgcolor="#DCDAFC">
+    <td height="22" colspan="2"><table id="jobtb">
+      <tr bgcolor="#DCDAFC">
        <td height="260" class="joblist">
      <table width="149" id="govttb">
 	 <tr bgcolor="#0099CC"><td bgcolor="#D1E6E7">Latest Government Jobs</td></tr>
@@ -216,99 +163,78 @@ input.submit-button { margin: -10px 0 0 0; }
          </tr>
        </table></td>
        </tr>
-      </table>
-    <table width="82%" height="347" border="0" id="infotb">
+    </table>
+    <table width="88%" height="482" border="0" id="infotb">
   <tr>
-    <td width="28%" height="100">
-	<form action="j_spring_security_check" method="post">
-	<table width="279" border="0" id="logintb">
+    <td height="100" colspan="3"><table width="626" border="0" align="center" id="jobsearch">
       <tr>
-        <td colspan="2" class="cationinfo">Login to your Profile and view recommended Jobs</td>
+        <td colspan="4" class="cationinfo">Job Search</td>
       </tr>
       <tr>
-        <td>Username</td>
-        <td><label for="textfield"></label>
-          <input type="text" name="j_username" id="j_username" /></td>
+        <td>Key Skills</td>
+        <td><input type="text" name="skills" id="skills" /></td>
+        <td>Location</td>
+        <td><label for="textfield2"></label>
+          <input type="text" name="location" id="location" /></td>
       </tr>
       <tr>
-        <td width="27" height="31">Password</td>
-        <td width="236"><label for="textfield"></label>
-          <input type="password" name="j_password" id="j_password" />
-          <br /></td>
+        <td width="137" height="23">Functional area</td>
+        <td width="172"><select name="selectfunctionalarea" id="selectfunctionalarea">
+        </select></td>
+        <td width="94">Experience</td>
+        <td width="205"><label for="select"></label>
+          <select name="experience" id="Experience">
+          </select></td>
       </tr>
       <tr>
-        <td height="38"><label for="checkbox2"></label></td>
-        <td><input type="submit" name="btn_submit2" id="btn_submit2" value="Login" />
-       </td>
+        <td height="38" colspan="2"><label for="checkbox3">
+          <input type="submit" name="button" id="button" value="Search" />
+        </label></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
-    </table></form></td>
-    <td width="24%" height="100"><table width="149" id="govtorgtb">
-      <tr bgcolor="#0099CC">
-        <td colspan="4" bgcolor="#CCCCCC">Government Organisations</td>
-      </tr>
-      <tr>
-        <td width="21%">&nbsp;</td>
-        <td width="24%">&nbsp;</td>
-        <td width="26%">&nbsp;</td>
-        <td width="29%">&nbsp;</td>
-      </tr>
-    </table></td>
-    <td width="23%" height="100"><table width="149" id="privateorgtb">
-      <tr bgcolor="#0099CC">
-        <td colspan="4" bgcolor="#CCCCCC">Private Sector Organizations</td>
-      </tr>
-      <tr>
-        <td width="18%">&nbsp;</td>
-        <td width="25%">&nbsp;</td>
-        <td width="28%">&nbsp;</td>
-        <td width="29%">&nbsp;</td>
-      </tr>
-    </table></td>
-    <td width="25%" height="100"><table width="279" border="0" id="subscribetb">
-      <tr>
-        <td colspan="2" class="cationinfo">Get SMS &amp; Email Free Job Alerts</td>
-      </tr>
-      <tr>
-        <td><img name="" src="images/emailicon.jpg" width="32" height="31" alt="" /></td>
-        <td><label for="textfield"></label>
-          <input type="text" name="txt_email" id="txt_email" /></td>
-      </tr>
-      <tr>
-        <td width="33" height="31"><img name="" src="images/phoneicon.jpg" width="32" height="27" alt="" /></td>
-        <td width="203"><label for="textfield"></label>
-          <input type="text" name="txt_mobile" id="txt_mobile" />
-          <br />
-          <input type="checkbox" name="checkbox" id="checkbox" />
-          I have read and agree the Terms and Conditions governed by Jobsbysms.com</td>
-      </tr>
-      <tr>
-        <td height="31" colspan="2"><label for="checkbox"></label>          <input type="submit" name="btn_submit" id="btn_submit" value="Subscribe" /></td>
-        </tr>
-    </table></td>
+    </table>
+    </td>
+    <td width="46%" height="100"><form action="j_spring_security_check" method="post">
+      <table width="412" border="0" id="logintb">
+        <tr>
+          <td colspan="2" class="cationinfo">Login to your Profile and view recommended Jobs</td>
+          </tr>
+        <tr>
+          <td>Username</td>
+          <td><label for="textfield"></label>
+            <input type="text" name="j_username" id="j_username" /></td>
+          </tr>
+        <tr>
+          <td width="140" height="23">Password</td>
+          <td width="262"><label for="textfield"></label>
+            <input type="password" name="j_password" id="j_password" />
+            <br /></td>
+          </tr>
+        <tr>
+          <td height="29"><label for="checkbox2">Forgot Password?</label></td>
+          <td><input type="submit" value="login"/>  </td>
+          </tr>
+      </table></form></td>
   </tr>
   <tr>
-    <td height="63"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.jobsbysms.com&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100%; height:80px;" allowtransparency="true"></iframe></td>
-    <td height="63">&nbsp;</td>
-    <td height="63">&nbsp;</td>
-    <td height="63">&nbsp;</td>
+    <td colspan="3" rowspan="2"><img name="" src="resources/images/packages.png" width="559" height="400" alt="" /></td>
+    <td height="47">HIRING NOW</td>
   </tr>
   <tr class="footer">
-    <td height="75" >&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td height="281"><img name="" src="resources/images/bank-logos.gif" width="300" height="300" alt="" /></td>
   </tr>
   <tr class="footer">
-    <td >&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td width="16%" height="37" >&nbsp;</td>
+    <td width="16%">&nbsp;</td>
+    <td width="22%">&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
     </table>
 </table>
     
   
-     <br/>
+<br/>
      <div id="pvtjobs"></div>
     
 </body>

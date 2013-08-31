@@ -33,26 +33,6 @@
 <link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
 
-<script type="text/javascript">
- $(document).ready( function(){	
-		// buttons for next and previous item						 
-		var buttons = { previous:$('#jslidernews1 .button-previous') ,
-						next:$('#jslidernews1 .button-next') };			
-		 $('#jslidernews1').lofJSidernews( { interval : 4000,
-											direction		: 'opacitys',	
-											easing			: 'easeInOutExpo',
-											duration		: 1200,
-											auto		 	: true,
-											maxItemDisplay  : 4,
-                      mobile   : true,
-											navPosition     : 'horizontal', // horizontal
-											navigatorHeight : 32,
-											navigatorWidth  : 80,
-											mainWidth		: 980,
-											buttons			: buttons } );	
-	});
-</script>
-
 
 <style>    
 * { margin: 0; padding: 0; }
@@ -111,19 +91,10 @@ input.submit-button { margin: -10px 0 0 0; }
 </head>
 
 <body>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<table height="134" border="0" id="indextb">
-  <tr>
-    <td height="30"><img src="../../resources/images/JBS_LOGO.png" id="logo"></img></td>
-    <td height="30">&nbsp;</td>
-    <td height="30">&nbsp;</td>
-    <td height="30">&nbsp;</td>
-    <td height="30" class="cationinfo"><a href="#logintb">Login</a> | New User? <a href="../register">Click to Register</a></td>
-    <td height="30" class="cationinfo"><a href="#">Privacy Policy</a></td>
-  </tr>
-  <tr>
-    <td height="96" colspan="6" class="menutd"><div class="wrap" align="center">
-    
+<table border="0" id="enquirytable">
+<tr>
+    <td><img src="../resources/images/JBS_LOGO.png" id="logo"></img></td>
+    <td colspan="6"><div class="wrap" align="left">
     <nav>
       <ul class="menu">
         <li>
@@ -131,15 +102,15 @@ input.submit-button { margin: -10px 0 0 0; }
           </li>
         
         <li>
-          <a class="fNiv" href="../../register/">Register</a>
+          <a class="fNiv" href="register/">Register</a>
           </li>
         
         <li>
-          <a class="fNiv" href="../login">Login</a>
+          <a class="fNiv" href="#">Login</a>
           </li>
         
         <li>
-          <a class="fNiv" id="paymentlink" href="enquiry">Enquiry</a> </li>
+          <a class="fNiv" id="enquiry" href="mypage/enquiry/">Enquiry</a> </li>
         
         <li>
           <a class="fNiv">Contact Us</a>
@@ -152,82 +123,68 @@ input.submit-button { margin: -10px 0 0 0; }
       </nav>
     </div></td>
   </tr>
+  <tr>
+    <td height="27" colspan="2" class="menutd"><div class="wrap" align="center">
+    <nav>
+      <ul class="menu">
+        <li>
+          <a class="fNiv">Central Govt Jobs</a>
+          </li>
+        
+        <li>
+          <a class="fNiv" href="#">State Govt Jobs</a>
+          </li>
+        
+        <li>
+          <a class="fNiv" href="#">Private Jobs</a>
+          </li>
+        
+        <li>
+          <a class="fNiv" href="#">IT Jobs</a> </li>
+    
+        <li>
+          <a class="fNiv">Banking Jobs</a>
+          </li>
+      </ul>
+    </nav>
+    </div></td>
+  </tr>
   
   <tr>
-    <td height="22" colspan="6">
-    
-    <table  height="44%" id="adbanner">
-    <tr>
-      <td height="141"> <table align="center" id="scroller" border="2"><div id="container" align="center">
-    		<!------------------------------------- THE CONTENT ------------------------------------------------->
-<div id="jslidernews1" class="lof-slidecontent" style="width:980px; height:340px; margin:auto;" align="center">
-	<div class="preload"><div></div></div>
-    		 <!-- MAIN CONTENT --> 
-              <div class="main-slider-content" style="width:980px; height:340px; margin:auto; " align="center">
-                <ul class="sliders-wrap-inner">
-                    <li>
-                      <img src="../../resources/images/job5.jpg" title="Newsflash 9" width="" >            
-                     </li> 
-                     <li>
-                      <img src="../../resources/images/job4.jpg" title="Newsflash 10" >            
-                     </li> 
-                     <li>
-                      <img src="../../resources/images/job2.jpg" title="Newsflash 11" >            
-                     </li> 
-                  </ul>  	
-            </div>
- 		   	<div class="navigator-content">
-                  <div class="button-next">Next</div>
-                  <div class="navigator-wrapper">
-                   </div>
-                  <div  class="button-previous">Previous</div>
-             </div> 
-          <!-- BUTTON PLAY-STOP -->
-          <div class="button-control"><span></span></div>
-           <!-- END OF BUTTON PLAY-STOP -->
-          
- </div></div></table>
-</td></tr>
-    </table>
-     <table id="jobtb">
+   <td colspan="6"> <table width="98%" id="jobtb">
      <tr bgcolor="#FFFFFF">
        <td width="52%" height="154" class="joblist"><form action="" method="post">
-		<!-- ============================== Fieldset 1 ============================== -->
-		<fieldset>
-			<legend>Contact Information</legend>
-				<label for="input-one" class="float"><strong>Name:</strong></label>
-				<br />
-				<input class="inp-text" name="input-one-name" id="input-one" type="text" size="30" /><br />
-
-				<label for="input-two" class="float"><strong>Email Id</strong></label>
-				<br />
-				<input class="inp-text" name="input-two-name"  id="input-two" type="text" size="30" />
-		</fieldset>
-		<!-- ============================== Fieldset 1 end ============================== -->
-
-
-		
-
-		<!-- ============================== Fieldset 3 ============================== -->
-		<fieldset>
-			<legend>Message:</legend>
-			<textarea name="textarea-name" id="message" cols="30" rows="5" title="Note or message"></textarea><br />
-		</fieldset>
-		<!-- ============================== Fieldset 3 end ============================== -->
-
-		<p><input class="submit-button" type="submit" alt="SUBMIT" name="Submit" value="SUBMIT" /></p>
-	</form>
-
+         <!-- ============================== Fieldset 1 ============================== -->
+         <fieldset>
+           <legend>Contact Information</legend>
+           <label for="input-one" class="float"><strong>Name:</strong></label>
+           <br />
+           <input class="inp-text" name="input-one-name" id="input-one" type="text" size="30" /><br />
+           
+           <label for="input-two" class="float"><strong>Email Id</strong></label>
+           <br />
+           <input class="inp-text" name="input-two-name"  id="input-two" type="text" size="30" />
+           </fieldset>
+         <!-- ============================== Fieldset 1 end ============================== -->
+         
+         
+         
+         
+         <!-- ============================== Fieldset 3 ============================== -->
+         <fieldset>
+           <legend>Message:</legend>
+           <textarea name="textarea-name" id="message" cols="30" rows="5" title="Note or message"></textarea><br />
+           </fieldset>
+         <!-- ============================== Fieldset 3 end ============================== -->
+         
+         <p><input class="submit-button" type="submit" alt="SUBMIT" name="Submit" value="SUBMIT" /></p>
+         </form>
+         
 </td>
-       <td width="41%" class="joblist">&nbsp;</td>
-       <td width="7%"  class="joblist">&nbsp;</td>
        </tr>
       </table>
-</table>
-    
-  
-     <br/>
-     <div id="pvtjobs"></div>
-    
+    </td>
+    </tr>
+  </table>  
 </body>
 </html>
