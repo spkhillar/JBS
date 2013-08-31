@@ -978,4 +978,19 @@
         <dropColumn tableName="skill" columnName="user_id"/>
     </changeSet>
     
+     <changeSet author="shiv" id="1367592120330-31">
+		<addColumn tableName="job">
+		    <column name="category" type="varchar(200)"></column>
+		</addColumn>
+		<addColumn tableName="job">
+		    <column name="sub_category" type="varchar(200)"></column>
+		</addColumn>
+		<addColumn tableName="job">
+		    <column name="age_limit" type="varchar(20)"></column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after location" />
+		</modifySql>   
+    </changeSet>
+    
 </databaseChangeLog>

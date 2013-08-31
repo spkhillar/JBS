@@ -38,7 +38,7 @@
   <td class="logoheader">&nbsp;</td>
 </tr>
 <tr>
-  <td width="84%" ><img name="" src="/resources/images/JBS_LOGO.png" width="150" height="30" alt="" /></td>
+  <td width="84%" ><img name="" src="resources/images/JBS_LOGO.png" width="150" height="30" alt="" /></td>
   <td width="1%">&nbsp;</td>
   <td width="2%">&nbsp;</td>
   <td width="6%" class="logoheader"><img name="" src="resources/images/messages-icon.png" width="30" height="30" alt="" /><br />
@@ -51,7 +51,7 @@
 </tr>
 
 <tr>
-<td height="132" colspan="8" align="center">
+<td height="10" colspan="8" align="center">
   <div class="wrap" align="center">
     
     <nav>
@@ -115,7 +115,7 @@
           <ul>
             <li class="arrow"></li>
             <li><a id="joblink" href="${contextPath}/admin/job/new">Add Job</a> </li>
-            <li><a id="editjoblink">Edit Job</a></li>
+            <li><a id="viewjoblink" href="${contextPath}/admin/job/list">View Jobs</a></li>
             <li><a>Delete Job</a></li>
             </ul>
           </li>

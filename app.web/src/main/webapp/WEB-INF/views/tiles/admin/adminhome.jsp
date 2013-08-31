@@ -13,10 +13,9 @@
 </head>
 
 <body>
-	<h1> admin home 1234</h1>
+	<h1> Welcome </h1>
 	<div id="adminDiv" style="height: 600px;">
 	
-			Relax
 	</div>
 </body>
 </html>

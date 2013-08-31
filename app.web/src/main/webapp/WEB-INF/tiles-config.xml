@@ -52,4 +52,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/new-job.jsp" />
 	</definition>
 	
+	<definition name="admin.list.job" extends="admin.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/job-list.jsp" />
+	</definition>
+	
 </tiles-definitions>
