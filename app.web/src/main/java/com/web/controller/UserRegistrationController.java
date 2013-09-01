@@ -33,6 +33,7 @@ public class UserRegistrationController extends BaseController {
   public String register(ModelMap map, final HttpServletRequest request) {
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
     map.put("registration", userRegistrationForm);
+    map.put("qualificationCount", 0);
     prepareObjectsForRendering(map);
     return "newuser";
   }
