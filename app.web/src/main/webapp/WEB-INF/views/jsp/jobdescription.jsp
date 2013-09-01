@@ -94,34 +94,7 @@ input.submit-button { margin: -10px 0 0 0; }
 <table border="0" id="enquirytable">
 <tr>
     <td><img src="../../resources/images/JBS_LOGO.png" id="logo"></img></td>
-    <td colspan="6"><div class="wrap" align="left">
-    <nav>
-      <ul class="menu">
-        <li>
-          <a class="fNiv" href="${contextPath}/">Home</a>
-          </li>
-        
-        <li>
-          <a class="fNiv" href="../register/">Register</a>
-          </li>
-        
-        <li>
-          <a class="fNiv" href="#">Login</a>
-          </li>
-        
-        <li>
-          <a class="fNiv" id="enquiry" href="../enquiry">Enquiry</a> </li>
-        
-        <li>
-          <a class="fNiv">Contact Us</a>
-          </li>
-        
-        <li><a class="fNiv">About Us</a>
-           </li>
-      </ul>
-      <div class="clearfix"></div>
-      </nav>
-    </div></td>
+    <td colspan="6">&nbsp;</td>
   </tr>
   <tr>
     <td height="27" colspan="2" class="menutd"></td>
@@ -130,34 +103,7 @@ input.submit-button { margin: -10px 0 0 0; }
   <tr>
    <td colspan="6"> <table width="98%" id="jobtb">
      <tr bgcolor="#FFFFFF">
-       <td width="52%" height="154" class="joblist"><form action="" method="post">
-         <!-- ============================== Fieldset 1 ============================== -->
-         <fieldset>
-           <legend>Contact Information</legend>
-           <label for="input-one" class="float"><strong>Name:</strong></label>
-           <br />
-           <input class="inp-text" name="input-one-name" id="input-one" type="text" size="30" /><br />
-           
-           <label for="input-two" class="float"><strong>Email Id</strong></label>
-           <br />
-           <input class="inp-text" name="input-two-name"  id="input-two" type="text" size="30" />
-           </fieldset>
-         <!-- ============================== Fieldset 1 end ============================== -->
-         
-         
-         
-         
-         <!-- ============================== Fieldset 3 ============================== -->
-         <fieldset>
-           <legend>Message:</legend>
-           <textarea name="textarea-name" id="message" cols="30" rows="5" title="Note or message"></textarea><br />
-           </fieldset>
-         <!-- ============================== Fieldset 3 end ============================== -->
-         
-         <p><input class="submit-button" type="submit" alt="SUBMIT" name="Submit" value="SUBMIT" /></p>
-         </form>
-         
-</td>
+       <td width="52%" height="154" class="joblist">&nbsp;</td>
        </tr>
       </table>
     </td>

@@ -16,8 +16,8 @@
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
 
 <spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
-
-<spring:url value="/resources/js/jquery.js" var="resourceJq2Url"/>
+<spring:url value="/resources/css/headmenu.css" var="resourceHeadMenuCssUrl"/>
+<spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJq2Url"/>
 <spring:url value="/resources/js/jquery.easing.js" var="resourceEasingUrl"/>
 <spring:url value="/resources/js/jquery.touchSwipe.min.js" var="resourceTouchSwipeUrl"/>
 <spring:url value="/resources/js/script.js" var="resourceScriptUrl"/>
@@ -29,8 +29,9 @@
 <script type="text/javascript" src="${resourceTouchSwipeUrl}"></script>
 <script type="text/javascript" src="${resourceScriptUrl}"></script>
 
-<link rel="stylesheet" type="text/css" href="${resourceEnquiryCssUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceHeadMenuCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
+
 <link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
 
 
@@ -87,9 +88,21 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
     </div></td>
   </tr>
   <tr>
-    <td height="27" colspan="2" class="menutd"><div class="wrap" align="center">
+  <td colspan="6"><div id="loginbox" style="float:right; font-size: 12px;">
+  <form action="j_spring_security_check" method="post">
+  <font color="blue">Existing User</font> &nbsp; <input type="text" name="j_username" placeholder="Enter your user id"/> &nbsp; <input type="password" placeholder="Enter your Password" name="j_password" />
+  <input type="submit" value="Login"/>
+  </form></div></td>
+  
+  </tr>
+  <tr>
+    <td height="27" colspan="2" class="menutd"><div class="wrap1" align="center">
+    <table id="submenu" border="0">
+      <tr>
+      <td>
     <nav>
       <ul class="menu">
+      
         <li>
           <a class="fNiv">Central Govt Jobs</a>
           </li>
@@ -108,8 +121,20 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
         <li>
           <a class="fNiv">Banking Jobs</a>
           </li>
+         <li>
+          <a class="fNiv">Railway Jobs</a>
+          </li>
+          <li>
+          <a class="fNiv">Finance Jobs</a>
+          </li>
+          <li>
+          <a class="fNiv">Marketing Jobs</a>
+          </li>
+                
       </ul>
+       <div class="wrap1" ></div>
     </nav>
+    </td></tr></table>
     </div></td>
   </tr>
   
@@ -135,36 +160,21 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
        <td class="joblist"><table id="privatetb">
          <tr bgcolor="#0099CC">
            <td bgcolor="#D1E6E7">Private Sector Jobs</td>
-         </tr>
+           </tr>
          <tr>
-           <td height="216" class="pvtinfo"><ul>
-          	<li>Senior Java Developer, Accenture India, New Delhi,Experience: 5-8 yrs.</li><a href="#">View Details</a>
-      	  	<li>Sr. Technical Consultant, Adobe Systems, Noida,Experience: 5-7 yrs.</li><a href="#">View Details</a>
-          	<li>SEO Consultant,Google India, Hyderabad,Experience: 6-8 yrs.</li><a href="#">View Details</a>
-          	<li>Oracle Apps Consultant,Oracle India, Bangalore,Experience: 5-8 yrs</li><a href="#">View Details</a>
-       		</ul>
-            <a href="privatesectorjobs.jsp">View More Job</a>
-       </td>
-         </tr>
-       </table></td>
-       <td  class="joblist"><table  id="abroadtb">
-         <tr bgcolor="#0099CC">
-           <td bgcolor="#D1E6E7" >International Jobs</td>
-         </tr>
-         <tr>
-           <td height="231" class="pvtinfo"><ul>
-          	 <li>Assistant Manager, State Bank of India, New Delhi,Experience: 7-10 yrs </li><a href="#">View Details</a>
-      	 	 <li>Station Manager, Railway Recruitment, Bhubaneswar,Experience: 5-7 yrs</li><a href="#">View Details</a>
-          	<li>Assistant Professor, Indian Institite of Technology, Bhubaneswar,Experience: 6-8 yrs</li><a href="#">View Details</a>
-          	<li>Research and Development Engineer, Indian Institute of TEchnology, Bhubaneswar,Experience: 5-8 yrs</li><a href="#">View Details</a>
-       		</ul>
-            <a href="Internationaljobs.jsp">View More Job</a>
-       </td>
-         </tr>
+           <td height="247" class="pvtinfo"><ul>
+             <li>Senior Java Developer, Accenture India, New Delhi,Experience: 5-8 yrs.</li><a href="#">View Details</a>
+             <li>Sr. Technical Consultant, Adobe Systems, Noida,Experience: 5-7 yrs.</li><a href="#">View Details</a>
+             <li>SEO Consultant,Google India, Hyderabad,Experience: 6-8 yrs.</li><a href="#">View Details</a>
+             <li>Oracle Apps Consultant,Oracle India, Bangalore,Experience: 5-8 yrs</li><a href="#">View Details</a>
+             </ul>
+             <a href="privatesectorjobs.jsp">View More Job</a>
+             </td>
+           </tr>
        </table></td>
        </tr>
     </table>
-    <table width="88%" height="482" border="0" id="infotb">
+    <table width="86%" height="525" border="0" id="infotb">
   <tr>
     <td height="100" colspan="3"><table width="626" border="0" align="center" id="jobsearch">
       <tr>
@@ -195,40 +205,27 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
       </tr>
     </table>
     </td>
-    <td width="46%" height="100"><form action="j_spring_security_check" method="post">
-      <table width="412" border="0" id="logintb">
-        <tr>
-          <td colspan="2" class="cationinfo">Login to your Profile and view recommended Jobs</td>
-          </tr>
-        <tr>
-          <td>Username</td>
-          <td><label for="textfield"></label>
-            <input type="text" name="j_username" id="j_username" /></td>
-          </tr>
-        <tr>
-          <td width="140" height="23">Password</td>
-          <td width="262"><label for="textfield"></label>
-            <input type="password" name="j_password" id="j_password" />
-            <br /></td>
-          </tr>
-        <tr>
-          <td height="29"><label for="checkbox2">Forgot Password?</label></td>
-          <td><input type="submit" value="login"/>  </td>
-          </tr>
-      </table></form></td>
+    <td width="6%" height="100"><img src="resources/images/sbilogo.png" width="98" height="81" longdesc="http://www.onlinesbi.com" /></td>
+    <td width="17%"><img src="resources/images/canarabanklogo.png" width="98" height="81" /></td>
+    <td width="7%"><img src="resources/images/pnblogo.png" width="98" height="81" /></td>
+    <td width="28%"><img src="resources/images/irctclogo.jpg" width="98" height="81" /></td>
   </tr>
   <tr>
-    <td colspan="3" rowspan="2"><img name="" src="resources/images/packages.png" width="559" height="400" alt="" /></td>
-    <td height="47">HIRING NOW</td>
+    <td colspan="4" ><img name="" src="resources/images/packages.png" width="500" height="380" alt="" /></td>
+    <td colspan="3"><table width="512" height="366" border="0" align="right" id="adtable">
+      <tr>
+        <td width="313" height="31" colspan="4" class="cationinfo">Advertisement</td>
+      </tr>
+      <tr>
+        <td colspan="4" class="adimg"><img src="resources/images/advert.png" width="256" height="197" /></td>
+      </tr>
+      </table></td>
   </tr>
   <tr class="footer">
-    <td height="281"><img name="" src="resources/images/bank-logos.gif" width="300" height="300" alt="" /></td>
-  </tr>
-  <tr class="footer">
-    <td width="16%" height="37" >&nbsp;</td>
-    <td width="16%">&nbsp;</td>
-    <td width="22%">&nbsp;</td>
-    <td>&nbsp;</td>
+    <td width="1%" height="37" >&nbsp;</td>
+    <td width="1%">&nbsp;</td>
+    <td width="40%">&nbsp;</td>
+    <td colspan="4">&nbsp;</td>
   </tr>
     </table>
 </table>

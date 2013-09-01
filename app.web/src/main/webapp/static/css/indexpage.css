@@ -70,11 +70,11 @@ td.joblist{
 }
 td.cationinfo{
  font-family:Arial, Helvetica, sans-serif;
- font-size:10px;
+ font-size:16px;
  font-weight:100;
  margin:auto;
  background-color:#DCE0FA;
- text-align:center
+ text-align:left;
  
  	
 }
@@ -120,12 +120,22 @@ td.pvtinfo{
 	font-family:Arial;
 	margin:auto;
 }
-#jobsearch,#logintb{
+#jobsearch{
 	width:100%;
 	border:2px solid #CCC;
 	border-radius: 1px 1px 10px 10px;
 	margin:auto;
-	text-align: center;
+	text-align: left;
+	font-size:14px;
+}
+
+td.adimg{
+	float: right;
+}
+
+td.imgholder{
+	float: left;
+	
 }
 tr.footer{
 
@@ -135,8 +145,8 @@ tr.footer{
 
 
 #logo{
-	height:50px;
-	width:250px;
+	height:30px;
+	width:220px;
 
 
 }
