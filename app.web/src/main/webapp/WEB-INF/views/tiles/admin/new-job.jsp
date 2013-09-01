@@ -25,6 +25,9 @@
 				"job.companyName" : {
 			        required : true
 			   },
+				"job.companyUrl" : {
+			        url : true
+			   },
 				"job.postedAt" : {
 			        required : true
 			   },

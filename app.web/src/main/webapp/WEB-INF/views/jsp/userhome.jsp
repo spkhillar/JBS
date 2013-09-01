@@ -14,14 +14,9 @@
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
 <spring:url value="/resources/css/enquirymenu.css" var="resourceUserHomeMenuCssUrl"/>
 <spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
-
 <spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJq2Url"/>
 
-
-
-
 <script type="text/javascript" src="${resourceJq2Url}"></script>
-
 
 <link rel="stylesheet" type="text/css" href="${resourceUserHomeMenuCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>

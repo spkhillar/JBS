@@ -9,6 +9,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<jsp:include page="../tiles/base/app.jsp"></jsp:include>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Register on JobsbySMS.com</title>
 <link rel="shortcut icon" href="resources/images/favico.png"/>
@@ -122,24 +123,84 @@
             }
 </style>
 
-<spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJqUrl"/>
 <spring:url value="/resources/js/userregister.js" var="resourceUserRegisterJqUrl"/>
 <spring:url value="/resources/css/newuser.css" var="resourceNewUserCssUrl"/>
 
-
-<script type="text/javascript" src="${resourceJqUrl}"></script>
 <script type="text/javascript" src="${resourceUserRegisterJqUrl}"></script>
 
 <link rel="stylesheet" type="text/css" href="${resourceNewUserCssUrl}"/>
 <script>
 	qualificationRowIndex = parseInt("<c:out value="${qualificationCount}" />");
-</script>
+	$(document).ready(function() {	
+		$("#registerBtn").button();
+	$("#registrationForm").validate( {
+	    success : "valid",
+	    ignoreTitle : true,
+	    rules : {
+			"user.userName" : {
+		        required : true
+		   },
+			"user.email" : {
+		        required : true,
+		        email:true
+		   },
+			"user.password" : {
+		        required : true
+		   },
+			"confirmPassword" : {
+		        required : true,
+		        equalTo: "#user\\.password"
+		   },
+			"securityAnswer" : {
+		        required : true
+		   },
+			"user.firstName" : {
+		        required : true
+		   },
+			"user.lastName" : {
+		        required : true
+		   },
+			"user.address.addressLine1" : {
+		        required : true
+		   },
+			"user.address.city" : {
+		        required : true
+		   },
+			"user.phone" : {
+		        required : true
+		   },
+			"user.address.pin" : {
+		        required : true
+		   },
+			"user.skill.skills" : {
+		        required : true
+		   }
+	    },
+	    messages: {
+	    	confirmPassword: {
+				equalTo: "Please enter the same password as above"
+			}
+		}
+	});
+	});
+	
+	function registerUser(){
+		var isValid = $("#registrationForm").valid();
+		console.log('Form Valid...',isValid);
+		if(isValid){
+			$("#registrationForm").attr("action",webContextPath+"/register/newuser");
+			$("#registrationForm").submit();
+		}
+		
+	}
+	
+	</script>
 
 </head>
 
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<form:form name="registration" commandName="registration" id="registrationForm" enctype="multipart/form-data" method="POST" action="/register/newuser">
+<form:form name="registrationForm" commandName="registration" id="registrationForm" enctype="multipart/form-data" method="POST">
 <table  border="0" id="usertbdesign" align="center">
 <tr bgcolor="#FFFFFF" class="menuhd">
   <td class="header" align="center" >&nbsp;</td>
@@ -147,7 +208,6 @@
   <td width="1%" class="header"  >&nbsp;</td>
   <td width="28%" class="header" ></td>
   <td width="23%" class="header"  ><a href="#"></a></td>
-  <td width="18%" class="header" ><a href="${contextPath}/">Already registered?Sign in</a></td>
   <td class="header"  >&nbsp;</td>
 </tr>
 <tr id="he">
@@ -316,16 +376,16 @@
   <c:when test="${currentLoggedInUserId eq null}">
       <tr>
       <td>
-      	<input type="text" name="user.qualifications[0].certification" />
+      	<input type="text" name="user.qualifications[0].certification" autofocus required/>
       </td>
       <td>
-      	<input type="text" name="user.qualifications[0].boardOrUniversity" />
+      	<input type="text" name="user.qualifications[0].boardOrUniversity" autofocus required/>
       </td>
       <td>
-       <input type="text" name="user.qualifications[0].yearOfPassing" />
+       <input type="number" name="user.qualifications[0].yearOfPassing" autofocus required/>
       </td>
       <td>
-       <input type="text" name="user.qualifications[0].percentage" />
+       <input type="number" name="user.qualifications[0].percentage" autofocus required/>
       </td>
       </tr>
   </c:when>
@@ -333,16 +393,16 @@
 	  <c:forEach var="qualification" items="${qualifications}" varStatus="status">
 	  <tr>
 	   <td>
-      	<input type="text" name="user.qualifications[${status.index}].certification" value="${qualification.certification}"/>
+      	<input type="text" name="user.qualifications[${status.index}].certification" value="${qualification.certification}" autofocus required/>
       </td>
       <td>
-      	<input type="text" name="user.qualifications[${status.index}].boardOrUniversity" value="${qualification.boardOrUniversity}"/>
+      	<input type="text" name="user.qualifications[${status.index}].boardOrUniversity" value="${qualification.boardOrUniversity}" autofocus required/>
       </td>
       <td>
-       <input type="text" name="user.qualifications[${status.index}].yearOfPassing" value="${qualification.yearOfPassing}"/>
+       <input type="number" name="user.qualifications[${status.index}].yearOfPassing" value="${qualification.yearOfPassing}" autofocus required/>
       </td>
       <td>
-       <input type="text" name="user.qualifications[${status.index}].percentage" value="${qualification.percentage}"/>
+       <input type="number" name="user.qualifications[${status.index}].percentage" value="${qualification.percentage}" autofocus required/>
       </td>
 	  </tr>
 	  </c:forEach>
@@ -387,46 +447,19 @@
   <td >&nbsp;</td>
   <c:choose>
   <c:when test="${currentLoggedInUserId eq null}">
-	  <td colspan="5" align="center" bgcolor="#FFFFFF"><input type="submit" name="submitbutton" id="submitbutton" value="Join to JobsbySMS" /></td>
+	  <td colspan="5" align="center" bgcolor="#FFFFFF">
+	  <button id="registerBtn" onclick="registerUser();">Join to JobsbySMS</button>
+	  </td>
   </c:when>
   <c:otherwise>
-	  <td colspan="5" align="center" bgcolor="#FFFFFF"><input type="submit" name="submitbutton" id="submitbutton" value="Submit" /></td>
+	  <td colspan="5" align="center" bgcolor="#FFFFFF">
+	  <button id="registerBtn" onclick="registerUser();">Submit</button>
+	  </td>
   </c:otherwise>
   </c:choose>
   <td ></td>
 </tr>
 </table>
 </form:form>
-<div id="wrapper">
-            <div id="popup">
-                <div align="left">
-                   <textarea cols="80" rows="10" scrollable="both" align="center" readonly="readonly"></textarea>                    
-                </div>
-                <input type="submit" value="CLOSE" id="hidepopup" /> 
-            </div>
-            <div id="overlay"></div>
-           </div>
-        <script>
-            $(document).ready(function(){
-                            $("a#showpopup").click(function(){
-                                $("div#overlay").fadeIn('500');       
-                                $("div#popup").delay('200');
-                                $("div#popup").fadeIn('500');         
-                           });                            
-                        
-                        
-                    $("div#overlay").click(function(){                       
-                                $("div#popup").fadeOut('500');      
-                                $("div#overlay").delay('200');
-                                $("div#overlay").fadeOut('500');   
-                    });
-                    
-                    $("input#hidepopup").click(function(){                       
-                                $("div#popup").fadeOut('500');      
-                                $("div#overlay").delay('200');
-                                $("div#overlay").fadeOut('500');   
-                    });
-                });
-        </script>
 </body>
 </html>

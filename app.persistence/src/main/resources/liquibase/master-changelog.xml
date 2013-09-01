@@ -992,5 +992,9 @@
 			<append value=" after location" />
 		</modifySql>   
     </changeSet>
+     
+     <changeSet author="shiv" id="1367592120330-32">
+		<modifyDataType tableName="skill" columnName="resume" newDataType="MEDIUMBLOB"/>   
+    </changeSet>
     
 </databaseChangeLog>

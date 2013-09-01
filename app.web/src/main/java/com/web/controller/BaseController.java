@@ -56,6 +56,7 @@ public class BaseController {
     JOB_CATEGORY.put("PRS", "Private Sector");
     JOB_CATEGORY.put("IJ", "Internation JOB");
 
+    JOB_SUB_CATEGORY.put("", "");
     JOB_SUB_CATEGORY.put("CGJ", "Central Government Job");
     JOB_SUB_CATEGORY.put("SGJ", "State Government Job");
     JOB_SUB_CATEGORY.put("RJ", "Railway JOB");

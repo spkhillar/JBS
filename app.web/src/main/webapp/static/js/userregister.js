@@ -8,8 +8,8 @@ $(document).ready(function(){
 			.after('<tr>'+
 				'<td><input type="text" name="user.qualifications['+ currentIndex +'].certification" autofocus required/></td>'+
 				'<td><input type="text" name="user.qualifications['+ currentIndex +'].boardOrUniversity" autofocus required/></td>'+
-				'<td><input type="text" name="user.qualifications['+ currentIndex +'].yearOfPassing" autofocus required/></td>'+
-				'<td><input type="text" name="user.qualifications['+ currentIndex +'].percentage" autofocus required/></td>'+
+				'<td><input type="number" name="user.qualifications['+ currentIndex +'].yearOfPassing" autofocus required/></td>'+
+				'<td><input type="number" name="user.qualifications['+ currentIndex +'].percentage" autofocus required/></td>'+
 				'</tr>');
 			qualificationRowIndex = currentIndex;
 		});
