@@ -13,4 +13,6 @@ public interface JobService {
   public Job findJob(Long id);
 
   public void updateJob(Job jobToUpdate);
+
+  public Page<Job> findByCategory(String category, int page, int rows, String sortOrder, String orderByField);
 }

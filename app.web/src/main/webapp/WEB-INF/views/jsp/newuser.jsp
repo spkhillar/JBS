@@ -11,7 +11,6 @@
 <head>
 <jsp:include page="../tiles/base/app.jsp"></jsp:include>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Register on JobsbySMS.com</title>
 <link rel="shortcut icon" href="resources/images/favico.png"/>
 <style>
 #usertbdesign.menuhd td {
@@ -131,69 +130,6 @@
 <link rel="stylesheet" type="text/css" href="${resourceNewUserCssUrl}"/>
 <script>
 	qualificationRowIndex = parseInt("<c:out value="${qualificationCount}" />");
-	$(document).ready(function() {	
-		$("#registerBtn").button();
-	$("#registrationForm").validate( {
-	    success : "valid",
-	    ignoreTitle : true,
-	    rules : {
-			"user.userName" : {
-		        required : true
-		   },
-			"user.email" : {
-		        required : true,
-		        email:true
-		   },
-			"user.password" : {
-		        required : true
-		   },
-			"confirmPassword" : {
-		        required : true,
-		        equalTo: "#user\\.password"
-		   },
-			"securityAnswer" : {
-		        required : true
-		   },
-			"user.firstName" : {
-		        required : true
-		   },
-			"user.lastName" : {
-		        required : true
-		   },
-			"user.address.addressLine1" : {
-		        required : true
-		   },
-			"user.address.city" : {
-		        required : true
-		   },
-			"user.phone" : {
-		        required : true
-		   },
-			"user.address.pin" : {
-		        required : true
-		   },
-			"user.skill.skills" : {
-		        required : true
-		   }
-	    },
-	    messages: {
-	    	confirmPassword: {
-				equalTo: "Please enter the same password as above"
-			}
-		}
-	});
-	});
-	
-	function registerUser(){
-		var isValid = $("#registrationForm").valid();
-		console.log('Form Valid...',isValid);
-		if(isValid){
-			$("#registrationForm").attr("action",webContextPath+"/register/newuser");
-			$("#registrationForm").submit();
-		}
-		
-	}
-	
 	</script>
 
 </head>
@@ -210,9 +146,11 @@
   <td width="23%" class="header"  ><a href="#"></a></td>
   <td class="header"  >&nbsp;</td>
 </tr>
+<c:if test="${currentLoggedInUserId eq null}">
 <tr id="he">
-  <td height="57" colspan="7" align="center" bgcolor="#0066CC" >Create a Profile now. Register to JOBSbySMS and recieve job alerts on your mobile</td>
+  <td height="57" colspan="7" align="center" bgcolor="#0066CC" >Create a Profile now. Register to JOBSbySMS and receive job alerts on your mobile</td>
 </tr>
+</c:if>
 <tr bgcolor="#FFFFFF" class="header2">
   <td colspan="7"><h4>Create Login Details</h4></td>
   </tr>
@@ -227,6 +165,7 @@
       <td width="36%">Enter your Email id</td>
       <td width="64%"> <form:input path="user.email" /></td>
     </tr>
+    <c:if test="${currentLoggedInUserId eq null}">
     <tr>
       <td>Create a Password for your account</td>
       <td> <form:password path="user.password" /></td>
@@ -235,6 +174,7 @@
       <td height="27">Confirm the Password</td>
       <td> <form:password path="confirmPassword" /></td>
     </tr>
+    </c:if>
      <tr>
       <td height="27">Select your security Question</td>
       <td> <form:select path="securityQuestion" items="${securityQuestions}" ></form:select>
@@ -460,6 +400,7 @@
   <td ></td>
 </tr>
 </table>
+<form:hidden path="user.id" />
 </form:form>
 </body>
 </html>

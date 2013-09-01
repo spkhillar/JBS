@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jpa.entities.User;
@@ -74,7 +75,23 @@ public class UserRegistrationController extends BaseController {
     }
     userRegistrationService.saveInternetUser(userRegistrationForm.getUser(),
       userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName);
-    return "registration-success";
+    return "redirect:/";
+  }
+
+  @RequestMapping(value = "/updateuser", method = RequestMethod.POST)
+  @ResponseBody
+  public String updateUser(@ModelAttribute("registration") UserRegistrationForm userRegistrationForm, ModelMap map,
+      final HttpServletRequest request) throws IOException {
+    /*
+     * byte[] resume = null; String fileName = null; MultipartFile multipartFile
+     * = userRegistrationForm.getResume(); if (multipartFile != null) { resume =
+     * multipartFile.getBytes(); fileName = multipartFile.getOriginalFilename();
+     * }
+     * userRegistrationService.saveInternetUser(userRegistrationForm.getUser(),
+     * userRegistrationForm.getSecurityQuestion(),
+     * userRegistrationForm.getSecurityAnswer(), resume, fileName);
+     */
+    return "Update not yet implemented";
   }
 
 }

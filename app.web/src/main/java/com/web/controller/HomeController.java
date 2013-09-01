@@ -61,7 +61,7 @@ public class HomeController extends BaseController {
     if (user.getUserRole().getRole().getId().equals(1L)) {
       return "admin.home";
     } else {
-      return "userhome";
+      return "redirect:/normal/user/home";
     }
   }
 

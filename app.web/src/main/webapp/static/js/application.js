@@ -44,7 +44,7 @@ function checkTime(i) {
 }
 
 function getRoles() {
-	var rolesUrl = webContextPath + "/user/roles";
+	/*var rolesUrl = webContextPath + "/user/roles";
 	var roleResponse = "";
 	$.ajax({
 		type : "get",
@@ -56,6 +56,6 @@ function getRoles() {
 		error : function(textStatus, errorThrown) {
 		}
 	});
-	console.log('role response..', roleResponse);
-	return roleResponse;
+	//console.log('role response..', roleResponse);
+	return roleResponse;*/
 }

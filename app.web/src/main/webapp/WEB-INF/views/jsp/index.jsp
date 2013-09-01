@@ -143,14 +143,14 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
       <tr bgcolor="#DCDAFC">
        <td height="260" class="joblist">
      <table width="149" id="govttb">
-	 <tr bgcolor="#0099CC"><td bgcolor="#D1E6E7">Latest Government Jobs</td></tr>
+	 <tr bgcolor="#0099CC"><td bgcolor="#D1E6E7">Public Sector Jobs</td></tr>
       <tr>
         <td height="231" class="pvtinfo">
         <ul>
-          <li>Assistant Manager, State Bank of India, New Delhi,Experience: 7-10 yrs.</li><a href="#">View Details</a>
-          <li>Station Manager, Railway Recruitment Board, Bhubaneswar,Experience: 5-7 yrs.</li><a href="#">View Details</a>
-          <li>Assistant Professor, Indian Institite of Technology, Bhubaneswar,Experience: 6-8 yrs.</li><a href="#">View Details</a>
-          <li>Research and Development Engineer, Indian Institute of Technology, Bhubaneswar,Experience: 5-8 yrs.</li><a href="#">View Details</a>
+         <c:forEach var="privateJob" items="${privateJobList}" varStatus="status">
+         	<li><strong><c:out value="${privateJob.companyName}"></c:out>, <c:out value="${privateJob.designation}"></c:out>, <c:out value="${privateJob.location}"></c:out>
+         	 (<c:out value="${privateJob.experiance}"></c:out> yrs)</strong> | </li><a href="#">View Details</a>
+         </c:forEach>
        </ul>
        <a href="governmentjobs.jsp">View More Job</a>
       </td>
@@ -162,12 +162,13 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
            <td bgcolor="#D1E6E7">Private Sector Jobs</td>
            </tr>
          <tr>
-           <td height="247" class="pvtinfo"><ul>
-             <li>Senior Java Developer, Accenture India, New Delhi,Experience: 5-8 yrs.</li><a href="#">View Details</a>
-             <li>Sr. Technical Consultant, Adobe Systems, Noida,Experience: 5-7 yrs.</li><a href="#">View Details</a>
-             <li>SEO Consultant,Google India, Hyderabad,Experience: 6-8 yrs.</li><a href="#">View Details</a>
-             <li>Oracle Apps Consultant,Oracle India, Bangalore,Experience: 5-8 yrs</li><a href="#">View Details</a>
-             </ul>
+           <td height="247" class="pvtinfo">
+           <ul>
+	         <c:forEach var="publicJob" items="${publicJobList}" varStatus="status">
+	         	<li><strong><c:out value="${publicJob.companyName}"></c:out>, <c:out value="${publicJob.designation}"></c:out>, <c:out value="${publicJob.location}"></c:out>
+	         	 (<c:out value="${publicJob.experiance}"></c:out> yrs)</strong> | </li><a href="#">View Details</a>
+	         </c:forEach>  
+           </ul>
              <a href="privatesectorjobs.jsp">View More Job</a>
              </td>
            </tr>

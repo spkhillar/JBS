@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +44,12 @@ public class JobServiceImpl implements JobService {
   @Override
   public Job findJob(Long id) {
     return jobDAO.findOne(id);
+  }
+
+  @Override
+  public Page<Job> findByCategory(String category, int page, int rows, String sortOrder, String orderByField) {
+    Pageable pageable = ServiceUtil.getPage(page, rows, sortOrder, orderByField);
+    return jobDAO.findByCategory(category, pageable);
   }
 
 }
