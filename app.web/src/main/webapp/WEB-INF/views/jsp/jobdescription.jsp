@@ -10,104 +10,81 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>JOBSbySMS-Enquiry</title>
+<title>JOBSbySMS-Job Information</title>
 <link rel="shortcut icon" href="resources/images/favico.png"/>
 
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
 <spring:url value="/resources/css/headmenu.css" var="resourceHeadMenuCssUrl"/>
+
+<spring:url value="/resources/css/style.min.css" var="resourceStyleMinCssUrl"/>
+<spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJq2Url"/>
 <spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
 
-<spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJq2Url"/>
-<spring:url value="/resources/js/jquery.easing.js" var="resourceEasingUrl"/>
-<spring:url value="/resources/js/jquery.touchSwipe.min.js" var="resourceTouchSwipeUrl"/>
-<spring:url value="/resources/js/script.js" var="resourceScriptUrl"/>
-
-
-
-<script type="text/javascript" src="${resourceJq2Url}"></script>
-<script type="text/javascript" src="${resourceEasingUrl}"></script>
-<script type="text/javascript" src="${resourceTouchSwipeUrl}"></script>
-<script type="text/javascript" src="${resourceScriptUrl}"></script>
-
-<link rel="stylesheet" type="text/css" href="${resourceHeadMenuCssUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceStyleMinCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
-
-
-<style>    
-* { margin: 0; padding: 0; }
-
-html { height: 100%; font-size: 62.5% }
-
-body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helvetica, sans-serif; }
-
-
-/* ==================== Form style sheet ==================== */
-
-form { margin: 25px 0 0 29px; width: 450px; padding-bottom: 30px; }
-
-fieldset { margin: 0 0 22px 0; border: 1px solid #095D92; padding: 12px 17px; background-color: #DFF3FF; }
-legend { font-size: 1.1em; background-color: #095D92; color: #FFFFFF; font-weight: bold; padding: 4px 8px; }
-
-label.float { float: left; display: block; width: 100px; margin: 4px 0 0 0; clear: left; }
-label { display: block; width: auto; margin: 0 0 10px 0; }
-label.spam-protection { display: inline; width: auto; margin: 0; }
-
-input.inp-text, textarea, input.choose, input.answer { border: 1px solid #909090; padding: 3px; }
-input.inp-text { width: 300px; margin: 0 0 8px 0; }
-textarea { width: 400px; height: 150px; margin: 0 0 12px 0; display: block; }
-
-input.choose { margin: 0 2px 0 0; }
-input.answer { width: 40px; margin: 0 0 0 10px; }
-input.submit-button { font: 1.4em Georgia, "Times New Roman", Times, serif; letter-spacing: 1px; display: block; margin: 23px 0 0 0; }
-
-form br { display: none; }
-
-/* ==================== Form style sheet END ==================== */
-
-#indextb tr td #jobtb tr .joblist form fieldset label {
-	text-align: left;
-}
-</style>
-
 
 <style type="text/css">
-
-/* ==================== Form style sheet for IE ==================== */
-
-fieldset { padding: 22px 17px 12px 17px; position: relative; margin: 12px 0 34px 0; }
-legend { position: absolute; top: -12px; left: 10px; }
-label.float { margin: 5px 0 0 0; }
-label { margin: 0 0 5px 0; }
-label.spam-protection { display: inline; width: auto; position: relative; top: -3px; }
-input.choose { border: 0; margin: 0; }
-input.submit-button { margin: -10px 0 0 0; }
-
-/* ==================== Form style sheet for IE end ==================== */
-
+#jobdetail {
+	color: #000;
+}
 </style>
-
-
 </head>
 
 <body>
-<table border="0" id="enquirytable">
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table width="53%" height="504"  border="1" align="center" id="jobdetail">
 <tr>
-    <td><img src="../../resources/images/JBS_LOGO.png" id="logo"></img></td>
-    <td colspan="6">&nbsp;</td>
-  </tr>
+    <td width="114"><img src="../resources/images/JBS_LOGO.png" id="logo"></img></td>
+    
+    </tr>
   <tr>
-    <td height="27" colspan="2" class="menutd"></td>
+    <td height="28" bgcolor="#C9D1FA" >Designation</td>
+     <td width="550" bgcolor="#E2E7EB">&nbsp;</td>
   </tr>
   
   <tr>
-   <td colspan="6"> <table width="98%" id="jobtb">
-     <tr bgcolor="#FFFFFF">
-       <td width="52%" height="154" class="joblist">&nbsp;</td>
-       </tr>
-      </table>
-    </td>
-    </tr>
+   <td height="35" bgcolor="#C9D1FA" >Job Description</td>
+   <td bgcolor="#E2E7EB"><p>&nbsp;</p>
+     <p>&nbsp;</p>
+    <p>&nbsp;</p></td>
+   </tr>
+  <tr>
+    <td height="37" bgcolor="#C9D1FA" >Experience</td>
+    <td bgcolor="#E2E7EB">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="38" bgcolor="#C9D1FA">Industry Type</td>
+    <td bgcolor="#E2E7EB">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="32" bgcolor="#C9D1FA">Role</td>
+    <td bgcolor="#E2E7EB">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="34" bgcolor="#C9D1FA" >Functional Area</td>
+    <td bgcolor="#E2E7EB">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="37" bgcolor="#C9D1FA" >Education</td>
+    <td bgcolor="#E2E7EB">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="34" bgcolor="#C9D1FA" >Location</td>
+    <td bgcolor="#E2E7EB">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="32" bgcolor="#C9D1FA" >Web Site</td>
+    <td bgcolor="#E2E7EB">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="33" bgcolor="#C9D1FA">Job Posted</td>
+    <td bgcolor="#E2E7EB">&nbsp;</td>
+  </tr>
+  <tr>
+    <td bgcolor="#C9D1FA" ><input type="submit" name="button" class="button small pop2" value="Apply"  /></td>
+    <td bgcolor="#E2E7EB">&nbsp;</td>
+  </tr>
   </table>  
 </body>
 </html>

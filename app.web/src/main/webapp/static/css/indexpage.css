@@ -10,6 +10,17 @@
 	border:1px solid #CCC;
 	border-radius: 10px 10px 1px 1px;
 }
+#jobdetail{
+	
+	width:80%;
+	background:rgba(205,194,100,0,4);
+	font-size: 14px;
+	font-family:Arial;
+	margin:auto;
+	border:1px solid #CCC;
+	border-radius: 10px 10px 1px 1px;
+	
+}
 #enquirytable{
 	width:80%;
 	background:rgba(205,194,100,0,4);
@@ -129,6 +140,9 @@ td.pvtinfo{
 	font-size:14px;
 }
 
+td.searchbox{
+	font-size:12px;
+}
 td.adimg{
 	float: right;
 }

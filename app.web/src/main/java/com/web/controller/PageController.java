@@ -60,4 +60,9 @@ public class PageController extends BaseController {
     return "viewjobs";
   }
 
+  @RequestMapping("/jobdetail")
+  public String jobDescription(){
+    return "jobdescription";
+  }
+
 }
