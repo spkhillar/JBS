@@ -8,14 +8,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>JOBSbySMS- Job Information</title>
-<style>
+
 <link rel="shortcut icon" href="resources/images/favico.png"/>
 
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
 <spring:url value="/resources/css/headmenu.css" var="resourceUserHomeMenuCssUrl"/>
 <spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
-
+<spring:url value="/resources/js/jquery.popupoverlay.js" var="resourcePopupboxUrl"/>
 <spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJq2Url"/>
+<spring:url value="/resources/js/jquery-1.8.2.min.js" var="resourceJq8Url"/>
+
+<link rel="stylesheet" type="text/css" href="${resourceUserHomeMenuCssUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
+
+<script type="text/javascript" src="${resourceJq2Url}"></script>
+<script type="text/javascript" src="${resourceJq8Url}"></script>
+
+<script type="text/javascript" src="${resourcePopupboxUrl}"></script>
+<style>
 #govttb2 tr .pvtinfo {
 	font-weight: normal;
 	font-size: 10px;
@@ -24,92 +35,28 @@
 	font-size: 12px;
 }
 
-#popup_box { 
-	display:none; /* Hide the DIV */
-	position:fixed;  
-	_position:absolute; /* hack for internet explorer 6 */  
-	height:300px;  
-	width:600px;  
-	background:#FFFFFF;  
-	left: 300px;
-	top: 150px;
-	z-index:100; /* Layering ( on-top of others), if you have lots of layers: I just maximized, you can change it yourself */
-	margin-left: 15px;  
-	
-	/* additional features, can be omitted */
-	border:2px solid #ff0000;  	
-	padding:15px;  
-	font-size:15px;  
-	-moz-box-shadow: 0 0 5px #ff0000;
-	-webkit-box-shadow: 0 0 5px #ff0000;
-	box-shadow: 0 0 5px #ff0000;
-	
-}
-
-#container {
-	background: #d2d2d2; /*Sample*/
-	width:100%;
-	height:100%;
-}
-
-a{  
-cursor: pointer;  
-text-decoration:none;  
-} 
-
-/* This is for the positioning of the Close Link */
-#popupBoxClose {
-	font-size:20px;  
-	line-height:15px;  
-	right:5px;  
-	top:5px;  
-	position:absolute;  
-	color:#6fa5e2;  
-	font-weight:500;  	
-}
+.popup_background {
+    z-index: 2000; /* any number */
+  }
+  .popup_wrapper {
+    z-index: 2001; /* any number + 1 */
+  }
+  /* Add inline-block support for IE7 */
+  .popup_align,.popup_content {
+    *display: inline;
+    *zoom: 1;
+  }
 </style>
 
+
+
 <script type="text/javascript">
-$(document).ready( function() {
-	
-	// When site loaded, load the Popupbox First
-	$('#b').click( function() {			
-		loadPopupBox();
-	});
-	
+   function loadPopup(){
+    $('#my_modal').popup();
+   }
 
-	$('#popupBoxClose').click( function() {			
-		unloadPopupBox();
-	});
-	
-	$('#container').click( function() {
-		unloadPopupBox();
-	});
-
-	function unloadPopupBox() {	// TO Unload the Popupbox
-		$('#popup_box').fadeOut("slow");
-		$("#container").css({ // this is just for style		
-			"opacity": "1"  
-		}); 
-	}	
-	
-	function loadPopupBox() {	// To Load the Popupbox
-		$('#popup_box').fadeIn("slow");
-		$("#container").css({ // this is just for style
-			"opacity": "0.3"  
-		}); 		
-	}
-	/**********************************************************/
-	
-});
 </script>
 
-<script type="text/javascript" src="${resourceJq2Url}"></script>
-
-
-<link rel="stylesheet" type="text/css" href="${resourceUserHomeMenuCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
 </head>
 
 <body>
@@ -141,7 +88,7 @@ $(document).ready( function() {
          <td colspan="6" class="pvtinfo"><strong><c:out value="${job.designation}"></c:out> - <c:out value="${job.location}"></c:out> (<c:out value="${job.experiance}"></c:out> yrs)</strong> | Posted date: <fmt:formatDate pattern="yyyy-MM-dd" value="${job.postedAt}"/>
          <ul><li><c:out value="${job.jobDescription}"></c:out></li></ul>
           <p><strong>Salary Range:</strong> Rs. <c:out value="${job.salary}"></c:out> p.a.  | <strong>Industry:</strong> <c:out value="${job.industry}"></c:out><br />
-          Company:<c:out value="${job.companyName}">|</c:out> </p><a href="" onclick="loadPopupBox()" id="b">View Details</a></td>
+          Company:<c:out value="${job.companyName}">|</c:out> </p><span class="my_modal_open"><a href="">View Details</a></span></p></td>
        </tr>
        </c:forEach>
        </table>
@@ -149,28 +96,19 @@ $(document).ready( function() {
      </div>
      
 <br/>
-     <div id="popup_box">	<!-- OUR PopupBox DIV-->
-	<table width="100%" border="0">
-  <tr>
-    <td><img src="images/JBS_LOGO.png" id="logo" /></td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr >
-    <td colspan="3" align="center"><img name="" src="images/DBconf.jpg"" width="200" height="150" alt="" /></td>
-   
-  </tr>
-  <tr>
-    <td colspan="3" align="center"><h3>JOBSbySMS.com Database Configuration is in Process. Sorry for the inconvenience</h3></td>
-    
-  </tr>
-</table>
-
-	<a id="popupBoxClose">Close</a>	
-</div>
-<div id="container"> <!-- Main Page -->
-	
-</div>
-
+    <!-- Add content to modal -->
+   <div id="my_modal" class="well" style="display:none;margin:1em;">
+            <a href="#" class="my_modal_close" style="float:right;padding:0 0.4em;">X</a>
+            
+            <form>
+                <button class="btn btn-alert my_modal_close">Close</button>
+            </form>
+        </div>
+<script>
+    $(function() {
+      $('#my_modal').popup();
+    });
+  </script>
     
 </body>
 </html>

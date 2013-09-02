@@ -49,54 +49,66 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
 #indextb tr td #infotb .footer td img {
 	text-align: center;
 }
+#indextb tr td table {
+	text-align: center;
+}
 </style>
 
+<script type="text/javascript">
+    function ChangeColor(tableRow, highLight)
+    {
+    if (highLight)
+    {
+      tableRow.style.backgroundColor = '#dcfac9';
+    }
+    else
+    {
+      tableRow.style.backgroundColor = 'white';
+    }
+  }
+
+  function DoNav(theUrl)
+  {
+  document.location.href = theUrl;
+  }
+  </script>
 
 </head>
 
 <body>
 <table border="0" id="indextb">
   <tr>
+    <td width="222"></td>
+    <td width="304"></td>
+    <td width="140"><div id="loginbox" style="font-size: 12px; float:right">
+  
+  <font color="#004364">Job Seeker Login</font> &nbsp;&nbsp;&nbsp;&nbsp;
+  </div></td>
+    <td width="548" colspan="2"><form action="j_spring_security_check" method="post">
+      <input type="text" name="j_username" placeholder="Enter your user id"/>
+      <input type="password" placeholder="Enter your Password" name="j_password" />
+      <input type="submit" value="Login"/>
+<br />
+      
+    </form></td>
+  </tr>
+  <tr>
     <td><img src="resources/images/JBS_LOGO.png" id="logo"></img></td>
-    <td><div class="wrap" align="center">
-    <nav>
-      <ul class="menu">
-        <li>
-          <a class="fNiv" href="${contextPath}/">Home</a>
-          </li>
-        
-        <li>
-          <a class="fNiv" href="register/">Register</a>
-          </li>
-        
-        <li>
-          <a class="fNiv" href="#">Login</a>
-          </li>
-        
-        <li>
-          <a class="fNiv" id="enquiry" href="mypage/enquiry/">Enquiry</a> </li>
-        
-        <li>
-          <a class="fNiv">Contact Us</a>
-          </li>
-        
-        <li><a class="fNiv">About Us</a>
-           </li>
-      </ul>
-      <div class="clearfix"></div>
-      </nav>
+    <td><img name="" src="resources/images/joblogo1.png" width="145" height="60" alt="" /><img name="" src="resources/images/joblogo3.png" width="147" height="60" alt="" /></td>
+    <td colspan="3"><div class="wrap" align="center">
+      <nav>
+        <ul class="menu">
+          <li> <a class="fNiv" href="${contextPath}/nitin_swadhin/">Home</a> </li>
+          <li> <a class="fNiv" href="register/">Register</a> </li>
+          <li> <a class="fNiv" href="#">Login</a> </li>
+          <li> <a class="fNiv" id="enquiry" href="mypage/enquiry/">Enquiry</a></li>
+          </ul>
+        <div class="clearfix"></div>
+        </nav>
     </div></td>
   </tr>
   <tr>
-  <td colspan="6"><div id="loginbox" style="float:right; font-size: 12px;">
-  <form action="j_spring_security_check" method="post">
-  <font color="blue">Existing User</font> &nbsp; <input type="text" name="j_username" placeholder="Enter your user id"/> &nbsp; <input type="password" placeholder="Enter your Password" name="j_password" />
-  <input type="submit" value="Login"/>
-  </form></div></td>
-  
-  </tr>
-  <tr>
-    <td height="27" colspan="2" class="menutd"><div class="wrap1" align="center">
+    <td height="27" colspan="5" class="menutd"><div class="wrap1" align="center">
     <table id="submenu" border="0">
       <tr>
       <td>
@@ -139,96 +151,172 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
   </tr>
   
   <tr>
-    <td height="22" colspan="2"><table id="jobtb">
-      <tr bgcolor="#DCDAFC">
-       <td height="260" class="joblist">
-     <table width="149" id="govttb">
-	 <tr bgcolor="#0099CC"><td bgcolor="#D1E6E7">Public Sector Jobs</td></tr>
+    <td height="680" colspan="5"><table id="jobtb">
       <tr>
-        <td height="231" class="pvtinfo">
-        <ul>
-         <c:forEach var="privateJob" items="${privateJobList}" varStatus="status">
-         	<li><strong><c:out value="${privateJob.companyName}"></c:out>, <c:out value="${privateJob.designation}"></c:out>, <c:out value="${privateJob.location}"></c:out>
-         	 (<c:out value="${privateJob.experiance}"></c:out> yrs)</strong> | </li><a href="#">View Details</a>
+       <td height="260" class="joblist">
+     <table width="100%" id="govttb">
+	 <tr>
+	 <td class="jobheading">Private Sector Jobs</td>
+	 </tr>
+      <tr>
+        <td class="pvtinfo">
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+           <ul>
+         <c:forEach var="privateJob" 
+
+items="${privateJobList}" varStatus="status">
+         	<li><strong><c:out 
+
+value="${privateJob.companyName}"></c:out>, 
+
+<c:out 
+
+value="${privateJob.designation}"></c:out>, 
+
+<c:out value="${privateJob.location}"></c:out>
+         	 (<c:out 
+
+value="${privateJob.experiance}"></c:out> yrs)
+
+</strong> | </li><a href="#">View Details</a>
          </c:forEach>
        </ul>
-       <a href="governmentjobs.jsp">View More Job</a>
-      </td>
+        </div>
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+          <ul>
+          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
+    	  </ul>
+        </div>
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+          <ul>
+          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
+    	  </ul>
+        </div>
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+          <ul>
+          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
+    	  </ul>
+        </div>
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+          <ul>
+          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
+    	  </ul>
+        </div>
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+          <ul>
+          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
+    	  </ul>
+        </div>
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+          <ul>
+          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
+    	  </ul>
+        </div>
+        </td>
       </tr>
       </table>
       </td>
-       <td class="joblist"><table id="privatetb">
-         <tr bgcolor="#0099CC">
-           <td bgcolor="#D1E6E7">Private Sector Jobs</td>
+       <td class="joblist"><table width="100%" id="privatetb">
+         <tr >
+           <td class="jobheading">Public Sector Jobs</td>
            </tr>
          <tr>
-           <td height="247" class="pvtinfo">
-           <ul>
-	         <c:forEach var="publicJob" items="${publicJobList}" varStatus="status">
-	         	<li><strong><c:out value="${publicJob.companyName}"></c:out>, <c:out value="${publicJob.designation}"></c:out>, <c:out value="${publicJob.location}"></c:out>
+           <td class="pvtinfo">
+           <c:forEach var="publicJob" items="${publicJobList}" varStatus="status">
+           <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');" title="View Detail">
+         <ul>
+	           	<li><strong><c:out value="${publicJob.companyName}"></c:out>, <c:out value="${publicJob.designation}"></c:out>, <c:out value="${publicJob.location}"></c:out>
 	         	 (<c:out value="${publicJob.experiance}"></c:out> yrs)</strong> | </li><a href="#">View Details</a>
-	         </c:forEach>  
-           </ul>
-             <a href="privatesectorjobs.jsp">View More Job</a>
+	      </ul>
+        </div>
+        </c:forEach> 
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+          <ul>
+          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
+    	  </ul>
+        </div>
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+          <ul>
+          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
+    	  </ul>
+        </div>
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+          <ul>
+          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
+    	  </ul>
+        </div>
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+          <ul>
+          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
+    	  </ul>
+        </div>
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+          <ul>
+          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
+    	  </ul>
+        </div>
+         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+          <ul>
+          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
+    	  </ul>
+    </div>
              </td>
            </tr>
        </table></td>
        </tr>
     </table>
-    <table width="86%" height="525" border="0" id="infotb">
+    <table width="93%" height="312" border="0" id="infotb">
   <tr>
-    <td height="100" colspan="3"><table width="626" border="0" align="center" id="jobsearch">
+    <td width="56%" height="100"><table width="557" border="0" align="center" id="jobsearch">
       <tr>
-        <td colspan="4" class="cationinfo">Job Search</td>
-      </tr>
+        <td colspan="2" class="cationinfo">Job Search</td>
+        </tr>
       <tr>
-        <td>Key Skills</td>
-        <td><input type="text" name="skills" id="skills" /></td>
-        <td>Location</td>
-        <td><label for="textfield2"></label>
-          <input type="text" name="location" id="location" /></td>
-      </tr>
+        <td class="cationinfo">Key Skills</td>
+        <td class="cationinfo">Functional area</td>
+        </tr>
       <tr>
-        <td width="137" height="23">Functional area</td>
-        <td width="172"><select name="selectfunctionalarea" id="selectfunctionalarea">
+        <td width="183" height="22"><input type="text" name="skills" id="skills" /></td>
+        <td width="364"><select name="selectfunctionalarea" id="selectfunctionalarea">
+          <option value="IT">Application Mantainance/Software/Programming/Design</option>
         </select></td>
-        <td width="94">Experience</td>
-        <td width="205"><label for="select"></label>
-          <select name="experience" id="Experience">
-          </select></td>
-      </tr>
+        </tr>
       <tr>
-        <td height="38" colspan="2"><label for="checkbox3">
-          <input type="submit" name="button" id="button" value="Search" />
-        </label></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
-    </table>
+        <td height="14" class="cationinfo">Location</td>
+        <td height="14" class="cationinfo">Experience</td>
+        </tr>
+      <tr>
+        <td height="38"><input type="text" name="location" id="location" /></td>
+        <td height="38"><select name="experience" id="Experience">
+        </select></td>
+        </tr>
+      <tr>
+        <td height="38" colspan="2"><input type="submit" name="button" id="button" value="Search" /></td>
+        </tr>
+</table>
     </td>
-    <td width="6%" height="100"><img src="resources/images/sbilogo.png" width="98" height="81" longdesc="http://www.onlinesbi.com" /></td>
-    <td width="17%"><img src="resources/images/canarabanklogo.png" width="98" height="81" /></td>
-    <td width="7%"><img src="resources/images/pnblogo.png" width="98" height="81" /></td>
-    <td width="28%"><img src="resources/images/irctclogo.jpg" width="98" height="81" /></td>
-  </tr>
+    <td width="44%" colspan="4" rowspan="2"><img src="resources/images/packages.png" width="480" height="308" /></td>
+    </tr>
   <tr>
-    <td colspan="4" ><img name="" src="resources/images/packages.png" width="500" height="380" alt="" /></td>
-    <td colspan="3"><table width="512" height="366" border="0" align="right" id="adtable">
+    <td height="152" ><table width="537" border="0" align="center" id="hiringlogo">
       <tr>
-        <td width="313" height="31" colspan="4" class="cationinfo">Advertisement</td>
+        <td colspan="6" class="cationinfo">Hiring Now</td>
+        </tr>
+      <tr>
+        <td width="53"><img name="" src="resources/images/saillogo.jpg" width="91" height="76" alt="" /></td>
+        <td width="89"><img name="" src="resources/images/sbilogo.png" width="91" height="76" alt="" /></td>
+        <td width="89"><img name="" src="resources/images/canarabanklogo.png" width="91" height="76" alt="" /></td>
+        <td width="89"><img name="" src="resources/images/pnblogo.png" width="91" height="76" alt="" /></td>
+        <td width="89"><img name="" src="resources/images/irctclogo.jpg" width="91" height="76" alt="" /></td>
+        <td width="102"><img name="" src="resources/images/ibpslogo.jpg" width="91" height="76" alt="" /></td>
       </tr>
       <tr>
-        <td colspan="4" class="adimg"><img src="resources/images/advert.png" width="256" height="197" /></td>
+        <td height="18" colspan="6">&nbsp;</td>
       </tr>
-      </table></td>
-  </tr>
-  <tr class="footer">
-    <td width="1%" height="37" >&nbsp;</td>
-    <td width="1%">&nbsp;</td>
-    <td width="40%">&nbsp;</td>
-    <td colspan="4">&nbsp;</td>
-  </tr>
+    </table></td>
+    </tr>
     </table>
+    <p align="center">All Rights Reserved &COPY; 2013 JOBSbySMS</p>
 </table>
     
   
