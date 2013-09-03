@@ -26,6 +26,53 @@
 <script type="text/javascript" src="${resourceJq8Url}"></script>
 
 <script type="text/javascript" src="${resourcePopupboxUrl}"></script>
+<script type="text/javascript">
+function createRequestObject()
+{
+var returnObj = false;
+if(window.XMLHttpRequest) {
+returnObj = new XMLHttpRequest();
+} else if(window.ActiveXObject) {
+try {
+returnObj = new ActiveXObject("Msxml2.XMLHTTP");
+} catch (e) {
+try {
+returnObj = new ActiveXObject("Microsoft.XMLHTTP");
+}
+catch (e) {}
+}
+}
+return returnObj;
+}
+var http = createRequestObject();
+var target;
+// This is the function to call, give it the script file you want to run and
+// the div you want it to output to.
+function sendRequest(scriptFile, targetElement)
+{	
+target = targetElement;
+try{
+http.open('get', scriptFile, true);
+}
+catch (e){
+document.getElementById(target).innerHTML = e;
+return;
+}
+http.onreadystatechange = handleResponse;
+http.send();	
+}
+function handleResponse()
+{	
+if(http.readyState == 4) {	
+try{
+var strResponse = http.responseText;
+document.getElementById(target).innerHTML = strResponse;
+} catch (e){
+document.getElementById(target).innerHTML = e;
+}	
+}
+}
+		   </script>
 <style>
 #govttb2 tr .pvtinfo {
 	font-weight: normal;
@@ -88,7 +135,7 @@
          <td colspan="6" class="pvtinfo"><strong><c:out value="${job.designation}"></c:out> - <c:out value="${job.location}"></c:out> (<c:out value="${job.experiance}"></c:out> yrs)</strong> | Posted date: <fmt:formatDate pattern="yyyy-MM-dd" value="${job.postedAt}"/>
          <ul><li><c:out value="${job.jobDescription}"></c:out></li></ul>
           <p><strong>Salary Range:</strong> Rs. <c:out value="${job.salary}"></c:out> p.a.  | <strong>Industry:</strong> <c:out value="${job.industry}"></c:out><br />
-          Company:<c:out value="${job.companyName}">|</c:out> </p><span class="my_modal_open"><a href="">View Details</a></span></p></td>
+          Company:<c:out value="${job.companyName}">|</c:out> </p><span class="my_modal_open"><a href="javascript:void()" onclick="javascript:sendRequest('jobdetail', 'my_modal')">View Details</a></span></p></td>
        </tr>
        </c:forEach>
        </table>
@@ -97,9 +144,10 @@
      
 <br/>
     <!-- Add content to modal -->
-   <div id="my_modal" class="well" style="display:none;margin:1em;">
+   <div id="my_modal" class="well" style="display:none;margin:1em; style="overflow-y:scroll; height:400px;">
             <a href="#" class="my_modal_close" style="float:right;padding:0 0.4em;">X</a>
-            
+         
+ 
             <form>
                 <button class="btn btn-alert my_modal_close">Close</button>
             </form>
