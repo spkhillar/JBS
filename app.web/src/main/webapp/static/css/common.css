@@ -32,3 +32,8 @@ font-size: 15px;
 font-weight: bold;
 color: #FF0000;
 }
+
+.message {
+	color: red;
+	text-align: center;	
+}

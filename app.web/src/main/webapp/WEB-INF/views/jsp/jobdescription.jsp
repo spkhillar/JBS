@@ -31,15 +31,11 @@
 </head>
 
 <body>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+<div>
 <table width="53%" height="504"  border="0" align="center" id="jobdetail" style="overflow-y:scroll">
-<tr>
-    <td colspan="2"><img src="../resources/images/JBS_LOGO.png" id="logo"></img></td>
-    </tr>
-  <tr>
+    <tr>
     <td width="70" height="28" bgcolor="#C9D1FA" >Designation</td>
-     <td width="600" bgcolor="#E2E7EB">Senior Research Fellow </td>
+     <td width="600" bgcolor="#E2E7EB"><c:out value="${currentJob.designation}"></c:out> </td>
   </tr>
   
   <tr>
@@ -74,7 +70,7 @@
    </tr>
   <tr>
     <td height="37" bgcolor="#C9D1FA" >Experience</td>
-    <td bgcolor="#E2E7EB">&nbsp;</td>
+    <td bgcolor="#E2E7EB"><c:out value="${currentJob.experiance}"></c:out></td>
   </tr>
   <tr>
     <td height="38" bgcolor="#C9D1FA">Industry Type</td>
@@ -105,10 +101,7 @@ The Division of Biochemistry, IARI, Pusa Institute, New Delhi -110012. </td>
     <td height="33" bgcolor="#C9D1FA">Job Posted</td>
     <td bgcolor="#E2E7EB">&nbsp;</td>
   </tr>
-  <tr>
-    <td bgcolor="#C9D1FA" ><input type="submit" name="button" class="button small pop2" value="Apply"  /></td>
-    <td bgcolor="#E2E7EB">&nbsp;</td>
-  </tr>
   </table>  
+  </div>
 </body>
 </html>

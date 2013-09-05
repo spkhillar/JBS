@@ -109,6 +109,14 @@ public class AdminJobController extends BaseController {
     return response;
   }
 
+  @RequestMapping(value = "/job/view/{jobId}", method = RequestMethod.GET)
+  public String viewJobDetials(@PathVariable final long jobId, final ModelMap map) {
+
+    Job currentJob = jobService.findJob(jobId);
+    map.put("currentJob", currentJob);
+    return "jobdescription";
+  }
+
   private void prepareJobRenderer(ModelMap map) {
     map.put("jobTypes", JOB_TYPE);
     map.put("jobCategories", JOB_CATEGORY);

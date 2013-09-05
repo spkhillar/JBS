@@ -159,7 +159,16 @@
   <td colspan="5" rowspan="3"><table width="101%" border="0" id="logininfotb">
     <tr>
       <td width="36%">Username</td>
-      <td width="64%"> <form:input path="user.userName" /></td>
+      <td width="64%">
+      <c:choose>
+      <c:when test="${currentLoggedInUserId eq null}">
+       <form:input path="user.userName" />
+       </c:when>
+       <c:otherwise>
+       <form:input path="user.userName" disabled="true"/>
+       </c:otherwise>
+       </c:choose>
+       </td>
     </tr>
     <tr>
       <td width="36%">Enter your Email id</td>
@@ -393,7 +402,7 @@
   </c:when>
   <c:otherwise>
 	  <td colspan="5" align="center" bgcolor="#FFFFFF">
-	  <button id="registerBtn" onclick="registerUser();">Submit</button>
+	  <button id="registerBtn" onclick="registerUser();">Update Profile</button>
 	  </td>
   </c:otherwise>
   </c:choose>

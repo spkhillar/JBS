@@ -15,6 +15,7 @@
 		classpath:applicationContext-data-source.xml,
 		classpath:applicationContext-liquibase.xml,
 		classpath:spring-data-jpa-config.xml,
+		classpath:applicationContext-rest-client.xml,
 		classpath:applicationContext-service.xml,
 		classpath:applicationContext-scheduler-jobs.xml,
 		classpath:applicationContext-scheduler.xml,

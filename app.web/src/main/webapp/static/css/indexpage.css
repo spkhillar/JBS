@@ -189,3 +189,7 @@ td.menutd{
 a.menulink{
 	color:#FFF;
 }
+
+.message {
+	color: red;
+}

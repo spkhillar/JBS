@@ -80,17 +80,24 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
   <tr>
     <td width="222"></td>
     <td width="304"></td>
-    <td width="140"><div id="loginbox" style="font-size: 12px; float:right">
-  
-  <font color="#004364">Job Seeker Login</font> &nbsp;&nbsp;&nbsp;&nbsp;
-  </div></td>
-    <td width="548" colspan="2"><form action="j_spring_security_check" method="post">
-      <input type="text" name="j_username" placeholder="Enter your user id"/>
-      <input type="password" placeholder="Enter your Password" name="j_password" />
-      <input type="submit" value="Login"/>
-<br />
-      
-    </form></td>
+    <td width="140">
+  </td>
+    <td width="548" colspan="2">
+    <form action="j_spring_security_check" method="post">
+    	<label style="font-size: 12px;"><font color="#004364">Job Seeker Login</font> &nbsp;&nbsp;&nbsp;&nbsp;</label>
+	      <input type="text" name="j_username" placeholder="Enter your user id"/>
+	      <input type="password" placeholder="Enter your Password" name="j_password" />
+	      <input type="submit" value="Login"/>
+				<c:choose>
+				    <c:when test="${empty message}">
+				      <div class="message">${emptySring}</div>
+				    </c:when>
+				    <c:otherwise>
+				       <div class="message">${message}</div>
+				    </c:otherwise>
+				</c:choose>
+    </form>
+    </td>
   </tr>
   <tr>
     <td><img src="resources/images/JBS_LOGO.png" id="logo"></img></td>
