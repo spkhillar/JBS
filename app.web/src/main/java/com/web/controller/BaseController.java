@@ -14,14 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jpa.entities.User;
+import com.service.UserService;
 import com.web.rest.RestResponse;
 
 /**
@@ -30,6 +34,9 @@ import com.web.rest.RestResponse;
  * @author
  */
 public class BaseController {
+
+  @Autowired
+  protected UserService userService;
 
   @InitBinder
   public void initBinder(final WebDataBinder binder) {
@@ -50,6 +57,10 @@ public class BaseController {
 
   protected static final List<String> DESGINATION = Arrays.asList(new String[] { "Technician", "Assistant Manager",
       "Consultant", "Other" });
+
+  protected static final List<String> EDUCATION_LIST = Arrays.asList(new String[] { "10", "10+2", "B.A", "B.Arch",
+      "BCA", "B.B.A", "B.Com", "B.Ed", "BDS", "BHM", "B.Pharma", "B.Sc", "B.Tech/B.E.", "Costing",
+      "Charted Accountant", "LLB", "M.A", "MBA", "MBBS", "M.Com", "MCA", "M.Sc", "M.Tech", "Diploma", "I.T.I" });
 
   static {
     JOB_CATEGORY.put("PUS", "Public Sector");
@@ -82,6 +93,18 @@ public class BaseController {
     logger.error("handleInternalServiceException-User-", ex);
     RestResponse restResponse = new RestResponse(500, ex.getMessage());
     return restResponse;
+  }
+
+  protected String getHomePage(ModelMap map) {
+    String username = this.getCurrentLoggedinUserName();
+    User user = userService.findByUserName(username);
+    map.put("currentLoggedInUser", username);
+    map.put("currentLoggedInUserId", user.getId());
+    if (user.getUserRole().getRole().getId().equals(1L)) {
+      return "admin.home";
+    } else {
+      return "redirect:/normal/user/home";
+    }
   }
 
   public String getCurrentLoggedinUserName() {

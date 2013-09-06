@@ -39,9 +39,6 @@ $(document).ready(function(){
   			"user.firstName" : {
   		        required : true
   		   },
-  			"user.lastName" : {
-  		        required : true
-  		   },
   			"user.address.addressLine1" : {
   		        required : true
   		   },
@@ -56,11 +53,17 @@ $(document).ready(function(){
   		   },
   			"user.skill.skills" : {
   		        required : true
+  		   },
+  		   "terms" : {
+  		        required : true
   		   }
   	    },
   	    messages: {
   	    	confirmPassword: {
   				equalTo: "Please enter the same password as above"
+  			},
+  			"terms":{
+  				required: "You must agree to terms and condition of JobsBySMS.com."
   			}
   		}
   	});

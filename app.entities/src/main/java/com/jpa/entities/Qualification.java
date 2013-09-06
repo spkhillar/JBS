@@ -30,7 +30,7 @@ public class Qualification implements BaseEntity, java.io.Serializable {
   private long id;
   private int version;
   private User user;
-  private String certification;
+  private Degree degree;
   private String boardOrUniversity;
   private int yearOfPassing;
   private BigDecimal percentage;
@@ -39,10 +39,9 @@ public class Qualification implements BaseEntity, java.io.Serializable {
 
   public Qualification() {}
 
-  public Qualification(User user, String certification, String boardOrUniversity, int yearOfPassing,
-      BigDecimal percentage) {
+  public Qualification(User user, Degree degree, String boardOrUniversity, int yearOfPassing, BigDecimal percentage) {
     this.user = user;
-    this.certification = certification;
+    this.degree = degree;
     this.boardOrUniversity = boardOrUniversity;
     this.yearOfPassing = yearOfPassing;
     this.percentage = percentage;
@@ -79,13 +78,14 @@ public class Qualification implements BaseEntity, java.io.Serializable {
     this.user = user;
   }
 
-  @Column(name = "certification", nullable = false, length = 300)
-  public String getCertification() {
-    return this.certification;
+  @ManyToOne(fetch = FetchType.EAGER, optional = true)
+  @JoinColumn(name = "degree_id", nullable = false)
+  public Degree getDegree() {
+    return degree;
   }
 
-  public void setCertification(String certification) {
-    this.certification = certification;
+  public void setDegree(Degree degree) {
+    this.degree = degree;
   }
 
   @Column(name = "board_or_university", nullable = false, length = 300)
@@ -140,7 +140,6 @@ public class Qualification implements BaseEntity, java.io.Serializable {
     final int prime = 31;
     int result = 1;
     result = prime * result + (boardOrUniversity == null ? 0 : boardOrUniversity.hashCode());
-    result = prime * result + (certification == null ? 0 : certification.hashCode());
     result = prime * result + (percentage == null ? 0 : percentage.hashCode());
     result = prime * result + yearOfPassing;
     return result;
@@ -163,13 +162,6 @@ public class Qualification implements BaseEntity, java.io.Serializable {
         return false;
       }
     } else if (!boardOrUniversity.equals(other.boardOrUniversity)) {
-      return false;
-    }
-    if (certification == null) {
-      if (other.certification != null) {
-        return false;
-      }
-    } else if (!certification.equals(other.certification)) {
       return false;
     }
     if (percentage == null) {

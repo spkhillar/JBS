@@ -44,6 +44,8 @@ public class NormalUserController extends BaseController {
     userRegistrationForm.setUser(existingUser);
     userRegistrationForm.setSecurityQuestion(existingUser.getUserSecurityQuestion().getSecurityQuestion().getId());
     userRegistrationForm.setSecurityAnswer(existingUser.getUserSecurityQuestion().getAnswer());
+    userRegistrationForm.setDegree(existingUser.getQualifications().get(0).getDegree().getName());
+    userRegistrationForm.setTerms(true);
     map.put("registration", userRegistrationForm);
     map.put("currentLoggedInUserId", existingUser.getId());
     map.put("qualifications", existingUser.getQualifications());
@@ -69,6 +71,7 @@ public class NormalUserController extends BaseController {
     map.put("states", userRegistrationService.getStates());
     map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
     map.put("workExperianceList", this.getWorkExperiance());
+    map.put("degreeList", userRegistrationService.getDegrees());
   }
 
 }

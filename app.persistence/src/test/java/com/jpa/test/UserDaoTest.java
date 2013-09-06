@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jpa.entities.Address;
+import com.jpa.entities.Degree;
 import com.jpa.entities.Qualification;
 import com.jpa.entities.Role;
 import com.jpa.entities.SecurityQuestion;
@@ -18,6 +19,7 @@ import com.jpa.entities.Skill;
 import com.jpa.entities.User;
 import com.jpa.entities.UserRole;
 import com.jpa.entities.UserSecurityQuestion;
+import com.jpa.repositories.DegreeDAO;
 import com.jpa.repositories.RoleDAO;
 import com.jpa.repositories.SecurityQuestionDAO;
 import com.jpa.repositories.UserDAO;
@@ -32,6 +34,9 @@ public class UserDaoTest extends BaseTest {
 
   @Autowired
   private RoleDAO roleDAO;
+
+  @Autowired
+  private DegreeDAO degreeDAO;
 
   @Test
   public void testUser() throws IOException {
@@ -66,7 +71,9 @@ public class UserDaoTest extends BaseTest {
     skill.setResume(resume);
     newUser.setSkill(skill);
 
-    Qualification qualification = new Qualification(newUser, "Matric", "CBSE", 2006, new BigDecimal("65.05"));
+    Degree degree = degreeDAO.findByName("10");
+
+    Qualification qualification = new Qualification(newUser, degree, "CBSE", 2006, new BigDecimal("65.05"));
     qualification.setUpdatedAt(new Date());
     newUser.getQualifications().add(qualification);
 

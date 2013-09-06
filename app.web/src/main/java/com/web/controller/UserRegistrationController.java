@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jpa.entities.User;
@@ -46,6 +45,7 @@ public class UserRegistrationController extends BaseController {
     userRegistrationForm.setUser(existingUser);
     userRegistrationForm.setSecurityQuestion(existingUser.getUserSecurityQuestion().getSecurityQuestion().getId());
     userRegistrationForm.setSecurityAnswer(existingUser.getUserSecurityQuestion().getAnswer());
+    userRegistrationForm.setDegree(existingUser.getQualifications().get(0).getDegree().getName());
     map.put("registration", userRegistrationForm);
     map.put("currentLoggedInUserId", existingUser.getId());
     map.put("qualifications", existingUser.getQualifications());
@@ -60,6 +60,7 @@ public class UserRegistrationController extends BaseController {
     map.put("states", userRegistrationService.getStates());
     map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
     map.put("workExperianceList", this.getWorkExperiance());
+    map.put("degreeList", userRegistrationService.getDegrees());
 
   }
 
@@ -74,24 +75,25 @@ public class UserRegistrationController extends BaseController {
       fileName = multipartFile.getOriginalFilename();
     }
     userRegistrationService.saveInternetUser(userRegistrationForm.getUser(),
-      userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName);
+      userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName,
+      userRegistrationForm.getDegree());
     return "redirect:/";
   }
 
   @RequestMapping(value = "/updateuser", method = RequestMethod.POST)
-  @ResponseBody
   public String updateUser(@ModelAttribute("registration") UserRegistrationForm userRegistrationForm, ModelMap map,
       final HttpServletRequest request) throws IOException {
-    /*
-     * byte[] resume = null; String fileName = null; MultipartFile multipartFile
-     * = userRegistrationForm.getResume(); if (multipartFile != null) { resume =
-     * multipartFile.getBytes(); fileName = multipartFile.getOriginalFilename();
-     * }
-     * userRegistrationService.saveInternetUser(userRegistrationForm.getUser(),
-     * userRegistrationForm.getSecurityQuestion(),
-     * userRegistrationForm.getSecurityAnswer(), resume, fileName);
-     */
-    return "Update not yet implemented";
+    byte[] resume = null;
+    String fileName = null;
+    MultipartFile multipartFile = userRegistrationForm.getResume();
+    if (multipartFile != null) {
+      resume = multipartFile.getBytes();
+      fileName = multipartFile.getOriginalFilename();
+    }
+    userRegistrationService.updateInternetUser(userRegistrationForm.getUser(),
+      userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName,
+      userRegistrationForm.getDegree());
+    return getHomePage(map);
   }
 
 }

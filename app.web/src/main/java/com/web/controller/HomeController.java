@@ -3,23 +3,18 @@
  */
 package com.web.controller;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jpa.entities.User;
-import com.service.UserService;
 import com.web.rest.RestResponse;
 import com.web.rest.WebHomeData;
 
@@ -34,9 +29,6 @@ public class HomeController extends BaseController {
   /** The Constant logger. */
   private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-  @Autowired
-  private UserService userService;
-
   /**
    * Simply selects the home view to render by returning its name.
    * 
@@ -49,20 +41,8 @@ public class HomeController extends BaseController {
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String home(final Locale locale, final ModelMap map) {
-    logger.info("Welcome home! The client locale is {}.", locale);
-
-    Date date = new Date();
-    DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-    String username = this.getCurrentLoggedinUserName();
-    User user = userService.findByUserName(username);
-    map.put("currentLoggedInUser", username);
-    map.put("currentLoggedInUserId", user.getId());
-    if (user.getUserRole().getRole().getId().equals(1L)) {
-      return "admin.home";
-    } else {
-      return "redirect:/normal/user/home";
-    }
+    logger.info("Home Page...", locale);
+    return getHomePage(map);
   }
 
   /**

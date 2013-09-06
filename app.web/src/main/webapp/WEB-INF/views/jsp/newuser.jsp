@@ -152,13 +152,13 @@
 </tr>
 </c:if>
 <tr bgcolor="#FFFFFF" class="header2">
-  <td colspan="7"><h4>Create Login Details</h4></td>
+  <td colspan="7"><h4>Login Details</h4></td>
   </tr>
 <tr class="header">
   <td width="1%" height="26">&nbsp;</td>
   <td colspan="5" rowspan="3"><table width="101%" border="0" id="logininfotb">
     <tr>
-      <td width="36%">Username</td>
+      <td width="36%">Username<em>*</em></td>
       <td width="64%">
       <c:choose>
       <c:when test="${currentLoggedInUserId eq null}">
@@ -171,16 +171,16 @@
        </td>
     </tr>
     <tr>
-      <td width="36%">Enter your Email id</td>
+      <td width="36%">Enter your Email id<em>*</em></td>
       <td width="64%"> <form:input path="user.email" /></td>
     </tr>
     <c:if test="${currentLoggedInUserId eq null}">
     <tr>
-      <td>Create a Password for your account</td>
+      <td>Create a Password for your account<em>*</em></td>
       <td> <form:password path="user.password" /></td>
     </tr>
     <tr>
-      <td height="27">Confirm the Password</td>
+      <td height="27">Confirm the Password<em>*</em></td>
       <td> <form:password path="confirmPassword" /></td>
     </tr>
     </c:if>
@@ -190,7 +190,7 @@
       </td>
     </tr>
     <tr>
-      <td height="27">Answer</td>
+      <td height="27">Answer<em>*</em></td>
       <td> <form:input path="securityAnswer" /></td>
     </tr>
   </table>
@@ -216,7 +216,7 @@
     
     <table width="206" border="0" id="addressinfotb">
       <tr>
-        <td width="270">First Name</td>
+        <td width="270">First Name<em>*</em></td>
         <td width="480"> <form:input path="user.firstName" ></form:input></td>
       </tr>
       <tr>
@@ -224,7 +224,7 @@
         <td><form:input path="user.lastName" ></form:input></td>
       </tr>
       <tr>
-        <td>Address Line1</td>
+        <td>Address Line1<em>*</em></td>
         <td><form:input path="user.address.addressLine1" ></form:input> </td>
       </tr>
       <tr>
@@ -236,16 +236,16 @@
         <td><form:select path="user.address.state" items="${states}" ></form:select> </td>
       </tr>
       <tr>
-        <td>City</td>
+        <td>City<em>*</em></td>
         <td>
           <form:input path="user.address.city" ></form:input></td>
       </tr>
       <tr>
-        <td>Mobile Number</td>
+        <td>Mobile Number<em>*</em></td>
         <td><form:input path="user.phone" ></form:input></td>
       </tr>
       <tr>
-        <td>Pin code</td>
+        <td>Pin code<em>*</em></td>
         <td><form:input path="user.address.pin" ></form:input></td>
       </tr>
     </table></td>
@@ -294,7 +294,7 @@
       </td>
     </tr>
     <tr>
-      <td>Key Skills</td>
+      <td>Key Skills<em>*</em></td>
       <td>
       <form:textarea path="user.skill.skills" />
       </td>
@@ -316,25 +316,25 @@
   <td colspan="5"><table width="762" border="0" id="educationinfotb">
     <tr>
       <td width="261">Certification</td>
-        <td width="212">Board/University</td>
-        <td width="189">Year of Passing</td>
-        <td width="234">Percentage/CGPA</td>
+        <td width="212">Board/University<em>*</em></td>
+        <td width="189">Year of Passing<em>*</em></td>
+        <td width="234">Percentage/CGPA<em>*</em></td>
       </tr>
       
      <c:choose>
   <c:when test="${currentLoggedInUserId eq null}">
       <tr>
       <td>
-      	<input type="text" name="user.qualifications[0].certification" autofocus required/>
+      	<form:select path="degree" items="${degreeList}" ></form:select>
       </td>
       <td>
-      	<input type="text" name="user.qualifications[0].boardOrUniversity" autofocus required/>
+      	<input type="text" name="user.qualifications[0].boardOrUniversity"  required/>
       </td>
       <td>
-       <input type="number" name="user.qualifications[0].yearOfPassing" autofocus required/>
+       <input type="number" name="user.qualifications[0].yearOfPassing"  required/>
       </td>
       <td>
-       <input type="number" name="user.qualifications[0].percentage" autofocus required/>
+       <input type="number" name="user.qualifications[0].percentage"  required/>
       </td>
       </tr>
   </c:when>
@@ -342,7 +342,7 @@
 	  <c:forEach var="qualification" items="${qualifications}" varStatus="status">
 	  <tr>
 	   <td>
-      	<input type="text" name="user.qualifications[${status.index}].certification" value="${qualification.certification}" autofocus required/>
+      	<form:select path="degree" items="${degreeList}" ></form:select>
       </td>
       <td>
       	<input type="text" name="user.qualifications[${status.index}].boardOrUniversity" value="${qualification.boardOrUniversity}" autofocus required/>
@@ -359,7 +359,6 @@
   </c:otherwise>
   </c:choose>
   </table>
-    <br /><input type="button" value="Add Another Certification" id="add"/></td>
   <td>&nbsp;</td>
 </tr>
 <tr bgcolor="#FFFFFF" class="header2">
@@ -385,7 +384,7 @@
   <form:checkbox path="notifySms" value="false"/>
     Notifications from JobsbySMS</h5></td>
   <td colspan="4" bgcolor="#FFFFFF"><h5>
-    <input type="checkbox" name="terms" id="terms" />
+  <form:checkbox path="terms"/>
     I have read and understood and agree to the <a href="#" id="showpopup">Terms &amp; Conditions</a> governing the use of JobsbySMS.com</h5>
   </td>
   <td >

@@ -1,6 +1,6 @@
  label.error {
-	float: none; color: red; 
-   padding-left: .5em;
+	float: none; 
+	color: red; 
    vertical-align: top; 
    display: block;
 }
@@ -36,4 +36,8 @@ color: #FF0000;
 .message {
 	color: red;
 	text-align: center;	
+}
+
+input.error { border: 1px solid red;
+background-color: #FFEBEB;
 }

@@ -20,6 +20,10 @@ public class UserRegistrationForm {
 
   private String notifySms;
 
+  private String degree;
+
+  private boolean terms = false;
+
   public UserRegistrationForm() {
     super();
     createUserRegistrationForm();
@@ -79,6 +83,22 @@ public class UserRegistrationForm {
 
   public void setNotifySms(String notifySms) {
     this.notifySms = notifySms;
+  }
+
+  public String getDegree() {
+    return degree;
+  }
+
+  public void setDegree(String degree) {
+    this.degree = degree;
+  }
+
+  public boolean isTerms() {
+    return terms;
+  }
+
+  public void setTerms(boolean terms) {
+    this.terms = terms;
   }
 
 }

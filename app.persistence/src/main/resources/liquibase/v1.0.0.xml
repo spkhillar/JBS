@@ -306,5 +306,159 @@
             <column name="updated_at" valueDate="now()"/>
             <column name="version" valueNumeric="0"/>
 		</insert>
-	</changeSet>            
+	</changeSet> 
+	
+	<changeSet author="shiv" id="1376829106667-9">
+        <insert tableName="degree">
+            <column name="name" value="10"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="10+2"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="B.A"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="B.Arch"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="BCA"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="B.B.A"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="B.Com"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="B.Ed"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="BDS"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="BHM"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="B.Sc"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="B.Tech/B.E."/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="Costing"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="Charted Accountant"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="LLB"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="M.A"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="MBA"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="MBBS"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="M.Com"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="MCA"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="M.Sc"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="M.Tech"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="Diploma"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="I.T.I"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="degree">
+            <column name="name" value="Under Matric"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+		
+    </changeSet>
 </databaseChangeLog>
