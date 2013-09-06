@@ -7,31 +7,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
+<jsp:include page="../tiles/base/app.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>JOBSbySMS-Home Page</title>
 <link rel="shortcut icon" href="resources/images/favico.png"/>
 
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
-
 <spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
 <spring:url value="/resources/css/headmenu.css" var="resourceHeadMenuCssUrl"/>
-<spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJq2Url"/>
-<spring:url value="/resources/js/jquery.easing.js" var="resourceEasingUrl"/>
-<spring:url value="/resources/js/jquery.touchSwipe.min.js" var="resourceTouchSwipeUrl"/>
-<spring:url value="/resources/js/script.js" var="resourceScriptUrl"/>
-
-
-
-<script type="text/javascript" src="${resourceJq2Url}"></script>
-<script type="text/javascript" src="${resourceEasingUrl}"></script>
-<script type="text/javascript" src="${resourceTouchSwipeUrl}"></script>
-<script type="text/javascript" src="${resourceScriptUrl}"></script>
 
 <link rel="stylesheet" type="text/css" href="${resourceHeadMenuCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
-
 <link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
 
 
@@ -167,7 +155,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
 	 </tr>
       <tr>
         <td class="pvtinfo">
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
+         <div id="indexjobinfo">
            <ul>
          <c:forEach var="privateJob" 
 
@@ -185,41 +173,11 @@ value="${privateJob.designation}"></c:out>,
 
 value="${privateJob.experiance}"></c:out> yrs)
 
-</strong> | </li><a href="#">View Details</a>
+</strong> | </li> <a href="javascript:void(0);" onclick="javascript:loadJobDetails(${privateJob.id});">View Details</a>
          </c:forEach>
        </ul>
         </div>
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
-          <ul>
-          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
-    	  </ul>
-        </div>
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
-          <ul>
-          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
-    	  </ul>
-        </div>
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
-          <ul>
-          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
-    	  </ul>
-        </div>
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
-          <ul>
-          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
-    	  </ul>
-        </div>
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
-          <ul>
-          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
-    	  </ul>
-        </div>
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
-          <ul>
-          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
-    	  </ul>
-        </div>
-        </td>
+           </td>
       </tr>
       </table>
       </td>
@@ -230,42 +188,17 @@ value="${privateJob.experiance}"></c:out> yrs)
          <tr>
            <td class="pvtinfo">
            <c:forEach var="publicJob" items="${publicJobList}" varStatus="status">
-           <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');" title="View Detail">
+           <div id="indexjobinfo" title="View Detail">
          <ul>
-	           	<li><strong><c:out value="${publicJob.companyName}"></c:out>, <c:out value="${publicJob.designation}"></c:out>, <c:out value="${publicJob.location}"></c:out>
-	         	 (<c:out value="${publicJob.experiance}"></c:out> yrs)</strong> | </li><a href="#">View Details</a>
+	           	<li><strong>
+	           	<c:out value="${publicJob.companyName}"></c:out>, <c:out value="${publicJob.designation}">
+	           	</c:out>, <c:out value="${publicJob.location}"></c:out>
+	         	 (<c:out value="${publicJob.experiance}"></c:out> yrs)</strong> | </li>
+	         	  <a href="javascript:void(0);" onclick="javascript:loadJobDetails(${publicJob.id});">View Details</a>
 	      </ul>
         </div>
         </c:forEach> 
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
-          <ul>
-          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
-    	  </ul>
-        </div>
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
-          <ul>
-          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
-    	  </ul>
-        </div>
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
-          <ul>
-          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
-    	  </ul>
-        </div>
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
-          <ul>
-          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
-    	  </ul>
-        </div>
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
-          <ul>
-          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
-    	  </ul>
-        </div>
-         <div id="jobinfo"  onmouseover="ChangeColor(this, true);" onmouseout="ChangeColor(this, false);" onclick="DoNav('http://www.yahoo.com/');">
-          <ul>
-          <li>Software Developer | IBM India |Location: Delhi/NCR, Gurgaon, Bangalore, Hyderabad|(4-5 Yrs) </li>
-    	  </ul>
+         
     </div>
              </td>
            </tr>
@@ -328,7 +261,10 @@ value="${privateJob.experiance}"></c:out> yrs)
     
   
 <br/>
-     <div id="pvtjobs"></div>
+     
+   <div id="jobdetailsdiv" title="Job Details">
+   </div>
+    
     
 </body>
 </html>

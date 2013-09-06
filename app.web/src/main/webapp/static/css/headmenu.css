@@ -4,7 +4,7 @@
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
-	display: block;
+	display:table;
 }
 body {
 	line-height: 1;
@@ -36,18 +36,59 @@ body {
 }
 
 .wrap {
-	width: 100%;
+	width: 60%;
 	margin: 0;
 	background-color: #39F;
+	float: right;
+	border:2px solid #CCC;
+	border-radius: 10px 10px 10px 10px;
+	
 
 }
 
+.wrap2 {
+	width: 60%;
+	margin: 0;
+	background-color: #39F;
+	float: left;
+	border:2px solid #CCC;
+	border-radius: 10px 10px 10px 10px;
+	
+}
+.menu1 li {
+	float: left;
+	position: relative;
+	
+	
+}
+.menu1 li a {
+	color: #778;
+	display: block;
+	font-size: 14px;
+	line-height: 15px;
+	padding: 1px 7px;
+	margin: 0px 0px;
+	
+
+	text-decoration:blink;
+}
 #submenu{
 	width:100%;
 	border:2px solid #CCC;
 	border-radius: 10px 10px 10px 10px;
-	background-color: #CCCCCC;
+	background-color: #6745F;
 	margin:auto;
+	height:30%;
+	
+	
+}
+#submenu1{
+	width:100%;
+	border-bottom:thick;
+	border-bottom-color:maroon;
+	background-color: #6745F;
+	margin:auto;
+	height:30%;
 	
 	
 }
@@ -65,15 +106,17 @@ body {
 .menu li {
 	float: left;
 	position: relative;
+	
 }
 
+
 .menu li a {
-	color: #444;
-	display: block;
+	color: #234;
+	display: table;
 	font-size: 14px;
-	line-height: 20px;
+	line-height: 10px;
 	padding: 6px 12px;
-	margin: 8px 8px;
+	margin: 0px 0px;
 	vertical-align: middle;
 	text-decoration: none;
 }
@@ -85,6 +128,15 @@ body {
 	box-shadow: inset 0px 0px 1px 1px rgba(0,0,0,0.1);
 	color: #222;
 }
+.menu1 li a:hover {
+	background: -webkit-gradient(linear, center top, center bottom, from(#ededed), to(#fff));
+	background-image: linear-gradient(#ededed, #fff);
+	border-radius: 12px;
+	box-shadow: inset 0px 0px 1px 1px rgba(0,0,0,0.1);
+	color: green;
+	background-color: green;
+}
+
 
 /* Dropdown styles */
 

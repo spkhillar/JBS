@@ -10,6 +10,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link rel="shortcut icon" href="resources/images/favico.png"/>
+<style>
+.formfields{
+
+ border-color: blue;
+ border-radius: 1px 1px 1px 1px;
+ width:100%;
+ height:50%;
+
+}
+
+#jobtbinfo,#jobs_tb{
+ 
+border-radius: 10px 10px 10px 10px;
+}
+
+</style>
+
 <script type="text/javascript">
 	
 	$(document).ready(function() {	
@@ -69,27 +87,12 @@
 </head>
 <body>
 <form:form name="jobForm" commandName="jobForm" id="jobForm" enctype="multipart/form-data" method="POST">
-	<table id="jobs_tb" style="border: 0">
+	<table width="100%" id="jobs_tb" style="border: 0">
 		<tr>
-			<td>Jobs Information
+			<td>Post New Job
 		</tr>
 		<tr>
-			<td height="359">
-			<table border="0" id="jobposttb">
-					<tr>
-						<td width="5%">&nbsp;</td>
-						<td width="6%">&nbsp;</td>
-						<td width="16%">&nbsp;</td>
-						<td width="16%">&nbsp;</td>
-						<td width="16%">&nbsp;</td>
-						<td width="16%">&nbsp;</td>
-						<td width="21%">&nbsp;</td>
-						<td width="4%">&nbsp;</td>
-					</tr>
-					<tr>
-						<td height="23">&nbsp;</td>
-						<td colspan="8" rowspan="7"><table width="85%" border="0"
-								align="center" id="jobtbinfo">
+		  <td><table width="96%"  border="0" align="center" id="jobtbinfo" style="font-size: 12px;">
 								<tr>
 									<td height="23">&nbsp;</td>
 									<td>&nbsp;</td>
@@ -100,55 +103,52 @@
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-									<td width="99"><em>*</em>Job Title</td>
-									<td width="143">
-									<form:input path="job.jobTitle"/>
+									<td width="117" height="56"><em>*</em>Job Title</td>
+									<td width="315">
+									<form:input path="job.jobTitle" cssClass="formfields"/>
 									</td>
-									<td width="170">Job Type</td>
-									<td width="143">
-									<form:select path="job.jobType" items="${jobTypes}" ></form:select>
+									<td width="101">Job Type</td>
+									<td width="180">
+									<form:select path="job.jobType" items="${jobTypes}" cssClass="formfields"></form:select>
 									</td>
-									<td width="127">Job Code</td>
-									<td width="151">
-									<form:input path="job.jobCode"/>
+									<td width="122">Job Code</td>
+									<td width="256">
+									<form:input path="job.jobCode" cssClass="formfields"/>
 									</td>
-									<td width="74">&nbsp;</td>
+									<td width="103">&nbsp;</td>
 								</tr>
 								<tr>
-									<td><em>*</em>Company Name</td>
-									<td><form:input path="job.companyName"/></td>
+									<td height="62"><em>*</em>Company Name</td>
+							    <td><form:input path="job.companyName" cssClass="formfields"/></td>
 									<td><em>*</em>Company URL</td>
-									<td><form:input path="job.companyUrl"/></td>
+									<td><form:input path="job.companyUrl" cssClass="formfields"/></td>
 									<td><em>*</em>Date</td>
-									<td><form:input path="job.postedAt" /></td>
+									<td><form:input path="job.postedAt" cssClass="formfields" /></td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-									<td><em>*</em>Qualification</td>
-									<td><form:input path="job.qualification" /></td>
+									<td height="48"><em>*</em>Qualification</td>
+							    <td><form:input path="job.qualification" cssClass="formfields" /></td>
 									<td><em>*</em>Salary</td>
-									<td><form:input path="job.salary"/></td>
+									<td><form:input path="job.salary"cssClass="formfields" /></td>
 									<td>Catagory</td>
-									<td><form:select path="job.category" items="${jobCategories}" ></form:select>
+									<td><form:select path="job.category" items="${jobCategories}" cssClass="formfields"></form:select>
 									</td>
 									<td>Sub Catagory</td>
-									<td>
-									<form:select path="job.subCategory" items="${jobSubCategories}" ></form:select>
-									</td>
-								</tr>
+									</tr>
 								<tr>
-									<td><em>*</em>Designation</td>
-									<td><form:select path="designation" items="${jobDesignations}" ></form:select>
+									<td height="62"><em>*</em>Designation</td>
+									<td><form:select path="designation" items="${jobDesignations}" cssClass="formfields" ></form:select>
 									</td>
 									<td>Others</td>
-									<td><form:input path="otherDesignation"/></td>
+									<td><form:input path="otherDesignation" cssClass="formfields"/></td>
 									<td>Functional Area</td>
 									<td><form:select path="job.industry" items="${jobsFunctionalAreaList}" ></form:select>
-									<td>&nbsp;</td>
+									<td><form:select path="job.subCategory" items="${jobSubCategories}" ></form:select></td>
 								</tr>
 								<tr>
-									<td><em>*</em>Experience</td>
-									<td><form:select path="job.experiance" items="${workExperianceList}" ></form:select></td>
+									<td height="46"><em>*</em>Experience</td>
+							    <td><form:select path="job.experiance" items="${workExperianceList}" ></form:select></td>
 									<td><em>*</em>Location</td>
 									<td><form:input path="job.location"/></td>
 									<td>&nbsp;</td>
@@ -156,16 +156,16 @@
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-									<td height="26">Age Limit</td>
-									<td><form:input path="job.ageLimit"/></td>
-									<td height="26"><em>*</em>Skills</td>
-									<td><form:textarea path="job.skill"/></td>
-									<td height="26">Keyword</td>
-									<td><form:textarea path="job.keyword"/></td>
+									<td height="52">Age Limit</td>
+							    <td><form:input path="job.ageLimit"/></td>
+									<td height="52"><em>*</em>Skills</td>
+							    <td><form:textarea path="job.skill"/></td>
+									<td height="52">Keyword</td>
+							    <td><form:textarea path="job.keyword"/></td>
 									<td>&nbsp;</td>
 								</tr>
 								<tr>
-									<td height="104"><em>*</em>Description</td>
+									<td height="75"><em>*</em>Description</td>
 									<td colspan="5"><form:textarea path="job.jobDescription"
 											cols="45" rows="5"/>
 									</td>
@@ -174,50 +174,13 @@
 								</tr>
 								<tr>
 								<td>
-								<button id="save" onclick="postJob();">Submit</button>
+								<button id="save" onClick="postJob();">Submit</button>
 								</td>
 								</tr>
 							</table></td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td height="65">&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-				</table>
-		</tr>
-	</table>
-	<form:hidden path="newJob"/>
+						</tr>
+			</table>
+<form:hidden path="newJob"/>
 	<form:hidden path="job.id"/>
 	</form:form>
 </body>

@@ -106,12 +106,24 @@ td.jobheading{
 	
 }
 
-#jobinfo{
+#indexjobinfo{
 	
+	border:2px solid #CCC;
 	font-family:Candara;
 	font-size:15px;
 	color: #004364;
-	border-color: purple;
+	border-radius: 4px 4px 4px 4px;
+	margin: auto;
+	
+}
+#userjobinfo{
+	width:80%;
+	border:2px solid #CCC;
+	font-family:Candara;
+	font-size:15px;
+	color: #004364;
+	border-radius: 4px 4px 4px 4px;
+	margin: auto;
 	
 }
 #govttb2{

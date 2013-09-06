@@ -37,69 +37,90 @@
     <td width="70" height="28" bgcolor="#C9D1FA" >Designation</td>
      <td width="600" bgcolor="#E2E7EB"><c:out value="${currentJob.designation}"></c:out> </td>
   </tr>
+  <tr>
+    <td width="70" height="28" bgcolor="#C9D1FA" >Job Code</td>
+     <td width="600" bgcolor="#E2E7EB"><c:out value="${currentJob.jobCode}"></c:out> </td>
+  </tr>
   
   <tr>
-   <td height="35" bgcolor="#C9D1FA" >Job Description</td>
-   <td bgcolor="#E2E7EB"><p align="justify">IARI Vacancy Details:
-       <br />
-       Total No of Posts: 01
-       <br />
-       </p>
-     <p align="justify">Name of the Post: Senior Research Fellow <br />
-      </p>
-     <p align="justify">Age Limit: Candidates age should be 35 years for men and 40 years for women.<br />
-      </p>
-     <p align="justify">Selection Process: Candidates will be selected based on their performance in Interview. </p>
-     <p align="justify"><br />
-      How to Apply:</p>
-     <p align="justify"> Interested Candidates may attend walk in interview along with the biodata with full particulars i.e. qualifications, experience, NOC from the previous employer/ experience certificate, publications etc.. along with original/ attested copies of the certificates on 10-09-2013 at 10:30 AM, at the Division of Biochemistry, IARI, Pusa Institute, New Delhi – 110012.      </p>
-     <p align="justify">Date & Time of Interview: 10-09-2013 at 10:30 AM
-       <br />
-     </p>
-     <p align="justify">Venue: <br />
-       The Division of Biochemistry, IARI, Pusa Institute, New Delhi -110012.
-       
-       <br />
-       Fore more details regarding age limit, educational qualifications, selections, pay scale and other click on following link……
-       
-       Read more:<br />
-       IARI Recruitment 2013 – Walk in for Sr Research Fellow <br />
-     </p>
-     <p align="justify">&nbsp;</p>
+   <td height="35" bgcolor="#C9D1FA" >Job Description
+   </td>
+   <td bgcolor="#E2E7EB"><p align="justify">
+     <c:out value="${currentJob.jobDescription}"></c:out>
+    </p>
      </td>
    </tr>
   <tr>
     <td height="37" bgcolor="#C9D1FA" >Experience</td>
-    <td bgcolor="#E2E7EB"><c:out value="${currentJob.experiance}"></c:out></td>
+    <td bgcolor="#E2E7EB">
+    <c:out value="${currentJob.experiance}"></c:out>
+    </td>
   </tr>
   <tr>
     <td height="38" bgcolor="#C9D1FA">Industry Type</td>
-    <td bgcolor="#E2E7EB">&nbsp;</td>
+    <td bgcolor="#E2E7EB">
+    <c:out value="${currentJob.industry}"></c:out>
+    </td>
   </tr>
   <tr>
-    <td height="32" bgcolor="#C9D1FA">Role</td>
-    <td bgcolor="#E2E7EB">&nbsp;</td>
+    <td height="32" bgcolor="#C9D1FA">Job Type</td>
+    <td bgcolor="#E2E7EB">
+    <c:out value="${currentJob.jobType}"></c:out>
+    </td>
   </tr>
   <tr>
-    <td height="34" bgcolor="#C9D1FA" >Functional Area</td>
-    <td bgcolor="#E2E7EB">Research</td>
+    <td height="34" bgcolor="#C9D1FA" >Skill</td>
+    <td bgcolor="#E2E7EB">
+    <c:out value="${currentJob.skill}"></c:out>
+    </td>
   </tr>
   <tr>
-    <td height="37" bgcolor="#C9D1FA" >Education</td>
-    <td bgcolor="#E2E7EB">Educational Qualification: Candidates should possess M. Sc. with specialization in Plant Biochemistry/ Plant Molecular Biology and Biotechnology. </td>
+    <td height="34" bgcolor="#C9D1FA" >Category</td>
+    <td bgcolor="#E2E7EB">
+    <c:out value="${currentJob.category}"></c:out>
+     </td>
+  </tr>
+  <tr>
+    <td height="34" bgcolor="#C9D1FA" >Salary</td>
+    <td bgcolor="#E2E7EB"> 
+    <c:out value="${currentJob.salary}"></c:out>
+    </td>
+  </tr>
+  <tr>
+    <td height="34" bgcolor="#C9D1FA" >Age Limit</td>
+    <td bgcolor="#E2E7EB">
+    <c:out value="${currentJob.ageLimit}"></c:out>
+     </td>
+  </tr>
+  <tr>
+    <td height="34" bgcolor="#C9D1FA" >Sub Category</td>
+    <td bgcolor="#E2E7EB">
+    <c:out value="${currentJob.subCategory}"></c:out>
+    </td>
+  </tr>
+   <tr>
+    <td height="37" bgcolor="#C9D1FA" >Qualification</td>
+    <td bgcolor="#E2E7EB"> 
+      	<c:out value="${currentJob.qualification}"></c:out>
+      </td>
   </tr>
   <tr>
     <td height="34" bgcolor="#C9D1FA" >Location</td>
-    <td bgcolor="#E2E7EB">Venue: <br />
-The Division of Biochemistry, IARI, Pusa Institute, New Delhi -110012. </td>
+    <td bgcolor="#E2E7EB">
+    <c:out value="${currentJob.location}"></c:out>
+     </td>
   </tr>
   <tr>
-    <td height="32" bgcolor="#C9D1FA" >Web Site</td>
-    <td bgcolor="#E2E7EB">Posts | FreeJobAlert.com http://www.freejobalert.com/iari-recruitment/17750/#ixzz2dnhczEWb</td>
+    <td height="32" bgcolor="#C9D1FA" >Company</td>
+    <td bgcolor="#E2E7EB">
+   <a href="${currentJob.companyUrl}" target="_blank"><c:out value="${currentJob.companyName}"></c:out></a>
+    </td>
   </tr>
   <tr>
     <td height="33" bgcolor="#C9D1FA">Job Posted</td>
-    <td bgcolor="#E2E7EB">&nbsp;</td>
+    <td bgcolor="#E2E7EB">
+     <fmt:formatDate pattern="dd-MM-yyyy" value="${currentJob.postedAt}"/>
+    </td>
   </tr>
   </table>  
   </div>

@@ -24,10 +24,11 @@
 
 <body>
      <div >
-     <table id="govttb2">
+     <table id="govttb2" width="100%">
      <tr>
      <td>
-     <h3>Welcome ${currentLoggedInUser}. Preferred Jobs listed below</h3></td>
+     <h3>Welcome ${currentLoggedInUser}. Preferred Jobs listed below</h3>
+    </td>
      </tr>
        <tr bgcolor="#0099CC">
          <td colspan="6" bgcolor="#D1E6E7"> Government Jobs</td>
@@ -36,7 +37,7 @@
         <c:forEach var="job" items="${jobList}" varStatus="status">
        <tr>
          <td colspan="6" class="pvtinfo"><strong>
-         <c:out value="${job.designation}"></c:out> - <c:out value="${job.location}"></c:out> (<c:out value="${job.experiance}"></c:out> yrs)</strong> | Posted date: <fmt:formatDate pattern="yyyy-MM-dd" value="${job.postedAt}"/>
+         <c:out value="${job.designation}"></c:out> - <c:out value="${job.location}"></c:out> (<c:out value="${job.experiance}"></c:out> yrs)</strong> | Posted date:     <fmt:formatDate pattern="yyyy-MM-dd" value="${job.postedAt}"/>
          <ul><li><c:out value="${job.jobDescription}"></c:out></li></ul>
           <p><strong>Salary Range:</strong> Rs. <c:out value="${job.salary}"></c:out> p.a.  | <strong>Industry:</strong> <c:out value="${job.industry}"></c:out><br />
           Company:<c:out value="${job.companyName}">|</c:out> </p><a href="#" onclick="">View Details</a></td>

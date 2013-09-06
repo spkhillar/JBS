@@ -61,7 +61,7 @@
 					rowNum : 20,
 					rowList : [ 20, 30, 40,30 ],
 					height : 500,
-					width : 1250,
+					width : 1050,
 					rownumbers : true,
 					pager : '#pager',
 					sortname : 'postedAt',
