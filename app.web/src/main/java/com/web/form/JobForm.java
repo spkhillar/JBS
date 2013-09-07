@@ -18,9 +18,7 @@ public class JobForm {
 
   private List<String> degreeList;
 
-  private List<String> selectedDegreeList;
-
-
+  private String selectedDegreeList;
 
   public Job getJob() {
     return job;
@@ -70,13 +68,12 @@ public class JobForm {
     this.degreeList = degreeList;
   }
 
-  public List<String> getSelectedDegreeList() {
+  public String getSelectedDegreeList() {
     return selectedDegreeList;
   }
 
-  public void setSelectedDegreeList(final List<String> selectedDegreeList) {
+  public void setSelectedDegreeList(String selectedDegreeList) {
     this.selectedDegreeList = selectedDegreeList;
   }
-
 
 }

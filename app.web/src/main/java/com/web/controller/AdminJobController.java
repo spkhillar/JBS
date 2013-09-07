@@ -1,8 +1,10 @@
 package com.web.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,6 +56,8 @@ public class AdminJobController extends BaseController {
   @RequestMapping(value = "/job/post", method = RequestMethod.POST)
   public String postJob(final ModelMap map, @ModelAttribute("jobForm") final JobForm jobForm) {
     Job newJob = jobForm.getJob();
+    String qualification = jobForm.getSelectedDegreeList();
+    newJob.setQualification(qualification);
     if (StringUtils.isNotBlank(jobForm.getOtherDesignation())) {
       newJob.setDesignation(jobForm.getOtherDesignation());
     } else {
@@ -85,17 +89,21 @@ public class AdminJobController extends BaseController {
     jobForm.setNewJob(false);
     map.put("jobForm", jobForm);
     prepareJobRenderer(map);
+
+    List<String> selectedDegree = Arrays.asList(StringUtils.split(existingJob.getQualification(), ","));
+    map.put("savedDegreeList", selectedDegree);
+    map.put("availableDegreeList", ListUtils.subtract(userRegistrationService.getDegrees(), selectedDegree));
     return "admin.new.job";
   }
 
   @RequestMapping(value = "/job/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<Job> records(@RequestParam("_search") final Boolean search,
-    @RequestParam(value = "filters", required = false) final String filters,
-    @RequestParam(value = "page", required = false) final Integer page,
-    @RequestParam(value = "rows", required = false) final Integer rows,
-    @RequestParam(value = "sidx", required = false) final String sidx,
-    @RequestParam(value = "sord", required = false) final String sord) {
+      @RequestParam(value = "filters", required = false) final String filters,
+      @RequestParam(value = "page", required = false) final Integer page,
+      @RequestParam(value = "rows", required = false) final Integer rows,
+      @RequestParam(value = "sidx", required = false) final String sidx,
+      @RequestParam(value = "sord", required = false) final String sord) {
     Page<Job> jobs = null;
     if (search == true) {
       jobs = jobService.findALL(page, rows, sord, sidx);
@@ -126,7 +134,6 @@ public class AdminJobController extends BaseController {
     map.put("jobDesignations", DESGINATION);
     map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
     map.put("workExperianceList", WORK_EXPERIANCE);
-    map.put("availableDegreeList",userRegistrationService.getDegrees());
 
   }
 }

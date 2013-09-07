@@ -70,6 +70,9 @@ td{
 	function postJob(){
 		var isValid = $("#jobForm").valid();
 		console.log('Form Valid...',isValid);
+		$("#selectedDegreeList > option").each(function(index, option) {
+		    $(this).attr("selected",true);   
+		});
 		if(isValid){
 			$("#jobForm").attr("action",webContextPath+"/admin/job/post");
 			$("#jobForm").submit();
@@ -103,12 +106,9 @@ td{
 		        $(selectedOpts).remove();
 		        e.preventDefault();
 		    });
-
 	}
 	
 </script>
-
-
 </head>
 
 <body>
@@ -128,7 +128,8 @@ td{
   <tr>
     <td>Job Type</td>
     <td><label for="textfield"></label>
-    <form:input path="job.jobType" cssClass="formfields"/></td>
+     <form:select path="job.jobType" items="${jobTypes}" cssClass="formfields"></form:select>
+    </td>
      <td>Company URL</td>
     <td ><label for="textfield5"></label>
     <form:input path="job.companyUrl" cssClass="formfields"/></td>
@@ -217,7 +218,7 @@ td{
     <td width="352"><label for="select"></label>
       <form:select path="degreeList" multiple="multiple" style="width:100%;" size="20" items="${availableDegreeList}"></form:select>
       </td>
-    <td width="169" class="degreeSelector">
+    <td width="10" class="degreeSelector">
       <input type="button" name="btnRight" id="btnRight" value="&gt;&gt;" />
             <br>
          <input type="button" name="btnLeft" id="btnLeft" value="&lt;&lt;"/>
@@ -230,6 +231,11 @@ td{
 	<td colspan="3">
 		<button id="save" onClick="postJob();">Submit</button>
 	</td>
+ </tr>
+ <tr>
+ <td colspan="3">
+ &nbsp;
+ </td>
  </tr>
 </table>
 <form:hidden path="newJob"/>

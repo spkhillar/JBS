@@ -1031,5 +1031,8 @@
           <dropColumn tableName="qualification" columnName="certification"/>
         <addForeignKeyConstraint baseColumnNames="degree_id" baseTableName="qualification"  constraintName="FK_degree" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="degree"  referencesUniqueColumn="false"/>
     </changeSet>
- 
+ 	 <changeSet author="shiv" id="1367592120330-36">
+		<modifyDataType tableName="job" columnName="job_description" newDataType="varchar(5000)"/>
+		<modifyDataType tableName="job" columnName="keyword" newDataType="varchar(2000)"/>   
+    </changeSet>
 </databaseChangeLog>

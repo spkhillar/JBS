@@ -43,7 +43,7 @@ public class Job implements BaseEntity, java.io.Serializable {
   @JsonProperty
   private String industry;
   private int jobValidDuration;
-  private Boolean enabled;
+  private Boolean enabled = true;
   @JsonProperty
   private String companyName;
   private String companyUrl;
