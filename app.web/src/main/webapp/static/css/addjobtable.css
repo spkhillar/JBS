@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* CSS Document */
+
+#addjob{
+
+width:80%;
+	
+	border-radius: 30px 30px 30px 30px;
+	border:0px solid #CCC;
+	box-shadow:  4px 4px 4px 4px;
+	font-size: 14px;
+	font-family:Arial;	
+	margin:auto;
+	
+}
+tr.blank{
+	
+}
+
+td.degreeSelector{
+	margin: 0;
+	vertical-align: middle;
+}
+td.qualificationLable{
+	margin: 0;
+	vertical-align:top;
+}

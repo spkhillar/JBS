@@ -1,5 +1,6 @@
 package com.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -45,12 +46,13 @@ public class AdminJobController extends BaseController {
   public String newJob(final ModelMap map) {
     JobForm jobForm = new JobForm();
     map.put("jobForm", jobForm);
+    map.put("savedDegreeList", new ArrayList<String>());
     prepareJobRenderer(map);
     return "admin.new.job";
   }
 
   @RequestMapping(value = "/job/post", method = RequestMethod.POST)
-  public String postJob(final ModelMap map, @ModelAttribute("jobForm") JobForm jobForm) {
+  public String postJob(final ModelMap map, @ModelAttribute("jobForm") final JobForm jobForm) {
     Job newJob = jobForm.getJob();
     if (StringUtils.isNotBlank(jobForm.getOtherDesignation())) {
       newJob.setDesignation(jobForm.getOtherDesignation());
@@ -89,11 +91,11 @@ public class AdminJobController extends BaseController {
   @RequestMapping(value = "/job/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<Job> records(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
     Page<Job> jobs = null;
     if (search == true) {
       jobs = jobService.findALL(page, rows, sord, sidx);
@@ -117,12 +119,14 @@ public class AdminJobController extends BaseController {
     return "jobdescription";
   }
 
-  private void prepareJobRenderer(ModelMap map) {
+  private void prepareJobRenderer(final ModelMap map) {
     map.put("jobTypes", JOB_TYPE);
     map.put("jobCategories", JOB_CATEGORY);
     map.put("jobSubCategories", JOB_SUB_CATEGORY);
     map.put("jobDesignations", DESGINATION);
     map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
     map.put("workExperianceList", WORK_EXPERIANCE);
+    map.put("availableDegreeList",userRegistrationService.getDegrees());
+
   }
 }
