@@ -45,15 +45,14 @@
   <tr>
    <td height="35" bgcolor="#C9D1FA" >Job Description
    </td>
-   <td bgcolor="#E2E7EB"><p align="justify">
-     <c:out value="${currentJob.jobDescription}"></c:out>
-    </p>
+   <td bgcolor="#E2E7EB">
+     <span style="white-space:pre"><c:out value="${currentJob.jobDescription}"></c:out></span>
      </td>
    </tr>
   <tr>
     <td height="37" bgcolor="#C9D1FA" >Experience</td>
     <td bgcolor="#E2E7EB">
-    <c:out value="${currentJob.experiance}"></c:out>
+    <c:out value="${currentJob.experiance}"></c:out> (Years)
     </td>
   </tr>
   <tr>
@@ -83,13 +82,13 @@
   <tr>
     <td height="34" bgcolor="#C9D1FA" >Salary</td>
     <td bgcolor="#E2E7EB"> 
-    <c:out value="${currentJob.salary}"></c:out>
+    <c:out value="${currentJob.salary}"></c:out> (Per-Annum)
     </td>
   </tr>
   <tr>
     <td height="34" bgcolor="#C9D1FA" >Age Limit</td>
     <td bgcolor="#E2E7EB">
-    <c:out value="${currentJob.ageLimit}"></c:out>
+    <c:out value="${currentJob.ageLimit}"></c:out> (Years)
      </td>
   </tr>
   <tr>
