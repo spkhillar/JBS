@@ -1035,4 +1035,14 @@
 		<modifyDataType tableName="job" columnName="job_description" newDataType="varchar(5000)"/>
 		<modifyDataType tableName="job" columnName="keyword" newDataType="varchar(2000)"/>   
     </changeSet>
+    <changeSet author="shiv" id="1367592120330-37">
+		<addColumn tableName="job">
+		    <column name="company_job_url" type="varchar(200)">
+		         <constraints nullable="true"/>
+		    </column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after company_url" />
+		</modifySql>   
+    </changeSet>
 </databaseChangeLog>

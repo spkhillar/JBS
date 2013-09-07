@@ -264,6 +264,10 @@ value="${privateJob.experiance}"></c:out> yrs)
      
    <div id="jobdetailsdiv" title="Job Details">
    </div>
+   
+    <div id="applyJobDiv" title="Apply Job">
+    <span>Inorder to apply this job, Please register/login to jobsbysms.com.</span>
+   </div>
     
     
 </body>

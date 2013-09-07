@@ -2,9 +2,7 @@ var webContextPath;
 var homeDataObject;
 var trueOrFalseOption = "true:true;false:false";
 var jqgridUserRolesFilter;
-
 $(document).ready(function() {
-
 	jqgridUserRolesFilter = getRoles();
 	startTime();
 });
@@ -77,8 +75,8 @@ function loadJobDetails(jobId){
 		  		closeOnEscape: true,
 		  		buttons: [ { text: "Apply", click: 
 			  			function() {
-			  				alert("..Will get back to you soon..");
 			  				$( this ).dialog( "close" ); 
+			  				checkAndApplyJob(jobId);
 			  			} 
 		  			},
 		  				{ text: "Cancel", click: function() 
@@ -105,6 +103,29 @@ function loadTermsAndConditions(){
 		  		width:850,
 		  		closeOnEscape: true
 		  	  }).show();
+		    }
+		  });
+}
+
+function checkAndApplyJob(jobId){
+	 $.ajax({
+		    url: webContextPath+"/admin/job/apply/"+jobId,
+		    success: function(data){
+		    	//redirect to the page where he can apply on company website
+		    	console.log('...user in system...',data);
+		    	window.open(data); 
+		    },
+		    error:function(jqXHR,textStatus,errorThrown){
+		    	//ask user to login.
+		    	console.log('...user not in system...');
+		    	 $( "#applyJobDiv" ).dialog({
+		    	      modal: true,
+		    	      buttons: {
+		    	        Ok: function() {
+		    	          $( this ).dialog( "close" );
+		    	        }
+		    	      }
+		    });
 		    }
 		  });
 }

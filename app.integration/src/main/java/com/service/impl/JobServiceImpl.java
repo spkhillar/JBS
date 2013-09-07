@@ -1,7 +1,10 @@
 package com.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jpa.entities.Job;
+import com.jpa.entities.User;
+import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.jpa.repositories.JobDAO;
 import com.service.JobService;
 import com.service.util.ServiceUtil;
@@ -20,6 +25,9 @@ public class JobServiceImpl implements JobService {
 
   @Autowired
   private JobDAO jobDAO;
+
+  @Autowired
+  private GenericQueryExecutorDAO genericQueryExecutorDAO;
 
   @Override
   public void saveJob(Job job) {
@@ -50,6 +58,46 @@ public class JobServiceImpl implements JobService {
   public Page<Job> findByCategory(String category, int page, int rows, String sortOrder, String orderByField) {
     Pageable pageable = ServiceUtil.getPage(page, rows, sortOrder, orderByField);
     return jobDAO.findByCategory(category, pageable);
+  }
+
+  @Override
+  public long findTotalMatchingJobCount(User user) {
+    String query = getFilteredJobsQuery(user);
+    query = " select count(j.id) from Job j where " + query;
+    return genericQueryExecutorDAO.findCount(query, null);
+  }
+
+  @Override
+  public Page<Job> findMatchingJob(User user, int page, int pageSize) {
+    String query = getFilteredJobsQuery(user);
+    query = " from Job j where " + query;
+    Page<Job> filteredJobs = genericQueryExecutorDAO.executeQuery(query, Job.class, page, pageSize);
+    return filteredJobs;
+  }
+
+  private String getFilteredJobsQuery(User user) {
+    String skills = user.getSkill().getSkills();
+    String qualification = user.getQualifications().get(0).getDegree().getName();
+    List<String> skillList = getSkillsPattern(skills);
+    String qualificationCriteria = getQualificationCriteria(qualification);
+    String skillCriteria = "( " + StringUtils.join(skillList, " or ") + " )";
+    String finalCriteria = qualificationCriteria + " and " + skillCriteria;
+    String jpaQuery = finalCriteria + " and j.enabled=1";
+    return jpaQuery;
+  }
+
+  private List<String> getSkillsPattern(String skills) {
+    String[] skillsArray = StringUtils.split(skills, ",");
+    String jpaQuery = "j.skill like '%?1%'";
+    List<String> skillList = new ArrayList<String>();
+    for (String currentSkill : skillsArray) {
+      skillList.add(StringUtils.replace(jpaQuery, "?1", currentSkill.trim()));
+    }
+    return skillList;
+  }
+
+  private String getQualificationCriteria(String qualification) {
+    return "(j.qualification like '%" + qualification + "%')";
   }
 
 }

@@ -60,6 +60,8 @@ public class Job implements BaseEntity, java.io.Serializable {
   @JsonProperty
   private String subCategory;
   private String ageLimit;
+  private String companyJobUrl;
+
   private Date createdAt = new Date();
   private Date updatedAt;
 
@@ -313,6 +315,15 @@ public class Job implements BaseEntity, java.io.Serializable {
 
   public void setAgeLimit(String ageLimit) {
     this.ageLimit = ageLimit;
+  }
+
+  @Column(name = "company_job_url", nullable = false, length = 200)
+  public String getCompanyJobUrl() {
+    return companyJobUrl;
+  }
+
+  public void setCompanyJobUrl(String companyJobUrl) {
+    this.companyJobUrl = companyJobUrl;
   }
 
   @Temporal(TemporalType.TIMESTAMP)

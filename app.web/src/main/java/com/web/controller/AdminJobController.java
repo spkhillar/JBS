@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jpa.entities.Job;
+import com.jpa.entities.User;
 import com.service.JobService;
 import com.service.UserRegistrationService;
 import com.web.form.JobForm;
@@ -121,10 +122,29 @@ public class AdminJobController extends BaseController {
 
   @RequestMapping(value = "/job/view/{jobId}", method = RequestMethod.GET)
   public String viewJobDetials(@PathVariable final long jobId, final ModelMap map) {
-
     Job currentJob = jobService.findJob(jobId);
     map.put("currentJob", currentJob);
     return "jobdescription";
+  }
+
+  @RequestMapping(value = "/job/apply/{jobId}", method = RequestMethod.GET)
+  @ResponseBody
+  public String applyToJob(@PathVariable final long jobId) {
+    this.getCurrentLoggedinUserName();
+    Job currentJob = jobService.findJob(jobId);
+    if (StringUtils.isBlank(currentJob.getCompanyJobUrl())) {
+      return currentJob.getCompanyUrl();
+    }
+    return currentJob.getCompanyJobUrl();
+  }
+
+  @RequestMapping(value = "/job/currentuser", method = RequestMethod.GET)
+  @ResponseBody
+  public long jobsForCurrentUser() {
+    String username = this.getCurrentLoggedinUserName();
+    User user = userService.findByUserName(username);
+    long totalCount = jobService.findTotalMatchingJobCount(user);
+    return totalCount;
   }
 
   private void prepareJobRenderer(final ModelMap map) {

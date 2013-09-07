@@ -26,17 +26,7 @@
 <script type="text/javascript" src="${resourceJq8Url}"></script>
 
 <script type="text/javascript" src="${resourcePopupboxUrl}"></script> --%>
-<script type="text/javascript">
 
-$(document).ready(function(){
-  //$('#my_modal').dialog();
-  
-  
-  
-});
-
-
-</script>
 <style>
 #govttb2 tr .pvtinfo {
 	font-weight: normal;
@@ -51,7 +41,6 @@ $(document).ready(function(){
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
      <div >
-      <h3>Welcome ${currentLoggedInUser}. Preferred Jobs listed below</h3>
        <c:forEach var="job" items="${jobList}" varStatus="status">
          <div id="userjobinfo">
          <c:out value="${job.designation}">

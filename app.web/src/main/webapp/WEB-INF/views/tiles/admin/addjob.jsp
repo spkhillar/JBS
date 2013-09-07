@@ -132,7 +132,7 @@ td{
     </td>
      <td>Company URL</td>
     <td ><label for="textfield5"></label>
-    <form:input path="job.companyUrl" cssClass="formfields"/></td>
+    <form:input path="job.companyUrl" cssClass="formfields" size="50"/></td>
   </tr>
   <tr>
     <td>Job Code</td>
@@ -140,7 +140,7 @@ td{
     <form:input path="job.jobCode" cssClass="formfields"/></td>
     <td>Company Job URL</td>
     <td ><label for="textfield6"></label>
-    <form:input path="companyJobUrl" cssClass="formfields"/></td>
+    <form:input path="job.companyJobUrl" cssClass="formfields" size="50"/></td>
   </tr>
   <tr>
     <td>Posted Date</td>
@@ -184,14 +184,27 @@ td{
     <td colspan="3"><label for="textfield11"></label>
    <form:input path="job.experiance" cssClass="formfields" /></td>  
    </tr>
-   <tr>
+  <tr>
     <td>Designation</td>
     <td>
       <form:select path="designation" items="${jobDesignations}" cssClass="formfields" ></form:select>
 	</td>
     <td>Others</td>
     <td><form:input path="otherDesignation" cssClass="formfields"/></td>
-		
+  </tr>
+  
+  <tr>
+    <td>Job Valid for (In days)</td>
+    <td>
+    	<form:input path="job.jobValidDuration" cssClass="formfields"/>
+    </td>
+    <td>Status</td>
+    <td>
+      <form:select path="job.enabled" cssClass="formfields" >
+	      <form:option value="true">True</form:option>
+	      <form:option value="false">False</form:option>
+      </form:select>
+	</td>
   </tr>
   <tr>
     <td>Skills</td>

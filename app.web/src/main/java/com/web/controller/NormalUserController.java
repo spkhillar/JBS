@@ -60,9 +60,18 @@ public class NormalUserController extends BaseController {
     User user = userService.findByUserName(username);
     map.put("currentLoggedInUser", username);
     map.put("currentLoggedInUserId", user.getId());
-    Page<Job> jobServiceList = jobService.findALL(1, 10, "desc", "postedAt");
-    map.put("jobList", jobServiceList.getContent());
     return "normal.user.home";
+  }
+
+  @RequestMapping(value = "/joblist/{page}/{pageSize}", method = RequestMethod.GET)
+  public String getJobListForUser(final ModelMap map, @PathVariable final int page, @PathVariable final int pageSize) {
+    String username = this.getCurrentLoggedinUserName();
+    User user = userService.findByUserName(username);
+    map.put("currentLoggedInUser", username);
+    map.put("currentLoggedInUserId", user.getId());
+    Page<Job> jobServiceList = jobService.findMatchingJob(user, page, pageSize);
+    map.put("jobList", jobServiceList.getContent());
+    return "viewjobs";
   }
 
   private void prepareObjectsForRendering(ModelMap map) {

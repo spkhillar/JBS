@@ -14,8 +14,6 @@ public class JobForm {
 
   private boolean newJob = true;
 
-  private String companyJobUrl;
-
   private List<String> degreeList;
 
   private String selectedDegreeList;
@@ -50,14 +48,6 @@ public class JobForm {
 
   public void setNewJob(final boolean newJob) {
     this.newJob = newJob;
-  }
-
-  public String getCompanyJobUrl() {
-    return companyJobUrl;
-  }
-
-  public void setCompanyJobUrl(final String companyJobUrl) {
-    this.companyJobUrl = companyJobUrl;
   }
 
   public List<String> getDegreeList() {

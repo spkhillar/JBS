@@ -64,7 +64,7 @@
 	</definition>
 	
 	<definition name="normal.user.home" extends="normal.user.base.definition">
-		<put-attribute name="body" value="/WEB-INF/views/tiles/user/normal/viewjobs.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/tiles/user/normal/userhome.jsp" />
 	</definition>
 	
 	<definition name="normal.user.profile" extends="normal.user.base.definition">

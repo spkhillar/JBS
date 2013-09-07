@@ -9,6 +9,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>JOBSbySMS-Enquiry</title>
+<spring:url value="/resources/css/smartpaginator.css" var="resourceCssSmartPaginatorUrl"/>
+<spring:url value="/resources/js/smartpaginator.js" var="resourceJsSmartPaginatorUrl"/>
+
+<script type="text/javascript" src="${resourceJsSmartPaginatorUrl}"></script>
+
+<link rel="stylesheet" type="text/css" href="${resourceCssSmartPaginatorUrl}"/>
 
 <style>
 #govttb2 tr .pvtinfo {
@@ -18,35 +24,86 @@
 #govttb2 tr .pvtinfo strong {
 	font-size: 12px;
 }
+.green
+{
+    background-color: #3399FF;
+}
+.green.normal
+{
+    background-color: #3399FF;
+    color: White;
+    border: solid 1px #3399FF;
+}
+.green.active
+{
+    background-color: #344C00;
+    color: #F8EB00;
+    border: solid 1px #5f9000;
+}
+.green .btn
+{
+    background-color: #3399FF;
+    color: White;
+    border: solid 1px #3399FF;
+}
+
+.pager{
+    background-color: #3399FF;
+    border: 1px solid #3399FF;
+    color: #FFFFFF;
+}
 </style>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	var matchingRecordCount = 0;
+	 $.ajax({
+		    url: webContextPath+"/admin/job/currentuser",
+		    async:false,
+		    success: function(data){
+		    	matchingRecordCount = parseInt(data);
+		    },
+		    error:function(jqXHR,textStatus,errorThrown){
+		    	
+		    }
+		  });
+	$('#smart-paginator').smartpaginator({
+		
+			totalrecords : matchingRecordCount,
+			recordsperpage : 2,
+			initval:1,
+			length : 4,
+			next : 'Next',
+			prev : 'Prev',
+			first : 'First',
+			last : 'Last',
+			theme : 'green',
+			controlsalways : true,
+			onchange : selectPage
+
+		});
+	selectPage(1);
+	});
+
+
+function selectPage(newPageValue) {
+	 $.ajax({
+	    url: webContextPath+"/normal/user/joblist/"+newPageValue+"/2",
+	    dataType:'html',
+	    success: function(data){
+	      //construct the data however, update the HTML of the popup div 
+	      $('#currentUserJobListDiv').html(data);
+	    }
+	});
+}
+</script>
 
 </head>
 
 <body>
-     <div >
-     <table id="govttb2" width="100%">
-     <tr>
-     <td>
      <h3>Welcome ${currentLoggedInUser}. Preferred Jobs listed below</h3>
-    </td>
-     </tr>
-       <tr bgcolor="#0099CC">
-         <td colspan="6" bgcolor="#D1E6E7"> Government Jobs</td>
-       </tr>
-       
-        <c:forEach var="job" items="${jobList}" varStatus="status">
-       <tr>
-         <td colspan="6" class="pvtinfo"><strong>
-         <c:out value="${job.designation}"></c:out> - <c:out value="${job.location}"></c:out> (<c:out value="${job.experiance}"></c:out> yrs)</strong> | Posted date:     <fmt:formatDate pattern="yyyy-MM-dd" value="${job.postedAt}"/>
-         <ul><li><c:out value="${job.jobDescription}"></c:out></li></ul>
-          <p><strong>Salary Range:</strong> Rs. <c:out value="${job.salary}"></c:out> p.a.  | <strong>Industry:</strong> <c:out value="${job.industry}"></c:out><br />
-          Company:<c:out value="${job.companyName}">|</c:out> </p><a href="#" onclick="">View Details</a></td>
-       </tr>
-       </c:forEach>
-       </table>
-     <div></div>
-     </div>
-
-
+    <div id="currentUserJobListDiv"></div>
+	<div id="smart-paginator"></div>
 </body>
 </html>
