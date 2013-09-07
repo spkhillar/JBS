@@ -30,7 +30,7 @@ public class UserRegistrationController extends BaseController {
   private UserRegistrationService userRegistrationService;
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
-  public String register(ModelMap map, final HttpServletRequest request) {
+  public String register(final ModelMap map, final HttpServletRequest request) {
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
     map.put("registration", userRegistrationForm);
     map.put("qualificationCount", 0);
@@ -39,7 +39,7 @@ public class UserRegistrationController extends BaseController {
   }
 
   @RequestMapping(value = "/retrieveuser/{userId}", method = RequestMethod.GET)
-  public String retrieveUser(ModelMap map, final HttpServletRequest request, @PathVariable Long userId) {
+  public String retrieveUser(final ModelMap map, final HttpServletRequest request, @PathVariable final Long userId) {
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
     User existingUser = userRegistrationService.retrieveUser(userId);
     userRegistrationForm.setUser(existingUser);
@@ -54,7 +54,7 @@ public class UserRegistrationController extends BaseController {
     return "newuser";
   }
 
-  private void prepareObjectsForRendering(ModelMap map) {
+  private void prepareObjectsForRendering(final ModelMap map) {
     Map<String, String> questionMap = securityQuestionService.getSecurityQuestions();
     map.put("securityQuestions", questionMap);
     map.put("states", userRegistrationService.getStates());
@@ -65,8 +65,8 @@ public class UserRegistrationController extends BaseController {
   }
 
   @RequestMapping(value = "/newuser", method = RequestMethod.POST)
-  public String registerNewUser(@ModelAttribute("registration") UserRegistrationForm userRegistrationForm,
-      ModelMap map, final HttpServletRequest request) throws IOException {
+  public String registerNewUser(@ModelAttribute("registration") final UserRegistrationForm userRegistrationForm,
+      final ModelMap map, final HttpServletRequest request) throws IOException {
     byte[] resume = null;
     String fileName = null;
     MultipartFile multipartFile = userRegistrationForm.getResume();
@@ -81,7 +81,7 @@ public class UserRegistrationController extends BaseController {
   }
 
   @RequestMapping(value = "/updateuser", method = RequestMethod.POST)
-  public String updateUser(@ModelAttribute("registration") UserRegistrationForm userRegistrationForm, ModelMap map,
+  public String updateUser(@ModelAttribute("registration") final UserRegistrationForm userRegistrationForm, final ModelMap map,
       final HttpServletRequest request) throws IOException {
     byte[] resume = null;
     String fileName = null;
@@ -94,6 +94,12 @@ public class UserRegistrationController extends BaseController {
       userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName,
       userRegistrationForm.getDegree());
     return getHomePage(map);
+  }
+
+  @RequestMapping(value = "/view/terms")
+  public String viewTermsAndCondition() {
+
+    return "termsandcondition";
   }
 
 }

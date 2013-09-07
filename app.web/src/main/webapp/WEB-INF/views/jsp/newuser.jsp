@@ -385,7 +385,11 @@
     Notifications from JobsbySMS</h5></td>
   <td colspan="4" bgcolor="#FFFFFF"><h5>
   <form:checkbox path="terms"/>
-    I have read and understood and agree to the <a href="#" id="showpopup">Terms &amp; Conditions</a> governing the use of JobsbySMS.com</h5>
+    I have read and understood and agree to the
+    <span class="my_modal_open">
+    <a href="javascript:void(0);" onclick="javascript:loadTermsAndConditions();">Terms &amp; Conditions</a> governing the use of JobsbySMS.com</span></h5>
+          
+           
   </td>
   <td >
   
@@ -408,7 +412,12 @@
   <td ></td>
 </tr>
 </table>
+
 <form:hidden path="user.id" />
 </form:form>
+
+<div id="termsandconditiondiv" title="Terms and Conditions">
+   </div>
 </body>
+
 </html>

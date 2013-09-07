@@ -56,7 +56,7 @@ $(document).ready(function(){
          <div id="userjobinfo">
          <c:out value="${job.designation}">
          </c:out> - <c:out value="${job.location}"></c:out> (<c:out value="${job.experiance}"></c:out> yrs)
-         | Posted date: <fmt:formatDate pattern="yyyy-MM-dd" value="${job.postedAt}"/>
+         | Posted date: <fmt:formatDate pattern="dd-MM-yyyy" value="${job.postedAt}"/>
          <ul>
          <li>
          <c:out value="${job.keyword}"></c:out>

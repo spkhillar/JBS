@@ -90,3 +90,21 @@ function loadJobDetails(jobId){
 		    }
 		  });
 }
+
+function loadTermsAndConditions(){
+	//console.log('..webContextPath+"/mypage/jobdetail"',webContextPath+"/mypage/jobdetail");
+	 $.ajax({
+		    url: webContextPath+"/register/view/terms/",
+		    dataType:'html',
+		    success: function(data){
+		      //construct the data however, update the HTML of the popup div 
+		      $('#termsandconditiondiv').html(data);
+		      $('#termsandconditiondiv').dialog({
+		  		modal: 'true',
+		  		height:700,
+		  		width:850,
+		  		closeOnEscape: true
+		  	  }).show();
+		    }
+		  });
+}
