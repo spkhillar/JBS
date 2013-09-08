@@ -41,3 +41,31 @@ color: #FF0000;
 input.error { border: 1px solid red;
 background-color: #FFEBEB;
 }
+
+#site_title  {
+    background: url("../images/JBS_LOGO.png") no-repeat scroll 0 0 transparent;
+    color: #FF6600;
+    display: block;
+    height: 100px;
+    text-indent: -10000px;
+    width: 285px;
+}
+#site_title1  {
+    background: url("../images/joblogo1.png") no-repeat scroll 0 0 transparent;
+    color: #FF6600;
+    display: block;
+    height: 100px;
+    text-indent: -10000px;
+    width: 150px;
+    float: left;
+}
+
+#site_title2  {
+    background: url("../images/joblogo3.png") no-repeat scroll 0 0 transparent;
+    color: #FF6600;
+    display: block;
+    height: 100px;
+    text-indent: -10000px;
+    width: 150px;
+   float: left;
+}

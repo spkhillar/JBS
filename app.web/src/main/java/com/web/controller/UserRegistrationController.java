@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jpa.entities.User;
 import com.service.SecurityQuestionService;
 import com.service.UserRegistrationService;
+import com.service.util.ServiceUtil;
 import com.web.form.UserRegistrationForm;
 
 @Controller()
@@ -59,7 +60,7 @@ public class UserRegistrationController extends BaseController {
     map.put("securityQuestions", questionMap);
     map.put("states", userRegistrationService.getStates());
     map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
-    map.put("workExperianceList", this.getWorkExperiance());
+    map.put("workExperianceList", ServiceUtil.WORK_EXPERIANCE);
     map.put("degreeList", userRegistrationService.getDegrees());
 
   }
@@ -81,8 +82,8 @@ public class UserRegistrationController extends BaseController {
   }
 
   @RequestMapping(value = "/updateuser", method = RequestMethod.POST)
-  public String updateUser(@ModelAttribute("registration") final UserRegistrationForm userRegistrationForm, final ModelMap map,
-      final HttpServletRequest request) throws IOException {
+  public String updateUser(@ModelAttribute("registration") final UserRegistrationForm userRegistrationForm,
+      final ModelMap map, final HttpServletRequest request) throws IOException {
     byte[] resume = null;
     String fileName = null;
     MultipartFile multipartFile = userRegistrationForm.getResume();

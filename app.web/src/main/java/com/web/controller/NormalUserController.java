@@ -19,6 +19,7 @@ import com.service.JobService;
 import com.service.SecurityQuestionService;
 import com.service.UserRegistrationService;
 import com.service.UserService;
+import com.service.util.ServiceUtil;
 import com.web.form.UserRegistrationForm;
 
 @Controller
@@ -79,7 +80,7 @@ public class NormalUserController extends BaseController {
     map.put("securityQuestions", questionMap);
     map.put("states", userRegistrationService.getStates());
     map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
-    map.put("workExperianceList", this.getWorkExperiance());
+    map.put("workExperianceList", ServiceUtil.WORK_EXPERIANCE);
     map.put("degreeList", userRegistrationService.getDegrees());
   }
 

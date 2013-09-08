@@ -85,4 +85,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/jsp/newuser.jsp" />
 	</definition>
 	
+	<definition name="site.jobs" extends="site.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/home/site-jobs.jsp" />
+	</definition>
+	
 </tiles-definitions>

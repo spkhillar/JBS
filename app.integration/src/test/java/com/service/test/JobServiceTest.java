@@ -1,19 +1,16 @@
 package com.service.test;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.jpa.entities.Job;
 import com.jpa.entities.User;
 import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.jpa.repositories.JobDAO;
+import com.service.JobService;
 import com.service.UserService;
 import com.service.util.ServiceUtil;
 
@@ -28,6 +25,9 @@ public class JobServiceTest extends BaseServiceTest {
   @Autowired
   private GenericQueryExecutorDAO genericQueryExecutorDAO;
 
+  @Autowired
+  private JobService jobService;
+
   // @Test
   public void test1() {
     Job job =
@@ -39,50 +39,20 @@ public class JobServiceTest extends BaseServiceTest {
     jobDAO.findByCategory("asd", page);
   }
 
-  @Test
+  // @Test
   public void testIfUserApplicabe() {
-
     User user = userService.findByUserName("shiv");
-    if (user == null) {
-      System.err.println("..user not found...");
-    } else {
-      System.err.println("..user found...");
-      Page<Job> jobList = findMatchingJob(user);
-      if (jobList != null) {
-        System.err.println("...Job list found...");
-      } else {
+    jobService.findMatchingJob(user, 1, 10);
+  }
 
-        System.err.println("...Job list not found...");
-      }
+  @Test
+  public void testFindSiteJobCountByType() {
+
+    for (int i = 1; i < 9; i++) {
+      long count = jobService.findSiteJobCountByType(i);
+      System.err.println(i + "..count.." + count);
     }
 
-  }
-
-  private Page<Job> findMatchingJob(User user) {
-    String skills = user.getSkill().getSkills();
-    String qualification = user.getQualifications().get(0).getDegree().getName();
-    List<String> skillList = getSkillsPattern(skills);
-    String qualificationCriteria = getQualificationCriteria(qualification);
-    String skillCriteria = "( " + StringUtils.join(skillList, " or ") + " )";
-    String finalCriteria = qualificationCriteria + " and " + skillCriteria;
-
-    String jpaQuery = " from Job j where " + finalCriteria;
-    Page<Job> filteredJobs = genericQueryExecutorDAO.executeQuery(jpaQuery, Job.class, 1, 10);
-    return filteredJobs;
-  }
-
-  private List<String> getSkillsPattern(String skills) {
-    String[] skillsArray = StringUtils.split(skills, ",");
-    String jpaQuery = "j.skill like '%?1%'";
-    List<String> skillList = new ArrayList<String>();
-    for (String currentSkill : skillsArray) {
-      skillList.add(StringUtils.replace(jpaQuery, "?1", currentSkill.trim()));
-    }
-    return skillList;
-  }
-
-  private String getQualificationCriteria(String qualification) {
-    return "(j.qualification like '%" + qualification + "%')";
   }
 
 }

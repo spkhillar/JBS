@@ -75,6 +75,53 @@ public class JobServiceImpl implements JobService {
     return filteredJobs;
   }
 
+  @Override
+  public long findSiteJobCountByType(int type) {
+    String jpaQuery = "select count(j.id) from Job j " + findSitePredicate(type);
+    return genericQueryExecutorDAO.findCount(jpaQuery, null);
+  }
+
+  @Override
+  public Page<Job> findSiteJobByType(int type, int page, int pageSize) {
+    String jpaQuery = "from Job j " + findSitePredicate(type);
+    return genericQueryExecutorDAO.executeQuery(jpaQuery, Job.class, page, pageSize);
+  }
+
+  public String findSitePredicate(int type) {
+    String jpaPredicate = null;
+    switch (type) {
+    case 1:
+      jpaPredicate = " where j.subCategory ='" + "CGJ" + "'";
+      break;
+    case 2:
+      jpaPredicate = " where j.subCategory ='" + "SGJ" + "'";
+      break;
+    case 3:
+      jpaPredicate = " where j.category ='" + "PRS" + "'";
+      break;
+    case 4:
+      jpaPredicate =
+          " where j.industry in ('" + ServiceUtil.IT_SOFTWARE_JOBS + "','" + ServiceUtil.IT_HARDWARE_JOBS + "')";
+      break;
+    case 5:
+      jpaPredicate = " where j.industry = '" + ServiceUtil.BANK_FINANCE_JOBS + "'";
+      break;
+    case 6:
+      jpaPredicate = " where j.subCategory ='" + "RJ" + "'";
+      break;
+    case 7:
+      jpaPredicate = " where j.industry = '" + ServiceUtil.BANK_FINANCE_JOBS + "'";
+      break;
+    case 8:
+      jpaPredicate = " where j.industry = '" + ServiceUtil.MARKETING_MR_MEDIA_PLANING + "'";
+      break;
+
+    default:
+      throw new RuntimeException(type + " not yet implemented.");
+    }
+    return jpaPredicate;
+  }
+
   private String getFilteredJobsQuery(User user) {
     String skills = user.getSkill().getSkills();
     String qualification = user.getQualifications().get(0).getDegree().getName();

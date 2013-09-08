@@ -82,15 +82,14 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
     </td>
   </tr>
   <tr>
-    <td><img src="resources/images/JBS_LOGO.png" id="logo"></img></td>
-    <td><img name="" src="resources/images/joblogo1.png" width="145" height="60" alt="" /><img name="" src="resources/images/joblogo3.png" width="147" height="60" alt="" /></td>
+    <td><div id="site_title"></div></td>
+    <td><span id="site_title1"></span><span id="site_title2"></span></td>
     <td colspan="3"><div class="wrap" align="center">
       <nav>
         <ul class="menu">
           <li> <a class="fNiv" href="${homeUrl}">Home</a> </li>
-          <li> <a class="fNiv" href="register/">Register</a> </li>
-          <li> <a class="fNiv" href="#">Login</a> </li>
-          <li> <a class="fNiv" id="enquiry" href="mypage/enquiry/">Enquiry</a></li>
+          <li> <a class="fNiv" href="${contextPath}/register/">Register</a> </li>
+          <li> <a class="fNiv" id="enquiry" href="${contextPath}/mypage/enquiry/">Enquiry</a></li>
           </ul>
         <div class="clearfix"></div>
         </nav>
@@ -105,31 +104,28 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
       <ul class="menu">
       
         <li>
-          <a class="fNiv">Central Govt Jobs</a>
+          <a class="fNiv" href="${contextPath}/admin/job/site/detail/1">Central Govt Jobs</a>
           </li>
         
         <li>
-          <a class="fNiv" href="#">State Govt Jobs</a>
+          <a class="fNiv" href="${contextPath}/admin/job/site/detail/2">State Govt Jobs</a>
           </li>
         
         <li>
-          <a class="fNiv" href="#">Private Jobs</a>
+          <a class="fNiv" href="${contextPath}/admin/job/site/detail/3">Private Jobs</a>
           </li>
         
         <li>
-          <a class="fNiv" href="#">IT Jobs</a> </li>
+          <a class="fNiv" href="${contextPath}/admin/job/site/detail/4">IT Jobs</a> </li>
     
         <li>
-          <a class="fNiv">Banking Jobs</a>
+          <a class="fNiv" href="${contextPath}/admin/job/site/detail/5">Banking and Finance Jobs</a>
           </li>
          <li>
-          <a class="fNiv">Railway Jobs</a>
+          <a class="fNiv" href="${contextPath}/admin/job/site/detail/6">Railway Jobs</a>
           </li>
           <li>
-          <a class="fNiv">Finance Jobs</a>
-          </li>
-          <li>
-          <a class="fNiv">Marketing Jobs</a>
+          <a class="fNiv" href="${contextPath}/admin/job/site/detail/8">Marketing Jobs</a>
           </li>
                 
       </ul>

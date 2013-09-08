@@ -20,4 +20,8 @@ public interface JobService {
   public Page<Job> findMatchingJob(User user, int page, int pageSize);
 
   public long findTotalMatchingJobCount(User user);
+
+  public long findSiteJobCountByType(int type);
+
+  public Page<Job> findSiteJobByType(int type, int page, int pageSize);
 }

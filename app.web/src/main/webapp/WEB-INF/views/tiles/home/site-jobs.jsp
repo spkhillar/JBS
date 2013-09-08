@@ -55,11 +55,12 @@
 </style>
 
 <script type="text/javascript">
-
+var viewJobType = 0;
 $(document).ready(function(){
 	var matchingRecordCount = 0;
+	viewJobType = $('#currrentJobType').val();
 	 $.ajax({
-		    url: webContextPath+"/admin/job/currentuser",
+		    url: webContextPath+"/admin/job/site/"+viewJobType,
 		    async:false,
 		    success: function(data){
 		    	matchingRecordCount = parseInt(data);
@@ -68,6 +69,7 @@ $(document).ready(function(){
 		    	
 		    }
 		  });
+	 console.log('..matchingRecordCount..',matchingRecordCount);
 	$('#smart-paginator').smartpaginator({
 		
 			totalrecords : matchingRecordCount,
@@ -89,11 +91,11 @@ $(document).ready(function(){
 
 function selectPage(newPageValue) {
 	 $.ajax({
-	    url: webContextPath+"/normal/user/joblist/"+newPageValue+"/"+ smartPaginateRecordsPerPage ,
+	    url: webContextPath+"/admin/job/site/details/"+viewJobType+"/"+newPageValue+ "/"+ smartPaginateRecordsPerPage,
 	    dataType:'html',
 	    success: function(data){
 	      //construct the data however, update the HTML of the popup div 
-	      $('#currentUserJobListDiv').html(data);
+	      $('#currentSiteJobListDiv').html(data);
 	    }
 	});
 }
@@ -102,8 +104,9 @@ function selectPage(newPageValue) {
 </head>
 
 <body>
-     <h3>Welcome ${currentLoggedInUser}. Preferred Jobs listed below</h3>
-    <div id="currentUserJobListDiv"></div>
+     
+    <div id="currentSiteJobListDiv"></div>
 	<div id="smart-paginator" style="margin: auto;"></div>
+	<input id="currrentJobType" type="hidden" value="${currrentJobType}"/>
 </body>
 </html>

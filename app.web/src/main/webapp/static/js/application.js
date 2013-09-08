@@ -2,6 +2,7 @@ var webContextPath;
 var homeDataObject;
 var trueOrFalseOption = "true:true;false:false";
 var jqgridUserRolesFilter;
+var smartPaginateRecordsPerPage=2;
 $(document).ready(function() {
 	jqgridUserRolesFilter = getRoles();
 	startTime();

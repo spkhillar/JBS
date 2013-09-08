@@ -23,6 +23,7 @@ import com.jpa.entities.Job;
 import com.jpa.entities.User;
 import com.service.JobService;
 import com.service.UserRegistrationService;
+import com.service.util.ServiceUtil;
 import com.web.form.JobForm;
 import com.web.util.DomainObjectMapper;
 import com.web.util.JqGridResponse;
@@ -81,7 +82,7 @@ public class AdminJobController extends BaseController {
     jobForm.setJob(existingJob);
     String designation = existingJob.getDesignation();
 
-    if (!DESGINATION.contains(designation)) {
+    if (!ServiceUtil.DESGINATION.contains(designation)) {
       jobForm.setOtherDesignation(designation);
       jobForm.setDesignation("Other");
     } else {
@@ -147,13 +148,35 @@ public class AdminJobController extends BaseController {
     return totalCount;
   }
 
+  @RequestMapping(value = "/job/site/{type}", method = RequestMethod.GET)
+  @ResponseBody
+  public long jobsForCurrentUser(@PathVariable final int type) {
+    long totalCount = jobService.findSiteJobCountByType(type);
+    return totalCount;
+  }
+
+  @RequestMapping(value = "/job/site/detail/{type}", method = RequestMethod.GET)
+  public String siteJobs(final ModelMap map, @PathVariable final int type) {
+    map.put("currrentJobType", type);
+    return "site.jobs";
+  }
+
+  @RequestMapping(value = "/job/site/details/{type}/{page}/{pageSize}", method = RequestMethod.GET)
+  public String siteJobDetails(final ModelMap map, @PathVariable final int type, @PathVariable int page,
+      @PathVariable int pageSize) {
+    Page<Job> jobServiceList = jobService.findSiteJobByType(type, page, pageSize);
+    map.put("jobList", jobServiceList.getContent());
+    map.put("currrentJobType", type);
+    return "viewjobs";
+  }
+
   private void prepareJobRenderer(final ModelMap map) {
-    map.put("jobTypes", JOB_TYPE);
-    map.put("jobCategories", JOB_CATEGORY);
-    map.put("jobSubCategories", JOB_SUB_CATEGORY);
-    map.put("jobDesignations", DESGINATION);
+    map.put("jobTypes", ServiceUtil.JOB_TYPE);
+    map.put("jobCategories", ServiceUtil.JOB_CATEGORY);
+    map.put("jobSubCategories", ServiceUtil.JOB_SUB_CATEGORY);
+    map.put("jobDesignations", ServiceUtil.DESGINATION);
     map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
-    map.put("workExperianceList", WORK_EXPERIANCE);
+    map.put("workExperianceList", ServiceUtil.WORK_EXPERIANCE);
 
   }
 }

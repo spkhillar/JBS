@@ -4,11 +4,7 @@
 package com.web.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,38 +44,6 @@ public class BaseController {
   /** The Constant logger. */
   private static final Logger logger = LoggerFactory.getLogger(BaseController.class);
 
-  protected static final List<String> WORK_EXPERIANCE = Arrays.asList(new String[] { "<1", "1", "2", "3", "4", "5",
-      "6", "7", "8", "9", "10+" });
-
-  protected static Map<String, String> JOB_CATEGORY = new LinkedHashMap<String, String>();
-
-  protected static Map<String, String> JOB_SUB_CATEGORY = new LinkedHashMap<String, String>();
-
-  protected static Map<String, String> JOB_TYPE = new LinkedHashMap<String, String>();
-
-  protected static final List<String> DESGINATION = Arrays.asList(new String[] { "Technician", "Assistant Manager",
-      "Consultant", "Other" });
-
-  protected static final List<String> EDUCATION_LIST = Arrays.asList(new String[] { "10", "10+2", "B.A", "B.Arch",
-      "BCA", "B.B.A", "B.Com", "B.Ed", "BDS", "BHM", "B.Pharma", "B.Sc", "B.Tech/B.E.", "Costing",
-      "Charted Accountant", "LLB", "M.A", "MBA", "MBBS", "M.Com", "MCA", "M.Sc", "M.Tech", "Diploma", "I.T.I" });
-
-  static {
-    JOB_CATEGORY.put("PUS", "Public Sector");
-    JOB_CATEGORY.put("PRS", "Private Sector");
-    JOB_CATEGORY.put("IJ", "Internation JOB");
-
-    JOB_SUB_CATEGORY.put("", "");
-    JOB_SUB_CATEGORY.put("CGJ", "Central Government Job");
-    JOB_SUB_CATEGORY.put("SGJ", "State Government Job");
-    JOB_SUB_CATEGORY.put("RJ", "Railway JOB");
-
-    JOB_TYPE.put("PMT", "Permanent");
-    JOB_TYPE.put("CNT", "Contract");
-    JOB_TYPE.put("PT", "Part Time");
-
-  }
-
   /**
    * Handle internal service exception.
    * 
@@ -116,10 +80,6 @@ public class BaseController {
         (org.springframework.security.core.userdetails.User) auth.getPrincipal();
     String username = principal.getUsername();
     return username;
-  }
-
-  public List<String> getWorkExperiance() {
-    return WORK_EXPERIANCE;
   }
 
 }

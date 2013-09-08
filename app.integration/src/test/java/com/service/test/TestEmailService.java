@@ -12,7 +12,7 @@ import com.service.EmailService;
 import com.service.mail.EmailTemplate;
 
 public class TestEmailService extends BaseServiceTest{
-  
+
   @Autowired
   private EmailService emailService;
 
@@ -20,13 +20,12 @@ public class TestEmailService extends BaseServiceTest{
   public void mailTest() throws IOException{
 
     File f = new File("dummy.txt");
-   // System.err.println("...File.."+f.getAbsolutePath());
+    // System.err.println("...File.."+f.getAbsolutePath());
     List<String> toAddress = new ArrayList<String>();
     toAddress.add("shivprasad.khillar@gmail.com");
-    toAddress.add("it2001@gmail.com");
     EmailTemplate emailTemplate = new EmailTemplate(toAddress,"Test Email","Routine Visit");
-    emailTemplate.setAttachmentFileName(f.getAbsolutePath());
-    //emailService.sendEmail(emailTemplate);
+    // emailTemplate.setAttachmentFileName(f.getAbsolutePath());
+    emailService.sendEmail(emailTemplate);
   }
-  
+
 }
