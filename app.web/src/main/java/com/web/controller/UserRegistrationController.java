@@ -35,7 +35,7 @@ public class UserRegistrationController extends BaseController {
     map.put("registration", userRegistrationForm);
     map.put("qualificationCount", 0);
     prepareObjectsForRendering(map);
-    return "newuser";
+    return "user.registration";
   }
 
   @RequestMapping(value = "/retrieveuser/{userId}", method = RequestMethod.GET)

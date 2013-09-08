@@ -9,9 +9,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<jsp:include page="../tiles/base/app.jsp"></jsp:include>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="shortcut icon" href="resources/images/favico.png"/>
 <style>
 #usertbdesign.menuhd td {
 	font-size: 12px;
@@ -34,6 +32,7 @@
 }
 #usertbdesign {
 	font-size: 14px;
+	margin: auto;
 }
 
  body

@@ -7,6 +7,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
+<link rel="shortcut icon" href="resources/images/favico.png"/>
 
 <spring:url value="/resources/css/common.css" var="resourceCssUrl"/>
 <spring:url value="/resources/css/cupertino/jquery-ui-1.10.2.custom.min.css" var="resourceJqUiCssUrl"/>

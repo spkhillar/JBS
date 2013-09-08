@@ -52,7 +52,7 @@ public class AccessController extends BaseController {
     Page<Job> publicJobList = jobService.findByCategory("PRS", 1, 5, "desc", "postedAt");
     modelMap.put("privateJobList", privateJobList.getContent());
     modelMap.put("publicJobList", publicJobList.getContent());
-    return "index";
+    return "site.home";
   }
 
   /**
