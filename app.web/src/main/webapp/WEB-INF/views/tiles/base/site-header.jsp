@@ -65,7 +65,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
     <td width="140">
   </td>
     <td width="548" colspan="2">
-    <form action="j_spring_security_check" method="post">
+    <form action="${contextPath}/j_spring_security_check" method="post">
     	<label style="font-size: 12px;"><font color="#004364">Job Seeker Login</font> &nbsp;&nbsp;&nbsp;&nbsp;</label>
 	      <input type="text" name="j_username" placeholder="Enter your user id"/>
 	      <input type="password" placeholder="Enter your Password" name="j_password" />
