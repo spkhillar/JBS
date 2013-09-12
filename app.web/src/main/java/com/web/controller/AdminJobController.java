@@ -51,6 +51,7 @@ public class AdminJobController extends BaseController {
     JobForm jobForm = new JobForm();
     map.put("jobForm", jobForm);
     map.put("savedDegreeList", new ArrayList<String>());
+    map.put("availableDegreeList", userRegistrationService.getDegrees());
     prepareJobRenderer(map);
     return "admin.new.job";
   }
