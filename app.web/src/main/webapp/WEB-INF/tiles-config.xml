@@ -90,7 +90,7 @@
 	</definition>
 	
 	<definition name="user.forgotpassword" extends="site.base.definition">
-		<put-attribute name="body" value="/WEB-INF/views/jsp/recoverpassword.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/jsp/forgot-password.jsp" />
 	</definition>
 	
     <definition name="user.changepassword" extends="normal.user.base.definition">

@@ -6,6 +6,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
 <jsp:include page="../tiles/base/app.jsp" />
@@ -51,6 +52,7 @@ tr.pwdhead{
 </head>
 <body>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <table id="passwordtb">
 <tr>
 <td>
@@ -69,25 +71,38 @@ tr.pwdhead{
   <tr>
     <td height="30" colspan="2"><p>You can now easily retrieve your password if you have forgotten. Please provide your valid security details mentioned during registration and submit. The password will be sent to your valid registered email id and mobile number</p>
       <hr />
-      <form>
+     <form:form name="registrationForm" commandName="registration" id="registrationForm" method="POST" action="${contextPath}/manage/forgotpwd/password">
+     <div id="messages">
+       <spring:hasBindErrors name="registration">
+        <h2>Errors</h2>
+        <div class="formerror">
+            <ul>
+            <c:forEach var="error" items="${errors.allErrors}">
+                <li>${error.defaultMessage}</li>
+            </c:forEach>
+            </ul>
+        </div>
+  	  </spring:hasBindErrors>
+	</div>
+     
       <table width="404" border="0" align="center" id="pwdtb">
         <tr>
         <td width="204">Enter your userid</td>
-        <td width="184"><input type="text" name="textfield" id="textfield" /></td>
+        <td width="184"><form:input path="user.userName" /></td>
         </tr>
       <tr>
         <td>Enter Security Question</td>
-        <td><input type="text" name="textfield3" id="textfield3" /></td>
+        <td><form:select path="securityQuestion" items="${securityQuestions}" ></form:select></td>
       </tr>
       <tr>
         <td>Enter your security answer</td>
-        <td><input type="text" name="textfield4" id="textfield4" /></td>
+        <td><form:input path="securityAnswer" /></td>
       </tr>
       <tr>
         <td colspan="2"><input type="submit" name="button" id="button" value="Submit" /></td>
         </tr>
       </table>
-            </form>
+           </form:form>
       <p>&nbsp;</p>
       <form>
       <table width="751" border="0" align="center" id="useridtb" >
