@@ -13,6 +13,9 @@
 <spring:url value="/resources/css/cupertino/jquery-ui-1.10.2.custom.min.css" var="resourceJqUiCssUrl"/>
 <spring:url value="/resources/css/ui.jqgrid.css" var="resourceJqGridCssUrl"/>
 <spring:url value="/resources/css/menu.css" var="resourceMenuCssUrl"/>
+<spring:url value="/resources/css/dropdown.css" var="resourceDropDownCssUrl"/>
+
+
 
 <spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJqUrl"/>
 <spring:url value="/resources/js/jquery.validate.min.js" var="resourceJqvUrl"/>
@@ -23,6 +26,7 @@
 <spring:url value="/resources/js/jquery-ui-timepicker-addon.js" var="dateTimePicKerJs"/>
 <spring:url value="/resources/js/sliderAccess.js" var="sliderAccessJS"/>
 <spring:url value="/resources/js/jMenu.jquery.js" var="resourceJMenuUrl"/>
+
 
 
 <script type="text/javascript" src="${resourceJqUrl}"></script>
@@ -36,10 +40,15 @@
 <script type="text/javascript" src="${resourceJMenuUrl}"></script>
 
 
+
 <link rel="stylesheet" type="text/css" href="${resourceCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceMenuCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceJqUiCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceJqGridCssUrl}" />
+<link rel="stylesheet" type="text/css" href="${resourceDropDownCssUrl}" />
+
+
+
 
 <script type="text/javascript">
 webContextPath="${pageContext.request.contextPath}";

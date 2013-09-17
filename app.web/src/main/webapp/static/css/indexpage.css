@@ -10,15 +10,54 @@
 	border:1px solid #CCC;
 	border-radius: 10px 10px 1px 1px;
 }
+#passwordtb{
+	width:80%;
+	background:rgba(205,194,100,0,4);
+	margin:auto;
+	border:1px solid #CCC;
+	border-radius: 2px 2px 2px 2px;
+}
+
+#forgottb{
+	width:80%;
+	background-color:#CEBDAA;
+	margin:auto;
+	border:2px solid thick;
+	border-radius: 2px 2px 2px 2px;
+	padding:20px;
+}
+
+#changetb{
+	width:80%;
+	background-color:#CEBDAA;
+	margin:auto;
+	border:2px solid thick;
+	border-radius: 2px 2px 2px 2px;
+	padding:10px;
+	font-size: 12px;
+	
+}
+
+
+#pwdtb,#useridtb{
+	width:100%;
+	background-color:#E6E1F4;
+	margin:auto;
+	border:2px solid thin;
+	border-radius: 2px 2px 2px 2px;
+	padding: 10px;
+}
+
 #jobdetail{
 	
 	width:80%;
 	background:rgba(205,194,100,0,4);
 	font-size: 14px;
 	font-family:Arial;
-	margin:auto;
+	
 	border:1px solid #CCC;
 	border-radius: 10px 10px 1px 1px;
+	
 	
 }
 #enquirytable{
@@ -94,17 +133,6 @@ td.jobheading{
 	 background-color:#DCE0FA;
 }
 
-#jobdetail{
-	width:100%;
-	border:1px thin #CCC;
-	border-radius: 10p 10px 10px 10px;
-	font-size: 12px;
-	font-family:Candara;
-	margin:auto;
-	font-weight: bold;
-	background-color: #FFF;
-	
-}
 
 #indexjobinfo{
 	
@@ -126,8 +154,12 @@ td.jobheading{
 	margin: auto;
 	
 }
-#govttb2{
-	width:80%;
+.t1 { 
+  float: left; 
+   width:100%; 
+  }
+#govttb{
+	width:100%;
 	border:2px solid #CCC;
 	border-radius: 1px 1px 10px 10px;
 	font-size: 12px;
@@ -136,15 +168,18 @@ td.jobheading{
 	font-weight: bold;
 	text-align: left;
 	
+	
 }
 #privatetb{
 	width:100%;
 	border:2px solid #CCC;
 	border-radius: 1px 1px 10px 10px;
 	font-size: 12px;
-	font-family:Candara;
+	font-family:Arial;
 	margin:auto;
 	font-weight: bold;
+	
+	
 	
 }
 td.jobheading{
@@ -204,4 +239,8 @@ a.menulink{
 
 .message {
 	color: red;
+}
+
+td.home{
+
 }

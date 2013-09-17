@@ -8,13 +8,14 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>JOBSbySMS-Enquiry</title>
+<title>JOBSbySMS-User Home</title>
 <spring:url value="/resources/css/smartpaginator.css" var="resourceCssSmartPaginatorUrl"/>
 <spring:url value="/resources/js/smartpaginator.js" var="resourceJsSmartPaginatorUrl"/>
-
+<spring:url value="/resources/css/userpage.css" var="resourceUserPageCssUrl"/>
 <script type="text/javascript" src="${resourceJsSmartPaginatorUrl}"></script>
 
 <link rel="stylesheet" type="text/css" href="${resourceCssSmartPaginatorUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceUserPageCssUrl}"/>
 
 <style>
 #govttb2 tr .pvtinfo {
@@ -52,6 +53,10 @@
     border: 1px solid #3399FF;
     color: #FFFFFF;
 }
+
+
+
+
 </style>
 
 <script type="text/javascript">
@@ -102,8 +107,79 @@ function selectPage(newPageValue) {
 </head>
 
 <body>
-     <h3>Welcome ${currentLoggedInUser}. Preferred Jobs listed below</h3>
-    <div id="currentUserJobListDiv"></div>
-	<div id="smart-paginator" style="margin: auto;"></div>
+     <div id="usernamediv" style="width:80%;margin: auto;">
+     <h3>Welcome ${currentLoggedInUser} </h3>
+     </div>
+     <table id="userjobtable">
+     <tr>
+     <td>
+    <table  border="0" id="profiletable">
+  <tr>
+    <td width="129"><strong>Profile Summary</strong></td>
+    <td width="475">&nbsp;</td>
+    
+  </tr>
+  <tr>
+    <td>Experience</td>
+    <td>${currentLoggedInUserExperience} Years of Experience</td>
+    
+  </tr>
+   <tr>
+    <td>Key Skills</td>
+    <td>${currentLoggedInUserSkill}</td>
+   
+  </tr>
+  <tr>
+    <td>Functional Area</td>
+    <td>${currentLoggedInUserFunctionalArea}</td>
+    
+  </tr>
+  
+  <tr>
+    <td>Email Id</td>
+    <td>${currentLoggedInUserEmail}</td>
+    <td>Mobile</td>
+    <td>${currentLoggedInUserMobile}</td>
+    </tr>
+</table>
+     </td>
+     </tr>
+     <tr>
+     <td>
+     <div id="outer">
+       <div id="inner">
+          <div class="t">
+			    <table id="adjobtb">
+			     <tr>
+			     <td>
+			        <div id="userdiv1"></div>
+			        <div id="userdiv2"></div>
+			        <div id="userdiv3"></div>
+			        <div id="userdiv4"></div>
+			        <div id="userdiv5"></div>
+			    </td>
+			    </tr>
+			     </table>     
+        </div>
+        <div class="t">
+		   <table id="jobdivtb">
+		   <tr>
+		   <td><h2>Preferred Jobs listed below</h2></td>
+		   </tr>
+		     <tr>
+		     <td>
+		         <div id="currentUserJobListDiv"></div>
+			    </td>
+			    </tr>
+			    <tr>
+		    <td><div id="smart-paginator" style="margin: auto;"></div></td>
+		    </tr>
+		   </table>
+		   </div>
+</div>    
+    </td>
+    </tr>
+    </table>
+	
 </body>
 </html>

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -102,11 +104,11 @@ public class AdminJobController extends BaseController {
   @RequestMapping(value = "/job/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<Job> records(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
     Page<Job> jobs = null;
     if (search == true) {
       jobs = jobService.findALL(page, rows, sord, sidx);
@@ -163,8 +165,8 @@ public class AdminJobController extends BaseController {
   }
 
   @RequestMapping(value = "/job/site/details/{type}/{page}/{pageSize}", method = RequestMethod.GET)
-  public String siteJobDetails(final ModelMap map, @PathVariable final int type, @PathVariable int page,
-      @PathVariable int pageSize) {
+  public String siteJobDetails(final ModelMap map, @PathVariable final int type, @PathVariable final int page,
+      @PathVariable final int pageSize) {
     Page<Job> jobServiceList = jobService.findSiteJobByType(type, page, pageSize);
     map.put("jobList", jobServiceList.getContent());
     map.put("currrentJobType", type);
@@ -180,4 +182,12 @@ public class AdminJobController extends BaseController {
     map.put("workExperianceList", ServiceUtil.WORK_EXPERIANCE);
 
   }
+
+  @RequestMapping(value = "/changepassword/{userId}", method = RequestMethod.GET)
+  public String changePassword(final ModelMap map, final HttpServletRequest request, @PathVariable final Long userId) {
+    User existingUser = userRegistrationService.retrieveUser(userId);
+    map.put("currentLoggedInAdminId", existingUser.getId());
+    return "admin.changepassword";
+  }
+
 }

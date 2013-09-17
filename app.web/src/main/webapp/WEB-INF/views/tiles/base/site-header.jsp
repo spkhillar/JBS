@@ -9,6 +9,7 @@
 <jsp:include page="app.jsp"></jsp:include>
 <head>
 <spring:url value="/" var="homeUrl" htmlEscape="true"/>
+
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
 <spring:url value="/resources/css/enquirymenu.css" var="resourceUserHomeMenuCssUrl"/>
 <spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
@@ -60,14 +61,13 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <table border="0" id="indextb">
   <tr>
-    <td width="222"></td>
-    <td width="304"></td>
-    <td width="140">
-  </td>
-    <td width="548" colspan="2">
+    <th scope="col"></th>
+    <th scope="col"></th>
+    <td scope="col" colspan="2" class="siteheadercells">
+    <label style="font-size: 12px;">
+    <font color="#004364">Login</font></label>
     <form action="${contextPath}/j_spring_security_check" method="post">
-    	<label style="font-size: 12px;"><font color="#004364">Job Seeker Login</font> &nbsp;&nbsp;&nbsp;&nbsp;</label>
-	      <input type="text" name="j_username" placeholder="Enter your user id"/>
+    	  <input type="text" name="j_username" placeholder="Enter your user id"/>
 	      <input type="password" placeholder="Enter your Password" name="j_password" />
 	      <input type="submit" value="Login"/>
 				<c:choose>
@@ -79,12 +79,14 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
 				    </c:otherwise>
 				</c:choose>
     </form>
+    <label><a href="${contextPath}/manage/forgotpassword">Forgot Password</a></label>
     </td>
   </tr>
-  <tr>
-    <td><div id="site_title"></div></td>
-    <td><span id="site_title1"></span><span id="site_title2"></span></td>
-    <td colspan="3"><div class="wrap" align="center">
+    <tr>
+    <td class="siteheadercells"><div id="site_title"></div></td>
+    <td class="siteheadercells"><div id="site_title1"></div></td>
+    
+    <td colspan="2"><div class="wrap">
       <nav>
         <ul class="menu">
           <li> <a class="fNiv" href="${homeUrl}">Home</a> </li>
@@ -95,9 +97,10 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
         </nav>
     </div></td>
   </tr>
-  <tr>
-    <td height="27" colspan="5" class="menutd"><div class="wrap1" align="center">
-    <table id="submenu" border="0">
+ <tr>
+    <td height="27" colspan="4" class="menutd">
+    <div class="wrap1" align="center">
+    <table id="submenu">
       <tr>
       <td>
     <nav>

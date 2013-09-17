@@ -39,7 +39,7 @@ public class NormalUserController extends BaseController {
   private JobService jobService;
 
   @RequestMapping(value = "/retrieveuser/{userId}", method = RequestMethod.GET)
-  public String retrieveUser(ModelMap map, final HttpServletRequest request, @PathVariable Long userId) {
+  public String retrieveUser(final ModelMap map, final HttpServletRequest request, @PathVariable final Long userId) {
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
     User existingUser = userRegistrationService.retrieveUser(userId);
     userRegistrationForm.setUser(existingUser);
@@ -61,6 +61,11 @@ public class NormalUserController extends BaseController {
     User user = userService.findByUserName(username);
     map.put("currentLoggedInUser", username);
     map.put("currentLoggedInUserId", user.getId());
+    map.put("currentLoggedInUserEmail", user.getEmail());
+    map.put("currentLoggedInUserMobile", user.getPhone());
+    map.put("currentLoggedInUserSkill", user.getSkill().getSkills());
+    map.put("currentLoggedInUserExperience", user.getSkill().getYearOfExperiance());
+    map.put("currentLoggedInUserFunctionalArea", user.getSkill().getFunctionalArea());
     return "normal.user.home";
   }
 
@@ -75,13 +80,20 @@ public class NormalUserController extends BaseController {
     return "viewjobs";
   }
 
-  private void prepareObjectsForRendering(ModelMap map) {
+  private void prepareObjectsForRendering(final ModelMap map) {
     Map<String, String> questionMap = securityQuestionService.getSecurityQuestions();
     map.put("securityQuestions", questionMap);
     map.put("states", userRegistrationService.getStates());
     map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
     map.put("workExperianceList", ServiceUtil.WORK_EXPERIANCE);
     map.put("degreeList", userRegistrationService.getDegrees());
+  }
+
+  @RequestMapping(value = "/changepassword/{userId}", method = RequestMethod.GET)
+  public String changePassword(final ModelMap map, final HttpServletRequest request, @PathVariable final Long userId) {
+    User existingUser = userRegistrationService.retrieveUser(userId);
+    map.put("currentLoggedInUserId", existingUser.getId());
+    return "user.changepassword";
   }
 
 }

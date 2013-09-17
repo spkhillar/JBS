@@ -26,11 +26,6 @@
 <style>    
 * { margin: 0; padding: 0; }
 
-html { height: 100%; font-size: 62.5% }
-
-body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helvetica, sans-serif; }
-
-
 #indextb tr td #jobtb tr .joblist form fieldset label {
 	text-align: left;
 }
@@ -67,42 +62,44 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
 
    <table id="indextb">
   <tr>
-    <td height="680" colspan="5"><table id="jobtb">
+    <td height="680" colspan="5">
+    <table id="jobtb">
       <tr>
        <td height="260" class="joblist">
-     <table width="100%" id="govttb">
+       <div class="t1">
+     <table width="100%" id="privatetb">
 	 <tr>
 	 <td class="jobheading">Private Sector Jobs</td>
 	 </tr>
       <tr>
         <td class="pvtinfo">
+         <c:forEach var="privateJob" items="${privateJobList}" varStatus="status">
          <div id="indexjobinfo">
            <ul>
-         <c:forEach var="privateJob" 
+           	<li>
+           	<strong>
+         	
+				<c:out value="${privateJob.companyName}"></c:out>, 
+				
+				<c:out value="${privateJob.designation}"></c:out>, 
+				
+				<c:out value="${privateJob.location}"></c:out>
+				(<c:out value="${privateJob.experiance}"></c:out> years)
 
-items="${privateJobList}" varStatus="status">
-         	<li><strong><c:out 
-
-value="${privateJob.companyName}"></c:out>, 
-
-<c:out 
-
-value="${privateJob.designation}"></c:out>, 
-
-<c:out value="${privateJob.location}"></c:out>
-         	 (<c:out 
-
-value="${privateJob.experiance}"></c:out> yrs)
-
-</strong> | </li> <a href="javascript:void(0);" onclick="javascript:loadJobDetails(${privateJob.id});">View Details</a>
-         </c:forEach>
-       </ul>
+			</strong> | 
+			</li> 
+			<a href="javascript:void(0);" onclick="javascript:loadJobDetails(${privateJob.id});">View Details</a>
+		 </ul>
         </div>
+         </c:forEach>
            </td>
       </tr>
       </table>
+      </div>
       </td>
-       <td class="joblist"><table width="100%" id="privatetb">
+       <td class="joblist">
+       <div class="t1">
+       <table width="100%" id="govttb">
          <tr >
            <td class="jobheading">Public Sector Jobs</td>
            </tr>
@@ -123,12 +120,15 @@ value="${privateJob.experiance}"></c:out> yrs)
     </div>
              </td>
            </tr>
-       </table></td>
+       </table>
+       </div>
+       </td>
        </tr>
     </table>
     <table width="93%" height="312" border="0" id="infotb">
   <tr>
-    <td width="56%" height="100"><table width="557" border="0" align="center" id="jobsearch">
+    <td width="56%" height="100">
+    <table width="557" border="0" align="center" id="jobsearch">
       <tr>
         <td colspan="2" class="cationinfo">Job Search</td>
         </tr>
@@ -179,17 +179,12 @@ value="${privateJob.experiance}"></c:out> yrs)
     </table>
     <p align="center">All Rights Reserved &COPY; 2013 JOBSbySMS</p>
 </table>
-    
-  
-<br/>
-     
-   <div id="jobdetailsdiv" title="Job Details">
-   </div>
-   
-    <div id="applyJobDiv" title="Apply Job">
+<div id="applyJobDiv" title="Apply Job">
     <span>Inorder to apply this job, Please register/login to jobsbysms.com.</span>
    </div>
-    
-    
-</body>
+   <div id="jobdetailsdiv" title="Job Details">
+   </div>
+</body>    
 </html>
+    
+

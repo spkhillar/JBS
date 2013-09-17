@@ -6,53 +6,42 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
-<jsp:include page="app.jsp"></jsp:include>
-<head>
 
+<head>
+<jsp:include page="app.jsp"></jsp:include>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <spring:url value="/" var="homeUrl" htmlEscape="true"/>
 <spring:url value="/resources/css/adminhome.css" var="resourceAdminHomeCssUrl"/>
 <spring:url value="/resources/css/admindesign.css" var="resourceAdminDesignCssUrl"/>
-<spring:url value="/resources/css/menu.css" var="resourceMenuCssUrl"/>
+
 
 <spring:url value="/resources/js/menuinfo.js" var="resourceMenuInfoUrl"/>
 
 <script type="text/javascript" src="${resourceMenuInfoUrl}"></script>
 
-<link rel="stylesheet" type="text/css" href="${resourceMenuCssUrl}"/>
+
 <link rel="stylesheet" type="text/css" href="${resourceAdminHomeCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceAdminDesignCssUrl}"/>
 </head>
 <body>
 
 
-<table id="menutab" align="center" width="80%">
+<table id="indextb" border="1" width="80%">
+
 <tr>
-  <td >&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td class="logoheader">&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td class="logoheader">&nbsp;</td>
-</tr>
-<tr>
-  <td width="84%" ><img name="" src="resources/images/JBS_LOGO.png" width="150" height="30" alt="" /></td>
+  <td width="84%" ><div id="site_title"></div></td>
   <td width="1%">&nbsp;</td>
-  <td width="2%">&nbsp;</td>
-  <td width="6%" class="logoheader"><img name="" src="resources/images/messages-icon.png" width="30" height="30" alt="" /><br />
-    Messages</td>
+  <td width="2%"></td>
+  <td width="6%" class="logoheader">
   <td width="1%">&nbsp;</td>
   <td width="1%">&nbsp;</td>
   <td width="1%">&nbsp;</td>
-  <td width="4%" class="logoheader"><img name="" src="resources/images/logout.jpg" width="30" height="30" alt="" /><br />
-     <a href="${contextPath}/j_spring_security_logout">Log Out</a> </td>
+  <td width="4%" class="logoheader"><jsp:include page="adminsettings.jsp"></jsp:include></td>
 </tr>
 
 <tr>
 <td height="10" colspan="8" align="center">
-  <div class="wrap" align="center">
+  <div class="wrap1" align="center">
     
     <nav>
       <ul class="menu">

@@ -6,9 +6,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
-<jsp:include page="app.jsp"></jsp:include>
-<head>
 
+<head>
+<jsp:include page="app.jsp"></jsp:include>
 <link rel="shortcut icon" href="resources/images/favico.png"/>
 
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
@@ -19,51 +19,27 @@
 <link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
 
+
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<table height="159" border="0" id="indextb">
+<table border="0" id="indextb">
   <tr>
-    <td width="17%" height="34"><img src="resources/images/JBS_LOGO.png" id="logo"></img></td>
-    <td width="24%" height="34">&nbsp;</td>
-    <td width="14%" height="34">&nbsp;</td>
-    <td width="31%" height="34">&nbsp;</td>
-    <td width="8%" height="34">&nbsp;</td>
-    <td width="6%" height="34"><img name="" src="resources/images/logout.jpg" width="32" height="32" alt="" align="center"/><br/>
-    <a href="${contextPath}/j_spring_security_logout">Log Out</a>
+    <td width="25%">
+    <div id="site_title"></div>
+    </td>
+    <td width="25%" height="34">&nbsp;</td>
+    <td width="25%" height="34">&nbsp;</td>
+    <td width="25%" height="34"></td>
+    <td width="25%" height="34" colspan="2">
+    	<jsp:include page="usersettings.jsp"></jsp:include>
     </td>
   </tr>
   <tr>
-    <td height="17" colspan="6" class="menutd"><div class="wrap" align="center">
-    
-    <nav>
-      <ul class="menu">
-        <li>
-          <a class="fNiv" href="${contextPath}/">Home</a>
-          </li>
-        
-        <li>
-          <a class="fNiv" href="${contextPath}/normal/user/retrieveuser/${currentLoggedInUserId}">My Profile</a>
-          </li>
-        
-        <li>
-          <a class="fNiv">News</a>
-          </li>
-        
-        <li>
-          <a class="fNiv"  href="#">Recommended Jobs</a> </li>
-        
-        <li>
-          <a class="fNiv">Recruiters</a>
-          </li>
-        
-        <li><a class="fNiv">Upgrade</a>
-           </li>
-      </ul>
-      <div class="clearfix"></div>
-      </nav>
-    </div></td>
+    <td><div id="userhome"><a href="${contextPath}/" >Home</a></div></td>
+    <td colspan="4"></td>
   </tr>
 </table>
+
 </body>
 </html>

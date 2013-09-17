@@ -9,8 +9,19 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<jsp:include page="../tiles/base/app.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
+<spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
+<spring:url value="/resources/css/headmenu.css" var="resourceHeadMenuCssUrl"/>
+
+<link rel="stylesheet" type="text/css" href="${resourceHeadMenuCssUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
+
 <style>
+* { margin: 0; padding: 0; }
 #usertbdesign.menuhd td {
 	font-size: 12px;
 	font-weight: bold;
@@ -35,90 +46,7 @@
 	margin: auto;
 }
 
- body
-            {
-                margin: 0;
-                padding: 0;
-            }
-            #wrapper
-            {
-                width: 80%;
-                height: 80%;
-            }
-            #popup
-            {
-                display: none;
-                width: 50%;
-                height: auto;
-                overflow: auto;
-                left: 35%;
-                top: 20%;
-                position: absolute;
-                z-index: 2000;
-                border: 2px solid #d57111;
-                background: #f9f9f9;
-                padding-bottom: 20px
-            }
-            #main
-            {
-                width: 600px;
-                height: 150px;
-                margin-top: 200px;
-                margin-left: 250px;
-                margin-right: auto;
-                padding: 30px;
-                border: 1px solid #ddd;
-                font-size: 25px;
-                color: #555;
-                line-height: 35px;
-                letter-spacing: 2px;
-                padding-left: 250px;
-            }
-            #main input
-            {
-                width: 350px;
-                height: 50px;
-                background: transparent;
-                border: 1px solid #222;
-                background: deepskyblue;
-                color: #fff;
-                font-size: 20px;
-                line-height: 35px;
-                letter-spacing: 2px;
-            }
-            #main input:hover
-            {
-                cursor: pointer;
-                background: dodgerblue;
-            }
-            #overlay
-            {
-                display: none;
-                width: 80%;
-                height: 700px;
-                left: 0;
-                top: 0;
-                position: absolute;
-                z-index: 1000;
-                background: opaque;
-               
-            }
-            #popup input
-            {
-                float: right;
-                margin-right: 30px;
-                border: none;
-                background: transparent;
-                width: 100px;
-                height: 30px;
-                background: #d57111;
-                color: #fff;
-            }
-            #popup input:hover
-            {
-                cursor: pointer;
-                background: #444;
-            }
+ 
 </style>
 
 <spring:url value="/resources/js/userregister.js" var="resourceUserRegisterJqUrl"/>
@@ -130,6 +58,13 @@
 <script>
 	qualificationRowIndex = parseInt("<c:out value="${qualificationCount}" />");
 	</script>
+	
+	<script type="text/javascript">
+	
+	$(document).ready(function() {	
+		$("#dob").datepicker({dateFormat: "dd/mm/yy" });
+	});
+		</script>
 
 </head>
 
@@ -137,17 +72,9 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <form:form name="registrationForm" commandName="registration" id="registrationForm" enctype="multipart/form-data" method="POST">
 <table  border="0" id="usertbdesign" align="center">
-<tr bgcolor="#FFFFFF" class="menuhd">
-  <td class="header" align="center" >&nbsp;</td>
-  <td width="28%" class="header"><img name="" src="../resources/images/JBS_LOGO.png" id="logo" alt="" /></td>
-  <td width="1%" class="header"  >&nbsp;</td>
-  <td width="28%" class="header" ></td>
-  <td width="23%" class="header"  ><a href="#"></a></td>
-  <td class="header"  >&nbsp;</td>
-</tr>
 <c:if test="${currentLoggedInUserId eq null}">
 <tr id="he">
-  <td height="57" colspan="7" align="center" bgcolor="#0066CC" >Create a Profile now. Register to JOBSbySMS and receive job alerts on your mobile</td>
+  <td colspan="7" align="center" bgcolor="#0066CC" >Register to JOBSbySMS and receive job alerts on your mobile</td>
 </tr>
 </c:if>
 <tr bgcolor="#FFFFFF" class="header2">
@@ -155,7 +82,8 @@
   </tr>
 <tr class="header">
   <td width="1%" height="26">&nbsp;</td>
-  <td colspan="5" rowspan="3"><table width="101%" border="0" id="logininfotb">
+  <td colspan="5" rowspan="3">
+  <table border="0" id="logininfotb">
     <tr>
       <td width="36%">Username<em>*</em></td>
       <td width="64%">
@@ -191,6 +119,10 @@
     <tr>
       <td height="27">Answer<em>*</em></td>
       <td> <form:input path="securityAnswer" /></td>
+    </tr>
+     <tr>
+      <td height="27">Date of Birth<em>*</em></td>
+      <td> <input type="text" id="dob" /></td>
     </tr>
   </table>
      <label for="text2"></label>
