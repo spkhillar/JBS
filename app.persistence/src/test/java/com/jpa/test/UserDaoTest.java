@@ -54,6 +54,8 @@ public class UserDaoTest extends BaseTest {
 
     System.err.println("..Security..." + securityQuestions);
     User newUser = new User("shiv-sambhu", "shivsambhu1234", "fname1", "lastName1", "abc@gmail.com", true, "98887655");
+    newUser.setMlmAccountId("XXX-190190");
+    newUser.setDateOfBirth(new Date());
     Role role = roleDAO.findOne(2L);
     UserRole userRole = new UserRole(newUser, role);
     newUser.setUserRole(userRole);
@@ -79,7 +81,7 @@ public class UserDaoTest extends BaseTest {
 
     User userSaved = userDao.save(newUser);
 
-    System.err.println("......");
+    System.err.println("......" + userSaved.isSignedForNotification());
 
   }
 }

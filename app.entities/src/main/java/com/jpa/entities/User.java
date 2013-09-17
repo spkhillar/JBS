@@ -75,9 +75,17 @@ public class User implements BaseEntity, java.io.Serializable {
   @JsonProperty
   private String phone;
 
+  private String mlmAccountId;
+
+  /** The created at. */
+  @JsonProperty
+  private Date dateOfBirth;
+
   /** The created at. */
   @JsonProperty
   private Date createdAt = new Date();
+
+  private boolean signedForNotification;
 
   /** The user role. */
   @JsonIgnore
@@ -386,6 +394,34 @@ public class User implements BaseEntity, java.io.Serializable {
    */
   public void setVersion(final Integer version) {
     this.version = version;
+  }
+
+  @Column(name = "signed_for_notification")
+  public boolean isSignedForNotification() {
+    return signedForNotification;
+  }
+
+  public void setSignedForNotification(boolean signedForNotification) {
+    this.signedForNotification = signedForNotification;
+  }
+
+  @Column(name = "mlm_account_id")
+  public String getMlmAccountId() {
+    return mlmAccountId;
+  }
+
+  public void setMlmAccountId(String mlmAccountId) {
+    this.mlmAccountId = mlmAccountId;
+  }
+
+  @Temporal(TemporalType.DATE)
+  @Column(name = "date_of_birth", nullable = false)
+  public Date getDateOfBirth() {
+    return dateOfBirth;
+  }
+
+  public void setDateOfBirth(Date dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
   }
 
   /**

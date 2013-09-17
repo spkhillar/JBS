@@ -57,15 +57,8 @@
 <link rel="stylesheet" type="text/css" href="${resourceNewUserCssUrl}"/>
 <script>
 	qualificationRowIndex = parseInt("<c:out value="${qualificationCount}" />");
-	</script>
+</script>
 	
-	<script type="text/javascript">
-	
-	$(document).ready(function() {	
-		$("#dob").datepicker({dateFormat: "dd/mm/yy" });
-	});
-		</script>
-
 </head>
 
 <body>
@@ -122,7 +115,7 @@
     </tr>
      <tr>
       <td height="27">Date of Birth<em>*</em></td>
-      <td> <input type="text" id="dob" /></td>
+      <td> <form:input path="user.dateOfBirth" /></td>
     </tr>
   </table>
      <label for="text2"></label>
@@ -312,7 +305,7 @@
 <tr class="header2">
   <td >&nbsp;</td>
   <td bgcolor="#FFFFFF"><h5>
-  <form:checkbox path="notifySms" value="false"/>
+  <form:checkbox path="user.signedForNotification" />
     Notifications from JobsbySMS</h5></td>
   <td colspan="4" bgcolor="#FFFFFF"><h5>
   <form:checkbox path="terms"/>

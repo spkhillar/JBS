@@ -13,14 +13,15 @@ $(document).ready(function(){
 				'</tr>');
 			qualificationRowIndex = currentIndex;
 		});
-      
+      $("#user\\.dateOfBirth").datepicker({dateFormat: "dd/mm/yy" });
       $("#registerBtn").button();
   	$("#registrationForm").validate( {
   	    success : "valid",
   	    ignoreTitle : true,
   	    rules : {
   			"user.userName" : {
-  		        required : true
+  		        required : true,
+  		      userNameCheck: true
   		   },
   			"user.email" : {
   		        required : true,
@@ -70,6 +71,25 @@ $(document).ready(function(){
 });
 
 
+jQuery.validator.addMethod('userNameCheck', function(inputValue) {
+	var unqiueUserName = checkUniqueUserName(inputValue);
+	console.log('..unqiueUserName...',unqiueUserName);
+	return !unqiueUserName;
+}, "Username already exists. Please use different username");
+function checkUniqueUserName(value){
+	var retValue = false;
+	$.ajax({
+		type : "get",
+		url : webContextPath + '/register/checkUserName/'+value,
+		async : false,
+		success : function(data, textStatus) {
+			console.log("...checkUserName...",data);
+			retValue = data;
+		}
+	});
+	
+	return retValue;
+}
 
 function registerUser(){
 	var isValid = $("#registrationForm").valid();

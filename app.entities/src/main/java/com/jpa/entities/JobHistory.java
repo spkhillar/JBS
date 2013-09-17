@@ -22,6 +22,8 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonMethod;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import com.jpa.entities.enums.JobStatus;
+
 /**
  * The Class JobHistory.
  * 

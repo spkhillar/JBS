@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jpa.entities.User;
 import com.service.SecurityQuestionService;
 import com.service.UserRegistrationService;
+import com.service.UserService;
 import com.service.util.ServiceUtil;
 import com.web.form.UserRegistrationForm;
 
@@ -29,6 +31,9 @@ public class UserRegistrationController extends BaseController {
 
   @Autowired
   private UserRegistrationService userRegistrationService;
+
+  @Autowired
+  private UserService userService;
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String register(final ModelMap map, final HttpServletRequest request) {
@@ -99,8 +104,16 @@ public class UserRegistrationController extends BaseController {
 
   @RequestMapping(value = "/view/terms")
   public String viewTermsAndCondition() {
-
     return "termsandcondition";
   }
 
+  @RequestMapping(value = "/checkUserName/{userName}", method = RequestMethod.GET)
+  @ResponseBody
+  public boolean checkUserName(@PathVariable final String userName) {
+    User user = userService.findByUserName(userName);
+    if (user == null) {
+      return false;
+    }
+    return true;
+  }
 }

@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.ArrayUtils;
@@ -60,6 +61,8 @@ public class ServiceUtil {
   public static String BANK_FINANCE_JOBS = "Banks/Insurance/Financial Services";
 
   public static String MARKETING_MR_MEDIA_PLANING = "Marketing/MR/Media Planning";
+
+  private static Random RANDOM = new Random();
 
   static {
     JOB_CATEGORY.put("PUS", "Public Sector");
@@ -355,5 +358,10 @@ public class ServiceUtil {
   public static String getImageMimeType(String fileName) {
     return MIME_IMAGE_MAPPING.get(FilenameUtils.getExtension(fileName).toLowerCase());
 
+  }
+
+  public static int mlmAccountId() {
+    int i1 = RANDOM.nextInt(999999999 - 111111111) + 111111111;
+    return i1;
   }
 }

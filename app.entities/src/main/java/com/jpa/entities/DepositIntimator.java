@@ -1,12 +1,11 @@
 package com.jpa.entities;
 
-
-
 import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +16,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+
+import com.jpa.entities.enums.DepositIntimatorStatus;
+import com.jpa.entities.enums.DepositIntimatorType;
+import com.jpa.entities.enums.PaymentMode;
 
 /**
  * DepositIntimator
@@ -35,23 +38,23 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
   private User userByReceiverUserId;
   private BigDecimal amountDeposited;
   private Date transactedDate;
-  private String modeOfPayment;
+  private PaymentMode modeOfPayment;
   private Long transactionNumber;
   private byte[] receiptCopy;
   private String chequeNumber;
   private Date chequeDate;
   private String chequeDrawnOnBank;
   private String chequeDrawnBranch;
-  private String status;
-  private Date createdAt;
+  private DepositIntimatorStatus status;
+  private DepositIntimatorType depositIntimatorType;
+  private String description;
+  private Date createdAt = new Date();
   private Date updatedAt;
 
-  public DepositIntimator() {
-  }
+  public DepositIntimator() {}
 
-  public DepositIntimator(long id, User userByUserId,
-      BigDecimal amountDeposited, Date transactedDate,
-      String modeOfPayment, String status, Date createdAt, Date updatedAt) {
+  public DepositIntimator(long id, User userByUserId, BigDecimal amountDeposited, Date transactedDate,
+      PaymentMode modeOfPayment, DepositIntimatorStatus status, Date createdAt, Date updatedAt) {
     this.id = id;
     this.userByUserId = userByUserId;
     this.amountDeposited = amountDeposited;
@@ -62,11 +65,9 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     this.updatedAt = updatedAt;
   }
 
-  public DepositIntimator(long id, User userByUserId,
-      User userByReceiverUserId, BigDecimal amountDeposited,
-      Date transactedDate, String modeOfPayment, Long transactionNumber,
-      byte[] receiptCopy, String chequeNumber, Date chequeDate,
-      String chequeDrawnOnBank, String chequeDrawnBranch, String status,
+  public DepositIntimator(long id, User userByUserId, User userByReceiverUserId, BigDecimal amountDeposited,
+      Date transactedDate, PaymentMode modeOfPayment, Long transactionNumber, byte[] receiptCopy, String chequeNumber,
+      Date chequeDate, String chequeDrawnOnBank, String chequeDrawnBranch, DepositIntimatorStatus status,
       Date createdAt, Date updatedAt) {
     this.id = id;
     this.userByUserId = userByUserId;
@@ -145,12 +146,13 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     this.transactedDate = transactedDate;
   }
 
+  @Enumerated
   @Column(name = "mode_of_payment", nullable = false, length = 50)
-  public String getModeOfPayment() {
+  public PaymentMode getModeOfPayment() {
     return this.modeOfPayment;
   }
 
-  public void setModeOfPayment(String modeOfPayment) {
+  public void setModeOfPayment(PaymentMode modeOfPayment) {
     this.modeOfPayment = modeOfPayment;
   }
 
@@ -209,13 +211,33 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     this.chequeDrawnBranch = chequeDrawnBranch;
   }
 
-  @Column(name = "status", nullable = false, length = 100)
-  public String getStatus() {
-    return this.status;
+  @Enumerated
+  @Column(name = "status", nullable = false)
+  public DepositIntimatorStatus getStatus() {
+    return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(DepositIntimatorStatus status) {
     this.status = status;
+  }
+
+  @Enumerated
+  @Column(name = "intimator_type", nullable = false)
+  public DepositIntimatorType getDepositIntimatorType() {
+    return depositIntimatorType;
+  }
+
+  public void setDepositIntimatorType(DepositIntimatorType depositIntimatorType) {
+    this.depositIntimatorType = depositIntimatorType;
+  }
+
+  @Column(name = "description")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   @Temporal(TemporalType.TIMESTAMP)

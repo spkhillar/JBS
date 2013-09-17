@@ -151,6 +151,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     dbUser.setEmail(newUser.getEmail());
     dbUser.setLastName(newUser.getLastName());
     dbUser.setPhone(newUser.getPhone());
+    dbUser.setSignedForNotification(newUser.isSignedForNotification());
     userDao.save(dbUser);
   }
 

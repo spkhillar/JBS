@@ -1,24 +1,22 @@
 package com.jpa.entities;
 
-
-
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+
+import com.jpa.entities.enums.SubscriptionType;
 
 /**
  * Subscription
@@ -35,18 +33,17 @@ public class Subscription implements BaseEntity, java.io.Serializable {
   private int version;
   private User user;
   private Subscription subscription;
-  private Boolean enabled;
+  private boolean enabled;
   private Date startDate;
   private Date endDate;
+  private SubscriptionType subscriptionType;
+  private int subscriptionDuration;
   private Date createdAt;
   private Date updatedAt;
-  private Set<Subscription> subscriptions = new HashSet<Subscription>(0);
 
-  public Subscription() {
-  }
+  public Subscription() {}
 
-  public Subscription(long id, User user, Date startDate, Date endDate,
-      Date createdAt, Date updatedAt) {
+  public Subscription(long id, User user, Date startDate, Date endDate, Date createdAt, Date updatedAt) {
     this.id = id;
     this.user = user;
     this.startDate = startDate;
@@ -55,9 +52,8 @@ public class Subscription implements BaseEntity, java.io.Serializable {
     this.updatedAt = updatedAt;
   }
 
-  public Subscription(long id, User user, Subscription subscription,
-      Boolean enabled, Date startDate, Date endDate, Date createdAt,
-      Date updatedAt, Set<Subscription> subscriptions) {
+  public Subscription(long id, User user, Subscription subscription, boolean enabled, Date startDate, Date endDate,
+      Date createdAt, Date updatedAt) {
     this.id = id;
     this.user = user;
     this.subscription = subscription;
@@ -66,7 +62,6 @@ public class Subscription implements BaseEntity, java.io.Serializable {
     this.endDate = endDate;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
-    this.subscriptions = subscriptions;
   }
 
   @Id
@@ -111,11 +106,11 @@ public class Subscription implements BaseEntity, java.io.Serializable {
   }
 
   @Column(name = "enabled")
-  public Boolean getEnabled() {
+  public boolean getEnabled() {
     return this.enabled;
   }
 
-  public void setEnabled(Boolean enabled) {
+  public void setEnabled(boolean enabled) {
     this.enabled = enabled;
   }
 
@@ -139,6 +134,25 @@ public class Subscription implements BaseEntity, java.io.Serializable {
     this.endDate = endDate;
   }
 
+  @Enumerated
+  @Column(name = "subscription_type", nullable = false)
+  public SubscriptionType getSubscriptionType() {
+    return subscriptionType;
+  }
+
+  public void setSubscriptionType(SubscriptionType subscriptionType) {
+    this.subscriptionType = subscriptionType;
+  }
+
+  @Column(name = "subscription_duration", nullable = false)
+  public int getSubscriptionDuration() {
+    return subscriptionDuration;
+  }
+
+  public void setSubscriptionDuration(int subscriptionDuration) {
+    this.subscriptionDuration = subscriptionDuration;
+  }
+
   @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "created_at", nullable = false, length = 19)
   public Date getCreatedAt() {
@@ -157,15 +171,6 @@ public class Subscription implements BaseEntity, java.io.Serializable {
 
   public void setUpdatedAt(Date updatedAt) {
     this.updatedAt = updatedAt;
-  }
-
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "subscription")
-  public Set<Subscription> getSubscriptions() {
-    return this.subscriptions;
-  }
-
-  public void setSubscriptions(Set<Subscription> subscriptions) {
-    this.subscriptions = subscriptions;
   }
 
 }

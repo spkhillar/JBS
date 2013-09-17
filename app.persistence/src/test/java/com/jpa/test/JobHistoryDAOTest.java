@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jpa.entities.JobHistory;
-import com.jpa.entities.JobStatus;
+import com.jpa.entities.enums.JobStatus;
 import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.jpa.repositories.JobHistoryDAO;
 

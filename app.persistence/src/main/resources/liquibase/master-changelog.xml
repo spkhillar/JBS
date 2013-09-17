@@ -1045,4 +1045,105 @@
 			<append value=" after company_url" />
 		</modifySql>   
     </changeSet>
+    <changeSet author="shiv" id="1367592120330-38">
+		<addColumn tableName="user">
+		    <column name="signed_for_notification" type="BIT">
+		    </column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after phone" />
+		</modifySql>   
+    </changeSet>
+    
+     <changeSet author="shiv" id="1367592120330-39">
+        <createTable tableName="mlm_user_credit_point">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deposit_intimator_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="points" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transfer_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+     <changeSet author="shiv" id="1367592120330-40">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="mlm_user_credit_point"  constraintName="FK_mlm_pnts_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"  referencesUniqueColumn="false"/>
+        <addForeignKeyConstraint baseColumnNames="deposit_intimator_id" baseTableName="mlm_user_credit_point"  constraintName="FK_deposit_intimator" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="deposit_intimator"  referencesUniqueColumn="false"/>
+    </changeSet>
+     <changeSet author="shiv" id="1367592120330-41">
+        <addForeignKeyConstraint baseColumnNames="transfer_id" baseTableName="mlm_user_credit_point"  constraintName="FK_credit_point_transfer" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="mlm_user_credit_point"  referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="shiv" id="1367592120330-42">
+		<addColumn tableName="deposit_intimator">
+		    <column name="intimator_type" type="varchar(30)">
+		        <constraints nullable="false"/>
+		    </column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after status" />
+		</modifySql>   
+    </changeSet>
+    <changeSet author="shiv" id="1367592120330-43">
+		<addColumn tableName="deposit_intimator">
+		    <column name="description" type="varchar(500)">
+		    </column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after intimator_type" />
+		</modifySql>   
+    </changeSet>
+    <changeSet author="shiv" id="1367592120330-44">
+		<addColumn tableName="subscription">
+		    <column name="subscription_type" type="varchar(30)">
+		        <constraints nullable="false"/>
+		    </column>
+		</addColumn>
+		<addColumn tableName="subscription">
+		    <column name="subscription_duration" type="INT">
+		        <constraints nullable="false"/>
+		    </column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after enabled" />
+		</modifySql>   
+    </changeSet>
+    <changeSet author="shiv" id="1367592120330-45">
+		<addColumn tableName="user">
+		    <column name="mlm_account_id" type="varchar(15)">
+		    </column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after signed_for_notification" />
+		</modifySql>   
+    </changeSet>
+    <changeSet author="shiv" id="1367592120330-46">
+		<addColumn tableName="user">
+		    <column name="date_of_birth" type="DATE">
+		        <constraints nullable="false"/>
+		    </column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after mlm_account_id" />
+		</modifySql>   
+    </changeSet>
 </databaseChangeLog>

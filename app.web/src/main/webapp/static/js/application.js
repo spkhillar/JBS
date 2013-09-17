@@ -19,10 +19,8 @@ function startTime() {
 
 function getDateTime() {
 	var today = new Date();
-
 	var month = today.getMonth() + 1;
 	var day = today.getDate();
-
 	var output = today.getFullYear() + '/'
 			+ (('' + month).length < 2 ? '0' : '') + month + '/'
 			+ (('' + day).length < 2 ? '0' : '') + day;
