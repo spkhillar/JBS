@@ -16,86 +16,91 @@ import com.jpa.entities.User;
 /**
  * The Interface UserService.
  * 
- * @author 
+ * @author
  */
 public interface UserService extends BaseService<User> {
 
-	/**
-	 * Find all.
-	 * 
-	 * @param page
-	 *            the page
-	 * @param rows
-	 *            the rows
-	 * @param sortOrder
-	 *            the sort order
-	 * @param orderByField
-	 *            the order by field
-	 * @return the page
-	 */
-	Page<User> findALL(int page, int rows, String sortOrder, String orderByField);
+  /**
+   * Find all.
+   * 
+   * @param page
+   *          the page
+   * @param rows
+   *          the rows
+   * @param sortOrder
+   *          the sort order
+   * @param orderByField
+   *          the order by field
+   * @return the page
+   */
+  Page<User> findALL(int page, int rows, String sortOrder, String orderByField);
 
-	/**
-	 * Find all.
-	 * 
-	 * @return the list
-	 */
-	List<User> findALL();
+  /**
+   * Find all.
+   * 
+   * @return the list
+   */
+  List<User> findALL();
 
-	/**
-	 * List roles.
-	 * 
-	 * @return the list
-	 */
-	List<Role> listRoles();
+  /**
+   * List roles.
+   * 
+   * @return the list
+   */
+  List<Role> listRoles();
 
-	/**
-	 * Export users.
-	 * 
-	 * @param filterPredicate
-	 *            the filter predicate
-	 * @param paramObject
-	 *            the param object
-	 * @param httpServletResponse
-	 *            the http servlet response
-	 * @param attachmentFileName
-	 *            the attachment file name
-	 */
-	void exportUsers(String filterPredicate, Map<String, Object> paramObject,
-			HttpServletResponse httpServletResponse, String attachmentFileName);
+  /**
+   * Export users.
+   * 
+   * @param filterPredicate
+   *          the filter predicate
+   * @param paramObject
+   *          the param object
+   * @param httpServletResponse
+   *          the http servlet response
+   * @param attachmentFileName
+   *          the attachment file name
+   */
+  void exportUsers(String filterPredicate, Map<String, Object> paramObject, HttpServletResponse httpServletResponse,
+      String attachmentFileName);
 
-	/**
-	 * Update.
-	 * 
-	 * @param user
-	 *            the user
-	 * @return the user
-	 */
-	User update(User user);
+  /**
+   * Update.
+   * 
+   * @param user
+   *          the user
+   * @return the user
+   */
+  User update(User user);
 
-	/**
-	 * Find all.
-	 * 
-	 * @param page
-	 *            the page
-	 * @param rows
-	 *            the rows
-	 * @param predicate
-	 *            the predicate
-	 * @param params
-	 *            the params
-	 * @return the page
-	 */
-	Page<User> findALL(int page, int rows, String predicate,
-			Map<String, Object> params);
+  /**
+   * Find all.
+   * 
+   * @param page
+   *          the page
+   * @param rows
+   *          the rows
+   * @param predicate
+   *          the predicate
+   * @param params
+   *          the params
+   * @return the page
+   */
+  Page<User> findALL(int page, int rows, String predicate, Map<String, Object> params);
 
-	/**
-	 * Find by user name.
-	 * 
-	 * @param userName
-	 *            the user name
-	 * @return the user
-	 */
-	User findByUserName(String userName);
+  /**
+   * Find by user name.
+   * 
+   * @param userName
+   *          the user name
+   * @return the user
+   */
+  User findByUserName(String userName);
+
+  public void changePassword(String username, String currentPassword);
+
+  public User findUserBy(String firstName, String lastName, String email, String phone);
+
+  public boolean matchPassword(String username, String currentPassword, String newPassword);
 
 }

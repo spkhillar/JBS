@@ -5,6 +5,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
 <jsp:include page="../tiles/base/app.jsp" />
@@ -48,25 +49,36 @@ tr.pwdhead{
   <tr>
     <td height="30" colspan="2"><p>Change Password</p>
       <hr color="red"/>
-      <form>
+      <form:form name="registrationForm" commandName="registration" id="registrationForm" method="POST" action="${contextPath}/manage/changepassword">
+     	 <div id="messages">
+       <spring:hasBindErrors name="registration">
+        <div class="formerror">
+            <ul>
+            <c:forEach var="error" items="${errors.allErrors}">
+                <li>${error.defaultMessage}</li>
+            </c:forEach>
+            </ul>
+        </div>
+  	  </spring:hasBindErrors>
+	</div>
       <table width="404" border="0" align="center" id="pwdtb">
         <tr>
         <td width="204">Enter Old Password</td>
-        <td width="184"><input type="text" name="textfield" id="textfield" /></td>
+        <td width="184"><form:password path="user.password" /></td>
         </tr>
       <tr>
         <td>Enter New Password</td>
-        <td><input type="text" name="textfield3" id="textfield3" /></td>
+        <td><form:password path="newPassword" /></td>
       </tr>
       <tr>
         <td>Confirm New Password</td>
-        <td><input type="text" name="textfield4" id="textfield4" /></td>
+        <td><form:password path="confirmPassword" /></td>
       </tr>
       <tr>
-        <td colspan="2"><input type="submit" name="button" id="button" value="Change Password" /></td>
+        <td colspan="2"><input type="submit" name="changePwdBtn" id="changePwdBtn" value="Change Password" /></td>
         </tr>
       </table>
-            </form>
+            </form:form>
       <p>&nbsp;</p>
       <p>&nbsp;</p></td>
   </tr>

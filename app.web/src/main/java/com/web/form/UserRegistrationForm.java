@@ -24,6 +24,8 @@ public class UserRegistrationForm {
 
   private boolean terms = false;
 
+  private String newPassword;
+
   public UserRegistrationForm() {
     super();
     createUserRegistrationForm();
@@ -99,6 +101,14 @@ public class UserRegistrationForm {
 
   public void setTerms(boolean terms) {
     this.terms = terms;
+  }
+
+  public String getNewPassword() {
+    return newPassword;
+  }
+
+  public void setNewPassword(String newPassword) {
+    this.newPassword = newPassword;
   }
 
 }

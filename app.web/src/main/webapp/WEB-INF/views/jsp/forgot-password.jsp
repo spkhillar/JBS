@@ -74,7 +74,6 @@ tr.pwdhead{
      <form:form name="registrationForm" commandName="registration" id="registrationForm" method="POST" action="${contextPath}/manage/forgotpwd/password">
      <div id="messages">
        <spring:hasBindErrors name="registration">
-        <h2>Errors</h2>
         <div class="formerror">
             <ul>
             <c:forEach var="error" items="${errors.allErrors}">
@@ -104,31 +103,42 @@ tr.pwdhead{
       </table>
            </form:form>
       <p>&nbsp;</p>
-      <form>
+       <form:form name="registrationForm" commandName="registration" id="registrationForm" method="POST" action="${contextPath}/manage/forgotpwd/username">
+     <div id="messages">
+       <spring:hasBindErrors name="registration">
+        <div class="formerror">
+            <ul>
+            <c:forEach var="error" items="${errors.allErrors}">
+                <li>${error.defaultMessage}</li>
+            </c:forEach>
+            </ul>
+        </div>
+  	  </spring:hasBindErrors>
+	</div>
       <table width="751" border="0" align="center" id="useridtb" >
         <tr>
           <td width="204">Enter your first name</td>
-          <td width="147"><input type="text" name="textfield5" id="textfield2" /></td>
+          <td width="147"><form:input path="user.firstName" ></form:input></td>
           <td width="221">Enter your last name</td>
-          <td width="151"><input type="text" name="textfield7" id="textfield7" /></td>
+          <td width="151"><form:input path="user.lastName" ></form:input></td>
         </tr>
         <tr>
           <td>Enter your Email id</td>
-          <td><input type="text" name="textfield6" id="textfield5" /></td>
+          <td><form:input path="user.email" /></td>
           <td>Enter Mobile number</td>
-          <td><input type="text" name="textfield8" id="textfield8" /></td>
+          <td><form:input path="user.phone" ></form:input></td>
         </tr>
         <tr>
           <td>Enter your Security Question</td>
-          <td><input type="text" name="textfield2" id="textfield6" /></td>
+          <td><form:select path="securityQuestion" items="${securityQuestions}" ></form:select></td>
           <td>Enter your Security Answer</td>
-          <td><input type="text" name="textfield9" id="textfield9" /></td>
+          <td><form:input path="securityAnswer" /></td>
         </tr>
         <tr>
           <td colspan="4"><input type="submit" name="button2" id="button2" value="Submit" /></td>
         </tr>
       </table>
-      </form>
+	</form:form>
     <p>&nbsp;</p></td>
   </tr>
 </table>

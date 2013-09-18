@@ -93,6 +93,8 @@ public class NormalUserController extends BaseController {
   public String changePassword(final ModelMap map, final HttpServletRequest request, @PathVariable final Long userId) {
     User existingUser = userRegistrationService.retrieveUser(userId);
     map.put("currentLoggedInUserId", existingUser.getId());
+    UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
+    map.put("registration", userRegistrationForm);
     return "user.changepassword";
   }
 

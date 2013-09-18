@@ -94,11 +94,11 @@
 	</definition>
 	
     <definition name="user.changepassword" extends="normal.user.base.definition">
-		<put-attribute name="body" value="/WEB-INF/views/jsp/changepassword.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/jsp/change-password.jsp" />
 	</definition>
 	
 	<definition name="admin.changepassword" extends="admin.base.definition">
-		<put-attribute name="body" value="/WEB-INF/views/jsp/changepassword.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/jsp/change-password.jsp" />
 	</definition>
 		
 </tiles-definitions>
