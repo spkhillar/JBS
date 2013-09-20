@@ -92,7 +92,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
   @Transactional
   public void saveAdminUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
       String fileName, String degree) {
-    Role role = roleDAO.findOne(1L);
+    Role role = roleDAO.findOne(5L);
     UserRole userRole = new UserRole(newUser, role);
     saveUser(newUser, securityQuestionId, securityQuestionAnswer, resume, fileName, degree, userRole);
   }

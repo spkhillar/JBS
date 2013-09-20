@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.jpa.entities.User;
 import com.service.SecurityQuestionService;
+import com.service.SystemConfigurationService;
 import com.service.UserRegistrationService;
 import com.service.UserService;
 import com.service.util.ServiceUtil;
@@ -46,6 +47,9 @@ public class BaseController {
 
   @Autowired
   protected UserRegistrationService userRegistrationService;
+
+  @Autowired
+  protected SystemConfigurationService systemConfigurationService;
 
   @InitBinder
   public void initBinder(final WebDataBinder binder) {
@@ -76,7 +80,8 @@ public class BaseController {
   protected String getHomePage(ModelMap map) {
     String username = this.getCurrentLoggedinUserName();
     User user = userService.findByUserName(username);
-    if (user.getUserRole().getRole().getId().equals(1L)) {
+    Long roleId = user.getUserRole().getRole().getId();
+    if (roleId.equals(1L) || roleId.equals(5L)) {
       map.put("currentLoggedInUser", username);
       map.put("currentLoggedInUserId", user.getId());
       return "admin.home";

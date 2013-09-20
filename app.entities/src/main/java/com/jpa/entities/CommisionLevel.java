@@ -13,22 +13,32 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonMethod;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 /**
  * CommisionLevel
  */
 @Entity
 @Table(name = "commision_level")
+@JsonAutoDetect(JsonMethod.NONE)
 public class CommisionLevel implements BaseEntity, java.io.Serializable {
 
   /**
    * 
    */
   private static final long serialVersionUID = -951642626769277245L;
+  @JsonProperty
   private long id;
   private int version;
+  @JsonProperty
   private int level;
+  @JsonProperty
   private String description;
+  @JsonProperty
   private BigDecimal percentage;
+  @JsonProperty
   private boolean cap;
   private Date createdAt;
   private Date updatedAt;

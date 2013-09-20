@@ -12,7 +12,7 @@
 					url : actionUrl,
 					datatype : 'json',
 					mtype : 'GET',
-					colNames : [ 'Id', 'Level', 'Percentage', 'Capping'],
+					colNames : [ 'Id', 'Level', 'Description','Percentage', 'Capping'],
 					colModel : [ {
 						name : 'id',
 						index : 'id',
@@ -21,15 +21,18 @@
 					}, {
 						name : 'level',
 						index : 'level',
-						width : 60,
-						formatter:myHyperLinkFormatter
+						width : 60
+					}, {
+						name : 'description',
+						index : 'description',
+						width : 60
 					}, {
 						name : 'percentage',
 						index : 'Percentage',
 						width : 60
 					}, {
-						name : 'capping',
-						index : 'capping',
+						name : 'cap',
+						index : 'cap',
 						width : 60
 					}  
 					  ],
@@ -42,7 +45,7 @@
 					pager : '#pager',
 					sortname : 'level',
 					viewrecords : true,
-					sortorder : "desc",
+					sortorder : "asc",
 					caption : "Commission Structure",
 					emptyrecords : "Empty records",
 					loadonce : false,
@@ -75,11 +78,7 @@
 		});
 	});
 	
-	function myHyperLinkFormatter (cellvalue, options, rowObject)
-	{
-		var value = '<a href="'+webContextPath+'/admin/job/find/'+ rowObject.id +'">'+ cellvalue +'</a>';
-	   return value;
-	}
+	
 </script>
 </head>
 <body>
@@ -90,6 +89,5 @@
 		<table id='grid'></table>
 		<div id='pager'></div>
 	</div>
-</div>
 </body>
 </html>

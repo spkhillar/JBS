@@ -73,7 +73,15 @@ $(document).ready(function(){
     <li id="opt_1.1">
     	<a href="${contextPath}/admin/changepassword">Change Password</a>
     </li>
+    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
     <li id="opt_1.2">
+    	<a href="#">Admin MLM-L</a>
+    </li>
+    <li id="opt_1.3">
+    	<a href="#">Admin MLM-R</a>
+    </li>
+    </sec:authorize>
+    <li id="opt_1.4">
     	<a href="${contextPath}/j_spring_security_logout">Logout</a>
     </li>
   </ul>

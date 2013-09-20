@@ -12,6 +12,10 @@ public class WebUser {
 
   private String phone;
 
+  private boolean adminMlmLeft;
+
+  private boolean adminMlmRight;
+
   public WebUser() {}
 
   public WebUser(String username, String firstName, String lastName, String email, String phone) {
@@ -61,6 +65,22 @@ public class WebUser {
 
   public void setPhone(String phone) {
     this.phone = phone;
+  }
+
+  public boolean isAdminMlmLeft() {
+    return adminMlmLeft;
+  }
+
+  public void setAdminMlmLeft(boolean adminMlmLeft) {
+    this.adminMlmLeft = adminMlmLeft;
+  }
+
+  public boolean isAdminMlmRight() {
+    return adminMlmRight;
+  }
+
+  public void setAdminMlmRight(boolean adminMlmRight) {
+    this.adminMlmRight = adminMlmRight;
   }
 
   @Override

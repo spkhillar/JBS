@@ -87,7 +87,9 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
               <a class="configlink1" href="${contextPath}/admin/commission/list">Network Configuration</a> 
              </li>
             <li><a class="configlink2">System Configuration</a></li>
-            <li><a class="configlink2" href="${contextPath}/admin/register/admin">Create System Admin</a></li>
+             <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+            	<li><a class="configlink2" href="${contextPath}/admin/register/admin">Create System Admin</a></li>
+            </sec:authorize>
             </ul>
           </li>
         

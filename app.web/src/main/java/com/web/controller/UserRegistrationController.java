@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,11 +15,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jpa.entities.User;
+import com.service.UserGroupService;
 import com.web.form.UserRegistrationForm;
 
 @Controller()
 @RequestMapping("/register")
 public class UserRegistrationController extends BaseController {
+
+  @Autowired
+  private UserGroupService userGroupService;
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String register(final ModelMap map, final HttpServletRequest request) {
@@ -50,7 +55,17 @@ public class UserRegistrationController extends BaseController {
       userRegistrationService.saveInternetUser(userRegistrationForm.getUser(),
         userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName,
         userRegistrationForm.getDegree());
-    } else {
+    } else if (userRegistrationForm.getRegistrationType() == 3) {
+      User savedMlmUser =
+          userRegistrationService.saveMlmUser(userRegistrationForm.getUser(),
+            userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName,
+            userRegistrationForm.getDegree());
+      User currentUser = userService.findByUserName(getCurrentLoggedinUserName());
+      Long roleId = currentUser.getUserRole().getRole().getId();
+      if (roleId.equals(1L)) {
+        // userGroupService.addToGroup(savedMlmUser, null, position)
+      }
+    } else if (userRegistrationForm.getRegistrationType() == 5) {
       userRegistrationService.saveAdminUser(userRegistrationForm.getUser(), userRegistrationForm.getSecurityQuestion(),
         userRegistrationForm.getSecurityAnswer(), resume, fileName, userRegistrationForm.getDegree());
     }
