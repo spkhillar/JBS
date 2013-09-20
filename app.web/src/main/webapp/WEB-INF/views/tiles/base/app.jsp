@@ -14,6 +14,13 @@
 <spring:url value="/resources/css/ui.jqgrid.css" var="resourceJqGridCssUrl"/>
 <spring:url value="/resources/css/menu.css" var="resourceMenuCssUrl"/>
 <spring:url value="/resources/css/dropdown.css" var="resourceDropDownCssUrl"/>
+<spring:url value="/resources/css/jquery.dropdown.css" var="resourceDropDownJqCssUrl"/>
+
+
+<!-- Index Page CSS -->
+<spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
+<spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
+<spring:url value="/resources/css/headmenu.css" var="resourceHeadMenuCssUrl"/>
 
 
 
@@ -26,6 +33,7 @@
 <spring:url value="/resources/js/jquery-ui-timepicker-addon.js" var="dateTimePicKerJs"/>
 <spring:url value="/resources/js/sliderAccess.js" var="sliderAccessJS"/>
 <spring:url value="/resources/js/jMenu.jquery.js" var="resourceJMenuUrl"/>
+<spring:url value="/resources/js/jquery.dropdown.js" var="resourceDropDownJSUrl"/>
 
 
 
@@ -38,6 +46,7 @@
 <script type="text/javascript" src="${dateTimePicKerJs}"></script>
 <script type="text/javascript" src="${sliderAccessJS}"></script>
 <script type="text/javascript" src="${resourceJMenuUrl}"></script>
+<script type="text/javascript" src="${resourceDropDownJSUrl}"></script>
 
 
 
@@ -46,6 +55,11 @@
 <link rel="stylesheet" type="text/css" href="${resourceJqUiCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceJqGridCssUrl}" />
 <link rel="stylesheet" type="text/css" href="${resourceDropDownCssUrl}" />
+<link rel="stylesheet" type="text/css" href="${resourceHeadMenuCssUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceDropDownJqCssUrl}"/>
+
 
 
 

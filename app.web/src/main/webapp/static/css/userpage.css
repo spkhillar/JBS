@@ -51,11 +51,3 @@ border-radius: 2px 2px 2px 2px;
 	text-align:center;
 }
 
-#userhome{
-	background-image: url("../images/home.jpg");
-	background-size:40px 40px;
-	background-repeat:no-repeat;
-	margin-right:10px;
-	padding-top: 50px
-	
-}

@@ -10,6 +10,33 @@
 <head>
 <jsp:include page="app.jsp"></jsp:include>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+
+.example {
+			color: #FFF;
+			cursor: pointer;
+			padding: 2px;
+			border-radius: 4px;
+			background: #888;
+			float: left;
+		}
+		
+		.example:after {
+			font-family: Consolas, Courier New, Arial, sans-serif;
+			margin-left: 6px;
+			color: #08c;
+		}
+		
+				
+		.example.dropdown-open {
+			background: blue;
+			color: #FFF;
+		}
+		
+		.example.dropdown-open:after {
+			color: #FFF;
+		}
+</style>
 
 <script type="text/javascript">
 
@@ -43,20 +70,21 @@
 	
 
 	</script>
-<style type="text/css">
-	
-	</style>
+
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<ul id="dropdown">
-	<li><a href="#" class="parent"><c:out value="${currentLoggedInUser}"></c:out></a>	
-		<ul class="children">
-			<li><a href="${contextPath}/admin/changepassword/${currentLoggedInUserId}">Change Password</a></li>
-			<li><a href="${contextPath}/j_spring_security_logout">Logout</a></li>
+<span class="example" data-dropdown="#dropdown-5">Welcome ${currentLoggedInUser}</span>
+ <div id="dropdown-5" class="dropdown dropdown-tip has-icons">
+		<ul class="dropdown-menu">
+			<li class="createtree"><a href="#">Create Tree</a></li>
+			<li class="cpassword"><a href="${contextPath}/admin/changepassword/${currentLoggedInUserId}")>Change Password</a></li>
+			<li class="dropdown-divider"></li>
+			<li class="logout"><a href="${contextPath}/j_spring_security_logout">Log Out</a></li>
+			
 		</ul>
-	</li>
-</ul>
-</body>
-<form:hidden path="user.id" />
+	</div>
+	<form:hidden path="user.id" />
+ </body>
+
 </html>

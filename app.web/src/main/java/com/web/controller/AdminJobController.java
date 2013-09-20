@@ -27,6 +27,7 @@ import com.service.JobService;
 import com.service.UserRegistrationService;
 import com.service.util.ServiceUtil;
 import com.web.form.JobForm;
+import com.web.form.UserRegistrationForm;
 import com.web.util.DomainObjectMapper;
 import com.web.util.JqGridResponse;
 
@@ -124,6 +125,7 @@ public class AdminJobController extends BaseController {
     return response;
   }
 
+
   @RequestMapping(value = "/job/view/{jobId}", method = RequestMethod.GET)
   public String viewJobDetials(@PathVariable final long jobId, final ModelMap map) {
     Job currentJob = jobService.findJob(jobId);
@@ -186,8 +188,15 @@ public class AdminJobController extends BaseController {
   @RequestMapping(value = "/changepassword/{userId}", method = RequestMethod.GET)
   public String changePassword(final ModelMap map, final HttpServletRequest request, @PathVariable final Long userId) {
     User existingUser = userRegistrationService.retrieveUser(userId);
-    map.put("currentLoggedInAdminId", existingUser.getId());
+    map.put("currentLoggedInUserId", existingUser.getId());
+    UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
+    map.put("registration", userRegistrationForm);
     return "admin.changepassword";
+  }
+
+  @RequestMapping(value = "/commission/list", method = RequestMethod.GET)
+  public String listCommission() {
+    return "admin.list.commission";
   }
 
 }

@@ -9,40 +9,88 @@
 
 <head>
 <jsp:include page="app.jsp"></jsp:include>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <spring:url value="/" var="homeUrl" htmlEscape="true"/>
-<spring:url value="/resources/css/adminhome.css" var="resourceAdminHomeCssUrl"/>
-<spring:url value="/resources/css/admindesign.css" var="resourceAdminDesignCssUrl"/>
 
 
-<spring:url value="/resources/js/menuinfo.js" var="resourceMenuInfoUrl"/>
+<style type="text/css">    
+* { margin: 0; padding: 0; }
 
-<script type="text/javascript" src="${resourceMenuInfoUrl}"></script>
+html { height: 100%; font-size: 62.5% }
+
+body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helvetica, sans-serif; }
 
 
-<link rel="stylesheet" type="text/css" href="${resourceAdminHomeCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceAdminDesignCssUrl}"/>
-</head>
+#indextb tr td #jobtb tr .joblist form fieldset label {
+	text-align: left;
+}
+#indextb tr td #infotb .footer td img {
+	text-align: center;
+}
+#indextb tr td table {
+	text-align: center;
+}
+
+
+
+		
+		
+</style>
+
+<script type="text/javascript">
+    function ChangeColor(tableRow, highLight)
+    {
+    if (highLight)
+    {
+      tableRow.style.backgroundColor = '#dcfac9';
+    }
+    else
+    {
+      tableRow.style.backgroundColor = 'white';
+    }
+  }
+
+  function DoNav(theUrl)
+  {
+  document.location.href = theUrl;
+  }
+  </script>
+  
+ </head>
 <body>
-
-
-<table id="indextb" border="1" width="80%">
-
-<tr>
-  <td width="84%" ><div id="site_title"></div></td>
-  <td width="1%">&nbsp;</td>
-  <td width="2%"></td>
-  <td width="6%" class="logoheader">
-  <td width="1%">&nbsp;</td>
-  <td width="1%">&nbsp;</td>
-  <td width="1%">&nbsp;</td>
-  <td width="4%" class="logoheader"><jsp:include page="adminsettings.jsp"></jsp:include></td>
-</tr>
-
-<tr>
-<td height="10" colspan="8" align="center">
-  <div class="wrap1" align="center">
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<table border="0" id="indextb">
+  <tr>
+    <th scope="col"></th>
+    <th scope="col"></th>
+    <td scope="col" colspan="2" class="siteheadercells"> </td>
+  </tr>
+    <tr>
+    <td class="siteheadercells"><div id="site_title"></div></td>
+    <td class="siteheadercells"><div id="site_title1"></div></td>
+     <td class="siteheadercells"><div id="site_title2"></div></td>
+    <td ><jsp:include page="admin-settings.jsp"></jsp:include>
+   <!--  <div id="user" class="example" data-dropdown="#dropdown-5">Welcome ${currentLoggedInUser}
+     </div>
     
+    <div id="dropdown-5" class="dropdown dropdown-tip has-icons">
+		<ul class="dropdown-menu">
+			<li class="createtree"><a href="#">Create Tree</a></li>
+			<li class="cpassword"><a href="${contextPath}/admin/changepassword/${currentLoggedInUserId}")>Change Password</a></li>
+			<li class="dropdown-divider"></li>
+			<li class="logout"><a href="${contextPath}/j_spring_security_logout">Log Out</a></li>
+			
+		</ul>
+	</div>
+ <form:hidden path="user.id" />
+  -->
+</td>
+  </tr>
+ <tr>
+    <td height="27" colspan="4" class="menutd">
+    <div class="wrap1">
+    <table id="submenu">
+      <tr>
+      <td>
     <nav>
       <ul class="menu">
       <li>
@@ -53,7 +101,7 @@
           <ul>
             <li class="arrow"></li>
             <li>
-              <a class="configlink1">Network Configuration</a> </li>
+              <a class="configlink1" href="${contextPath}/admin/commission/list">Network Configuration</a> </li>
             <li><a class="configlink2">System Configuration</a></li>
             </ul>
           </li>
@@ -122,14 +170,13 @@
             </ul>
           </li>
         </ul>
-      <div class="clearfix"></div>
+      <div class="wrap1"></div>
       </nav>
+    </td></tr></table>
     </div>
-</td>
-    <td></td>
-    
+    </td>
     </tr>
     </table>
-<br />
+    
 </body>
 </html>

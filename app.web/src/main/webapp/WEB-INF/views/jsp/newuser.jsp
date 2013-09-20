@@ -12,14 +12,6 @@
 <jsp:include page="../tiles/base/app.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
-<spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
-<spring:url value="/resources/css/headmenu.css" var="resourceHeadMenuCssUrl"/>
-
-<link rel="stylesheet" type="text/css" href="${resourceHeadMenuCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
-
 <style>
 * { margin: 0; padding: 0; }
 #usertbdesign.menuhd td {

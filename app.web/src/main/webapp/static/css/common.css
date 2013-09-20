@@ -69,3 +69,45 @@ padding-top: 70px
 .formerror{
 	color: red;
 }
+
+#addjob {
+
+width:80%;
+	
+	border-radius: 3px 3px 3px 3px;
+	border:0px solid #CCC;
+	box-shadow:  4px 4px 4px 4px;
+	font-size: 14px;
+	font-family:Arial;	
+	margin:auto;
+	
+}
+#jobListDiv,#commissionListDiv{
+	
+	width:80%;
+	border-radius: 3px 3px 3px 3px;
+	border:0px solid #CCC;
+	box-shadow:  4px 4px 4px 4px;
+	font-size: 14px;
+	font-family:Arial;	
+	margin:auto;
+	
+}
+tr.blank{
+	
+}
+
+td.degreeSelector{
+	margin: 30px;
+	vertical-align: middle;
+}
+td.qualificationLable{
+	margin: 0;
+	vertical-align:top;
+}
+
+table.settings td{
+	
+ padding: 7px;	
+ border-width: thick;
+}

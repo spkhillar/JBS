@@ -8,18 +8,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<link rel="shortcut icon" href="resources/images/favico.png"/>
+<jsp:include page="../../tiles/base/app.jsp"></jsp:include>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<style>
-td{
-	padding:5px;
-}
-</style>
-<spring:url value="/resources/css/addjobtable.css" var="resourceAddJobCssUrl"/>
-
-<link rel="stylesheet" type="text/css" href="${resourceAddJobCssUrl}"/>
 <script type="text/javascript">
 	
 	$(document).ready(function() {	
@@ -113,24 +103,26 @@ td{
 
 <body>
 <form:form name="jobForm" commandName="jobForm" id="jobForm" enctype="multipart/form-data" method="POST">
-<table id="addjob" border="0" align="center">
+<table id="addjob" border="0" align="center" class="settings">
   <tr>
-    <td scope="col">  
-    <td colspan="3" scope="col">  
+    
+    <td colspan="6" scope="col"><h4 style="padding: 5px">Home | Jobs | Add Jobs </h4><br/>
+    <hr color="red"></td>  
   </tr>
+ 
   <tr>
-    <td width="182" scope="col">Job Title</th>
+    <td width="182" scope="col">Job Title</td>
     <td scope="col"><form:input path="job.jobTitle" cssClass="formfields"/></td>
     <td>Company Name</td>
     <td ><label for="textfield4"></label>
     <form:input path="job.companyName" cssClass="formfields"/></td>
   </tr>
   <tr>
-    <td>Job Type</td>
+    <td  width="182">Job Type</td>
     <td><label for="textfield"></label>
      <form:select path="job.jobType" items="${jobTypes}" cssClass="formfields"></form:select>
     </td>
-     <td>Company URL</td>
+     <td  width="182">Company URL</td>
     <td ><label for="textfield5"></label>
     <form:input path="job.companyUrl" cssClass="formfields" size="50"/></td>
   </tr>
@@ -231,7 +223,7 @@ td{
     <td width="352"><label for="select"></label>
       <form:select path="degreeList" multiple="multiple" style="width:100%;" size="20" items="${availableDegreeList}"></form:select>
       </td>
-    <td width="10" class="degreeSelector">
+    <td class="degreeSelector" align="justify">
       <input type="button" name="btnRight" id="btnRight" value="&gt;&gt;" />
             <br>
          <input type="button" name="btnLeft" id="btnLeft" value="&lt;&lt;"/>

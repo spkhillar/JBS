@@ -9,16 +9,6 @@
 <jsp:include page="app.jsp"></jsp:include>
 <head>
 <spring:url value="/" var="homeUrl" htmlEscape="true"/>
-
-<spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
-<spring:url value="/resources/css/enquirymenu.css" var="resourceUserHomeMenuCssUrl"/>
-<spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
-
-<link rel="stylesheet" type="text/css" href="${resourceUserHomeMenuCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
-
-
 <style>    
 * { margin: 0; padding: 0; }
 
@@ -61,8 +51,8 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <table border="0" id="indextb">
   <tr>
-    <th scope="col"></th>
-    <th scope="col"></th>
+    <th scope="col"><div id="site_title"></div></th>
+    <th scope="col"><div id="site_title1"></div></th>
     <td scope="col" colspan="2" class="siteheadercells">
     <label style="font-size: 12px;">
     <font color="#004364">Login</font></label>
@@ -83,8 +73,8 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
     </td>
   </tr>
     <tr>
-    <td class="siteheadercells"><div id="site_title"></div></td>
-    <td class="siteheadercells"><div id="site_title1"></div></td>
+    <td class="siteheadercells"></td>
+    <td class="siteheadercells"></td>
     
     <td colspan="2"><div class="wrap">
       <nav>

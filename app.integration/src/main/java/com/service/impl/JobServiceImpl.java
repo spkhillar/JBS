@@ -30,14 +30,14 @@ public class JobServiceImpl implements JobService {
   private GenericQueryExecutorDAO genericQueryExecutorDAO;
 
   @Override
-  public void saveJob(Job job) {
+  public void saveJob(final Job job) {
     job.setEnabled(true);
     job.setUpdatedAt(new Date());
     jobDAO.save(job);
   }
 
   @Override
-  public void updateJob(Job jobToUpdate) {
+  public void updateJob(final Job jobToUpdate) {
     Job savedJob = findJob(jobToUpdate.getId());
     BeanUtils.copyProperties(jobToUpdate, savedJob, new String[] { "createdAt", "version" });
     savedJob.setUpdatedAt(new Date());
@@ -45,30 +45,30 @@ public class JobServiceImpl implements JobService {
   }
 
   @Override
-  public Page<Job> findALL(int page, int rows, String sortOrder, String orderByField) {
+  public Page<Job> findALL(final int page, final int rows, final String sortOrder, final String orderByField) {
     return jobDAO.findAll(ServiceUtil.getPage(page, rows, sortOrder, orderByField));
   }
 
   @Override
-  public Job findJob(Long id) {
+  public Job findJob(final Long id) {
     return jobDAO.findOne(id);
   }
 
   @Override
-  public Page<Job> findByCategory(String category, int page, int rows, String sortOrder, String orderByField) {
+  public Page<Job> findByCategory(final String category, final int page, final int rows, final String sortOrder, final String orderByField) {
     Pageable pageable = ServiceUtil.getPage(page, rows, sortOrder, orderByField);
     return jobDAO.findByCategory(category, pageable);
   }
 
   @Override
-  public long findTotalMatchingJobCount(User user) {
+  public long findTotalMatchingJobCount(final User user) {
     String query = getFilteredJobsQuery(user);
     query = " select count(j.id) from Job j where " + query;
     return genericQueryExecutorDAO.findCount(query, null);
   }
 
   @Override
-  public Page<Job> findMatchingJob(User user, int page, int pageSize) {
+  public Page<Job> findMatchingJob(final User user, final int page, final int pageSize) {
     String query = getFilteredJobsQuery(user);
     query = " from Job j where " + query;
     Page<Job> filteredJobs = genericQueryExecutorDAO.executeQuery(query, Job.class, page, pageSize);
@@ -76,18 +76,18 @@ public class JobServiceImpl implements JobService {
   }
 
   @Override
-  public long findSiteJobCountByType(int type) {
+  public long findSiteJobCountByType(final int type) {
     String jpaQuery = "select count(j.id) from Job j " + findSitePredicate(type);
     return genericQueryExecutorDAO.findCount(jpaQuery, null);
   }
 
   @Override
-  public Page<Job> findSiteJobByType(int type, int page, int pageSize) {
+  public Page<Job> findSiteJobByType(final int type, final int page, final int pageSize) {
     String jpaQuery = "from Job j " + findSitePredicate(type);
     return genericQueryExecutorDAO.executeQuery(jpaQuery, Job.class, page, pageSize);
   }
 
-  public String findSitePredicate(int type) {
+  public String findSitePredicate(final int type) {
     String jpaPredicate = null;
     switch (type) {
     case 1:
@@ -101,7 +101,7 @@ public class JobServiceImpl implements JobService {
       break;
     case 4:
       jpaPredicate =
-          " where j.industry in ('" + ServiceUtil.IT_SOFTWARE_JOBS + "','" + ServiceUtil.IT_HARDWARE_JOBS + "')";
+      " where j.industry in ('" + ServiceUtil.IT_SOFTWARE_JOBS + "','" + ServiceUtil.IT_HARDWARE_JOBS + "')";
       break;
     case 5:
       jpaPredicate = " where j.industry = '" + ServiceUtil.BANK_FINANCE_JOBS + "'";
@@ -122,7 +122,7 @@ public class JobServiceImpl implements JobService {
     return jpaPredicate;
   }
 
-  private String getFilteredJobsQuery(User user) {
+  private String getFilteredJobsQuery(final User user) {
     String skills = user.getSkill().getSkills();
     String qualification = user.getQualifications().get(0).getDegree().getName();
     List<String> skillList = getSkillsPattern(skills);
@@ -133,7 +133,7 @@ public class JobServiceImpl implements JobService {
     return jpaQuery;
   }
 
-  private List<String> getSkillsPattern(String skills) {
+  private List<String> getSkillsPattern(final String skills) {
     String[] skillsArray = StringUtils.split(skills, ",");
     String jpaQuery = "j.skill like '%?1%'";
     List<String> skillList = new ArrayList<String>();
@@ -143,8 +143,10 @@ public class JobServiceImpl implements JobService {
     return skillList;
   }
 
-  private String getQualificationCriteria(String qualification) {
+  private String getQualificationCriteria(final String qualification) {
     return "(j.qualification like '%" + qualification + "%')";
   }
+
+
 
 }

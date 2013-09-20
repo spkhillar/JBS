@@ -13,16 +13,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="shortcut icon" href="resources/images/favico.png"/>
 
-<spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
-<spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
-<spring:url value="/resources/css/headmenu.css" var="resourceHeadMenuCssUrl"/>
+<spring:url value="/resources/js/forgot-password.js" var="resourceForgotPasswordJSUrl"/>
 
-<link rel="stylesheet" type="text/css" href="${resourceHeadMenuCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
+<script type="text/javascript" src="${resourceForgotPasswordJSUrl}"></script>
 
-
-<style>    
+<style type="text/css">    
 * { margin: 0; padding: 0; }
 
 #indextb tr td #jobtb tr .joblist form fieldset label {
@@ -39,16 +34,24 @@ tr.pwdhead{
  border-collapse: collapse;
  border-top-style: solid;
 }
+
+
 </style>
 <script type="text/javascript">
-
-	 $('#radio1').click(function(){
-		  $('#pwdtb').hide(); 
-	 });
-	
-
+$(document).ready(function(){
+ $('#radio1').change(function(){
+	 $('#pwdtb').show();
+	 $('#useridtb').hide();
+	 
+  })
+  
+  $('#radio2').change(function(){
+	 $('#useridtb').show();
+	 $('#pwdtb').hide();
+	 
+  })
+});
 </script>
-
 </head>
 <body>
 
@@ -59,20 +62,21 @@ tr.pwdhead{
 <div id="forgottb">
 <table width="933" height="89" border="0" id="forgottb">
   <tr>
-    <td height="23" colspan="2" scope="col">Please select the option for login problem</td>
+    <td height="23" colspan="2" scope="col"><h2>Please select the option for login problem</h2></td>
   </tr>
   <tr>
-    <td width="266" height="26"><p>
-      <input type="radio" name="radio" id="radio1" value="radio" onselect="showPwdTB()"/>
-      I forgot my password</p></td>
-    <td width="326"><input type="radio" name="radio" id="radio2" value="radio" onselect="showUserIDTB()"/>
-    <span class="s">I forgot my userid</span></td>
+    <td width="266" height="26"><p><input type="radio" name="radio" id="radio1" value="radio">I forgot my password</p></td>
+    <td width="326">
+    <input type="radio" name="radio" id="radio2" value="radio"><span class="s">I forgot my userid</span></td>
   </tr>
   <tr>
     <td height="30" colspan="2"><p>You can now easily retrieve your password if you have forgotten. Please provide your valid security details mentioned during registration and submit. The password will be sent to your valid registered email id and mobile number</p>
       <hr />
      <form:form name="registrationForm" commandName="registration" id="registrationForm" method="POST" action="${contextPath}/manage/forgotpwd/password">
-     <div id="messages">
+      <table width="751" border="0" align="center" id="pwdtb" title="Recover Password" hidden="true">
+      <tr>
+      <td>
+      <div id="messages">
        <spring:hasBindErrors name="registration">
         <div class="formerror">
             <ul>
@@ -83,28 +87,41 @@ tr.pwdhead{
         </div>
   	  </spring:hasBindErrors>
 	</div>
-     
-      <table width="404" border="0" align="center" id="pwdtb">
+      </td>
+      </tr>
         <tr>
-        <td width="204">Enter your userid</td>
-        <td width="184"><form:input path="user.userName" /></td>
+        <td width="204">Enter your userid<em>*</em></td>
+        <td width="184">
+        <c:choose>
+         <c:when test="${currentLoggedInUserId eq null}">
+       <form:input path="user.userName" />
+       </c:when>
+        </c:choose>
+        </td>
         </tr>
       <tr>
-        <td>Enter Security Question</td>
+        <td>Enter Security Question<em>*</em></td>
         <td><form:select path="securityQuestion" items="${securityQuestions}" ></form:select></td>
       </tr>
       <tr>
-        <td>Enter your security answer</td>
+        <td>Enter your security answer<em>*</em></td>
         <td><form:input path="securityAnswer" /></td>
       </tr>
       <tr>
-        <td colspan="2"><input type="submit" name="button" id="button" value="Submit" /></td>
+        <td colspan="2">
+      	  <button id="passwordBtn">Submit</button>
+	  </td>
+      
         </tr>
       </table>
            </form:form>
       <p>&nbsp;</p>
        <form:form name="registrationForm" commandName="registration" id="registrationForm" method="POST" action="${contextPath}/manage/forgotpwd/username">
-     <div id="messages">
+     
+      <table width="751" border="0" align="center" id="useridtb" title="Recover Password" hidden="true">
+      <tr>
+      <td colspan="2">
+      <div id="messages">
        <spring:hasBindErrors name="registration">
         <div class="formerror">
             <ul>
@@ -115,18 +132,19 @@ tr.pwdhead{
         </div>
   	  </spring:hasBindErrors>
 	</div>
-      <table width="751" border="0" align="center" id="useridtb" >
+      </td>
+      </tr>
         <tr>
-          <td width="204">Enter your first name</td>
-          <td width="147"><form:input path="user.firstName" ></form:input></td>
-          <td width="221">Enter your last name</td>
-          <td width="151"><form:input path="user.lastName" ></form:input></td>
+          <td width="204">Enter your first name<em>*</em></td>
+          <td width="184"><form:input path="user.firstName" id="userFirstName"></form:input></td>
+          <td width="221">Enter your last name<em>*</em></td>
+          <td width="151"><form:input path="user.lastName" id="userLastName"></form:input></td>
         </tr>
         <tr>
           <td>Enter your Email id</td>
-          <td><form:input path="user.email" /></td>
+          <td><form:input path="user.email" id="userEmail" /></td>
           <td>Enter Mobile number</td>
-          <td><form:input path="user.phone" ></form:input></td>
+          <td><form:input path="user.phone" id="userPhone"></form:input></td>
         </tr>
         <tr>
           <td>Enter your Security Question</td>
@@ -135,7 +153,8 @@ tr.pwdhead{
           <td><form:input path="securityAnswer" /></td>
         </tr>
         <tr>
-          <td colspan="4"><input type="submit" name="button2" id="button2" value="Submit" /></td>
+          <td colspan="4"> 
+          <button id="passwordBtn1">Submit</button></td>
         </tr>
       </table>
 	</form:form>

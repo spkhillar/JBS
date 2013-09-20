@@ -47,7 +47,7 @@ tr.pwdhead{
 <div id="changetb">
 <table width="933" height="89" border="0" id="changetb">
   <tr>
-    <td height="30" colspan="2"><p>Change Password</p>
+    <td height="30" colspan="2"><h2>Change Password</h2>
       <hr color="red"/>
       <form:form name="registrationForm" commandName="registration" id="registrationForm" method="POST" action="${contextPath}/manage/changepassword">
      	 <div id="messages">
@@ -61,10 +61,10 @@ tr.pwdhead{
         </div>
   	  </spring:hasBindErrors>
 	</div>
-      <table width="404" border="0" align="center" id="pwdtb">
+      <table width="40%" border="0" align="center" id="pwdtb">
         <tr>
-        <td width="204">Enter Old Password</td>
-        <td width="184"><form:password path="user.password" /></td>
+        <td width="50">Enter Old Password</td>
+        <td width="50"><form:password path="user.password" /></td>
         </tr>
       <tr>
         <td>Enter New Password</td>

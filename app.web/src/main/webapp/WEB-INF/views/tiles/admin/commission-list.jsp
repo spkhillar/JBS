@@ -3,72 +3,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="../../tiles/base/app.jsp" />
 <script type='text/javascript'>
 
 	$(function() {
-		var actionUrl = webContextPath + "/admin/job/records";
+		var actionUrl = webContextPath + "/admin/commission/records";
 		$("#grid").jqGrid(
 				{
 					url : actionUrl,
 					datatype : 'json',
 					mtype : 'GET',
-					colNames : [ 'Id', 'Job Title', 'Job Type', 'Job Code',
-							'Posted At', "Functional Area", "Company Name", "Desgination", "Category","Sub Category" ],
+					colNames : [ 'Id', 'Level', 'Percentage', 'Capping'],
 					colModel : [ {
 						name : 'id',
 						index : 'id',
 						width : 55,
 						hidden : true
 					}, {
-						name : 'jobTitle',
-						index : 'jobTitle',
-						width : 200,
+						name : 'level',
+						index : 'level',
+						width : 60,
 						formatter:myHyperLinkFormatter
 					}, {
-						name : 'jobType',
-						index : 'jobType',
-						width : 100
+						name : 'percentage',
+						index : 'Percentage',
+						width : 60
 					}, {
-						name : 'jobCode',
-						index : 'jobCode',
-						width : 100
-					}, {
-						name : 'postedAt',
-						index : 'postedAt',
-						width : 150
-					}, {
-						name : 'industry',
-						index : 'industry',
-						width : 250
-					}, {
-						name : 'companyName',
-						index : 'companyName',
-						width : 100
-					}, {
-						name : 'designation',
-						index : 'designation',
-						width : 100
-					}, {
-						name : 'category',
-						index : 'category',
-						width : 100,
-					}, {
-						name : 'subCategory',
-						index : 'subCategory',
-						width : 100,
-					} ],
+						name : 'capping',
+						index : 'capping',
+						width : 60
+					}  
+					  ],
 					postData : {},
 					rowNum : 20,
 					rowList : [ 20, 30, 40,30 ],
-					height : 400,
-					width :1070,
+					height : 500,
+					width : 1050,
 					rownumbers : true,
 					pager : '#pager',
-					sortname : 'postedAt',
+					sortname : 'level',
 					viewrecords : true,
 					sortorder : "desc",
-					caption : "Jobs",
+					caption : "Commission Structure",
 					emptyrecords : "Empty records",
 					loadonce : false,
 					hidegrid : false,
@@ -109,10 +84,9 @@
 </head>
 <body>
 
-<div id="jobListDiv">
- <h4 style="padding: 5px">Home | Jobs | View Jobs </h4><br/><br/>
+<div id="commissionListDiv">
+ <h4 style="padding: 5px">Home | Configuration | Network Configuration | Commission Structure </h4><br/>
  <hr color="red"/>
-	<div id='jqgrid'>
 		<table id='grid'></table>
 		<div id='pager'></div>
 	</div>

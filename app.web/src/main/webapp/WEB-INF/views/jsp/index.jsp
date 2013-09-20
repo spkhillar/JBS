@@ -14,14 +14,6 @@
 <title>JOBSbySMS-Home Page</title>
 <link rel="shortcut icon" href="resources/images/favico.png"/>
 
-<spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
-<spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
-<spring:url value="/resources/css/headmenu.css" var="resourceHeadMenuCssUrl"/>
-
-<link rel="stylesheet" type="text/css" href="${resourceHeadMenuCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
-
 
 <style>    
 * { margin: 0; padding: 0; }

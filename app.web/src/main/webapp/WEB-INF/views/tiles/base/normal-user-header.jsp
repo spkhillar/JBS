@@ -10,26 +10,27 @@
 <head>
 <jsp:include page="app.jsp"></jsp:include>
 <link rel="shortcut icon" href="resources/images/favico.png"/>
+<style>    
+* { margin: 0; padding: 0; }
 
-<spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
-<spring:url value="/resources/css/enquirymenu.css" var="resourceUserHomeMenuCssUrl"/>
-<spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
-
-<link rel="stylesheet" type="text/css" href="${resourceUserHomeMenuCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
-
-
+#indextb tr td #jobtb tr .joblist form fieldset label {
+	text-align: left;
+}
+#indextb tr td #infotb .footer td img {
+	text-align: center;
+}
+#indextb tr td table {
+	text-align: center;
+}
+</style>
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <table border="0" id="indextb">
   <tr>
-    <td width="25%">
-    <div id="site_title"></div>
-    </td>
-    <td width="25%" height="34">&nbsp;</td>
-    <td width="25%" height="34">&nbsp;</td>
+    <td width="25%"><div class="siteheadercells" id="site_title"></div></td>
+    <td width="25%"></td>
+    <td width="25%" height="34"><div class="siteheadercells" id="site_title1"></div></td>
     <td width="25%" height="34"></td>
     <td width="25%" height="34" colspan="2">
     	<jsp:include page="usersettings.jsp"></jsp:include>
