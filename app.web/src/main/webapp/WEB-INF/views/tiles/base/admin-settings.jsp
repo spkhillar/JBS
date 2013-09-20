@@ -78,7 +78,7 @@
  <div id="dropdown-5" class="dropdown dropdown-tip has-icons">
 		<ul class="dropdown-menu">
 			<li class="createtree"><a href="#">Create Tree</a></li>
-			<li class="cpassword"><a href="${contextPath}/admin/changepassword/${currentLoggedInUserId}")>Change Password</a></li>
+			<li class="cpassword"><a href="${contextPath}/admin/changepassword")>Change Password</a></li>
 			<li class="dropdown-divider"></li>
 			<li class="logout"><a href="${contextPath}/j_spring_security_logout">Log Out</a></li>
 			

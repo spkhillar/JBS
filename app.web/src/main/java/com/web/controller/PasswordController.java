@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -16,19 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jpa.entities.SecurityQuestion;
 import com.jpa.entities.User;
 import com.jpa.entities.UserSecurityQuestion;
-import com.service.SecurityQuestionService;
-import com.service.UserService;
 import com.web.form.UserRegistrationForm;
 
 @Controller
 @RequestMapping("/manage")
 public class PasswordController extends BaseController {
-
-  @Autowired
-  private SecurityQuestionService securityQuestionService;
-
-  @Autowired
-  private UserService userService;
 
   @RequestMapping("/forgotpassword")
   public String homePage(final ModelMap map) {

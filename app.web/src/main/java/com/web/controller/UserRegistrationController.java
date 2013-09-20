@@ -1,11 +1,9 @@
 package com.web.controller;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,58 +14,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jpa.entities.User;
-import com.service.SecurityQuestionService;
-import com.service.UserRegistrationService;
-import com.service.UserService;
-import com.service.util.ServiceUtil;
 import com.web.form.UserRegistrationForm;
 
 @Controller()
 @RequestMapping("/register")
 public class UserRegistrationController extends BaseController {
 
-  @Autowired
-  private SecurityQuestionService securityQuestionService;
-
-  @Autowired
-  private UserRegistrationService userRegistrationService;
-
-  @Autowired
-  private UserService userService;
-
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String register(final ModelMap map, final HttpServletRequest request) {
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
     map.put("registration", userRegistrationForm);
     map.put("qualificationCount", 0);
-    prepareObjectsForRendering(map);
+    prepareObjectsForRegistration(map);
     return "user.registration";
   }
 
   @RequestMapping(value = "/retrieveuser/{userId}", method = RequestMethod.GET)
   public String retrieveUser(final ModelMap map, final HttpServletRequest request, @PathVariable final Long userId) {
-    UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
-    User existingUser = userRegistrationService.retrieveUser(userId);
-    userRegistrationForm.setUser(existingUser);
-    userRegistrationForm.setSecurityQuestion(existingUser.getUserSecurityQuestion().getSecurityQuestion().getId());
-    userRegistrationForm.setSecurityAnswer(existingUser.getUserSecurityQuestion().getAnswer());
-    userRegistrationForm.setDegree(existingUser.getQualifications().get(0).getDegree().getName());
-    map.put("registration", userRegistrationForm);
-    map.put("currentLoggedInUserId", existingUser.getId());
-    map.put("qualifications", existingUser.getQualifications());
-    map.put("qualificationCount", existingUser.getQualifications().size() - 1);
-    prepareObjectsForRendering(map);
+    retrieveAndPopulateUser(map);
     return "newuser";
-  }
-
-  private void prepareObjectsForRendering(final ModelMap map) {
-    Map<String, String> questionMap = securityQuestionService.getSecurityQuestions();
-    map.put("securityQuestions", questionMap);
-    map.put("states", userRegistrationService.getStates());
-    map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
-    map.put("workExperianceList", ServiceUtil.WORK_EXPERIANCE);
-    map.put("degreeList", userRegistrationService.getDegrees());
-
   }
 
   @RequestMapping(value = "/newuser", method = RequestMethod.POST)
@@ -80,9 +45,15 @@ public class UserRegistrationController extends BaseController {
       resume = multipartFile.getBytes();
       fileName = multipartFile.getOriginalFilename();
     }
-    userRegistrationService.saveInternetUser(userRegistrationForm.getUser(),
-      userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName,
-      userRegistrationForm.getDegree());
+
+    if (userRegistrationForm.getRegistrationType() == 2) {
+      userRegistrationService.saveInternetUser(userRegistrationForm.getUser(),
+        userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName,
+        userRegistrationForm.getDegree());
+    } else {
+      userRegistrationService.saveAdminUser(userRegistrationForm.getUser(), userRegistrationForm.getSecurityQuestion(),
+        userRegistrationForm.getSecurityAnswer(), resume, fileName, userRegistrationForm.getDegree());
+    }
     return "redirect:/";
   }
 

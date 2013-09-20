@@ -20,4 +20,10 @@ public interface UserRegistrationService {
 
   public void updateInternetUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
       String fileName, String degree);
+
+  public void saveAdminUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
+      String fileName, String degree);
+
+  public User saveMlmUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
+      String fileName, String degree);
 }

@@ -307,7 +307,6 @@
             <column name="version" valueNumeric="0"/>
 		</insert>
 	</changeSet> 
-	
 	<changeSet author="shiv" id="1376829106667-9">
         <insert tableName="degree">
             <column name="name" value="10"/>
@@ -459,6 +458,210 @@
             <column name="updated_at" valueDate="now()"/>
             <column name="version" valueNumeric="0"/>
 		</insert>
-		
     </changeSet>
+	<changeSet author="shiv" id="1376829106667-10">
+        <insert tableName="commision_level">
+            <column name="level" value="0"/>
+            <column name="description" value="Root Level"/>
+            <column name="percentage" value="0.0"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="1"/>
+            <column name="description" value="Level-1"/>
+            <column name="percentage" value="30.00"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="2"/>
+            <column name="description" value="Level-2"/>
+            <column name="percentage" value="25.00"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="3"/>
+            <column name="description" value="Level-3"/>
+            <column name="percentage" value="15.00"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="4"/>
+            <column name="description" value="Level-4"/>
+            <column name="percentage" value="10.00"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="5"/>
+            <column name="description" value="Level-5"/>
+            <column name="percentage" value="9.00"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="6"/>
+            <column name="description" value="Level-6"/>
+            <column name="percentage" value="8.00"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="7"/>
+            <column name="description" value="Level-7"/>
+            <column name="percentage" value="6.00"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="8"/>
+            <column name="description" value="Level-8"/>
+            <column name="percentage" value="5.00"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="9"/>
+            <column name="description" value="Level-9"/>
+            <column name="percentage" value="4.50"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="10"/>
+            <column name="description" value="Level-10"/>
+            <column name="percentage" value="4.00"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="11"/>
+            <column name="description" value="Level-11"/>
+            <column name="percentage" value="3.00"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="12"/>
+            <column name="description" value="Level-12"/>
+            <column name="percentage" value="1.50"/>
+            <column name="cap" valueBoolean="false"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="13"/>
+            <column name="description" value="Level-13"/>
+            <column name="percentage" value="1.50"/>
+            <column name="cap" valueBoolean="true"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="14"/>
+            <column name="description" value="Level-14"/>
+            <column name="percentage" value="1.50"/>
+            <column name="cap" valueBoolean="true"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="15"/>
+            <column name="description" value="Level-15"/>
+            <column name="percentage" value="1.50"/>
+            <column name="cap" valueBoolean="true"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="16"/>
+            <column name="description" value="Level-16"/>
+            <column name="percentage" value="1.50"/>
+            <column name="cap" valueBoolean="true"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="17"/>
+            <column name="description" value="Level-17"/>
+            <column name="percentage" value="1.50"/>
+            <column name="cap" valueBoolean="true"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="18"/>
+            <column name="description" value="Level-18"/>
+            <column name="percentage" value="1.50"/>
+            <column name="cap" valueBoolean="true"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="commision_level">
+            <column name="level" value="19"/>
+            <column name="description" value="Level-19"/>
+            <column name="percentage" value="1.50"/>
+            <column name="cap" valueBoolean="true"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+	</changeSet>
+	<changeSet author="shiv" id="1376829106667-11">
+        <insert tableName="system_configuration">
+            <column name="key" value="root-mlm-1"/>
+            <column name="value" value="0"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+        <insert tableName="system_configuration">
+            <column name="key" value="root-mlm-2"/>
+            <column name="value" value="0"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+	</changeSet>
+	
+	<changeSet author="shiv" id="1376829106667-12">
+	    <update tableName="user_groups">
+	        <column name="level" value="-1"></column>
+	        <where>group_id=1</where>	        
+	    </update>
+	</changeSet>
 </databaseChangeLog>

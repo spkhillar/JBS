@@ -5,6 +5,7 @@ package com.web.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,7 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.jpa.entities.User;
+import com.service.SecurityQuestionService;
+import com.service.UserRegistrationService;
 import com.service.UserService;
+import com.service.util.ServiceUtil;
+import com.web.form.UserRegistrationForm;
 import com.web.rest.RestResponse;
 
 /**
@@ -35,6 +40,12 @@ public class BaseController {
 
   @Autowired
   protected UserService userService;
+
+  @Autowired
+  protected SecurityQuestionService securityQuestionService;
+
+  @Autowired
+  protected UserRegistrationService userRegistrationService;
 
   @InitBinder
   public void initBinder(final WebDataBinder binder) {
@@ -80,6 +91,30 @@ public class BaseController {
         (org.springframework.security.core.userdetails.User) auth.getPrincipal();
     String username = principal.getUsername();
     return username;
+  }
+
+  protected void prepareObjectsForRegistration(final ModelMap map) {
+    Map<String, String> questionMap = securityQuestionService.getSecurityQuestions();
+    map.put("securityQuestions", questionMap);
+    map.put("states", userRegistrationService.getStates());
+    map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
+    map.put("workExperianceList", ServiceUtil.WORK_EXPERIANCE);
+    map.put("degreeList", userRegistrationService.getDegrees());
+  }
+
+  protected void retrieveAndPopulateUser(ModelMap map) {
+    UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
+    User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
+    userRegistrationForm.setUser(existingUser);
+    userRegistrationForm.setSecurityQuestion(existingUser.getUserSecurityQuestion().getSecurityQuestion().getId());
+    userRegistrationForm.setSecurityAnswer(existingUser.getUserSecurityQuestion().getAnswer());
+    userRegistrationForm.setDegree(existingUser.getQualifications().get(0).getDegree().getName());
+    userRegistrationForm.setTerms(true);
+    map.put("registration", userRegistrationForm);
+    map.put("currentLoggedInUserId", existingUser.getId());
+    map.put("qualifications", existingUser.getQualifications());
+    map.put("qualificationCount", existingUser.getQualifications().size() - 1);
+    prepareObjectsForRegistration(map);
   }
 
 }

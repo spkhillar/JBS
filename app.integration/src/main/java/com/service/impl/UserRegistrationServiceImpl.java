@@ -11,6 +11,7 @@ import java.util.TreeSet;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ import com.jpa.repositories.RoleDAO;
 import com.jpa.repositories.SecurityQuestionDAO;
 import com.jpa.repositories.UserDAO;
 import com.service.UserRegistrationService;
+import com.service.util.ApplicationConstants;
+import com.service.util.ServiceUtil;
 
 @Service("userRegistrationService")
 public class UserRegistrationServiceImpl implements UserRegistrationService {
@@ -82,6 +85,45 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
       String fileName, String degree) {
     Role role = roleDAO.findOne(2L);
     UserRole userRole = new UserRole(newUser, role);
+    saveUser(newUser, securityQuestionId, securityQuestionAnswer, resume, fileName, degree, userRole);
+  }
+
+  @Override
+  @Transactional
+  public void saveAdminUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
+      String fileName, String degree) {
+    Role role = roleDAO.findOne(1L);
+    UserRole userRole = new UserRole(newUser, role);
+    saveUser(newUser, securityQuestionId, securityQuestionAnswer, resume, fileName, degree, userRole);
+  }
+
+  @Override
+  @Transactional
+  public User saveMlmUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
+      String fileName, String degree) {
+    Role role = roleDAO.findOne(3L);
+    UserRole userRole = new UserRole(newUser, role);
+    newUser.setMlmAccountId(getMlmAccountId());
+    return saveUser(newUser, securityQuestionId, securityQuestionAnswer, resume, fileName, degree, userRole);
+  }
+
+  private String getMlmAccountId() {
+    String mlmAccountId = null;
+    boolean exist = true;
+    while (exist) {
+      int accountId = ServiceUtil.mlmAccountId();
+      mlmAccountId = ApplicationConstants.MLM_ACCOUNT_PREFEIX + accountId;
+      User user = userDao.findByMlmAccountId(mlmAccountId);
+      if (user == null) {
+        exist = false;
+      }
+    }
+    return mlmAccountId;
+  }
+
+  private User saveUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
+      String fileName, String degree, UserRole userRole) {
+
     newUser.setUserRole(userRole);
     SecurityQuestion securityQuestion = securityQuestionDAO.findOne(securityQuestionId);
     UserSecurityQuestion userSecurityQuestion =
@@ -89,19 +131,23 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     newUser.setUserSecurityQuestion(userSecurityQuestion);
     userSecurityQuestion.setUpdatedAt(new Date());
     newUser.getAddress().setUpdatedAt(new Date());
-
-    newUser.getSkill().setResume(resume);
-    newUser.getSkill().setResumeFileName(fileName);
-    newUser.getSkill().setUpdatedAt(new Date());
-
-    Qualification qualification = newUser.getQualifications().get(0);
-    Degree savedDegree = degreeDAO.findByName(degree);
-    qualification.setDegree(savedDegree);
-    qualification.setUser(newUser);
-    qualification.setUpdatedAt(new Date());
+    // for admin user
+    if (newUser.getSkill() != null) {
+      newUser.getSkill().setResume(resume);
+      newUser.getSkill().setResumeFileName(fileName);
+      newUser.getSkill().setUpdatedAt(new Date());
+    }
+    // For admin user
+    if (CollectionUtils.isNotEmpty(newUser.getQualifications())) {
+      Qualification qualification = newUser.getQualifications().get(0);
+      Degree savedDegree = degreeDAO.findByName(degree);
+      qualification.setDegree(savedDegree);
+      qualification.setUser(newUser);
+      qualification.setUpdatedAt(new Date());
+    }
     String encodedPassword = shaPasswordEncoder.encodePassword(newUser.getPassword(), newUser.getUserName());
     newUser.setPassword(encodedPassword);
-    userDao.save(newUser);
+    return userDao.save(newUser);
   }
 
   @Override

@@ -1,7 +1,5 @@
 package com.jpa.entities;
 
-
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -31,14 +29,13 @@ public class CommisionLevel implements BaseEntity, java.io.Serializable {
   private int level;
   private String description;
   private BigDecimal percentage;
+  private boolean cap;
   private Date createdAt;
   private Date updatedAt;
 
-  public CommisionLevel() {
-  }
+  public CommisionLevel() {}
 
-  public CommisionLevel(long id, int level, BigDecimal percentage,
-      Date createdAt, Date updatedAt) {
+  public CommisionLevel(long id, int level, BigDecimal percentage, Date createdAt, Date updatedAt) {
     this.id = id;
     this.level = level;
     this.percentage = percentage;
@@ -46,8 +43,7 @@ public class CommisionLevel implements BaseEntity, java.io.Serializable {
     this.updatedAt = updatedAt;
   }
 
-  public CommisionLevel(long id, int level, String description,
-      BigDecimal percentage, Date createdAt, Date updatedAt) {
+  public CommisionLevel(long id, int level, String description, BigDecimal percentage, Date createdAt, Date updatedAt) {
     this.id = id;
     this.level = level;
     this.description = description;
@@ -102,6 +98,15 @@ public class CommisionLevel implements BaseEntity, java.io.Serializable {
 
   public void setPercentage(BigDecimal percentage) {
     this.percentage = percentage;
+  }
+
+  @Column(name = "cap")
+  public boolean isCap() {
+    return cap;
+  }
+
+  public void setCap(boolean cap) {
+    this.cap = cap;
   }
 
   @Temporal(TemporalType.TIMESTAMP)

@@ -52,8 +52,8 @@
 <ul id="dropdown">
 	<li><a href="#" class="parent"><c:out value="${currentLoggedInUser}"></c:out> </a>	
 		<ul class="children">
-			<li><a href="${contextPath}/normal/user/retrieveuser/${currentLoggedInUserId}">My Profile</a></li>
-			<li><a href="${contextPath}/normal/user/changepassword/${currentLoggedInUserId}">Change Password</a></li>
+			<li><a href="${contextPath}/normal/user/retrieveuser">My Profile</a></li>
+			<li><a href="${contextPath}/normal/user/changepassword">Change Password</a></li>
 			<li><a href="#">Upgrade</a></li>
 			<li><a href="${contextPath}/j_spring_security_logout">Logout</a></li>
 		</ul>

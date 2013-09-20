@@ -81,7 +81,7 @@ public class UserDaoTest extends BaseTest {
 
     User userSaved = userDao.save(newUser);
 
-    System.err.println("......" + userSaved.isSignedForNotification());
+    System.err.println(userSaved + "......" + userSaved.isSignedForNotification());
 
   }
 }

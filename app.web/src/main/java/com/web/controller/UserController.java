@@ -10,7 +10,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jpa.entities.Role;
 import com.jpa.entities.User;
-import com.service.UserService;
 import com.web.rest.RestResponse;
 import com.web.util.DomainObjectMapper;
 import com.web.util.JqGridResponse;
@@ -30,15 +28,11 @@ import com.web.util.JqGridResponse;
 /**
  * The Class UserController.
  * 
- * @author 
+ * @author
  */
 @RequestMapping(value = "/user")
 @Controller
 public class UserController extends AbstractJqGridFilterController {
-
-  /** The user service. */
-  @Autowired
-  private UserService userService;
 
   /** The excluded props in filter. */
   private final String[] excludedPropsInFilter = new String[] { "roleId" };
@@ -67,34 +61,32 @@ public class UserController extends AbstractJqGridFilterController {
    * Records.
    * 
    * @param search
-   *            the search
+   *          the search
    * @param filters
-   *            the filters
+   *          the filters
    * @param page
-   *            the page
+   *          the page
    * @param rows
-   *            the rows
+   *          the rows
    * @param sidx
-   *            the sidx
+   *          the sidx
    * @param sord
-   *            the sord
+   *          the sord
    * @return the jq grid response
    */
   @RequestMapping(value = "/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<User> records(@RequestParam("_search") final Boolean search,
-    @RequestParam(value = "filters", required = false) final String filters,
-    @RequestParam(value = "page", required = false) final Integer page,
-    @RequestParam(value = "rows", required = false) final Integer rows,
-    @RequestParam(value = "sidx", required = false) final String sidx,
-    @RequestParam(value = "sord", required = false) final String sord) {
+      @RequestParam(value = "filters", required = false) final String filters,
+      @RequestParam(value = "page", required = false) final Integer page,
+      @RequestParam(value = "rows", required = false) final Integer rows,
+      @RequestParam(value = "sidx", required = false) final String sidx,
+      @RequestParam(value = "sord", required = false) final String sord) {
     Page<User> users = null;
     if (search == true) {
       Map<String, Object> paramObject = new LinkedHashMap<String, Object>();
-      String filterPredicate = getFilteredRecords(filters, sord, sidx,
-        paramObject, User.class);
-      users = userService.findALL(page, rows, filterPredicate,
-        paramObject);
+      String filterPredicate = getFilteredRecords(filters, sord, sidx, paramObject, User.class);
+      users = userService.findALL(page, rows, filterPredicate, paramObject);
     } else {
       users = userService.findALL(page, rows, sord, sidx);
     }
@@ -111,7 +103,7 @@ public class UserController extends AbstractJqGridFilterController {
    * Creates the.
    * 
    * @param user
-   *            the user
+   *          the user
    * @return the rest response
    */
   @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -127,7 +119,7 @@ public class UserController extends AbstractJqGridFilterController {
    * Update.
    * 
    * @param user
-   *            the user
+   *          the user
    * @return the rest response
    */
   @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -143,7 +135,7 @@ public class UserController extends AbstractJqGridFilterController {
    * Delete.
    * 
    * @param user
-   *            the user
+   *          the user
    * @return the rest response
    */
   @RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -166,8 +158,7 @@ public class UserController extends AbstractJqGridFilterController {
     List<Role> roleList = userService.listRoles();
     StringBuilder sb = new StringBuilder();
     for (Role role : roleList) {
-      sb.append(role.getId()).append(":").append(role.getName())
-      .append(";");
+      sb.append(role.getId()).append(":").append(role.getName()).append(";");
     }
     String roles = sb.substring(0, sb.length() - 1);
     return roles;
@@ -177,19 +168,19 @@ public class UserController extends AbstractJqGridFilterController {
    * Export.
    * 
    * @param search
-   *            the search
+   *          the search
    * @param filters
-   *            the filters
+   *          the filters
    * @param page
-   *            the page
+   *          the page
    * @param rows
-   *            the rows
+   *          the rows
    * @param sidx
-   *            the sidx
+   *          the sidx
    * @param sord
-   *            the sord
+   *          the sord
    * @param httpServletResponse
-   *            the http servlet response
+   *          the http servlet response
    */
   @RequestMapping(value = "/export")
   public void export(@RequestParam("_search") final Boolean search,
@@ -197,31 +188,28 @@ public class UserController extends AbstractJqGridFilterController {
       @RequestParam(value = "page", required = false) final Integer page,
       @RequestParam(value = "rows", required = false) final Integer rows,
       @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord,
-      final HttpServletResponse httpServletResponse) {
+      @RequestParam(value = "sord", required = false) final String sord, final HttpServletResponse httpServletResponse) {
     String filterPredicate = null;
     Map<String, Object> paramObject = null;
     if (search) {
       paramObject = new LinkedHashMap<String, Object>();
-      filterPredicate = getFilteredRecords(filters, sord, sidx,
-        paramObject, User.class);
+      filterPredicate = getFilteredRecords(filters, sord, sidx, paramObject, User.class);
     }
-    userService.exportUsers(filterPredicate, paramObject,
-      httpServletResponse, "users.xls");
+    userService.exportUsers(filterPredicate, paramObject, httpServletResponse, "users.xls");
   }
 
   /**
    * Check user name.
    * 
    * @param userName
-   *            the user name
+   *          the user name
    * @return the boolean
    */
   @RequestMapping(value = "/checkUserName/{userName}")
   @ResponseBody
-  public boolean checkUserName( @PathVariable final String userName) {
+  public boolean checkUserName(@PathVariable final String userName) {
     User user = userService.findByUserName(userName);
-    if(user != null){
+    if (user != null) {
       return true;
     }
     return false;

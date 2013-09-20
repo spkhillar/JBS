@@ -1146,4 +1146,23 @@
 			<append value=" after mlm_account_id" />
 		</modifySql>   
     </changeSet>
+    <changeSet author="shiv" id="1367592120330-47">
+		<addColumn tableName="commision_level">
+		    <column name="cap" type="BIT" defaultValueBoolean="false">
+		    </column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after percentage" />
+		</modifySql>   
+    </changeSet>
+    <changeSet author="shiv" id="1367592120330-48">
+		<modifyDataType tableName="system_configuration" columnName="key" newDataType="VARCHAR(100)"/>
+    </changeSet>
+    <changeSet author="shiv" id="1367592120330-49">
+		<addUniqueConstraint tableName="system_configuration" columnNames="key"/>        
+    </changeSet>
+    
+    <changeSet author="shiv" id="1367592120330-50">
+		<addUniqueConstraint tableName="user" columnNames="username"/>    
+    </changeSet>
 </databaseChangeLog>

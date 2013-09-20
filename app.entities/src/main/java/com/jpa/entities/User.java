@@ -657,6 +657,11 @@ public class User implements BaseEntity, java.io.Serializable {
       builder.append(createdAt);
       builder.append(", ");
     }
+    if (mlmAccountId != null) {
+      builder.append("mlmAccountId=");
+      builder.append(mlmAccountId);
+      builder.append(", ");
+    }
     if (userRole != null) {
       builder.append("userRole=");
       builder.append(userRole);

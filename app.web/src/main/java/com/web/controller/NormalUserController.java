@@ -1,7 +1,6 @@
 package com.web.controller;
 
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,10 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jpa.entities.Job;
 import com.jpa.entities.User;
 import com.service.JobService;
-import com.service.SecurityQuestionService;
-import com.service.UserRegistrationService;
-import com.service.UserService;
-import com.service.util.ServiceUtil;
 import com.web.form.UserRegistrationForm;
 
 @Controller
@@ -27,31 +22,11 @@ import com.web.form.UserRegistrationForm;
 public class NormalUserController extends BaseController {
 
   @Autowired
-  private UserRegistrationService userRegistrationService;
-
-  @Autowired
-  private SecurityQuestionService securityQuestionService;
-
-  @Autowired
-  private UserService userService;
-
-  @Autowired
   private JobService jobService;
 
-  @RequestMapping(value = "/retrieveuser/{userId}", method = RequestMethod.GET)
-  public String retrieveUser(final ModelMap map, final HttpServletRequest request, @PathVariable final Long userId) {
-    UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
-    User existingUser = userRegistrationService.retrieveUser(userId);
-    userRegistrationForm.setUser(existingUser);
-    userRegistrationForm.setSecurityQuestion(existingUser.getUserSecurityQuestion().getSecurityQuestion().getId());
-    userRegistrationForm.setSecurityAnswer(existingUser.getUserSecurityQuestion().getAnswer());
-    userRegistrationForm.setDegree(existingUser.getQualifications().get(0).getDegree().getName());
-    userRegistrationForm.setTerms(true);
-    map.put("registration", userRegistrationForm);
-    map.put("currentLoggedInUserId", existingUser.getId());
-    map.put("qualifications", existingUser.getQualifications());
-    map.put("qualificationCount", existingUser.getQualifications().size() - 1);
-    prepareObjectsForRendering(map);
+  @RequestMapping(value = "/retrieveuser", method = RequestMethod.GET)
+  public String retrieveUser(final ModelMap map, final HttpServletRequest request) {
+    retrieveAndPopulateUser(map);
     return "normal.user.profile";
   }
 
@@ -80,18 +55,9 @@ public class NormalUserController extends BaseController {
     return "viewjobs";
   }
 
-  private void prepareObjectsForRendering(final ModelMap map) {
-    Map<String, String> questionMap = securityQuestionService.getSecurityQuestions();
-    map.put("securityQuestions", questionMap);
-    map.put("states", userRegistrationService.getStates());
-    map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
-    map.put("workExperianceList", ServiceUtil.WORK_EXPERIANCE);
-    map.put("degreeList", userRegistrationService.getDegrees());
-  }
-
-  @RequestMapping(value = "/changepassword/{userId}", method = RequestMethod.GET)
-  public String changePassword(final ModelMap map, final HttpServletRequest request, @PathVariable final Long userId) {
-    User existingUser = userRegistrationService.retrieveUser(userId);
+  @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
+  public String changePassword(final ModelMap map, final HttpServletRequest request) {
+    User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
     map.put("currentLoggedInUserId", existingUser.getId());
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
     map.put("registration", userRegistrationForm);

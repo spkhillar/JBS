@@ -1,7 +1,5 @@
 package com.jpa.entities;
 
-
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -26,21 +24,17 @@ public class SystemConfiguration implements BaseEntity, java.io.Serializable {
    */
   private static final long serialVersionUID = 1453277217032014984L;
   private long id;
-  private int version;
+  private int version = 0;
   private String key;
   private String value;
-  private Date createdAt;
+  private Date createdAt = new Date();
   private Date updatedAt;
 
-  public SystemConfiguration() {
-  }
+  public SystemConfiguration() {}
 
-  public SystemConfiguration(long id, String key, String value,
-      Date createdAt, Date updatedAt) {
-    this.id = id;
+  public SystemConfiguration(String key, String value, Date updatedAt) {
     this.key = key;
     this.value = value;
-    this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
 
@@ -84,7 +78,7 @@ public class SystemConfiguration implements BaseEntity, java.io.Serializable {
   }
 
   @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_at", nullable = false, length = 19)
+  @Column(name = "created_at", nullable = false, updatable = false, length = 19)
   public Date getCreatedAt() {
     return this.createdAt;
   }
@@ -101,6 +95,61 @@ public class SystemConfiguration implements BaseEntity, java.io.Serializable {
 
   public void setUpdatedAt(Date updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (key == null ? 0 : key.hashCode());
+    result = prime * result + (value == null ? 0 : value.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    SystemConfiguration other = (SystemConfiguration) obj;
+    if (key == null) {
+      if (other.key != null) {
+        return false;
+      }
+    } else if (!key.equals(other.key)) {
+      return false;
+    }
+    if (value == null) {
+      if (other.value != null) {
+        return false;
+      }
+    } else if (!value.equals(other.value)) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("SystemConfiguration [");
+    if (key != null) {
+      builder.append("key=");
+      builder.append(key);
+      builder.append(", ");
+    }
+    if (value != null) {
+      builder.append("value=");
+      builder.append(value);
+    }
+    builder.append("]");
+    return builder.toString();
   }
 
 }

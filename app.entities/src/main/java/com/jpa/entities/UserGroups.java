@@ -1,11 +1,10 @@
 package com.jpa.entities;
 
-
-
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+
+import com.jpa.entities.enums.UserPosition;
 
 /**
  * UserGroups
@@ -33,26 +34,23 @@ public class UserGroups implements BaseEntity, java.io.Serializable {
   private User userByGroupId;
   private User userByParentGroupId;
   private int level;
-  private char position;
-  private Date createdAt;
+  private UserPosition position;
+  private Date createdAt = new Date();
   private Date updatedAt;
 
-  public UserGroups() {
-  }
+  public UserGroups() {}
 
-  public UserGroups(User userByGroupId, int level, char position) {
+  public UserGroups(User userByGroupId, int level, UserPosition position) {
     this.userByGroupId = userByGroupId;
     this.level = level;
     this.position = position;
   }
 
-  public UserGroups(User userByGroupId, User userByParentGroupId, int level,
-      char position, Date createdAt, Date updatedAt) {
+  public UserGroups(User userByGroupId, User userByParentGroupId, int level, UserPosition position, Date updatedAt) {
     this.userByGroupId = userByGroupId;
     this.userByParentGroupId = userByParentGroupId;
     this.level = level;
     this.position = position;
-    this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
 
@@ -106,12 +104,13 @@ public class UserGroups implements BaseEntity, java.io.Serializable {
     this.level = level;
   }
 
+  @Enumerated
   @Column(name = "position", nullable = false, length = 1)
-  public char getPosition() {
+  public UserPosition getPosition() {
     return this.position;
   }
 
-  public void setPosition(char position) {
+  public void setPosition(UserPosition position) {
     this.position = position;
   }
 
@@ -133,6 +132,56 @@ public class UserGroups implements BaseEntity, java.io.Serializable {
 
   public void setUpdatedAt(Date updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + level;
+    result = prime * result + (position == null ? 0 : position.hashCode());
+    result = prime * result + (userByGroupId == null ? 0 : userByGroupId.hashCode());
+    result = prime * result + (userByParentGroupId == null ? 0 : userByParentGroupId.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    UserGroups other = (UserGroups) obj;
+    if (level != other.level) {
+      return false;
+    }
+    if (position == null) {
+      if (other.position != null) {
+        return false;
+      }
+    } else if (!position.equals(other.position)) {
+      return false;
+    }
+    if (userByGroupId == null) {
+      if (other.userByGroupId != null) {
+        return false;
+      }
+    } else if (!userByGroupId.equals(other.userByGroupId)) {
+      return false;
+    }
+    if (userByParentGroupId == null) {
+      if (other.userByParentGroupId != null) {
+        return false;
+      }
+    } else if (!userByParentGroupId.equals(other.userByParentGroupId)) {
+      return false;
+    }
+    return true;
   }
 
 }

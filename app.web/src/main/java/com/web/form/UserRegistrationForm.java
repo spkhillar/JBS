@@ -26,6 +26,8 @@ public class UserRegistrationForm {
 
   private String newPassword;
 
+  private int registrationType = 2;
+
   public UserRegistrationForm() {
     super();
     createUserRegistrationForm();
@@ -109,6 +111,14 @@ public class UserRegistrationForm {
 
   public void setNewPassword(String newPassword) {
     this.newPassword = newPassword;
+  }
+
+  public int getRegistrationType() {
+    return registrationType;
+  }
+
+  public void setRegistrationType(int registrationType) {
+    this.registrationType = registrationType;
   }
 
 }

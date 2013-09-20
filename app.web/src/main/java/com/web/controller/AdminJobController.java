@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -27,7 +25,6 @@ import com.service.JobService;
 import com.service.UserRegistrationService;
 import com.service.util.ServiceUtil;
 import com.web.form.JobForm;
-import com.web.form.UserRegistrationForm;
 import com.web.util.DomainObjectMapper;
 import com.web.util.JqGridResponse;
 
@@ -105,11 +102,11 @@ public class AdminJobController extends BaseController {
   @RequestMapping(value = "/job/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<Job> records(@RequestParam("_search") final Boolean search,
-    @RequestParam(value = "filters", required = false) final String filters,
-    @RequestParam(value = "page", required = false) final Integer page,
-    @RequestParam(value = "rows", required = false) final Integer rows,
-    @RequestParam(value = "sidx", required = false) final String sidx,
-    @RequestParam(value = "sord", required = false) final String sord) {
+      @RequestParam(value = "filters", required = false) final String filters,
+      @RequestParam(value = "page", required = false) final Integer page,
+      @RequestParam(value = "rows", required = false) final Integer rows,
+      @RequestParam(value = "sidx", required = false) final String sidx,
+      @RequestParam(value = "sord", required = false) final String sord) {
     Page<Job> jobs = null;
     if (search == true) {
       jobs = jobService.findALL(page, rows, sord, sidx);
@@ -124,7 +121,6 @@ public class AdminJobController extends BaseController {
     response.setPage(Integer.valueOf(jobs.getNumber() + 1).toString());
     return response;
   }
-
 
   @RequestMapping(value = "/job/view/{jobId}", method = RequestMethod.GET)
   public String viewJobDetials(@PathVariable final long jobId, final ModelMap map) {
@@ -183,20 +179,6 @@ public class AdminJobController extends BaseController {
     map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
     map.put("workExperianceList", ServiceUtil.WORK_EXPERIANCE);
 
-  }
-
-  @RequestMapping(value = "/changepassword/{userId}", method = RequestMethod.GET)
-  public String changePassword(final ModelMap map, final HttpServletRequest request, @PathVariable final Long userId) {
-    User existingUser = userRegistrationService.retrieveUser(userId);
-    map.put("currentLoggedInUserId", existingUser.getId());
-    UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
-    map.put("registration", userRegistrationForm);
-    return "admin.changepassword";
-  }
-
-  @RequestMapping(value = "/commission/list", method = RequestMethod.GET)
-  public String listCommission() {
-    return "admin.list.commission";
   }
 
 }

@@ -57,7 +57,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <form:form name="registrationForm" commandName="registration" id="registrationForm" enctype="multipart/form-data" method="POST">
 <table  border="0" id="usertbdesign" align="center">
-<c:if test="${currentLoggedInUserId eq null}">
+<c:if test="${(currentLoggedInUserId eq null) and (currentLoggedInAdminId eq null)}">
 <tr id="he">
   <td colspan="7" align="center" bgcolor="#0066CC" >Register to JOBSbySMS and receive job alerts on your mobile</td>
 </tr>
@@ -114,6 +114,7 @@
     </td>
   <td width="1%">&nbsp;</td>
 </tr>
+
 <tr class="header">
   <td>&nbsp;</td>
   <td>&nbsp;</td>
@@ -195,6 +196,7 @@
   <td height="21"><h4>&nbsp;</h4></td>
   <td><h4>&nbsp;</h4></td>
 </tr>
+ <c:if test="${currentLoggedInAdminId eq null}">
 <tr bgcolor="#FFFFFF" class="header2">
   <td colspan="7"><h4>
     <label for="othercity"></label>
@@ -224,9 +226,12 @@
   </table></td>
   <td>&nbsp;</td>
 </tr>
+</c:if>
+ <c:if test="${currentLoggedInAdminId eq null}">
 <tr bgcolor="#FFFFFF" class="header2">
   <td colspan="7"><h4> Educational Qualification</h4></td>
   </tr>
+
 <tr class="header">
   <td>&nbsp;</td>
   <td colspan="5"><table width="762" border="0" id="educationinfotb">
@@ -277,6 +282,8 @@
   </table>
   <td>&nbsp;</td>
 </tr>
+</c:if>
+ <c:if test="${currentLoggedInAdminId eq null}">
 <tr bgcolor="#FFFFFF" class="header2">
   <td>&nbsp;</td>	
   <td colspan="2">Upload Your Detailed Resume Document</td>
@@ -286,6 +293,7 @@
     Supported Formats: doc, docx, rtf, pdf. Max file size: 300 Kb</h5></td>
   <td>&nbsp;</td>
   </tr>
+  
 <tr bgcolor="#330000" class="header2">
   <td colspan="7">&nbsp;</td>
   </tr>
@@ -311,12 +319,18 @@
   
   </td>
 </tr>
+</c:if>
 <tr class="header2">
   <td >&nbsp;</td>
   <c:choose>
-  <c:when test="${currentLoggedInUserId eq null}">
+  <c:when test="${(currentLoggedInUserId eq null) and (currentLoggedInAdminId eq null)}">
 	  <td colspan="5" align="center" bgcolor="#FFFFFF">
 	  <button id="registerBtn" onclick="registerUser();">Join to JobsbySMS</button>
+	  </td>
+  </c:when>
+  <c:when test="${currentLoggedInAdminId ne null}">
+	  <td colspan="5" align="center" bgcolor="#FFFFFF">
+	  <button id="registerBtn" onclick="registerUser();">Create Admin</button>
 	  </td>
   </c:when>
   <c:otherwise>
@@ -330,6 +344,7 @@
 </table>
 
 <form:hidden path="user.id" />
+<form:hidden path="registrationType" />
 </form:form>
 
 <div id="termsandconditiondiv" title="Terms and Conditions">
