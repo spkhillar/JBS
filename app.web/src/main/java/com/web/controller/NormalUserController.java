@@ -19,7 +19,7 @@ import com.web.form.UserRegistrationForm;
 
 @Controller
 @RequestMapping(value = "/normal/user")
-public class NormalUserController extends BaseController {
+public class NormalUserController extends BaseAuthenticatedController {
 
   @Autowired
   private JobService jobService;

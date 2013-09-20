@@ -30,7 +30,7 @@ import com.web.util.JqGridResponse;
 
 @Controller
 @RequestMapping(value = "/admin")
-public class JobController extends BaseController {
+public class JobController extends BaseAuthenticatedController {
 
   @Autowired
   private UserRegistrationService userRegistrationService;

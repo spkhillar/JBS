@@ -15,14 +15,11 @@
 <spring:url value="/resources/css/menu.css" var="resourceMenuCssUrl"/>
 <spring:url value="/resources/css/dropdown.css" var="resourceDropDownCssUrl"/>
 <spring:url value="/resources/css/jquery.dropdown.css" var="resourceDropDownJqCssUrl"/>
-
-
+<spring:url value="/resources/css/jquery.jui_dropdown.css" var="resourceJqJuiDropDownCssUrl"/>
 <!-- Index Page CSS -->
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
 <spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
 <spring:url value="/resources/css/headmenu.css" var="resourceHeadMenuCssUrl"/>
-
-
 
 <spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJqUrl"/>
 <spring:url value="/resources/js/jquery.validate.min.js" var="resourceJqvUrl"/>
@@ -34,8 +31,7 @@
 <spring:url value="/resources/js/sliderAccess.js" var="sliderAccessJS"/>
 <spring:url value="/resources/js/jMenu.jquery.js" var="resourceJMenuUrl"/>
 <spring:url value="/resources/js/jquery.dropdown.js" var="resourceDropDownJSUrl"/>
-
-
+<spring:url value="/resources/js/jquery.jui_dropdown.min.js" var="resourceJqJuiDropDownJsUrl"/>
 
 <script type="text/javascript" src="${resourceJqUrl}"></script>
 <script type="text/javascript" src="${resourceAppJsUrl}"></script>
@@ -47,8 +43,7 @@
 <script type="text/javascript" src="${sliderAccessJS}"></script>
 <script type="text/javascript" src="${resourceJMenuUrl}"></script>
 <script type="text/javascript" src="${resourceDropDownJSUrl}"></script>
-
-
+<script type="text/javascript" src="${resourceJqJuiDropDownJsUrl}"></script>
 
 <link rel="stylesheet" type="text/css" href="${resourceCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceMenuCssUrl}"/>
@@ -59,9 +54,7 @@
 <link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceDropDownJqCssUrl}"/>
-
-
-
+<link rel="stylesheet" type="text/css" href="${resourceJqJuiDropDownCssUrl}"/>
 
 
 <script type="text/javascript">

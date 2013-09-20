@@ -25,8 +25,4 @@ public interface ApplicationConstants {
 
   String MLM_ACCOUNT_PREFEIX = "JBS-";
 
-  String POSITION_LEFT = "L";
-
-  String POSITION_RIGHT = "R";
-
 }

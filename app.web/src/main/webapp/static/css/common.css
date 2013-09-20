@@ -111,3 +111,33 @@ table.settings td{
  padding: 7px;	
  border-width: thick;
 }
+
+.example {
+			color: #FFF;
+			cursor: pointer;
+			padding: 2px;
+			border-radius: 4px;
+			background: #888;
+			float: left;
+}
+		
+.example:after {
+			font-family: Consolas, Courier New, Arial, sans-serif;
+			margin-left: 6px;
+			color: #08c;
+}
+		
+				
+.example.dropdown-open {
+			background: blue;
+			color: #FFF;
+}
+		
+.example.dropdown-open:after {
+			color: #FFF;
+}
+
+.logout A {
+	background-image: url("../images/door-open-out.png"); 
+	background-repeat: no-repeat;
+}

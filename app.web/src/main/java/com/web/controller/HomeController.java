@@ -24,7 +24,7 @@ import com.web.rest.WebHomeData;
  * @author
  */
 @Controller
-public class HomeController extends BaseController {
+public class HomeController extends BaseAuthenticatedController {
 
   /** The Constant logger. */
   private static final Logger logger = LoggerFactory.getLogger(HomeController.class);

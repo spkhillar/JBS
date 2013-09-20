@@ -9,82 +9,75 @@
 <html>
 <head>
 <jsp:include page="app.jsp"></jsp:include>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style type="text/css">
-
-.example {
-			color: #FFF;
-			cursor: pointer;
-			padding: 2px;
-			border-radius: 4px;
-			background: #888;
-			float: left;
-		}
-		
-		.example:after {
-			font-family: Consolas, Courier New, Arial, sans-serif;
-			margin-left: 6px;
-			color: #08c;
-		}
-		
-				
-		.example.dropdown-open {
-			background: blue;
-			color: #FFF;
-		}
-		
-		.example.dropdown-open:after {
-			color: #FFF;
-		}
-</style>
-
 <script type="text/javascript">
 
-	$(document).ready(function () {
-
-		$('#dropdown').hover(
-		
-			function () {
-
-				//change the background of parent menu				
-				$('#dropdown li a.parent').addClass('hover');
-				
-				//display the submenu
-				$('#dropdown ul.children').show();
-				
-			},
-		
-			function () {
-
-				//change the background of parent menu
-				$('#dropdown li a.parent').removeClass('hover');			
-
-				//display the submenu
-				$('#dropdown ul.children').hide();
-				
-			}
-		
-		);
-		
-	});
-	
-
-	</script>
-
+$(document).ready(function(){
+	 $("#demo_drop1").jui_dropdown({
+		    launcher_id: 'launcher1',
+		    launcher_container_id: 'launcher1_container',
+		    menu_id: 'menu1',
+		    containerClass: 'container1',
+		    menuClass: 'menu1',
+		    launchOnMouseEnter: true,
+		    launcherUIShowText: true,
+		    launcherUISecondaryIconClass: 'ui-icon-gear',
+		    onSelect: function(event, data) {
+		      console.log('index: ' + data.index + ' (id: ' + data.id + ')');
+		    }
+		  });
+		 
+});
+</script>
+<style type="text/css">
+#jui_dropdown_demo {
+  height: 400px;
+}
+ 
+#jui_dropdown_demo button {
+  padding: 3px !important;
+}
+ 
+#jui_dropdown_demo ul li {
+  background: none;
+  display: inline-block;
+  list-style: none;
+}
+ 
+/* SELECTED OPTION INDICATOR ------------------------------------------------ */
+#opt_selected {
+  margin-top: 20px;
+  font-size: 20px;
+}
+ 
+/* DEMO_DROPDOWN 1 ---------------------------------------------------------- */
+.container1 {
+  margin: 20px 30px 10px 30px ;
+  display: inline-block;
+  width:200px;
+}
+ 
+.menu1 {
+  position: absolute;
+  width: 240px !important;
+  margin-top: 3px !important;
+}
+</style>
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<span class="example" data-dropdown="#dropdown-5">Welcome ${currentLoggedInUser}</span>
- <div id="dropdown-5" class="dropdown dropdown-tip has-icons">
-		<ul class="dropdown-menu">
-			<li class="createtree"><a href="#">Create Tree</a></li>
-			<li class="cpassword"><a href="${contextPath}/admin/changepassword")>Change Password</a></li>
-			<li class="dropdown-divider"></li>
-			<li class="logout"><a href="${contextPath}/j_spring_security_logout">Log Out</a></li>
-			
-		</ul>
-	</div>
-	<form:hidden path="user.id" />
+<div id="demo_drop1">
+  <div id="launcher1_container">
+    <button id="launcher1"><c:out value="${webUser.firstName} ${webUser.lastName}"></c:out></button>
+  </div>
+  <ul id="menu1">
+    <li id="opt_1.1">
+    	<a href="${contextPath}/admin/changepassword">Change Password</a>
+    </li>
+    <li id="opt_1.2">
+    	<a href="${contextPath}/j_spring_security_logout">Logout</a>
+    </li>
+  </ul>
+</div>
  </body>
 
 </html>

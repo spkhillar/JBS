@@ -29,10 +29,6 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
 #indextb tr td table {
 	text-align: center;
 }
-
-
-
-		
 		
 </style>
 
@@ -69,20 +65,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
     <td class="siteheadercells"><div id="site_title1"></div></td>
      <td class="siteheadercells"><div id="site_title2"></div></td>
     <td ><jsp:include page="admin-settings.jsp"></jsp:include>
-   <!--  <div id="user" class="example" data-dropdown="#dropdown-5">Welcome ${currentLoggedInUser}
-     </div>
-    
-    <div id="dropdown-5" class="dropdown dropdown-tip has-icons">
-		<ul class="dropdown-menu">
-			<li class="createtree"><a href="#">Create Tree</a></li>
-			<li class="cpassword"><a href="${contextPath}/admin/changepassword/${currentLoggedInUserId}")>Change Password</a></li>
-			<li class="dropdown-divider"></li>
-			<li class="logout"><a href="${contextPath}/j_spring_security_logout">Log Out</a></li>
-			
-		</ul>
-	</div>
- <form:hidden path="user.id" />
-  -->
+ 
 </td>
   </tr>
  <tr>
