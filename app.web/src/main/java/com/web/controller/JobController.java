@@ -30,7 +30,7 @@ import com.web.util.JqGridResponse;
 
 @Controller
 @RequestMapping(value = "/admin")
-public class AdminJobController extends BaseController {
+public class JobController extends BaseController {
 
   @Autowired
   private UserRegistrationService userRegistrationService;
@@ -39,7 +39,7 @@ public class AdminJobController extends BaseController {
   private JobService jobService;
 
   /** The Constant logger. */
-  private static final Logger logger = LoggerFactory.getLogger(AdminJobController.class);
+  private static final Logger logger = LoggerFactory.getLogger(JobController.class);
 
   @RequestMapping(value = "/job/list", method = RequestMethod.GET)
   public String listJobs() {
