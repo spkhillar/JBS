@@ -14,6 +14,7 @@ public class ResellerController extends BaseAuthenticatedController {
 
   @RequestMapping(value = "/paymentintimator", method = RequestMethod.GET)
   public String paymentIntimator(final ModelMap map, final HttpServletRequest request) {
+
     return "mlm.payment.intimator";
   }
 

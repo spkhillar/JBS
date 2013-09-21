@@ -13,6 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
+<form:form name="depositIntimator" commandName="depositIntimator" method="POST">
 <table border="0" width="80%" style="margin:auto">
   <tr>
     <td scope="col" widtd="48"><strong>Payment Intimator</strong></td>
@@ -22,8 +23,7 @@
       <tr>
         <td width="253" scope="col">Payment Mode</td>
         <td width="375" scope="col"><label for="select"></label>
-          <select name="select" id="select">
-          </select></td>
+          <form:select path=""> </form:select></td>
         </tr>
       <tr>
         <td widtd="159">Transaction Date</td>
@@ -102,5 +102,6 @@
     </table></td>
   </tr>
 </table>
+</form:form>
 </body>
 </html>
