@@ -359,4 +359,9 @@ public class UserServiceImpl implements UserService {
     }
     return matchPassword;
   }
+
+  @Override
+  public User findByMlmAccountId(String mlmAccountId) {
+    return userDAO.findByMlmAccountId(mlmAccountId);
+  }
 }

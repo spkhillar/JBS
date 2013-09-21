@@ -103,4 +103,6 @@ public interface UserService extends BaseService<User> {
 
   public boolean matchPassword(String username, String currentPassword, String newPassword);
 
+  public User findByMlmAccountId(String mlmAccountId);
+
 }

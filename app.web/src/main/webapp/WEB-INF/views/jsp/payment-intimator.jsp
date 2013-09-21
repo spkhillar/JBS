@@ -9,35 +9,47 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
-<jsp:include page="../tiles/base/app.jsp" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>
+$(document).ready(function(){
+    $("#depositIntimator\\.transactedDate").datepicker({dateFormat: "dd/mm/yy" });
+    $("#depositIntimator\\.chequeDate").datepicker({dateFormat: "dd/mm/yy" });
+    $("#initDeposit").button();
+});
+function initiateDeposit(){
+	var isValid = $("#depositIntimator").valid();
+	console.log('Form Valid...',isValid);
+	if(isValid){
+			$("#depositIntimator").attr("action",webContextPath+"/reseller/paymentintimator");
+		}
+	}
+</script>
 </head>
 <body>
-<form:form name="depositIntimator" commandName="depositIntimator" method="POST">
+<form:form name="depositIntimator" id="depositIntimator" commandName="depositIntimator" enctype="multipart/form-data" method="POST">
 <table border="0" width="80%" style="margin:auto">
   <tr>
-    <td scope="col" widtd="48"><strong>Payment Intimator</strong></td>
+    <td scope="col" width="48"><strong>Payment Intimator</strong></td>
   </tr>
   <tr>
-    <td><table widtd="527" border="0">
+    <td><table width="527" border="0">
       <tr>
         <td width="253" scope="col">Payment Mode</td>
         <td width="375" scope="col"><label for="select"></label>
-          <form:select path=""> </form:select></td>
+          <form:select path="paymentMode" items="${paymentModes}"> </form:select></td>
         </tr>
       <tr>
-        <td widtd="159">Transaction Date</td>
-        <td widtd="25"><label for="textfield"></label>
-          <input size=30 type="text" name="textfield" id="textfield" /></td>
+        <td width="159">Transaction Date</td>
+        <td width="25">
+          <form:input size="30" path="depositIntimator.transactedDate" /></td>
       </tr>
       <tr>
         <td>Transaction Amount</td>
-        <td><input size=30 type="text" name="textfield2" id="textfield2" /></td>
+        <td><form:input size="30" path="depositIntimator.amountDeposited" /></td>
       </tr>
       <tr>
         <td>Description</td>
         <td><label for="textarea"></label>
-          <textarea name="textarea" id="textarea" cols="45" rows="5"></textarea></td>
+          <form:textarea path="depositIntimator.description" cols="45" rows="5"/></td>
       </tr>
     </table></td>
   </tr>
@@ -45,10 +57,10 @@
     <td><strong>Cash Deposit in Hand</strong></td>
   </tr>
   <tr>
-    <td><table widtd="261" border="0">
+    <td><table width="261" border="0">
       <tr>
-        <td width="253"> Recevier MLM ID</td>
-        <td width="370"><input size=30 type="text" name="textfield3" id="textfield3" /></td>
+        <td width="253"> Receiver Reseller ID</td>
+        <td width="370"><form:input size="30" path="receiverResellerId"/></td>
       </tr>
     </table></td>
   </tr>
@@ -56,14 +68,14 @@
     <td><strong>Cash Deposit in Bank</strong></td>
   </tr>
   <tr>
-    <td><table width="644" border="0" widtd="200">
+    <td><table width="644" border="0" width="200">
       <tr>
         <td width="253" scope="col">Receipt Copy</td>
-        <td width="375" scope="col"><input size=30 type="text" name="textfield9" id="textfield9" /></td>
+        <td width="375" scope="col"><input type="file" name="cashReceipt" id="cashReceipt" /></td>
       </tr>
       <tr>
         <td>Bank Name</td>
-        <td><input size=30 type="text" name="textfield4" id="textfield4" /></td>
+        <td><form:input size="30" path="depositIntimator.cashDepositedBankName"/></td>
       </tr>
     </table></td>
   </tr>
@@ -71,10 +83,10 @@
     <td><strong>Details for NEFT/RTGS/Online Transfer</strong></td>
   </tr>
   <tr>
-    <td><table width="640" border="0" widtd="200">
+    <td><table width="640" border="0" width="200">
       <tr>
         <td width="245">Transaction Number</td>
-        <td width="367"><input size=30 type="text" name="textfield5" id="textfield5" /></td>
+        <td width="367"><form:input size="30" path="depositIntimator.transactionNumber" /></td>
       </tr>
     </table></td>
   </tr>
@@ -82,24 +94,29 @@
     <td><strong>Details for Cheque Transfer</strong></td>
   </tr>
   <tr>
-    <td><table widtd="200" border="0">
+    <td><table width="200" border="0">
       <tr>
         <td width="253">Cheque Number</td>
-        <td width="374"><input size=30 type="text" name="textfield6" id="textfield6" /></td>
+        <td width="374"><form:input size="30" path="depositIntimator.chequeNumber"/></td>
       </tr>
       <tr>
         <td>Cheque Date</td>
-        <td><input size=30 type="text" name="textfield7" id="textfield7" /></td>
+        <td><form:input size="30" path="depositIntimator.chequeDate"/></td>
       </tr>
       <tr>
         <td>Drawn on bank</td>
-        <td><input size=30 type="text" name="textfield8" id="textfield8" /></td>
+        <td><form:input size="30" path="depositIntimator.chequeDrawnOnBank"/></td>
       </tr>
       <tr>
         <td>Drawn on branch</td>
-        <td><input size=30 type="text" name="textfield10" id="textfield10" /></td>
+        <td><form:input size="30" path="depositIntimator.chequeDrawnBranch"/></td>
       </tr>
     </table></td>
+  </tr>
+  <tr>
+  <td>
+  	<button id="initDeposit" onclick="initiateDeposit();">Submit</button>
+  	</td>
   </tr>
 </table>
 </form:form>
