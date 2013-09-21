@@ -8,23 +8,26 @@
 #templatemo_footer_wrapper {
 	clear: both;
 	height: 85px;
-	background-color: #A2A2A2;
+	
+	width:80%; 
+	margin:auto;
 }
 
 #templatemo_footer {
 	clear: both;
-	width: 900px;
+	width: 80%;
 	height: 55px;
 	padding: 15px 30px;
-	margin: 0 auto;
+	margin:auto;
 	text-align: center;
-	color: #fff;
-	background-color: #A2A2A2;
+	color:maroon;
+	
 }
 
 #templatemo_footer a {
 	font-weight: normal;
-	color: #fff;
+	color: #CCC;
+	margin: auto;
 }
 
 em {
@@ -82,7 +85,7 @@ width:80%;
 	margin:auto;
 	
 }
-#jobListDiv,#commissionListDiv{
+#jobListDiv,#commissionListDiv,#systemConfigDiv{
 	
 	width:80%;
 	border-radius: 3px 3px 3px 3px;
@@ -140,4 +143,46 @@ table.settings td{
 .logout A {
 	background-image: url("../images/door-open-out.png"); 
 	background-repeat: no-repeat;
+}
+
+#profiletable{
+	width:100%;
+	background-color:C2E8EF;
+	font-size: 12px;
+	font-family:Arial;
+	margin:0px;
+	border:20px solid #CCC;
+	border-radius: 12px 12px 12px 12px;
+	padding: 40px;
+	
+	
+}
+
+  #outer { 
+  text-align: center; 
+  }
+  #inner { 
+  text-align: left; 
+  margin: 0 auto; 
+  
+  }
+  .t { 
+  float: left; 
+   width:30%; 
+  }
+  table { 
+  border: 2px solid #CCC;
+border-radius: 2px 2px 2px 2px;
+ 
+  }
+ #adjobtb,#jobdivtb{
+   width:80%;
+   border: 2px solid #CCC;
+ }
+#userdiv1{
+	background-image: url("../images/Ad_mlm.png");
+	background-size:250px 150px;
+	background-repeat:no-repeat;
+	padding-top: 180px;
+	text-align:center;
 }

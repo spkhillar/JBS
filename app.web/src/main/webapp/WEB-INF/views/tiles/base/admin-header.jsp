@@ -86,7 +86,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
             <li>
               <a class="configlink1" href="${contextPath}/admin/commission/list">Network Configuration</a> 
              </li>
-            <li><a class="configlink2">System Configuration</a></li>
+            <li><a class="configlink2" href="${contextPath}/admin/view/systemconfiguration">System Configuration</a></li>
              <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
             	<li><a class="configlink2" href="${contextPath}/admin/register/admin">Create System Admin</a></li>
             </sec:authorize>
@@ -114,8 +114,10 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
               
               </li>
             <li>
-              <a class="treelink2">MLM</a></li>
-            <li><a class="treelink3">Premium Users</a></li>
+              <a class="treelink2" href="${contextPath}/admin/view/reseller">MLM</a></li>
+            <li>
+            	<a class="treelink3">Premium Users</a>
+            </li>
             
             </ul>
           </li>

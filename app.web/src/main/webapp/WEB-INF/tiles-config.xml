@@ -108,5 +108,13 @@
 	<definition name="admin.list.commission" extends="admin.base.definition">
 		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/commission-list.jsp" />
 	</definition>
+	
+	<definition name="admin.view.systemconfiguration" extends="admin.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/system-configuration.jsp" />
+	</definition>
+	
+	<definition name="admin.view.reseller" extends="admin.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/view-reseller-tree.jsp" />
+	</definition>
 		
 </tiles-definitions>

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jpa.entities.Job;
 import com.service.JobService;
 import com.service.UserService;
+import com.service.util.ServiceUtil;
+import com.web.form.UserRegistrationForm;
 import com.web.http.session.management.LogoutEventPublisher;
 
 /**
@@ -50,8 +52,11 @@ public class AccessController extends BaseController {
     modelMap.addAttribute("message", message);
     Page<Job> privateJobList = jobService.findByCategory("PUS", 1, 5, "desc", "postedAt");
     Page<Job> publicJobList = jobService.findByCategory("PRS", 1, 5, "desc", "postedAt");
+    UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
+    modelMap.put("registration", userRegistrationForm);
     modelMap.put("privateJobList", privateJobList.getContent());
     modelMap.put("publicJobList", publicJobList.getContent());
+    prepareObjectsForRegistration(modelMap);
     return "site.home";
   }
 
@@ -131,4 +136,12 @@ public class AccessController extends BaseController {
   public String sessionTimeOut() {
     return "sessiontimeout";
   }
+
+  @Override
+  protected void prepareObjectsForRegistration(final ModelMap map) {
+    map.put("jobsFunctionalAreaList", userRegistrationService.getJobsFunctionalArea());
+    map.put("workExperianceList", ServiceUtil.WORK_EXPERIANCE);
+
+  }
+
 }

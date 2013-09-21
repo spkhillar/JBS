@@ -12,27 +12,35 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonMethod;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 /**
  * SystemConfiguration
  */
 @Entity
 @Table(name = "system_configuration")
+@JsonAutoDetect(JsonMethod.NONE)
 public class SystemConfiguration implements BaseEntity, java.io.Serializable {
 
   /**
    * 
    */
   private static final long serialVersionUID = 1453277217032014984L;
+  @JsonProperty
   private long id;
   private int version = 0;
+  @JsonProperty
   private String key;
+  @JsonProperty
   private String value;
   private Date createdAt = new Date();
   private Date updatedAt;
 
   public SystemConfiguration() {}
 
-  public SystemConfiguration(String key, String value, Date updatedAt) {
+  public SystemConfiguration(final String key, final String value, final Date updatedAt) {
     this.key = key;
     this.value = value;
     this.updatedAt = updatedAt;
@@ -45,7 +53,7 @@ public class SystemConfiguration implements BaseEntity, java.io.Serializable {
     return this.id;
   }
 
-  public void setId(long id) {
+  public void setId(final long id) {
     this.id = id;
   }
 
@@ -55,7 +63,7 @@ public class SystemConfiguration implements BaseEntity, java.io.Serializable {
     return this.version;
   }
 
-  public void setVersion(int version) {
+  public void setVersion(final int version) {
     this.version = version;
   }
 
@@ -64,7 +72,7 @@ public class SystemConfiguration implements BaseEntity, java.io.Serializable {
     return this.key;
   }
 
-  public void setKey(String key) {
+  public void setKey(final String key) {
     this.key = key;
   }
 
@@ -73,7 +81,7 @@ public class SystemConfiguration implements BaseEntity, java.io.Serializable {
     return this.value;
   }
 
-  public void setValue(String value) {
+  public void setValue(final String value) {
     this.value = value;
   }
 
@@ -83,7 +91,7 @@ public class SystemConfiguration implements BaseEntity, java.io.Serializable {
     return this.createdAt;
   }
 
-  public void setCreatedAt(Date createdAt) {
+  public void setCreatedAt(final Date createdAt) {
     this.createdAt = createdAt;
   }
 
@@ -93,7 +101,7 @@ public class SystemConfiguration implements BaseEntity, java.io.Serializable {
     return this.updatedAt;
   }
 
-  public void setUpdatedAt(Date updatedAt) {
+  public void setUpdatedAt(final Date updatedAt) {
     this.updatedAt = updatedAt;
   }
 
@@ -107,7 +115,7 @@ public class SystemConfiguration implements BaseEntity, java.io.Serializable {
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
     }

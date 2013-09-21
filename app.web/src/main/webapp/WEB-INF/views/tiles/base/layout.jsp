@@ -4,7 +4,8 @@
 <html >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>JOBSbySMS-Enquiry</title>
+<title>JOBSbySMS-Premium web site for Jobs, Opportunities, Networks and Benefits</title>
+<link rel="shortcut icon" href="resources/images/favico.png"/>
 
 </head>
 <body>

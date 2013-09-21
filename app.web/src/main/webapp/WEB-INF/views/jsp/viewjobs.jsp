@@ -10,23 +10,6 @@
 
 <title>JOBSbySMS- Job Information</title>
 
-<spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
-<spring:url value="/resources/css/headmenu.css" var="resourceUserHomeMenuCssUrl"/>
-<spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
-
-<%-- <spring:url value="/resources/js/jquery.popupoverlay.js" var="resourcePopupboxUrl"/>
-<spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJq2Url"/>
-<spring:url value="/resources/js/jquery-1.8.2.min.js" var="resourceJq8Url"/> --%>
-
-<link rel="stylesheet" type="text/css" href="${resourceUserHomeMenuCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
-
-<%-- <script type="text/javascript" src="${resourceJq2Url}"></script>
-<script type="text/javascript" src="${resourceJq8Url}"></script>
-
-<script type="text/javascript" src="${resourcePopupboxUrl}"></script> --%>
-
 <style>
 #govttb2 tr .pvtinfo {
 	font-weight: normal;

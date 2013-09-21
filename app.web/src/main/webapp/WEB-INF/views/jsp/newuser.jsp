@@ -59,7 +59,9 @@
 <table  border="0" id="usertbdesign" align="center">
 <c:if test="${(currentLoggedInUserId eq null) and (currentLoggedInAdminId eq null)}">
 <tr id="he">
-  <td colspan="7" align="center" bgcolor="#0066CC" >Register to JOBSbySMS and receive job alerts on your mobile</td>
+  <td colspan="7" align="center" bgcolor="#0066CC" >
+  		Register to JOBSbySMS and receive job alerts on your mobile
+  </td>
 </tr>
 </c:if>
 <tr bgcolor="#FFFFFF" class="header2">

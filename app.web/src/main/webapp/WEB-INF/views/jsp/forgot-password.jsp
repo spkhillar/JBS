@@ -62,15 +62,30 @@ $(document).ready(function(){
 <div id="forgottb">
 <table width="933" height="89" border="0" id="forgottb">
   <tr>
-    <td height="23" colspan="2" scope="col"><h2>Please select the option for login problem</h2></td>
+    <td height="23" colspan="2" scope="col">
+    	<h2>Please select the option for login problem</h2>
+    </td>
   </tr>
   <tr>
-    <td width="266" height="26"><p><input type="radio" name="radio" id="radio1" value="radio">I forgot my password</p></td>
+    <td width="266" height="26">
+    <p>
+    	<input type="radio" name="radio" id="radio1" value="radio">
+    	I forgot my password
+    </p>
+    	</td>
     <td width="326">
-    <input type="radio" name="radio" id="radio2" value="radio"><span class="s">I forgot my userid</span></td>
+    	<input type="radio" name="radio" id="radio2" value="radio">
+    	<span class="s">I forgot my userid</span>
+    </td>
   </tr>
   <tr>
-    <td height="30" colspan="2"><p>You can now easily retrieve your password if you have forgotten. Please provide your valid security details mentioned during registration and submit. The password will be sent to your valid registered email id and mobile number</p>
+    <td height="30" colspan="2">
+    <p> 
+    	You can now easily retrieve your password if you have forgotten. 
+    	Please provide your valid security details mentioned during registration and submit. 
+        The password will be sent to your valid registered email id and mobile number
+    </p>
+    
       <hr />
      <form:form name="registrationForm" commandName="registration" id="registrationForm" method="POST" action="${contextPath}/manage/forgotpwd/password">
       <table width="751" border="0" align="center" id="pwdtb" title="Recover Password" hidden="true">

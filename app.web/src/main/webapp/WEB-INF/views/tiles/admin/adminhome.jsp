@@ -12,7 +12,7 @@
 </head>
 <body>
 	<h1> Welcome </h1>
-	<div id="adminDiv" style="height: 500px;">
+	<div id="adminDiv" style="width: 80%; height: 500px;">
 	</div>
 </body>
 </html>

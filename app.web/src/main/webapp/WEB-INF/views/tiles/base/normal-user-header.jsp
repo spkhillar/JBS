@@ -28,11 +28,11 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <table border="0" id="indextb">
   <tr>
-    <td width="25%"><div class="siteheadercells" id="site_title"></div></td>
-    <td width="25%"></td>
-    <td width="25%" height="34"><div class="siteheadercells" id="site_title1"></div></td>
-    <td width="25%" height="34"></td>
-    <td width="25%" height="34" colspan="2">
+    <td width="30%"><div class="siteheadercells" id="site_title"></div></td>
+    <td width="30%"></td>
+    <td width="30%" height="34"><div id="site_title1"></div></td>
+    <td width="30%" height="34"></td>
+    <td width="30%" height="34" colspan="2">
     	<jsp:include page="usersettings.jsp"></jsp:include>
     </td>
   </tr>

@@ -9,56 +9,81 @@
 <html>
 <head>
 <jsp:include page="app.jsp"></jsp:include>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
 <script type="text/javascript">
 
-	$(document).ready(function () {
-
-		$('#dropdown').hover(
-		
-			function () {
-
-				//change the background of parent menu				
-				$('#dropdown li a.parent').addClass('hover');
-				
-				//display the submenu
-				$('#dropdown ul.children').show();
-				
-			},
-		
-			function () {
-
-				//change the background of parent menu
-				$('#dropdown li a.parent').removeClass('hover');			
-
-				//display the submenu
-				$('#dropdown ul.children').hide();
-				
-			}
-		
-		);
-		
-	});
-	
-
-	</script>
+$(document).ready(function(){
+	 $("#demo_drop1").jui_dropdown({
+		    launcher_id: 'launcher1',
+		    launcher_container_id: 'launcher1_container',
+		    menu_id: 'menu1',
+		    containerClass: 'container1',
+		    menuClass: 'menu1',
+		    launchOnMouseEnter: true,
+		    launcherUIShowText: true,
+		    launcherUISecondaryIconClass: 'ui-icon-gear',
+		    onSelect: function(event, data) {
+		      console.log('index: ' + data.index + ' (id: ' + data.id + ')');
+		    }
+		  });
+		 
+});
+</script>
 <style type="text/css">
-	
-	</style>
+#jui_dropdown_demo {
+  height: 400px;
+}
+ 
+#jui_dropdown_demo button {
+  padding: 3px !important;
+}
+ 
+#jui_dropdown_demo ul li {
+  background: none;
+  display: inline-block;
+  list-style: none;
+}
+ 
+/* SELECTED OPTION INDICATOR ------------------------------------------------ */
+#opt_selected {
+  margin-top: 20px;
+  font-size: 20px;
+}
+ 
+/* DEMO_DROPDOWN 1 ---------------------------------------------------------- */
+.container1 {
+  margin: 20px 30px 10px 30px ;
+  display: inline-block;
+  width:200px;
+}
+ 
+.menu1 {
+  position: absolute;
+  width: 240px !important;
+  margin-top: 3px !important;
+}
+</style>
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<ul id="dropdown">
-	<li><a href="#" class="parent"><c:out value="${currentLoggedInUser}"></c:out> </a>	
-		<ul class="children">
-			<li><a href="${contextPath}/normal/user/retrieveuser">My Profile</a></li>
-			<li><a href="${contextPath}/normal/user/changepassword">Change Password</a></li>
-			<li><a href="#">Upgrade</a></li>
-			<li><a href="${contextPath}/j_spring_security_logout">Logout</a></li>
-		</ul>
-	</li>
-</ul>
-<form:hidden path="user.id" />
-</body>
+<div id="demo_drop1">
+  <div id="launcher1_container">
+    <button id="launcher1"><c:out value="${webUser.firstName} ${webUser.lastName}"></c:out></button>
+  </div>
+  <ul id="menu1">
+    <li id="opt_1.1">
+    	<a href="${contextPath}/normal/user/retrieveuser">My Profile</a>
+    </li>
+    <li>
+    	<a href="${contextPath}/normal/user/changepassword">Change Password</a>
+    </li>
+    <li id="opt_1.3">
+    	<a href="#">Upgrade</a>
+    </li>
+    <li id="opt_1.4">
+    	<a href="${contextPath}/j_spring_security_logout">Logout</a>
+    </li>
+  </ul>
+</div>
+ </body>
+
 </html>

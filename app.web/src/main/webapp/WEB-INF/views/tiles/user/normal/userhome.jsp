@@ -8,7 +8,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>JOBSbySMS-User Home</title>
 <spring:url value="/resources/css/smartpaginator.css" var="resourceCssSmartPaginatorUrl"/>
 <spring:url value="/resources/js/smartpaginator.js" var="resourceJsSmartPaginatorUrl"/>
 <spring:url value="/resources/css/userpage.css" var="resourceUserPageCssUrl"/>

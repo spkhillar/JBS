@@ -19,17 +19,17 @@
 }
 
 #forgottb{
-	width:80%;
-	background-color:#CEBDAA;
+	width:100%;
+	background-color:#fff;
 	margin:auto;
 	border:2px solid thick;
 	border-radius: 2px 2px 2px 2px;
-	padding:20px;
+	padding:0px;
 }
 
 #changetb{
-	width:80%;
-	background-color:#CEBDAA;
+	width:100%;
+	background-color:#fff;
 	margin:auto;
 	border:2px solid thick;
 	border-radius: 2px 2px 2px 2px;
@@ -39,12 +39,12 @@
 
 
 #pwdtb,#useridtb{
-	width:100%;
+	width:60%;
 	background-color:#E6E1F4;
 	margin:auto;
 	border:2px solid thin;
 	border-radius: 2px 2px 2px 2px;
-	padding: 10px;
+	padding: 0px;
 }
 
 #jobdetail{
@@ -104,7 +104,7 @@
 
 #jobtb{
 	width:100%;
-	border:2px solid #CCC;
+	border:0px solid #CCC;
 	border-radius: 10px 10px 10px 10px;
 	font-size: 12px;
 	font-family:Arial;
@@ -158,26 +158,26 @@ td.jobheading{
    width:100%; 
   }
 #govttb{
-	width:100%;
-	border:2px solid #CCC;
+	width:50%;
+	border:0px solid #CCC;
 	border-radius: 1px 1px 10px 10px;
 	font-size: 12px;
 	font-family:Arial;
 	margin:auto;
 	font-weight: bold;
-	text-align: left;
+	float: left;
 	
 	
 }
 #privatetb{
-	width:100%;
-	border:2px solid #CCC;
+	width:50%;
+	border:0px solid #CCC;
 	border-radius: 1px 1px 10px 10px;
 	font-size: 12px;
 	font-family:Arial;
 	margin:auto;
 	font-weight: bold;
-	
+	float:left;
 	
 	
 }
@@ -192,7 +192,7 @@ td.pvtinfo{
 
 #jobsearch,#hiringlogo{
 	width:100%;
-	border:2px solid #CCC;
+	border:0px solid #CCC;
 	border-radius: 1px 1px 10px 10px;
 	margin:auto;
 	text-align: left;
@@ -240,6 +240,6 @@ a.menulink{
 	color: red;
 }
 
-td.home{
-
+#applyjobdiv{
+	text-align: center;
 }

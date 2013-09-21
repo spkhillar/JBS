@@ -41,12 +41,13 @@ $(document).ready(function(){
   background: none;
   display: inline-block;
   list-style: none;
+  border-radius:1px 1px 1px 1px;
 }
  
 /* SELECTED OPTION INDICATOR ------------------------------------------------ */
 #opt_selected {
-  margin-top: 20px;
-  font-size: 20px;
+  margin-top: 10px;
+  font-size: 10px;
 }
  
 /* DEMO_DROPDOWN 1 ---------------------------------------------------------- */
@@ -59,14 +60,14 @@ $(document).ready(function(){
 .menu1 {
   position: absolute;
   width: 240px !important;
-  margin-top: 3px !important;
+  margin-top: 6px !important;
 }
 </style>
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div id="demo_drop1">
-  <div id="launcher1_container">
+  <div id="launcher1_container" style="float: right">
     <button id="launcher1"><c:out value="${webUser.firstName} ${webUser.lastName}"></c:out></button>
   </div>
   <ul id="menu1">
