@@ -56,7 +56,12 @@
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/tiles/base/footer.jsp" />
 	</definition>
-	
+	<definition name="mlm.base.definition"
+		template="/WEB-INF/views/tiles/base/layout.jsp">
+		<put-attribute name="main-content" value="/WEB-INF/views/tiles/base/mlm-header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/base/footer.jsp" />
+	</definition>
 	<definition name="admin.home" extends="admin.base.definition">
 		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/adminhome.jsp" />
 	</definition>
@@ -119,6 +124,10 @@
 	
 	<definition name="admin.mlm.profile" extends="admin.base.definition">
 		<put-attribute name="body" value="/WEB-INF/views/jsp/newuser.jsp" />
+	</definition>
+	
+	<definition name="mlm.home" extends="mlm.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/mlm/mlm-home.jsp" />
 	</definition>
 		
 </tiles-definitions>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 , Inc. All rights reserved 
+ * Copyright (C) 2013 , Inc. All rights reserved
  */
 package com.web.controller;
 
@@ -78,7 +78,7 @@ public class BaseController {
     return restResponse;
   }
 
-  protected String getHomePage(ModelMap map) {
+  protected String getHomePage(final ModelMap map) {
     String username = this.getCurrentLoggedinUserName();
     User user = userService.findByUserName(username);
     Long roleId = user.getUserRole().getRole().getId();
@@ -86,6 +86,10 @@ public class BaseController {
       map.put("currentLoggedInUser", username);
       map.put("currentLoggedInUserId", user.getId());
       return "admin.home";
+    } else if (roleId.equals(3L) || roleId.equals(6L)) {
+      map.put("currentLoggedInUser", username);
+      map.put("currentLoggedInUserId", user.getId());
+      return "mlm.home";
     } else {
       return "redirect:/normal/user/home";
     }
@@ -108,7 +112,7 @@ public class BaseController {
     map.put("degreeList", userRegistrationService.getDegrees());
   }
 
-  protected void retrieveAndPopulateUser(ModelMap map, User existingUser) {
+  protected void retrieveAndPopulateUser(final ModelMap map, final User existingUser) {
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
     userRegistrationForm.setUser(existingUser);
     userRegistrationForm.setSecurityQuestion(existingUser.getUserSecurityQuestion().getSecurityQuestion().getId());
