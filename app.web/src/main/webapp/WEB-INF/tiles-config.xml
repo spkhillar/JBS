@@ -116,5 +116,9 @@
 	<definition name="admin.view.reseller" extends="admin.base.definition">
 		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/view-reseller-tree.jsp" />
 	</definition>
+	
+	<definition name="admin.mlm.profile" extends="admin.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/newuser.jsp" />
+	</definition>
 		
 </tiles-definitions>

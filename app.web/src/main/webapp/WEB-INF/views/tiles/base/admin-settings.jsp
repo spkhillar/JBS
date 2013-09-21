@@ -76,10 +76,10 @@ $(document).ready(function(){
     </li>
     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
     <li id="opt_1.2">
-    	<a href="#">Admin MLM-L</a>
+    	<a href="${contextPath}/admin/register/mlm/0">Admin MLM-L</a>
     </li>
     <li id="opt_1.3">
-    	<a href="#">Admin MLM-R</a>
+    	<a href="${contextPath}/admin/register/mlm/1">Admin MLM-R</a>
     </li>
     </sec:authorize>
     <li id="opt_1.4">

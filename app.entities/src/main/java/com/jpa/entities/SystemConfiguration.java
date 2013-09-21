@@ -67,7 +67,7 @@ public class SystemConfiguration implements BaseEntity, java.io.Serializable {
     this.version = version;
   }
 
-  @Column(name = "key", nullable = false, length = 512)
+  @Column(name = "key", nullable = false, updatable = false, length = 512)
   public String getKey() {
     return this.key;
   }

@@ -3,24 +3,30 @@
  */
 package com.web.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jpa.entities.Role;
 import com.jpa.entities.User;
+import com.web.form.UserRegistrationForm;
 import com.web.rest.RestResponse;
 import com.web.util.DomainObjectMapper;
 import com.web.util.JqGridResponse;
@@ -250,6 +256,22 @@ public class UserController extends AbstractJqGridFilterController {
   @Override
   public Map<String, String> getFilterExcludedPropertyOrderMapping() {
     return excludedPropOrderMapping;
+  }
+
+  @RequestMapping(value = "/updateuser", method = RequestMethod.POST)
+  public String updateUser(@ModelAttribute("registration") final UserRegistrationForm userRegistrationForm,
+      final ModelMap map, final HttpServletRequest request) throws IOException {
+    byte[] resume = null;
+    String fileName = null;
+    MultipartFile multipartFile = userRegistrationForm.getResume();
+    if (multipartFile != null) {
+      resume = multipartFile.getBytes();
+      fileName = multipartFile.getOriginalFilename();
+    }
+    userRegistrationService.updateInternetUser(userRegistrationForm.getUser(),
+      userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName,
+      userRegistrationForm.getDegree());
+    return getHomePage(map);
   }
 
 }

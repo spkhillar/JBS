@@ -100,7 +100,7 @@ function registerUser(){
 		if(userId == null || userId==undefined || userId == ""){
 			$("#registrationForm").attr("action",webContextPath+"/register/newuser");
 		}else{
-			$("#registrationForm").attr("action",webContextPath+"/register/updateuser");
+			$("#registrationForm").attr("action",webContextPath+"/user/updateuser");
 		}
 	}
 }

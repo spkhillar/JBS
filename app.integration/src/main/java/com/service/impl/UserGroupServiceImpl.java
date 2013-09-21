@@ -7,11 +7,11 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jpa.entities.User;
 import com.jpa.entities.UserGroups;
 import com.jpa.entities.enums.UserPosition;
-import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.jpa.repositories.UserDAO;
 import com.jpa.repositories.UserGroupsDAO;
 import com.service.UserGroupService;
@@ -24,9 +24,6 @@ public class UserGroupServiceImpl implements UserGroupService {
 
   @Autowired
   private UserDAO userDAO;
-
-  @Autowired
-  private GenericQueryExecutorDAO genericQueryExecutorDAO;
 
   @Override
   public void addToGroup(User currentUser, String parentMlmId, UserPosition position) {
@@ -58,5 +55,17 @@ public class UserGroupServiceImpl implements UserGroupService {
         }
       }
     }
+  }
+
+  @Override
+  @Transactional
+  public User findMlmAdminUser(User parentUser, UserPosition userPosition) {
+    User user = null;
+    UserGroups userGroups = userGroupsDAO.findByUserByParentGroupIdAndPosition(parentUser, userPosition);
+    if (userGroups != null) {
+      user = userGroups.getUserByGroupId();
+    }
+    user.getUserSecurityQuestion().getSecurityQuestion();
+    return user;
   }
 }

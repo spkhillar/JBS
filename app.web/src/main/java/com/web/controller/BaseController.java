@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,18 +108,19 @@ public class BaseController {
     map.put("degreeList", userRegistrationService.getDegrees());
   }
 
-  protected void retrieveAndPopulateUser(ModelMap map) {
+  protected void retrieveAndPopulateUser(ModelMap map, User existingUser) {
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
-    User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
     userRegistrationForm.setUser(existingUser);
     userRegistrationForm.setSecurityQuestion(existingUser.getUserSecurityQuestion().getSecurityQuestion().getId());
     userRegistrationForm.setSecurityAnswer(existingUser.getUserSecurityQuestion().getAnswer());
-    userRegistrationForm.setDegree(existingUser.getQualifications().get(0).getDegree().getName());
+    if (CollectionUtils.isNotEmpty(existingUser.getQualifications())) {
+      userRegistrationForm.setDegree(existingUser.getQualifications().get(0).getDegree().getName());
+      map.put("qualifications", existingUser.getQualifications());
+      map.put("qualificationCount", existingUser.getQualifications().size() - 1);
+    }
     userRegistrationForm.setTerms(true);
     map.put("registration", userRegistrationForm);
     map.put("currentLoggedInUserId", existingUser.getId());
-    map.put("qualifications", existingUser.getQualifications());
-    map.put("qualificationCount", existingUser.getQualifications().size() - 1);
     prepareObjectsForRegistration(map);
   }
 

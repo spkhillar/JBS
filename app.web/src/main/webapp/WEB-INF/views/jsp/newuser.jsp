@@ -57,7 +57,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <form:form name="registrationForm" commandName="registration" id="registrationForm" enctype="multipart/form-data" method="POST">
 <table  border="0" id="usertbdesign" align="center">
-<c:if test="${(currentLoggedInUserId eq null) and (currentLoggedInAdminId eq null)}">
+<c:if test="${operation eq 'new_user'}">
 <tr id="he">
   <td colspan="7" align="center" bgcolor="#0066CC" >
   		Register to JOBSbySMS and receive job alerts on your mobile
@@ -75,7 +75,7 @@
       <td width="36%">Username<em>*</em></td>
       <td width="64%">
       <c:choose>
-      <c:when test="${currentLoggedInUserId eq null}">
+      <c:when test="${(operation eq 'new_user') or (operation eq 'site_admin')}">
        <form:input path="user.userName" />
        </c:when>
        <c:otherwise>
@@ -88,7 +88,7 @@
       <td width="36%">Enter your Email id<em>*</em></td>
       <td width="64%"> <form:input path="user.email" /></td>
     </tr>
-    <c:if test="${currentLoggedInUserId eq null}">
+    <c:if test="${(operation eq 'new_user') or (operation eq 'site_admin')}">
     <tr>
       <td>Create a Password for your account<em>*</em></td>
       <td> <form:password path="user.password" /></td>
@@ -198,7 +198,7 @@
   <td height="21"><h4>&nbsp;</h4></td>
   <td><h4>&nbsp;</h4></td>
 </tr>
- <c:if test="${currentLoggedInAdminId eq null}">
+ <c:if test="${(operation eq 'new_user') or (operation eq 'user_update')}">
 <tr bgcolor="#FFFFFF" class="header2">
   <td colspan="7"><h4>
     <label for="othercity"></label>
@@ -229,7 +229,7 @@
   <td>&nbsp;</td>
 </tr>
 </c:if>
- <c:if test="${currentLoggedInAdminId eq null}">
+ <c:if test="${(operation eq 'new_user') or (operation eq 'user_update')}">
 <tr bgcolor="#FFFFFF" class="header2">
   <td colspan="7"><h4> Educational Qualification</h4></td>
   </tr>
@@ -245,7 +245,7 @@
       </tr>
       
      <c:choose>
-  <c:when test="${currentLoggedInUserId eq null}">
+  <c:when test="${operation eq 'new_user'}">
       <tr>
       <td>
       	<form:select path="degree" items="${degreeList}" ></form:select>
@@ -285,7 +285,7 @@
   <td>&nbsp;</td>
 </tr>
 </c:if>
- <c:if test="${currentLoggedInAdminId eq null}">
+ <c:if test="${(operation eq 'new_user') or (operation eq 'user_update')}">
 <tr bgcolor="#FFFFFF" class="header2">
   <td>&nbsp;</td>	
   <td colspan="2">Upload Your Detailed Resume Document</td>
@@ -325,12 +325,12 @@
 <tr class="header2">
   <td >&nbsp;</td>
   <c:choose>
-  <c:when test="${(currentLoggedInUserId eq null) and (currentLoggedInAdminId eq null)}">
+  <c:when test="${operation eq 'new_user'}">
 	  <td colspan="5" align="center" bgcolor="#FFFFFF">
 	  <button id="registerBtn" onclick="registerUser();">Join to JobsbySMS</button>
 	  </td>
   </c:when>
-  <c:when test="${currentLoggedInAdminId ne null}">
+  <c:when test="${(operation eq 'site_admin')}">
 	  <td colspan="5" align="center" bgcolor="#FFFFFF">
 	  <button id="registerBtn" onclick="registerUser();">Create Admin</button>
 	  </td>
@@ -347,6 +347,7 @@
 
 <form:hidden path="user.id" />
 <form:hidden path="registrationType" />
+<form:hidden path="mlmPosition" />
 </form:form>
 
 <div id="termsandconditiondiv" title="Terms and Conditions">

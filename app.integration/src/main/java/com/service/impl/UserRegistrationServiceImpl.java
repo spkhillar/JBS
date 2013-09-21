@@ -24,14 +24,18 @@ import com.jpa.entities.Degree;
 import com.jpa.entities.Qualification;
 import com.jpa.entities.Role;
 import com.jpa.entities.SecurityQuestion;
+import com.jpa.entities.SystemConfiguration;
 import com.jpa.entities.User;
 import com.jpa.entities.UserRole;
 import com.jpa.entities.UserSecurityQuestion;
+import com.jpa.entities.enums.UserPosition;
 import com.jpa.repositories.DegreeDAO;
 import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.jpa.repositories.RoleDAO;
 import com.jpa.repositories.SecurityQuestionDAO;
 import com.jpa.repositories.UserDAO;
+import com.service.SystemConfigurationService;
+import com.service.UserGroupService;
 import com.service.UserRegistrationService;
 import com.service.util.ApplicationConstants;
 import com.service.util.ServiceUtil;
@@ -59,6 +63,12 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
   private DegreeDAO degreeDAO;
 
   private Set<String> states = new TreeSet<String>();
+
+  @Autowired
+  private UserGroupService userGroupService;
+
+  @Autowired
+  private SystemConfigurationService systemConfigurationService;
 
   @Override
   public Set<String> getStates() {
@@ -100,11 +110,27 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
   @Override
   @Transactional
   public User saveMlmUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
-      String fileName, String degree) {
-    Role role = roleDAO.findOne(3L);
+      String fileName, String degree, long roleId) {
+    Role role = roleDAO.findOne(roleId);
     UserRole userRole = new UserRole(newUser, role);
     newUser.setMlmAccountId(getMlmAccountId());
-    return saveUser(newUser, securityQuestionId, securityQuestionAnswer, resume, fileName, degree, userRole);
+    User savedUser = saveUser(newUser, securityQuestionId, securityQuestionAnswer, resume, fileName, degree, userRole);
+    return savedUser;
+  }
+
+  @Override
+  @Transactional
+  public User saveMlmUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
+      String fileName, String degree, long roleId, UserPosition userPosition, String parentMlmAccountId) {
+    Role role = roleDAO.findOne(roleId);
+    UserRole userRole = new UserRole(newUser, role);
+    newUser.setMlmAccountId(getMlmAccountId());
+    User savedUser = saveUser(newUser, securityQuestionId, securityQuestionAnswer, resume, fileName, degree, userRole);
+    userGroupService.addToGroup(savedUser, parentMlmAccountId, userPosition);
+    if (StringUtils.isBlank(parentMlmAccountId)) {
+      updateSystemConfigProperties(userPosition);
+    }
+    return savedUser;
   }
 
   private String getMlmAccountId() {
@@ -180,25 +206,39 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
       dbUser.getSkill().setResume(resume);
       dbUser.getSkill().setResumeFileName(fileName);
     }
-    dbUser.getSkill().setSkills(newUser.getSkill().getSkills());
-    dbUser.getSkill().setUpdatedAt(new Date());
-    Qualification currQualification = newUser.getQualifications().get(0);
-    Qualification dbQualification = dbUser.getQualifications().get(0);
-    Degree savedDegree = dbQualification.getDegree();
+    // For admin user and mlm admin user
+    if (dbUser.getSkill() != null) {
+      dbUser.getSkill().setSkills(newUser.getSkill().getSkills());
+      dbUser.getSkill().setUpdatedAt(new Date());
+      Qualification currQualification = newUser.getQualifications().get(0);
+      Qualification dbQualification = dbUser.getQualifications().get(0);
+      Degree savedDegree = dbQualification.getDegree();
 
-    if (!StringUtils.equals(degree, savedDegree.getName())) {
-      Degree currDegree = degreeDAO.findByName(degree);
-      dbQualification.setDegree(currDegree);
+      if (!StringUtils.equals(degree, savedDegree.getName())) {
+        Degree currDegree = degreeDAO.findByName(degree);
+        dbQualification.setDegree(currDegree);
+      }
+      BeanUtils.copyProperties(currQualification, dbQualification, new String[] { "id", "version", "createdAt", "user",
+          "degree" });
+      dbQualification.setUpdatedAt(new Date());
     }
-    BeanUtils.copyProperties(currQualification, dbQualification, new String[] { "id", "version", "createdAt", "user",
-        "degree" });
-    dbQualification.setUpdatedAt(new Date());
     dbUser.setFirstName(newUser.getFirstName());
     dbUser.setEmail(newUser.getEmail());
     dbUser.setLastName(newUser.getLastName());
     dbUser.setPhone(newUser.getPhone());
     dbUser.setSignedForNotification(newUser.isSignedForNotification());
     userDao.save(dbUser);
+  }
+
+  private void updateSystemConfigProperties(UserPosition userPosition) {
+    SystemConfiguration systemConfiguration = null;
+    if (UserPosition.L.equals(userPosition)) {
+      systemConfiguration = systemConfigurationService.findByKey(ApplicationConstants.ROOT_MLM_1);
+    } else {
+      systemConfiguration = systemConfigurationService.findByKey(ApplicationConstants.ROOT_MLM_2);
+    }
+    systemConfiguration.setValue(ApplicationConstants.BOOLEAN_TRUE_STRING);
+    systemConfigurationService.update(systemConfiguration);
   }
 
   @PostConstruct

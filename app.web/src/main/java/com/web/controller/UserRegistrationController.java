@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,28 +14,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jpa.entities.User;
-import com.service.UserGroupService;
+import com.jpa.entities.enums.UserPosition;
+import com.service.util.ApplicationConstants;
 import com.web.form.UserRegistrationForm;
 
 @Controller()
 @RequestMapping("/register")
 public class UserRegistrationController extends BaseController {
 
-  @Autowired
-  private UserGroupService userGroupService;
-
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String register(final ModelMap map, final HttpServletRequest request) {
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
     map.put("registration", userRegistrationForm);
     map.put("qualificationCount", 0);
+    map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "new_user");
     prepareObjectsForRegistration(map);
     return "user.registration";
   }
 
   @RequestMapping(value = "/retrieveuser/{userId}", method = RequestMethod.GET)
   public String retrieveUser(final ModelMap map, final HttpServletRequest request, @PathVariable final Long userId) {
-    retrieveAndPopulateUser(map);
+    User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
+    retrieveAndPopulateUser(map, existingUser);
     return "newuser";
   }
 
@@ -55,37 +54,16 @@ public class UserRegistrationController extends BaseController {
       userRegistrationService.saveInternetUser(userRegistrationForm.getUser(),
         userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName,
         userRegistrationForm.getDegree());
-    } else if (userRegistrationForm.getRegistrationType() == 3) {
-      User savedMlmUser =
-          userRegistrationService.saveMlmUser(userRegistrationForm.getUser(),
-            userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName,
-            userRegistrationForm.getDegree());
-      User currentUser = userService.findByUserName(getCurrentLoggedinUserName());
-      Long roleId = currentUser.getUserRole().getRole().getId();
-      if (roleId.equals(1L)) {
-        // userGroupService.addToGroup(savedMlmUser, null, position)
-      }
+    } else if (userRegistrationForm.getRegistrationType() == 6) {
+      UserPosition position = userRegistrationForm.getMlmPosition() == 0 ? UserPosition.L : UserPosition.R;
+      userRegistrationService.saveMlmUser(userRegistrationForm.getUser(), userRegistrationForm.getSecurityQuestion(),
+        userRegistrationForm.getSecurityAnswer(), resume, fileName, userRegistrationForm.getDegree(),
+        userRegistrationForm.getRegistrationType(), position, null);
     } else if (userRegistrationForm.getRegistrationType() == 5) {
       userRegistrationService.saveAdminUser(userRegistrationForm.getUser(), userRegistrationForm.getSecurityQuestion(),
         userRegistrationForm.getSecurityAnswer(), resume, fileName, userRegistrationForm.getDegree());
     }
     return "redirect:/";
-  }
-
-  @RequestMapping(value = "/updateuser", method = RequestMethod.POST)
-  public String updateUser(@ModelAttribute("registration") final UserRegistrationForm userRegistrationForm,
-      final ModelMap map, final HttpServletRequest request) throws IOException {
-    byte[] resume = null;
-    String fileName = null;
-    MultipartFile multipartFile = userRegistrationForm.getResume();
-    if (multipartFile != null) {
-      resume = multipartFile.getBytes();
-      fileName = multipartFile.getOriginalFilename();
-    }
-    userRegistrationService.updateInternetUser(userRegistrationForm.getUser(),
-      userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName,
-      userRegistrationForm.getDegree());
-    return getHomePage(map);
   }
 
   @RequestMapping(value = "/view/terms")

@@ -32,18 +32,27 @@ public class MLMServiceTest extends BaseServiceTest {
     userGroupService.findChild("shiv1");
   }
 
+  @Test
+  public void testFindGrp() {
+    User user = userService.findByUserName("root");
+
+    User userMlm = userGroupService.findMlmAdminUser(user, UserPosition.L);
+    System.err.println("..." + userMlm.getId());
+
+  }
+
   /**
    * 
    * root 1 2 3 4 5 6 7 8 9 10
    * 
    */
-  @Test
+  // @Test
   public void testMlm() {
     List<User> savedUserList = new ArrayList<User>();
     Map<String, String> mlmMap = new HashMap<String, String>();
     for (int i = 1; i <= 14; i++) {
       User user = getUser("A" + i);
-      User savedUser = userRegistrationService.saveMlmUser(user, 1L, "shiv", null, null, null);
+      User savedUser = userRegistrationService.saveMlmUser(user, 1L, "shiv", null, null, null, 3l);
       savedUserList.add(savedUser);
       mlmMap.put(savedUser.getUserName(), savedUser.getMlmAccountId());
     }

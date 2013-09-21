@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.jpa.entities.User;
+import com.jpa.entities.enums.UserPosition;
 
 public interface UserRegistrationService {
 
@@ -25,5 +26,9 @@ public interface UserRegistrationService {
       String fileName, String degree);
 
   public User saveMlmUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
-      String fileName, String degree);
+      String fileName, String degree, long roleId, UserPosition userPosition, String parentMlmAccountId);
+
+  User saveMlmUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
+      String fileName, String degree, long roleId);
+
 }

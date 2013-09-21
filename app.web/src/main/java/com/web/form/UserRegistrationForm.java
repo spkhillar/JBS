@@ -28,6 +28,8 @@ public class UserRegistrationForm {
 
   private int registrationType = 2;
 
+  private int mlmPosition = 0;
+
   public UserRegistrationForm() {
     super();
     createUserRegistrationForm();
@@ -119,6 +121,14 @@ public class UserRegistrationForm {
 
   public void setRegistrationType(int registrationType) {
     this.registrationType = registrationType;
+  }
+
+  public int getMlmPosition() {
+    return mlmPosition;
+  }
+
+  public void setMlmPosition(int mlmPosition) {
+    this.mlmPosition = mlmPosition;
   }
 
 }

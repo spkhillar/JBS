@@ -672,4 +672,12 @@
             <column name="description" value="Site Administrator"/>
         </insert>
     </changeSet>
+    <changeSet author="shiv" id="1376829106667-14">
+        <insert tableName="role">
+            <column name="id" valueNumeric="6"/>
+            <column name="name" value="Mlm-Admin"/>
+            <column name="role_name" value="MLM_ADMIN"/>
+            <column name="description" value="MLM Administrator"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

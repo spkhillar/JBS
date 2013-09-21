@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jpa.entities.CommisionLevel;
 import com.jpa.entities.SystemConfiguration;
 import com.jpa.entities.User;
+import com.jpa.entities.enums.UserPosition;
 import com.service.CommisionLevelService;
 import com.service.SystemConfigurationService;
+import com.service.UserGroupService;
+import com.service.util.ApplicationConstants;
 import com.web.form.UserRegistrationForm;
 import com.web.util.DomainObjectMapper;
 import com.web.util.JqGridResponse;
@@ -32,6 +36,9 @@ public class AdminController extends BaseAuthenticatedController {
   @Autowired
   private SystemConfigurationService systemConfigurationService;
 
+  @Autowired
+  private UserGroupService userGroupService;
+
   @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
   public String changePassword(final ModelMap map, final HttpServletRequest request) {
     User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
@@ -45,14 +52,43 @@ public class AdminController extends BaseAuthenticatedController {
   public String createAdmin(final ModelMap map, final HttpServletRequest request) {
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
     userRegistrationForm.setRegistrationType(5);
+    map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "site_admin");
     setBasicAdminRegister(map, userRegistrationForm);
     return "create.admin.profile";
   }
 
-  @RequestMapping(value = "/register/mlm", method = RequestMethod.GET)
-  public String createMlmAdmin(final ModelMap map, final HttpServletRequest request) {
+  @RequestMapping(value = "/register/mlm/{position}", method = RequestMethod.GET)
+  public String createMlmAdmin(final ModelMap map, final HttpServletRequest request, @PathVariable int position) {
+    SystemConfiguration systemConfiguration = null;
+    if (position == 0) {
+      systemConfiguration =
+          systemConfigurationService.findByKeyAndValue(ApplicationConstants.ROOT_MLM_1,
+            ApplicationConstants.BOOLEAN_TRUE_STRING);
+    } else {
+      systemConfiguration =
+          systemConfigurationService.findByKeyAndValue(ApplicationConstants.ROOT_MLM_2,
+            ApplicationConstants.BOOLEAN_TRUE_STRING);
+    }
+    if (systemConfiguration == null) {
+      return checkAndReturnCreateView(map, position);
+    } else {
+      return retrieveAdminMlmAndReturnView(map, position);
+    }
+  }
+
+  private String retrieveAdminMlmAndReturnView(ModelMap map, int position) {
+    User user = userService.findByUserName(getCurrentLoggedinUserName());
+    UserPosition userPosition = position == 0 ? UserPosition.L : UserPosition.R;
+    User mlmUser = userGroupService.findMlmAdminUser(user, userPosition);
+    retrieveAndPopulateUser(map, mlmUser);
+    return "admin.mlm.profile";
+  }
+
+  private String checkAndReturnCreateView(final ModelMap map, int position) {
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
-    userRegistrationForm.setRegistrationType(3);
+    userRegistrationForm.setRegistrationType(6);
+    userRegistrationForm.setMlmPosition(position);
+    map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "site_admin");
     setBasicAdminRegister(map, userRegistrationForm);
     return "create.admin.profile";
   }

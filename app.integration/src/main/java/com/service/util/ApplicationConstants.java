@@ -27,4 +27,8 @@ public interface ApplicationConstants {
 
   String BOOLEAN_FALSE_STRING = "0";
 
+  String BOOLEAN_TRUE_STRING = "1";
+
+  String USER_OPERATION_ON_SCREEN = "operation";
+
 }

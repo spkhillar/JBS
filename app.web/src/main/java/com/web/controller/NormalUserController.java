@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jpa.entities.Job;
 import com.jpa.entities.User;
 import com.service.JobService;
+import com.service.util.ApplicationConstants;
 import com.web.form.UserRegistrationForm;
 
 @Controller
@@ -26,7 +27,9 @@ public class NormalUserController extends BaseAuthenticatedController {
 
   @RequestMapping(value = "/retrieveuser", method = RequestMethod.GET)
   public String retrieveUser(final ModelMap map, final HttpServletRequest request) {
-    retrieveAndPopulateUser(map);
+    User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
+    retrieveAndPopulateUser(map, existingUser);
+    map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "user_update");
     return "normal.user.profile";
   }
 
