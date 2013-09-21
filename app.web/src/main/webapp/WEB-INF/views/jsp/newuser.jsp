@@ -7,11 +7,10 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <jsp:include page="../tiles/base/app.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
 <style>
 * { margin: 0; padding: 0; }
 #usertbdesign.menuhd td {
