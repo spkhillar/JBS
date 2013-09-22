@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jpa.entities.CommisionLevel;
+import com.jpa.entities.DepositIntimator;
 import com.jpa.entities.SystemConfiguration;
 import com.jpa.entities.User;
 import com.jpa.entities.enums.UserPosition;
 import com.service.CommisionLevelService;
+import com.service.DepositIntimatorService;
 import com.service.SystemConfigurationService;
 import com.service.UserGroupService;
 import com.service.util.ApplicationConstants;
@@ -39,6 +41,10 @@ public class AdminController extends BaseAuthenticatedController {
   @Autowired
   private UserGroupService userGroupService;
 
+  @Autowired
+  private DepositIntimatorService depositIntimatorService;
+
+
   @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
   public String changePassword(final ModelMap map, final HttpServletRequest request) {
     User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
@@ -58,7 +64,7 @@ public class AdminController extends BaseAuthenticatedController {
   }
 
   @RequestMapping(value = "/register/mlm/{position}", method = RequestMethod.GET)
-  public String createMlmAdmin(final ModelMap map, final HttpServletRequest request, @PathVariable int position) {
+  public String createMlmAdmin(final ModelMap map, final HttpServletRequest request, @PathVariable final int position) {
     SystemConfiguration systemConfiguration = null;
     if (position == 0) {
       systemConfiguration =
@@ -76,7 +82,7 @@ public class AdminController extends BaseAuthenticatedController {
     }
   }
 
-  private String retrieveAdminMlmAndReturnView(ModelMap map, int position) {
+  private String retrieveAdminMlmAndReturnView(final ModelMap map, final int position) {
     User user = userService.findByUserName(getCurrentLoggedinUserName());
     UserPosition userPosition = position == 0 ? UserPosition.L : UserPosition.R;
     User mlmUser = userGroupService.findMlmAdminUser(user, userPosition);
@@ -84,7 +90,7 @@ public class AdminController extends BaseAuthenticatedController {
     return "admin.mlm.profile";
   }
 
-  private String checkAndReturnCreateView(final ModelMap map, int position) {
+  private String checkAndReturnCreateView(final ModelMap map, final int position) {
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
     userRegistrationForm.setRegistrationType(6);
     userRegistrationForm.setMlmPosition(position);
@@ -160,5 +166,33 @@ public class AdminController extends BaseAuthenticatedController {
   @RequestMapping(value = "/view/reseller", method = RequestMethod.GET)
   public String viewReseller() {
     return "admin.view.reseller";
+  }
+
+  @RequestMapping(value = "/view/deposit", method = RequestMethod.GET)
+  public String viewAllDeposit(final ModelMap map) {
+    return "payment.deposit.list";
+  }
+
+  @RequestMapping(value = "/deposit/records", produces = "application/json")
+  public @ResponseBody
+  JqGridResponse<DepositIntimator> mlmDepositRecords(@RequestParam("_search") final Boolean search,
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
+    Page<DepositIntimator> depositIntimator = null;
+    if (search == true) {
+      depositIntimator = depositIntimatorService.findAll(page, rows, sord, sidx);
+    } else {
+      depositIntimator = depositIntimatorService.findAll(page, rows, sord, sidx);
+    }
+    List<Object> list = DomainObjectMapper.listEntities(depositIntimator);
+    JqGridResponse<DepositIntimator> response = new JqGridResponse<DepositIntimator>();
+    response.setRows(list);
+    response.setRecords(Long.valueOf(depositIntimator.getTotalElements()).toString());
+    response.setTotal(Integer.valueOf(depositIntimator.getTotalPages()).toString());
+    response.setPage(Integer.valueOf(depositIntimator.getNumber() + 1).toString());
+    return response;
   }
 }

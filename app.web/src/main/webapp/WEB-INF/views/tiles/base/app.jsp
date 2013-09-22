@@ -22,6 +22,7 @@
 <spring:url value="/resources/css/headmenu.css" var="resourceHeadMenuCssUrl"/>
 
 <spring:url value="/resources/css/resellerview.css" var="resourceResellerViewCssUrl"/>
+<spring:url value="/resources/css/msgBoxLight.css" var="resourceMessageBoxCssUrl"/>
 
 
 <spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJqUrl"/>
@@ -36,6 +37,9 @@
 <spring:url value="/resources/js/jquery.dropdown.js" var="resourceDropDownJSUrl"/>
 <spring:url value="/resources/js/jquery.jui_dropdown.min.js" var="resourceJqJuiDropDownJsUrl"/>
 <spring:url value="/resources/js/splitter.js" var="resourceJqSplitterJsUrl"/>
+<spring:url value="/resources/js/jquery.msgBox.js" var="resourceJqMessageBoxJsUrl"/>
+
+
 
 <script type="text/javascript" src="${resourceJqUrl}"></script>
 <script type="text/javascript" src="${resourceAppJsUrl}"></script>
@@ -49,6 +53,7 @@
 <script type="text/javascript" src="${resourceDropDownJSUrl}"></script>
 <script type="text/javascript" src="${resourceJqJuiDropDownJsUrl}"></script>
 <script type="text/javascript" src="${resourceJqSplitterJsUrl}"></script>
+<script type="text/javascript" src="${resourceJqMessageBoxJsUrl}"></script>
 
 <link rel="stylesheet" type="text/css" href="${resourceCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceMenuCssUrl}"/>
@@ -61,6 +66,7 @@
 <link rel="stylesheet" type="text/css" href="${resourceDropDownJqCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceJqJuiDropDownCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceResellerViewCssUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceMessageBoxCssUrl}"/>
 
 
 <script type="text/javascript">

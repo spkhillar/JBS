@@ -17,6 +17,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonMethod;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import com.jpa.entities.enums.DepositIntimatorStatus;
 import com.jpa.entities.enums.DepositIntimatorType;
 import com.jpa.entities.enums.PaymentMode;
@@ -26,18 +30,24 @@ import com.jpa.entities.enums.PaymentMode;
  */
 @Entity
 @Table(name = "deposit_intimator")
+@JsonAutoDetect(JsonMethod.NONE)
 public class DepositIntimator implements BaseEntity, java.io.Serializable {
 
   /**
    * 
    */
   private static final long serialVersionUID = -6027320354612393779L;
+  @JsonProperty
   private long id;
   private int version;
+  @JsonProperty
   private User userByUserId;
   private User userByReceiverUserId;
+  @JsonProperty
   private BigDecimal amountDeposited;
+  @JsonProperty
   private Date transactedDate;
+  @JsonProperty
   private PaymentMode modeOfPayment;
   private Long transactionNumber;
   private byte[] receiptCopy;
@@ -46,6 +56,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
   private String chequeDrawnOnBank;
   private String chequeDrawnBranch;
   private DepositIntimatorStatus status;
+  @JsonProperty
   private DepositIntimatorType depositIntimatorType;
   private String description;
   private String cashDepositedBankName;
@@ -54,8 +65,8 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
 
   public DepositIntimator() {}
 
-  public DepositIntimator(long id, User userByUserId, BigDecimal amountDeposited, Date transactedDate,
-      PaymentMode modeOfPayment, DepositIntimatorStatus status, Date createdAt, Date updatedAt) {
+  public DepositIntimator(final long id, final User userByUserId, final BigDecimal amountDeposited, final Date transactedDate,
+      final PaymentMode modeOfPayment, final DepositIntimatorStatus status, final Date createdAt, final Date updatedAt) {
     this.id = id;
     this.userByUserId = userByUserId;
     this.amountDeposited = amountDeposited;
@@ -66,10 +77,10 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     this.updatedAt = updatedAt;
   }
 
-  public DepositIntimator(long id, User userByUserId, User userByReceiverUserId, BigDecimal amountDeposited,
-      Date transactedDate, PaymentMode modeOfPayment, Long transactionNumber, byte[] receiptCopy, String chequeNumber,
-      Date chequeDate, String chequeDrawnOnBank, String chequeDrawnBranch, DepositIntimatorStatus status,
-      Date createdAt, Date updatedAt) {
+  public DepositIntimator(final long id, final User userByUserId, final User userByReceiverUserId, final BigDecimal amountDeposited,
+      final Date transactedDate, final PaymentMode modeOfPayment, final Long transactionNumber, final byte[] receiptCopy, final String chequeNumber,
+      final Date chequeDate, final String chequeDrawnOnBank, final String chequeDrawnBranch, final DepositIntimatorStatus status,
+      final Date createdAt, final Date updatedAt) {
     this.id = id;
     this.userByUserId = userByUserId;
     this.userByReceiverUserId = userByReceiverUserId;
@@ -94,7 +105,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.id;
   }
 
-  public void setId(long id) {
+  public void setId(final long id) {
     this.id = id;
   }
 
@@ -104,17 +115,17 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.version;
   }
 
-  public void setVersion(int version) {
+  public void setVersion(final int version) {
     this.version = version;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id", nullable = false)
   public User getUserByUserId() {
     return this.userByUserId;
   }
 
-  public void setUserByUserId(User userByUserId) {
+  public void setUserByUserId(final User userByUserId) {
     this.userByUserId = userByUserId;
   }
 
@@ -124,7 +135,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.userByReceiverUserId;
   }
 
-  public void setUserByReceiverUserId(User userByReceiverUserId) {
+  public void setUserByReceiverUserId(final User userByReceiverUserId) {
     this.userByReceiverUserId = userByReceiverUserId;
   }
 
@@ -133,7 +144,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.amountDeposited;
   }
 
-  public void setAmountDeposited(BigDecimal amountDeposited) {
+  public void setAmountDeposited(final BigDecimal amountDeposited) {
     this.amountDeposited = amountDeposited;
   }
 
@@ -143,7 +154,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.transactedDate;
   }
 
-  public void setTransactedDate(Date transactedDate) {
+  public void setTransactedDate(final Date transactedDate) {
     this.transactedDate = transactedDate;
   }
 
@@ -153,7 +164,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.modeOfPayment;
   }
 
-  public void setModeOfPayment(PaymentMode modeOfPayment) {
+  public void setModeOfPayment(final PaymentMode modeOfPayment) {
     this.modeOfPayment = modeOfPayment;
   }
 
@@ -162,7 +173,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.transactionNumber;
   }
 
-  public void setTransactionNumber(Long transactionNumber) {
+  public void setTransactionNumber(final Long transactionNumber) {
     this.transactionNumber = transactionNumber;
   }
 
@@ -171,7 +182,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.receiptCopy;
   }
 
-  public void setReceiptCopy(byte[] receiptCopy) {
+  public void setReceiptCopy(final byte[] receiptCopy) {
     this.receiptCopy = receiptCopy;
   }
 
@@ -180,7 +191,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.chequeNumber;
   }
 
-  public void setChequeNumber(String chequeNumber) {
+  public void setChequeNumber(final String chequeNumber) {
     this.chequeNumber = chequeNumber;
   }
 
@@ -190,7 +201,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.chequeDate;
   }
 
-  public void setChequeDate(Date chequeDate) {
+  public void setChequeDate(final Date chequeDate) {
     this.chequeDate = chequeDate;
   }
 
@@ -199,7 +210,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.chequeDrawnOnBank;
   }
 
-  public void setChequeDrawnOnBank(String chequeDrawnOnBank) {
+  public void setChequeDrawnOnBank(final String chequeDrawnOnBank) {
     this.chequeDrawnOnBank = chequeDrawnOnBank;
   }
 
@@ -208,7 +219,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.chequeDrawnBranch;
   }
 
-  public void setChequeDrawnBranch(String chequeDrawnBranch) {
+  public void setChequeDrawnBranch(final String chequeDrawnBranch) {
     this.chequeDrawnBranch = chequeDrawnBranch;
   }
 
@@ -218,7 +229,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return status;
   }
 
-  public void setStatus(DepositIntimatorStatus status) {
+  public void setStatus(final DepositIntimatorStatus status) {
     this.status = status;
   }
 
@@ -228,7 +239,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return depositIntimatorType;
   }
 
-  public void setDepositIntimatorType(DepositIntimatorType depositIntimatorType) {
+  public void setDepositIntimatorType(final DepositIntimatorType depositIntimatorType) {
     this.depositIntimatorType = depositIntimatorType;
   }
 
@@ -237,7 +248,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return description;
   }
 
-  public void setDescription(String description) {
+  public void setDescription(final String description) {
     this.description = description;
   }
 
@@ -246,7 +257,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return cashDepositedBankName;
   }
 
-  public void setCashDepositedBankName(String cashDepositedBankName) {
+  public void setCashDepositedBankName(final String cashDepositedBankName) {
     this.cashDepositedBankName = cashDepositedBankName;
   }
 
@@ -256,7 +267,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.createdAt;
   }
 
-  public void setCreatedAt(Date createdAt) {
+  public void setCreatedAt(final Date createdAt) {
     this.createdAt = createdAt;
   }
 
@@ -266,7 +277,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     return this.updatedAt;
   }
 
-  public void setUpdatedAt(Date updatedAt) {
+  public void setUpdatedAt(final Date updatedAt) {
     this.updatedAt = updatedAt;
   }
 

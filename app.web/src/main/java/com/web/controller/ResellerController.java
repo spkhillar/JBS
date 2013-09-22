@@ -41,7 +41,7 @@ public class ResellerController extends BaseAuthenticatedController {
 
   @RequestMapping(value = "/paymentintimator", method = RequestMethod.POST)
   public String paymentIntimatorInitiate(final ModelMap map,
-      @ModelAttribute("depositIntimator") ResellerForm resellerForm) throws IOException {
+      @ModelAttribute("depositIntimator") final ResellerForm resellerForm) throws IOException {
     byte[] receiptCopy = null;
     MultipartFile multipartFile = resellerForm.getCashReceipt();
     if (multipartFile != null) {
@@ -65,9 +65,9 @@ public class ResellerController extends BaseAuthenticatedController {
     return "redirect:/";
   }
 
-  public void prepareResellerForm(ModelMap map) {
+  public void prepareResellerForm(final ModelMap map) {
     List<String> paymentModes =
-        Arrays.asList(new String[] { PaymentMode.CHEQUE.toString(), PaymentMode.DEPOSIT.toString(),
+        Arrays.asList(new String[] {PaymentMode.CHEQUE.toString(), PaymentMode.DEPOSIT.toString(),
             PaymentMode.MANUAL.toString(), PaymentMode.ONLINE.toString() });
     map.put("paymentModes", paymentModes);
   }

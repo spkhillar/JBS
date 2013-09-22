@@ -94,7 +94,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
           </li>
         
         <li>
-          <a class="fNiv">Manage Notification</a>
+          <a class="fNiv" href="${contextPath}/admin/view/deposit">Manage Notification</a>
           <ul>
             <li class="arrow"></li>
             <li>
@@ -130,9 +130,14 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
           <ul>
             <li class="arrow"></li>
             <li>
-              <a class="accountlink1">Credits or Payments</a> </li>
-            <li><a class="accountlink2">Incentives</a></li>
-            <li><a class="accountlink3">Premium Deposit</a></li>
+              <a class="accountlink1" >Credits or Payments</a> 
+            </li>
+            <li>
+            	<a class="accountlink2">Incentives</a>
+            </li>
+            <li>
+            	<a class="accountlink3">Premium Deposit</a>
+            </li>
             <li></li>
             </ul>
           </li>

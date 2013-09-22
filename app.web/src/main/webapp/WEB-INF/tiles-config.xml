@@ -134,4 +134,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/jsp/payment-intimator.jsp" />
 	</definition>
 		
+	<definition name="payment.deposit.list" extends="admin.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/deposit-intimator-list.jsp" />
+	</definition>
 </tiles-definitions>
