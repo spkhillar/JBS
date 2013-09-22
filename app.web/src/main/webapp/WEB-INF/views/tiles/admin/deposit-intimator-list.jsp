@@ -51,8 +51,8 @@
 					pager : '#pager',
 					sortname : 'id',
 					viewrecords : true,
-					sortorder : "asc",
-					caption : "Payment Information List",
+					sortorder : "desc",
+					caption : "Deposit Information List",
 					emptyrecords : "Empty records",
 					loadonce : false,
 					hidegrid : false,
@@ -90,7 +90,7 @@
 <body>
 
 <div id="depositListDiv">
- <h4 style="padding: 5px">Home | Account | Credits or Payments </h4><br/>
+ <h4 style="padding: 5px">Home | Manage Notification | Approval Notification </h4><br/>
  <hr color="red"/>
 		<table id='grid'></table>
 		<div id='pager'></div>

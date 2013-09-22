@@ -7,9 +7,8 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<html>
+<html> 
 <head>
-<jsp:include page="../tiles/base/app.jsp"/>
 <script>
 $(document).ready(function(){
     $("#depositIntimator\\.transactedDate").datepicker({dateFormat: "dd/mm/yy" });
@@ -17,35 +16,12 @@ $(document).ready(function(){
     $("#initDeposit").button();
 });
 function initiateDeposit(){
-	$( "#depositIntimator" ).submit(function( event ) {
-		if ( $('#paymentMode').val()== "0" ) {
-			$.msgBox({
-			    title:"Select Payment Option",
-			    content:"Mode of Payment not selected",
-			    type:"info"
-			});
-			event.preventDefault();
-		return;
-		}else if($('#transactedDate').val()=="" || $('#amountDeposited').val()=="" ){
-			$.msgBox({
-			    title:"Select the date of transaction",
-			    content:"Date of transaction not entered",
-			    type:"info"
-			});
-			event.preventDefault();
-			return;
-		}else{
-			var isValid = $("#depositIntimator").valid();
-			console.log('Form Valid...',isValid);
-			if(isValid){
+	var isValid = $("#depositIntimator").valid();
+	console.log('Form Valid...',isValid);
+	if(isValid){
 			$("#depositIntimator").attr("action",webContextPath+"/reseller/paymentintimator");
-			}
+		}
 	}
- });
-	
-}
-
-		
 </script>
 </head>
 <body>
@@ -72,11 +48,11 @@ function initiateDeposit(){
       <tr>
         <td width="159">Transaction Date</td>
         <td width="25">
-          <form:input size="30" path="depositIntimator.transactedDate" id="transactedDate" /></td>
+          <form:input size="30" path="depositIntimator.transactedDate"  /></td>
       </tr>
       <tr>
         <td>Transaction Amount</td>
-        <td><form:input size="30" path="depositIntimator.amountDeposited" id="amountDeposited"/></td>
+        <td><form:input size="30" path="depositIntimator.amountDeposited" /></td>
       </tr>
       <tr>
         <td>Description</td>

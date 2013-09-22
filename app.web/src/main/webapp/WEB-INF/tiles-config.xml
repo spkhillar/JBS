@@ -131,7 +131,7 @@
 	</definition>
 	
 	<definition name="mlm.payment.intimator" extends="mlm.base.definition">
-		<put-attribute name="body" value="/WEB-INF/views/jsp/payment-intimator.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/jsp/deposit-intimator.jsp" />
 	</definition>
 		
 	<definition name="payment.deposit.list" extends="admin.base.definition">

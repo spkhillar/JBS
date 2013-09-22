@@ -13,8 +13,6 @@
 <spring:url value="/resources/css/cupertino/jquery-ui-1.10.2.custom.min.css" var="resourceJqUiCssUrl"/>
 <spring:url value="/resources/css/ui.jqgrid.css" var="resourceJqGridCssUrl"/>
 <spring:url value="/resources/css/menu.css" var="resourceMenuCssUrl"/>
-<spring:url value="/resources/css/dropdown.css" var="resourceDropDownCssUrl"/>
-<spring:url value="/resources/css/jquery.dropdown.css" var="resourceDropDownJqCssUrl"/>
 <spring:url value="/resources/css/jquery.jui_dropdown.css" var="resourceJqJuiDropDownCssUrl"/>
 <!-- Index Page CSS -->
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
@@ -50,7 +48,6 @@
 <script type="text/javascript" src="${dateTimePicKerJs}"></script>
 <script type="text/javascript" src="${sliderAccessJS}"></script>
 <script type="text/javascript" src="${resourceJMenuUrl}"></script>
-<script type="text/javascript" src="${resourceDropDownJSUrl}"></script>
 <script type="text/javascript" src="${resourceJqJuiDropDownJsUrl}"></script>
 <script type="text/javascript" src="${resourceJqSplitterJsUrl}"></script>
 <script type="text/javascript" src="${resourceJqMessageBoxJsUrl}"></script>
@@ -59,11 +56,9 @@
 <link rel="stylesheet" type="text/css" href="${resourceMenuCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceJqUiCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceJqGridCssUrl}" />
-<link rel="stylesheet" type="text/css" href="${resourceDropDownCssUrl}" />
 <link rel="stylesheet" type="text/css" href="${resourceHeadMenuCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceIndexPageCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceStyle1CssUrl}"/>
-<link rel="stylesheet" type="text/css" href="${resourceDropDownJqCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceJqJuiDropDownCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceResellerViewCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceMessageBoxCssUrl}"/>

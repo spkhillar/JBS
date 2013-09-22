@@ -94,11 +94,11 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
           </li>
         
         <li>
-          <a class="fNiv" href="${contextPath}/admin/view/deposit">Manage Notification</a>
+          <a class="fNiv" >Manage Notification</a>
           <ul>
             <li class="arrow"></li>
             <li>
-              <a class="notifylink1">Approval Notification</a> </li>
+              <a class="notifylink1" href="${contextPath}/admin/view/deposit">Approval Notification</a> </li>
             <li>
               <a class="notifylink2">Redeem Notification</a> </li>
             <li></li>
