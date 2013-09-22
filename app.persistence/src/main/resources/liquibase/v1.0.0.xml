@@ -680,4 +680,13 @@
             <column name="description" value="MLM Administrator"/>
         </insert>
     </changeSet>
+    <changeSet author="shiv" id="1376829106667-15">
+        <insert tableName="system_configuration">
+            <column name="key" value="subscription-base-price"/>
+            <column name="value" value="600"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+	</changeSet>
 </databaseChangeLog>

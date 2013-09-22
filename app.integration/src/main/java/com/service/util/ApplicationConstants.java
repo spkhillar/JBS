@@ -31,4 +31,6 @@ public interface ApplicationConstants {
 
   String USER_OPERATION_ON_SCREEN = "operation";
 
+  String SUBSCRIPTION_BASE_PRICE = "subscription-base-price";
+
 }
