@@ -9,4 +9,6 @@ public interface DepositIntimatorService {
   public void save(DepositIntimator depositIntimator);
 
   public Page<DepositIntimator> findAll(int page, int rows, String sord, String sidx);
+
+  public DepositIntimator findById(long depositorIntimatorId);
 }

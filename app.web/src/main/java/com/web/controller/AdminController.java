@@ -195,4 +195,19 @@ public class AdminController extends BaseAuthenticatedController {
     response.setPage(Integer.valueOf(depositIntimator.getNumber() + 1).toString());
     return response;
   }
+
+  @RequestMapping(value = "/view/approval/notification/{depositorIntimatorId}", method = RequestMethod.GET)
+  public String viewDepositNotification(@PathVariable final long depositorIntimatorId,final ModelMap map ) {
+    /* ResellerForm resellerForm=new ResellerForm();
+       DepositIntimator depositIntimator=depositIntimatorService.findById(depositorIntimatorId);
+       if(depositIntimator.getUserByReceiverUserId()==null){
+        resellerForm.setDepositIntimator(depositIntimator);
+      }
+      resellerForm.setPaymentMode(depositIntimator.getModeOfPayment().toString());
+      resellerForm.setReceiverResellerId(depositIntimator.getUserByReceiverUserId().getMlmAccountId());
+    }
+    map.put("depositIntimator", resellerForm);
+     */
+    return "deposit-intimator";
+  }
 }

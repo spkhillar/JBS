@@ -29,4 +29,9 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
     return depositIntimatorDAO.findAll(pageable);
   }
 
+  @Override
+  public DepositIntimator findById(final long depositorIntimatorId) {
+    return depositIntimatorDAO.findOne(depositorIntimatorId);
+  }
+
 }

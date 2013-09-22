@@ -21,7 +21,8 @@
 					}, {
 						name : 'userByUserId.userName',
 						index : 'userByUserId.userName',
-						width : 60
+						width : 60,
+						formatter:myHyperLinkFormatter
 					}, {
 						name : 'amountDeposited',
 						index : 'amountDeposited',
@@ -84,6 +85,43 @@
 		});
 	});
 	
+	function myHyperLinkFormatter (cellvalue, options, rowObject)
+	{
+		//var value = '<a href="'+webContextPath+'/admin/job/find/'+ rowObject.id +'">'+ cellvalue +'</a>';
+		  var value = '<a href="javascript:void(0);" onclick="javascript:loadDepositDetails('+rowObject.id+')">'+ cellvalue +'</a>';
+		
+		return value;
+	}
+	
+	function loadDepositDetails(depositorIntimatorId){
+		//console.log('..webContextPath+"/mypage/jobdetail"',webContextPath+"/mypage/jobdetail");
+		
+		//console.log('...'+jobId+'...');
+		 $.ajax({
+			    url: webContextPath+"/admin/view/approval/notification/"+depositorIntimatorId,
+			    dataType:'html',
+			    success: function(data){
+			      //construct the data however, update the HTML of the popup div 
+			      $('#viewDepositdiv').html(data);
+			      $('#viewDepositdiv').dialog({
+			  		modal: 'true',
+			  		height:700,
+			  		width:850,
+			  		closeOnEscape: true,
+			  		buttons: [ { text: "Approve", click: 
+				  			function() {
+				  				$( this ).dialog( "close" ); 
+				  				} 
+			  			},
+			  				{ text: "Reject", click: function() 
+			  				{
+			  					$( this ).dialog( "close" ); 
+			  				} 
+			  			}]
+			      }).show();
+			    }
+			  });
+	}
 	
 </script>
 </head>
@@ -95,5 +133,8 @@
 		<table id='grid'></table>
 		<div id='pager'></div>
 	</div>
+	
+<div id="viewDepositdiv" title="Deposit Notification">
+  </div>	
 </body>
 </html>
