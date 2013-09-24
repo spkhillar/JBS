@@ -6,7 +6,8 @@
 <script type='text/javascript'>
 
 	$(function() {
-		var actionUrl = webContextPath + "/admin/commission/records";
+		var lastsel="";
+		var actionUrl = webContextPath + "/commission/records";
 		$("#grid").jqGrid(
 				{
 					url : actionUrl,
@@ -21,20 +22,37 @@
 					}, {
 						name : 'level',
 						index : 'level',
-						width : 60
+						width : 60,
+						editable: true,
+						editrules : {
+							required : true,
+							integer:true
+						}
 					}, {
 						name : 'description',
 						index : 'description',
-						width : 60
+						width : 60,
+						editable: true,
+						editrules : {
+							required : true,
+						}
 					}, {
 						name : 'percentage',
 						index : 'Percentage',
-						width : 60
+						width : 60,
+						editable: true,
+						editrules : {
+							required : true,
+							number:true
+						}
 					}, {
 						name : 'cap',
 						index : 'cap',
-						width : 60
-					}  
+						width : 60,
+						editable: true,
+						edittype:"select",
+							editoptions:{value:"true:true;false:false"}
+						}  
 					  ],
 					postData : {},
 					rowNum : 20,
@@ -60,7 +78,15 @@
 						repeatitems : false,
 						cell : "cell",
 						id : "id"
-					}
+					},
+					onSelectRow: function(id){
+						if(id && id!==lastsel){
+							$('#grid').jqGrid('restoreRow',lastsel);
+							$('#grid').jqGrid('editRow',id,true);
+							lastsel=id;
+						}
+					},
+					editurl: webContextPath + "/commission/update"
 				});
 
 		$("#grid").jqGrid('navGrid', '#pager', {

@@ -6,7 +6,8 @@
 <script type='text/javascript'>
 
 	$(function() {
-		var actionUrl = webContextPath + "/admin/systemconfiguration/records";
+		var lastsel="";
+		var actionUrl = webContextPath + "/systemconfiguration/records";
 		$("#grid").jqGrid(
 				{
 					url : actionUrl,
@@ -25,6 +26,10 @@
 					}, {
 						name : 'value',
 						index : 'value',
+						editable: true,
+						editrules : {
+							required : true
+						},
 						width : 60
 					}
 								],
@@ -52,7 +57,17 @@
 						repeatitems : false,
 						cell : "cell",
 						id : "id"
-					}
+					},
+					onSelectRow: function(id){
+						console.log(lastsel,'...done...',id);
+						if(id && id!==lastsel){
+							console.log('...inside...');
+							$('#grid').jqGrid('restoreRow',lastsel);
+							$('#grid').jqGrid('editRow',id,true);
+							lastsel=id;
+						}
+					},
+					editurl: webContextPath + "/systemconfiguration/update"
 				});
 
 		$("#grid").jqGrid('navGrid', '#pager', {

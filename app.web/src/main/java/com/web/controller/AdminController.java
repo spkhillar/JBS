@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jpa.entities.CommisionLevel;
 import com.jpa.entities.DepositIntimator;
 import com.jpa.entities.SystemConfiguration;
 import com.jpa.entities.User;
@@ -24,6 +23,7 @@ import com.service.DepositIntimatorService;
 import com.service.SystemConfigurationService;
 import com.service.UserGroupService;
 import com.service.util.ApplicationConstants;
+import com.web.form.ResellerForm;
 import com.web.form.UserRegistrationForm;
 import com.web.util.DomainObjectMapper;
 import com.web.util.JqGridResponse;
@@ -43,7 +43,6 @@ public class AdminController extends BaseAuthenticatedController {
 
   @Autowired
   private DepositIntimatorService depositIntimatorService;
-
 
   @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
   public String changePassword(final ModelMap map, final HttpServletRequest request) {
@@ -107,62 +106,6 @@ public class AdminController extends BaseAuthenticatedController {
     prepareObjectsForRegistration(map);
   }
 
-  @RequestMapping(value = "/commission/list", method = RequestMethod.GET)
-  public String listCommission() {
-    return "admin.list.commission";
-  }
-
-  @RequestMapping(value = "/commission/records", produces = "application/json")
-  public @ResponseBody
-  JqGridResponse<CommisionLevel> records(@RequestParam("_search") final Boolean search,
-    @RequestParam(value = "filters", required = false) final String filters,
-    @RequestParam(value = "page", required = false) final Integer page,
-    @RequestParam(value = "rows", required = false) final Integer rows,
-    @RequestParam(value = "sidx", required = false) final String sidx,
-    @RequestParam(value = "sord", required = false) final String sord) {
-    Page<CommisionLevel> commisionLevels = null;
-    if (search == true) {
-      commisionLevels = commisionLevelService.findAll(page, rows, sord, sidx);
-    } else {
-      commisionLevels = commisionLevelService.findAll(page, rows, sord, sidx);
-    }
-    List<Object> list = DomainObjectMapper.listEntities(commisionLevels);
-    JqGridResponse<CommisionLevel> response = new JqGridResponse<CommisionLevel>();
-    response.setRows(list);
-    response.setRecords(Long.valueOf(commisionLevels.getTotalElements()).toString());
-    response.setTotal(Integer.valueOf(commisionLevels.getTotalPages()).toString());
-    response.setPage(Integer.valueOf(commisionLevels.getNumber() + 1).toString());
-    return response;
-  }
-
-  @RequestMapping(value = "/view/systemconfiguration", method = RequestMethod.GET)
-  public String viewSystemConfiguration() {
-    return "admin.view.systemconfiguration";
-  }
-
-  @RequestMapping(value = "/systemconfiguration/records", produces = "application/json")
-  public @ResponseBody
-  JqGridResponse<SystemConfiguration> systemConfigRecords(@RequestParam("_search") final Boolean search,
-    @RequestParam(value = "filters", required = false) final String filters,
-    @RequestParam(value = "page", required = false) final Integer page,
-    @RequestParam(value = "rows", required = false) final Integer rows,
-    @RequestParam(value = "sidx", required = false) final String sidx,
-    @RequestParam(value = "sord", required = false) final String sord) {
-    Page<SystemConfiguration> systemConfiguration = null;
-    if (search == true) {
-      systemConfiguration = systemConfigurationService.findAll(page, rows, sord, sidx);
-    } else {
-      systemConfiguration = systemConfigurationService.findAll(page, rows, sord, sidx);
-    }
-    List<Object> list = DomainObjectMapper.listEntities(systemConfiguration);
-    JqGridResponse<SystemConfiguration> response = new JqGridResponse<SystemConfiguration>();
-    response.setRows(list);
-    response.setRecords(Long.valueOf(systemConfiguration.getTotalElements()).toString());
-    response.setTotal(Integer.valueOf(systemConfiguration.getTotalPages()).toString());
-    response.setPage(Integer.valueOf(systemConfiguration.getNumber() + 1).toString());
-    return response;
-  }
-
   @RequestMapping(value = "/view/reseller", method = RequestMethod.GET)
   public String viewReseller() {
     return "admin.view.reseller";
@@ -176,11 +119,11 @@ public class AdminController extends BaseAuthenticatedController {
   @RequestMapping(value = "/deposit/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<DepositIntimator> mlmDepositRecords(@RequestParam("_search") final Boolean search,
-    @RequestParam(value = "filters", required = false) final String filters,
-    @RequestParam(value = "page", required = false) final Integer page,
-    @RequestParam(value = "rows", required = false) final Integer rows,
-    @RequestParam(value = "sidx", required = false) final String sidx,
-    @RequestParam(value = "sord", required = false) final String sord) {
+      @RequestParam(value = "filters", required = false) final String filters,
+      @RequestParam(value = "page", required = false) final Integer page,
+      @RequestParam(value = "rows", required = false) final Integer rows,
+      @RequestParam(value = "sidx", required = false) final String sidx,
+      @RequestParam(value = "sord", required = false) final String sord) {
     Page<DepositIntimator> depositIntimator = null;
     if (search == true) {
       depositIntimator = depositIntimatorService.findAll(page, rows, sord, sidx);
@@ -197,17 +140,29 @@ public class AdminController extends BaseAuthenticatedController {
   }
 
   @RequestMapping(value = "/view/approval/notification/{depositorIntimatorId}", method = RequestMethod.GET)
-  public String viewDepositNotification(@PathVariable final long depositorIntimatorId,final ModelMap map ) {
-    /* ResellerForm resellerForm=new ResellerForm();
-       DepositIntimator depositIntimator=depositIntimatorService.findById(depositorIntimatorId);
-       if(depositIntimator.getUserByReceiverUserId()==null){
-        resellerForm.setDepositIntimator(depositIntimator);
-      }
-      resellerForm.setPaymentMode(depositIntimator.getModeOfPayment().toString());
+  public String viewDepositNotification(@PathVariable final long depositorIntimatorId, final ModelMap map) {
+    ResellerForm resellerForm = new ResellerForm();
+    DepositIntimator depositIntimator = depositIntimatorService.findById(depositorIntimatorId);
+    if (depositIntimator.getUserByReceiverUserId() == null) {
+      resellerForm.setDepositIntimator(depositIntimator);
+    }
+    resellerForm.setPaymentMode(depositIntimator.getModeOfPayment().toString());
+    if (depositIntimator.getUserByReceiverUserId() != null) {
       resellerForm.setReceiverResellerId(depositIntimator.getUserByReceiverUserId().getMlmAccountId());
     }
+
     map.put("depositIntimator", resellerForm);
-     */
+    prepareResellerForm(map);
+    map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "view");
+
     return "deposit-intimator";
+  }
+
+  @RequestMapping(value = "/approve/notification{depositorIntimatorId}/{type}", method = RequestMethod.GET)
+  @ResponseBody
+  public String approveOrRejectDepositIntimator(@PathVariable final long depositorIntimatorId,
+      @PathVariable final int type, final ModelMap map) {
+    depositIntimatorService.approveOrRejectDepositIntimator(depositorIntimatorId, type);
+    return "done with approval";
   }
 }

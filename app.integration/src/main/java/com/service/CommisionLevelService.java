@@ -9,4 +9,8 @@ public interface CommisionLevelService {
   public CommisionLevel findByLevel(int level);
 
   public Page<CommisionLevel> findAll(int page, int rows, String sord, String sidx);
+
+  public CommisionLevel findById(long id);
+
+  public void update(CommisionLevel commisionLevel);
 }

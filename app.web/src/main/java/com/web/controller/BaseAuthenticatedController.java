@@ -1,8 +1,13 @@
 package com.web.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.jpa.entities.User;
+import com.jpa.entities.enums.PaymentMode;
 import com.web.form.WebUser;
 
 public class BaseAuthenticatedController extends BaseController {
@@ -25,6 +30,13 @@ public class BaseAuthenticatedController extends BaseController {
       webUser = new WebUser();
     }
     return webUser;
+  }
+
+  protected void prepareResellerForm(final ModelMap map) {
+    List<String> paymentModes =
+        Arrays.asList(new String[] { PaymentMode.CHEQUE.toString(), PaymentMode.DEPOSIT.toString(),
+            PaymentMode.MANUAL.toString(), PaymentMode.ONLINE.toString() });
+    map.put("paymentModes", paymentModes);
   }
 
 }

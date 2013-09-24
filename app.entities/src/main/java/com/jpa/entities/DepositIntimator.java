@@ -65,8 +65,9 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
 
   public DepositIntimator() {}
 
-  public DepositIntimator(final long id, final User userByUserId, final BigDecimal amountDeposited, final Date transactedDate,
-      final PaymentMode modeOfPayment, final DepositIntimatorStatus status, final Date createdAt, final Date updatedAt) {
+  public DepositIntimator(final long id, final User userByUserId, final BigDecimal amountDeposited,
+      final Date transactedDate, final PaymentMode modeOfPayment, final DepositIntimatorStatus status,
+      final Date createdAt, final Date updatedAt) {
     this.id = id;
     this.userByUserId = userByUserId;
     this.amountDeposited = amountDeposited;
@@ -77,9 +78,10 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     this.updatedAt = updatedAt;
   }
 
-  public DepositIntimator(final long id, final User userByUserId, final User userByReceiverUserId, final BigDecimal amountDeposited,
-      final Date transactedDate, final PaymentMode modeOfPayment, final Long transactionNumber, final byte[] receiptCopy, final String chequeNumber,
-      final Date chequeDate, final String chequeDrawnOnBank, final String chequeDrawnBranch, final DepositIntimatorStatus status,
+  public DepositIntimator(final long id, final User userByUserId, final User userByReceiverUserId,
+      final BigDecimal amountDeposited, final Date transactedDate, final PaymentMode modeOfPayment,
+      final Long transactionNumber, final byte[] receiptCopy, final String chequeNumber, final Date chequeDate,
+      final String chequeDrawnOnBank, final String chequeDrawnBranch, final DepositIntimatorStatus status,
       final Date createdAt, final Date updatedAt) {
     this.id = id;
     this.userByUserId = userByUserId;
@@ -129,7 +131,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     this.userByUserId = userByUserId;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "receiver_user_id")
   public User getUserByReceiverUserId() {
     return this.userByReceiverUserId;

@@ -1,9 +1,7 @@
 package com.web.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +20,7 @@ import com.jpa.entities.enums.DepositIntimatorStatus;
 import com.jpa.entities.enums.DepositIntimatorType;
 import com.jpa.entities.enums.PaymentMode;
 import com.service.DepositIntimatorService;
+import com.service.util.ApplicationConstants;
 import com.web.form.ResellerForm;
 
 @Controller
@@ -35,6 +34,7 @@ public class ResellerController extends BaseAuthenticatedController {
   public String paymentIntimator(final ModelMap map, final HttpServletRequest request) {
     ResellerForm resellerForm = new ResellerForm();
     map.put("depositIntimator", resellerForm);
+    map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "create");
     prepareResellerForm(map);
     return "mlm.payment.intimator";
   }
@@ -63,13 +63,6 @@ public class ResellerController extends BaseAuthenticatedController {
     depositIntimator.setStatus(DepositIntimatorStatus.NEW);
     depositIntimatorService.save(depositIntimator);
     return "redirect:/";
-  }
-
-  public void prepareResellerForm(final ModelMap map) {
-    List<String> paymentModes =
-        Arrays.asList(new String[] {PaymentMode.CHEQUE.toString(), PaymentMode.DEPOSIT.toString(),
-            PaymentMode.MANUAL.toString(), PaymentMode.ONLINE.toString() });
-    map.put("paymentModes", paymentModes);
   }
 
 }

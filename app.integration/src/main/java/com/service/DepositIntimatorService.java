@@ -11,4 +11,6 @@ public interface DepositIntimatorService {
   public Page<DepositIntimator> findAll(int page, int rows, String sord, String sidx);
 
   public DepositIntimator findById(long depositorIntimatorId);
+
+  public void approveOrRejectDepositIntimator(long depositorIntimatorId, int type);
 }

@@ -14,6 +14,8 @@ public interface SystemConfigurationService {
 
   public Page<SystemConfiguration> findAll(int page, int rows, String sord, String sidx);
 
-  SystemConfiguration update(SystemConfiguration systemConfiguration);
+  public SystemConfiguration update(SystemConfiguration systemConfiguration);
+
+  public SystemConfiguration find(Long id);
 
 }

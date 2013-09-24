@@ -25,6 +25,14 @@ function initiateDeposit(){
 </script>
 </head>
 <body>
+<c:choose>
+<c:when test="${operation eq 'create'}">
+<c:set var="readonly" value="false"/>
+</c:when>
+<c:otherwise>
+<c:set var="readonly" value="true"/>
+</c:otherwise>
+</c:choose>
 <form:form name="depositIntimator" id="depositIntimator" commandName="depositIntimator" enctype="multipart/form-data" method="POST">
 <table border="0" width="80%" style="margin:auto">
   <tr>
@@ -38,7 +46,7 @@ function initiateDeposit(){
       <tr>
         <td width="253" scope="col">Payment Mode</td>
         <td width="375" scope="col"><label for="select"></label>
-          <form:select path="paymentMode" id="paymentMode">
+          <form:select path="paymentMode" id="paymentMode" disabled="${readonly}">
           <form:option  value="0" >Select Payment Option</form:option> 
           <form:options  items="${paymentModes}" />
           </form:select>
@@ -48,16 +56,16 @@ function initiateDeposit(){
       <tr>
         <td width="159">Transaction Date</td>
         <td width="25">
-          <form:input size="30" path="depositIntimator.transactedDate"  /></td>
+          <form:input size="30" path="depositIntimator.transactedDate"  readonly="${readonly}"/></td>
       </tr>
       <tr>
         <td>Transaction Amount</td>
-        <td><form:input size="30" path="depositIntimator.amountDeposited" /></td>
+        <td><form:input size="30" path="depositIntimator.amountDeposited" readonly="${readonly}"/></td>
       </tr>
       <tr>
         <td>Description</td>
         <td><label for="textarea"></label>
-          <form:textarea path="depositIntimator.description" cols="45" rows="5"/></td>
+          <form:textarea path="depositIntimator.description" cols="45" rows="5" readonly="${readonly}"/></td>
       </tr>
      </table>
      
@@ -73,7 +81,7 @@ function initiateDeposit(){
     <table width="261" border="0" id="resellerTable" id="resellerTable" class="paymentTable">
       <tr>
         <td width="253"> Receiver Reseller ID</td>
-        <td width="370"><form:input size="30" path="receiverResellerId"/></td>
+        <td width="370"><form:input size="30" path="receiverResellerId" readonly="${readonly}"/></td>
       </tr>
     </table>
     
@@ -88,11 +96,11 @@ function initiateDeposit(){
     <table width="644" border="0" width="200" id="receiptTable" class="paymentTable" >
       <tr>
         <td width="253" scope="col">Receipt Copy</td>
-        <td width="375" scope="col"><input type="file" name="cashReceipt" id="cashReceipt" /></td>
+        <td width="375" scope="col"><input type="file" name="cashReceipt" id="cashReceipt" readonly="${readonly}"/></td>
       </tr>
       <tr>
         <td>Bank Name</td>
-        <td><form:input size="30" path="depositIntimator.cashDepositedBankName"/></td>
+        <td><form:input size="30" path="depositIntimator.cashDepositedBankName" readonly="${readonly}"/></td>
       </tr>
     </table>
     </td>
@@ -106,7 +114,7 @@ function initiateDeposit(){
     <table width="640" border="0" width="200" id="onlineTable" class="paymentTable">
       <tr>
         <td width="245">Transaction Number</td>
-        <td width="367"><form:input size="30" path="depositIntimator.transactionNumber" /></td>
+        <td width="367"><form:input size="30" path="depositIntimator.transactionNumber" readonly="${readonly}"/></td>
       </tr>
     </table>
     </td>
@@ -121,26 +129,28 @@ function initiateDeposit(){
     <table width="200" border="0" id="chequeTable" class="paymentTable" >
       <tr>
         <td width="253">Cheque Number</td>
-        <td width="374"><form:input size="30" path="depositIntimator.chequeNumber"/></td>
+        <td width="374"><form:input size="30" path="depositIntimator.chequeNumber" readonly="${readonly}"/></td>
       </tr>
       <tr>
         <td>Cheque Date</td>
-        <td><form:input size="30" path="depositIntimator.chequeDate"/></td>
+        <td><form:input size="30" path="depositIntimator.chequeDate" readonly="${readonly}"/></td>
       </tr>
       <tr>
         <td>Drawn on bank</td>
-        <td><form:input size="30" path="depositIntimator.chequeDrawnOnBank"/></td>
+        <td><form:input size="30" path="depositIntimator.chequeDrawnOnBank" readonly="${readonly}"/></td>
       </tr>
       <tr>
         <td>Drawn on branch</td>
-        <td><form:input size="30" path="depositIntimator.chequeDrawnBranch"/></td>
+        <td><form:input size="30" path="depositIntimator.chequeDrawnBranch" readonly="${readonly}"/></td>
       </tr>
     </table>
     </td>
   </tr>
   <tr>
   <td>
-  	<button id="initDeposit" onclick="initiateDeposit();">Submit</button>
+ 	<c:if test="${operation eq 'create' }">
+  		<button id="initDeposit" onclick="initiateDeposit();">Submit</button>
+ 	 </c:if>
   	</td>
   </tr>
 </table>

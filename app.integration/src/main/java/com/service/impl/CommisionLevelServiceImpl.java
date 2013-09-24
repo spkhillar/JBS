@@ -1,5 +1,7 @@
 package com.service.impl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +29,22 @@ public class CommisionLevelServiceImpl implements CommisionLevelService {
   public Page<CommisionLevel> findAll(int page, int rows, String sord, String sidx) {
     Pageable pageable = ServiceUtil.getPage(page, rows, sord, sidx);
     return commisionLevelDAO.findAll(pageable);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public CommisionLevel findById(long id) {
+    return commisionLevelDAO.findOne(id);
+  }
+
+  @Override
+  public void update(CommisionLevel commisionLevel) {
+    CommisionLevel savedCommisionLevel = findById(commisionLevel.getId());
+    savedCommisionLevel.setCap(commisionLevel.isCap());
+    savedCommisionLevel.setDescription(commisionLevel.getDescription());
+    savedCommisionLevel.setPercentage(commisionLevel.getPercentage());
+    savedCommisionLevel.setUpdatedAt(new Date());
+    commisionLevelDAO.save(savedCommisionLevel);
   }
 
 }

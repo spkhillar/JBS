@@ -442,7 +442,7 @@ public class User implements BaseEntity, java.io.Serializable {
    */
   public void setUserRole(final UserRole userRole) {
     this.userRole = userRole;
-    if (userRole != null) {
+    if (userRole != null && userRole.getRole() != null) {
       roleId = userRole.getRole().getId();
     }
   }

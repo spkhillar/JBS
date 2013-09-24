@@ -61,12 +61,15 @@ public class SystemConfigurationServiceImpl implements SystemConfigurationServic
     return systemConfigurationDAO.save(dbConfiguration);
   }
 
-
   @Override
   public Page<SystemConfiguration> findAll(final int page, final int rows, final String sord, final String sidx) {
     Pageable pageable = ServiceUtil.getPage(page, rows, sord, sidx);
     return systemConfigurationDAO.findAll(pageable);
   }
 
+  @Override
+  public SystemConfiguration find(Long id) {
+    return systemConfigurationDAO.findOne(id);
+  }
 
 }

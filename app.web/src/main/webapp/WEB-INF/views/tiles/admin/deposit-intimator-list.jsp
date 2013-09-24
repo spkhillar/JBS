@@ -111,16 +111,28 @@
 			  		buttons: [ { text: "Approve", click: 
 				  			function() {
 				  				$( this ).dialog( "close" ); 
+				  					initiateActionOnDepositIntimatorRecord(depositorIntimatorId,1);
 				  				} 
 			  			},
 			  				{ text: "Reject", click: function() 
 			  				{
 			  					$( this ).dialog( "close" ); 
+			  					initiateActionOnDepositIntimatorRecord(depositorIntimatorId,0);
 			  				} 
 			  			}]
 			      }).show();
 			    }
 			  });
+	}
+	
+	function initiateActionOnDepositIntimatorRecord(depositorIntimatorId,type){
+		 $.ajax({
+			    url: webContextPath+"/admin/approve/notification/"+depositorIntimatorId+"/"+type,
+			    success: function(data){
+			    	
+			    }
+			    
+		 });
 	}
 	
 </script>

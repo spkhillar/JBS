@@ -13,8 +13,8 @@ import javax.persistence.Table;
 
 /**
  * UserRole.
- *
- * @author  
+ * 
+ * @author
  */
 @Entity
 @Table(name = "user_role")
@@ -22,13 +22,13 @@ public class UserRole implements java.io.Serializable {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 6247808108412977322L;
-  
+
   /** The id. */
   private Long id;
-  
+
   /** The user. */
   private User user;
-  
+
   /** The role. */
   private Role role;
 
@@ -39,9 +39,11 @@ public class UserRole implements java.io.Serializable {
 
   /**
    * Instantiates a new user role.
-   *
-   * @param user the user
-   * @param role the role
+   * 
+   * @param user
+   *          the user
+   * @param role
+   *          the role
    */
   public UserRole(User user, Role role) {
     this.user = user;
@@ -50,7 +52,7 @@ public class UserRole implements java.io.Serializable {
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   @Id
@@ -62,8 +64,9 @@ public class UserRole implements java.io.Serializable {
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(Long id) {
     this.id = id;
@@ -71,7 +74,7 @@ public class UserRole implements java.io.Serializable {
 
   /**
    * Gets the user.
-   *
+   * 
    * @return the user
    */
   @ManyToOne(fetch = FetchType.LAZY)
@@ -82,8 +85,9 @@ public class UserRole implements java.io.Serializable {
 
   /**
    * Sets the user.
-   *
-   * @param user the new user
+   * 
+   * @param user
+   *          the new user
    */
   public void setUser(User user) {
     this.user = user;
@@ -91,10 +95,10 @@ public class UserRole implements java.io.Serializable {
 
   /**
    * Gets the role.
-   *
+   * 
    * @return the role
    */
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "role_id")
   public Role getRole() {
     return this.role;
@@ -102,14 +106,17 @@ public class UserRole implements java.io.Serializable {
 
   /**
    * Sets the role.
-   *
-   * @param role the new role
+   * 
+   * @param role
+   *          the new role
    */
   public void setRole(Role role) {
     this.role = role;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override
@@ -121,11 +128,10 @@ public class UserRole implements java.io.Serializable {
       builder.append(id);
       builder.append(", ");
     }
-   /* if (user != null) {
-      builder.append("user=");
-      builder.append(user);
-      builder.append(", ");
-    }*/
+    /*
+     * if (user != null) { builder.append("user="); builder.append(user);
+     * builder.append(", "); }
+     */
     if (role != null) {
       builder.append("role=");
       builder.append(role);
@@ -134,5 +140,4 @@ public class UserRole implements java.io.Serializable {
     return builder.toString();
   }
 
-  
 }
