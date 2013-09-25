@@ -129,7 +129,7 @@
 		 $.ajax({
 			    url: webContextPath+"/admin/approve/notification/"+depositorIntimatorId+"/"+type,
 			    success: function(data){
-			    	
+			    	$("#grid").trigger('reloadGrid');
 			    }
 			    
 		 });

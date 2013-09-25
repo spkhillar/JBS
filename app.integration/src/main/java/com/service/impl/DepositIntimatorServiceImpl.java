@@ -12,6 +12,7 @@ import com.jpa.entities.DepositIntimator;
 import com.jpa.entities.enums.DepositIntimatorStatus;
 import com.jpa.repositories.DepositIntimatorDAO;
 import com.service.DepositIntimatorService;
+import com.service.MlmUserCreditPointService;
 import com.service.util.ServiceUtil;
 
 @Service("depositIntimatorService")
@@ -20,9 +21,13 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
   @Autowired
   private DepositIntimatorDAO depositIntimatorDAO;
 
+  @Autowired
+  private MlmUserCreditPointService mlmUserCreditPointService;
+
   @Override
-  public void save(final DepositIntimator depositIntimator) {
-    depositIntimatorDAO.save(depositIntimator);
+  @Transactional
+  public DepositIntimator save(final DepositIntimator depositIntimator) {
+    return depositIntimatorDAO.save(depositIntimator);
 
   }
 
@@ -51,7 +56,10 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
       throw new UnsupportedOperationException("Type " + type + " is not an identified operation");
     }
     depositIntimator.setUpdatedAt(new Date());
-    depositIntimatorDAO.save(depositIntimator);
+    DepositIntimator savedDepositIntimator = this.save(depositIntimator);
+    if (type == 1) {
+      mlmUserCreditPointService.save(savedDepositIntimator);
+    }
   }
 
 }

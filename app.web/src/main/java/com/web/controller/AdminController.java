@@ -158,7 +158,7 @@ public class AdminController extends BaseAuthenticatedController {
     return "deposit-intimator";
   }
 
-  @RequestMapping(value = "/approve/notification{depositorIntimatorId}/{type}", method = RequestMethod.GET)
+  @RequestMapping(value = "/approve/notification/{depositorIntimatorId}/{type}", method = RequestMethod.GET)
   @ResponseBody
   public String approveOrRejectDepositIntimator(@PathVariable final long depositorIntimatorId,
       @PathVariable final int type, final ModelMap map) {

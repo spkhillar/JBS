@@ -131,7 +131,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     this.userByUserId = userByUserId;
   }
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "receiver_user_id")
   public User getUserByReceiverUserId() {
     return this.userByReceiverUserId;
@@ -281,6 +281,60 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
 
   public void setUpdatedAt(final Date updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (createdAt == null ? 0 : createdAt.hashCode());
+    result = prime * result + (depositIntimatorType == null ? 0 : depositIntimatorType.hashCode());
+    result = prime * result + (modeOfPayment == null ? 0 : modeOfPayment.hashCode());
+    result = prime * result + (transactedDate == null ? 0 : transactedDate.hashCode());
+    result = prime * result + (userByUserId == null ? 0 : userByUserId.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    DepositIntimator other = (DepositIntimator) obj;
+    if (createdAt == null) {
+      if (other.createdAt != null) {
+        return false;
+      }
+    } else if (!createdAt.equals(other.createdAt)) {
+      return false;
+    }
+    if (depositIntimatorType != other.depositIntimatorType) {
+      return false;
+    }
+    if (modeOfPayment != other.modeOfPayment) {
+      return false;
+    }
+    if (transactedDate == null) {
+      if (other.transactedDate != null) {
+        return false;
+      }
+    } else if (!transactedDate.equals(other.transactedDate)) {
+      return false;
+    }
+    if (userByUserId == null) {
+      if (other.userByUserId != null) {
+        return false;
+      }
+    } else if (!userByUserId.equals(other.userByUserId)) {
+      return false;
+    }
+    return true;
   }
 
 }

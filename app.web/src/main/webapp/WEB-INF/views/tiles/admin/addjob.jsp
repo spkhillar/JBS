@@ -174,7 +174,7 @@
     </td>
  <td>Experience</td>
     <td colspan="3"><label for="textfield11"></label>
-   <form:input path="job.experiance" cssClass="formfields" /></td>  
+   <form:select path="job.experiance" items="${workExperianceList}"/></td>  
    </tr>
   <tr>
     <td>Designation</td>

@@ -6,7 +6,7 @@ import com.jpa.entities.DepositIntimator;
 
 public interface DepositIntimatorService {
 
-  public void save(DepositIntimator depositIntimator);
+  public DepositIntimator save(DepositIntimator depositIntimator);
 
   public Page<DepositIntimator> findAll(int page, int rows, String sord, String sidx);
 
