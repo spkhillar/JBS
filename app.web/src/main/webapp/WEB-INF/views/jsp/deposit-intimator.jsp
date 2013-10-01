@@ -22,6 +22,102 @@ function initiateDeposit(){
 			$("#depositIntimator").attr("action",webContextPath+"/reseller/paymentintimator");
 		}
 	}
+
+$(document).ready(function(){
+	
+	$("#depositIntimator").validate( {
+	    success : "valid",
+	    ignoreTitle : true,
+	    
+	    rules : {
+	    	 "depositIntimator.transactedDate" : {
+  		        required : true
+  		      },    
+  		      
+  		    "depositIntimator.amountDeposited" : {
+  		    	required : true,
+  		    	 number:true
+  		    },
+	    	    		
+	    	"receiverResellerId" : {
+	    		required:function(element){
+	    			return $("#paymentMode option:selected").val()=="MANUAL"
+	    			  }
+	    		  		
+	    	}, 
+	    	"cashReceipt" : {
+	    		required:function(element){
+	    			return $("#paymentMode option:selected").val()=="DEPOSIT"
+	    			  }
+	    		  		
+	    	},
+  		     "depositIntimator.cashDepositedBankName": {
+  		    	lettersonly: true,
+  		    	required:function(element){
+	    			return $("#paymentMode option:selected").val()=="DEPOSIT"
+	    		}
+	    			
+ 		    },
+ 		      "depositIntimator.transactionNumber":{
+ 		    	 required:function(element){
+ 	    			return $("#paymentMode option:selected").val()=="ONLINE"
+ 	    		},
+  		    	 number:true
+ 		    },
+ 		   "depositIntimator.chequeNumber" : {
+ 		    	number:true,
+ 		    	 required:function(element){
+  	    			return $("#paymentMode option:selected").val()=="CHEQUE"
+ 			   }
+ 		   },
+ 		  "depositIntimator.chequeDate" : {
+		    	 required:function(element){
+	    			return $("#paymentMode option:selected").val()=="CHEQUE"
+			   }
+		   },
+		   "depositIntimator.chequeDrawnOnBank" : {
+			     lettersonly:true,
+		    	 required:function(element){
+	    			return $("#paymentMode option:selected").val()=="CHEQUE"
+			   }
+		   },
+		   "depositIntimator.chequeDrawnBranch" : {
+			    lettersonly: true,
+		    	 required:function(element){
+	    			return $("#paymentMode option:selected").val()=="CHEQUE"
+			   }
+		   },
+	    },
+	    
+	       messages: {
+	          receiverResellerId : "Select the reseller Id",
+	          "depositIntimator.chequeNumber" : {
+	        	  required: "Enter the Cheque number"
+	          },
+	    	 "depositIntimator.cashDepositedBankName" : {
+	    		  required: "Enter the Bank Name"
+	    	 },
+	    	 "depositIntimator.chequeDrawnOnBank" : {
+	    		 
+	    		  required: "Enter the Bank Name"
+	    	 },
+	    	 "depositIntimator.chequeDrawnBranch" : {
+	    		  
+	    		  required: "Enter the Branch Name"
+	    	 }
+	     }
+	         
+	});
+	   
+});
+ 
+	   
+
+jQuery.validator.addMethod("lettersonly", function(value, element) {
+	  return this.optional(element) || /^[a-zA-Z ]+$/i.test(value);
+	}, "Alphabets & Space are valid characters."); 
+	
+	
 </script>
 </head>
 <body>
@@ -44,22 +140,22 @@ function initiateDeposit(){
     <td>
     <table width="527" border="0" id="transactionTable" class="paymentTable">
       <tr>
-        <td width="253" scope="col">Payment Mode</td>
+        <td width="253" scope="col">Payment Mode<em>*</em></td>
         <td width="375" scope="col"><label for="select"></label>
           <form:select path="paymentMode" id="paymentMode" disabled="${readonly}">
-          <form:option  value="0" >Select Payment Option</form:option> 
+          <form:option  value="" >Select Payment Option</form:option> 
           <form:options  items="${paymentModes}" />
           </form:select>
           
           </td>
         </tr>
       <tr>
-        <td width="159">Transaction Date</td>
+        <td width="159">Transaction Date<em>*</em></td>
         <td width="25">
           <form:input size="30" path="depositIntimator.transactedDate"  readonly="${readonly}"/></td>
       </tr>
       <tr>
-        <td>Transaction Amount</td>
+        <td>Transaction Amount<em>*</em></td>
         <td><form:input size="30" path="depositIntimator.amountDeposited" readonly="${readonly}"/></td>
       </tr>
       <tr>
@@ -72,7 +168,7 @@ function initiateDeposit(){
     </td>
   </tr>
   <tr>
-   <td><strong>Cash Deposit in Hand</strong><br/>
+   <td><strong>Cash Deposit in Hand<em>*</em></strong><br/>
    <hr color="red"/>
    </td>
   </tr>
@@ -80,7 +176,7 @@ function initiateDeposit(){
     <td>
     <table width="261" border="0" id="resellerTable" id="resellerTable" class="paymentTable">
       <tr>
-        <td width="253"> Receiver Reseller ID</td>
+        <td width="253"> Receiver Reseller ID<em>*</em></td>
         <td width="370"><form:input size="30" path="receiverResellerId" readonly="${readonly}"/></td>
       </tr>
     </table>
@@ -95,11 +191,11 @@ function initiateDeposit(){
     <td>
     <table width="644" border="0" width="200" id="receiptTable" class="paymentTable" >
       <tr>
-        <td width="253" scope="col">Receipt Copy</td>
+        <td width="253" scope="col">Receipt Copy<em>*</em></td>
         <td width="375" scope="col"><input type="file" name="cashReceipt" id="cashReceipt" readonly="${readonly}"/></td>
       </tr>
       <tr>
-        <td>Bank Name</td>
+        <td>Bank Name<em>*</em></td>
         <td><form:input size="30" path="depositIntimator.cashDepositedBankName" readonly="${readonly}"/></td>
       </tr>
     </table>
@@ -113,14 +209,14 @@ function initiateDeposit(){
     <td>
     <table width="640" border="0" width="200" id="onlineTable" class="paymentTable">
       <tr>
-        <td width="245">Transaction Number</td>
+        <td width="245">Transaction Number<em>*</em></td>
         <td width="367"><form:input size="30" path="depositIntimator.transactionNumber" readonly="${readonly}"/></td>
       </tr>
     </table>
     </td>
   </tr>
   <tr>
-    <td><strong>Details for Cheque Transfer</strong><br/>
+    <td><strong>Details for Cheque Transfer<em>*</em></strong><br/>
     <hr color="red"/>
     </td>
   </tr>
@@ -128,19 +224,19 @@ function initiateDeposit(){
     <td>
     <table width="200" border="0" id="chequeTable" class="paymentTable" >
       <tr>
-        <td width="253">Cheque Number</td>
+        <td width="253">Cheque Number<em>*</em></td>
         <td width="374"><form:input size="30" path="depositIntimator.chequeNumber" readonly="${readonly}"/></td>
       </tr>
       <tr>
-        <td>Cheque Date</td>
+        <td>Cheque Date<em>*</em></td>
         <td><form:input size="30" path="depositIntimator.chequeDate" readonly="${readonly}"/></td>
       </tr>
       <tr>
-        <td>Drawn on bank</td>
+        <td>Drawn on bank<em>*</em></td>
         <td><form:input size="30" path="depositIntimator.chequeDrawnOnBank" readonly="${readonly}"/></td>
       </tr>
       <tr>
-        <td>Drawn on branch</td>
+        <td>Drawn on branch<em>*</em></td>
         <td><form:input size="30" path="depositIntimator.chequeDrawnBranch" readonly="${readonly}"/></td>
       </tr>
     </table>

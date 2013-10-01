@@ -197,3 +197,14 @@ table.paymentTable{
 	font-size:x-large;
 	
 }
+
+#jobEntryTable,#jobRequirementTable,#jobDescriptionTable{
+	width:90%;
+	background-color:C2E8EF;
+	font-size: 12px;
+	font-family:Arial;
+	margin:auto;
+	border:20px solid #CCC;
+	border-radius: 12px 12px 12px 12px;
+	padding: 5px;
+}

@@ -102,11 +102,11 @@ public class JobController extends BaseAuthenticatedController {
   @RequestMapping(value = "/job/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<Job> records(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
     Page<Job> jobs = null;
     if (search == true) {
       jobs = jobService.findALL(page, rows, sord, sidx);

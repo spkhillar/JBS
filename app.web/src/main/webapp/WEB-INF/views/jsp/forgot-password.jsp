@@ -50,6 +50,8 @@ $(document).ready(function(){
 	 $('#pwdtb').hide();
 	 
   })
+  
+  
 });
 </script>
 </head>

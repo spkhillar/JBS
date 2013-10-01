@@ -7,16 +7,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>JOBSbySMS-Job Information</title>
-<link rel="shortcut icon" href="resources/images/favico.png"/>
-
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
 <spring:url value="/resources/css/headmenu.css" var="resourceHeadMenuCssUrl"/>
 
-<spring:url value="/resources/css/style.min.css" var="resourceStyleMinCssUrl"/>
+
 <spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJq2Url"/>
 <spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
 

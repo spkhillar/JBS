@@ -13,22 +13,29 @@ $(document).ready(function(){
 				'</tr>');
 			qualificationRowIndex = currentIndex;
 		});
-      $("#user\\.dateOfBirth").datepicker({dateFormat: "dd/mm/yy" });
-      $("#registerBtn").button();
-  	$("#registrationForm").validate( {
+      $("#user\\.dateOfBirth").datepicker({ dateFormat: "dd/mm/yy"});
+       $("#registerBtn").button();
+       $("#registrationForm").validate( {
   	    success : "valid",
   	    ignoreTitle : true,
   	    rules : {
   			"user.userName" : {
   		        required : true,
-  		      userNameCheck: true
-  		   },
+  		        userNameCheck: true,
+  		        minlength: 4,
+  		        maxlength: 10,
+  		        alphanumeric: true
+  		      },
   			"user.email" : {
   		        required : true,
   		        email:true
   		   },
   			"user.password" : {
-  		        required : true
+  		        required : true,
+  		        minlength: 6,
+  		        maxlength: 8,
+  		      alphanumeric: true
+  		        
   		   },
   			"confirmPassword" : {
   		        required : true,
@@ -37,27 +44,45 @@ $(document).ready(function(){
   			"securityAnswer" : {
   		        required : true
   		   },
+  		   	"user.dateOfBirth" : {
+  		   		required: true,
+  		   	 	date: true
+		   },
   			"user.firstName" : {
-  		        required : true
+  		        required : true,
+  		      lettersonly: true
   		   },
   			"user.address.addressLine1" : {
-  		        required : true
+  		        required : true,
+  		      alphanumeric: true,
+  		      maxlength: 200,
   		   },
+  		   "user.address.addressLine2" : {
+ 		          alphanumeric: true,
+ 	  		      maxlength: 200,
+ 	  		},
   			"user.address.city" : {
-  		        required : true
+  		        required : true,
+  		        lettersonly:true,
+  		        maxlength: 100,
   		   },
   			"user.phone" : {
-  		        required : true
+  		        required : true,
+  		        number:true,
+  		        minlength: 10
   		   },
   			"user.address.pin" : {
-  		        required : true
+  		        required : true,
+  		        number:true,
+  		        minlength:5
   		   },
   			"user.skill.skills" : {
   		        required : true
   		   },
-  		   "terms" : {
+  		    "terms" : {
   		        required : true
   		   }
+  		   
   	    },
   	    messages: {
   	    	confirmPassword: {
@@ -66,16 +91,18 @@ $(document).ready(function(){
   			"terms":{
   				required: "You must agree to terms and condition of JobsBySMS.com."
   			}
-  		}
-  	});
+  			
+  	    }
+  		
+  	  	});
 });
-
 
 jQuery.validator.addMethod('userNameCheck', function(inputValue) {
 	var unqiueUserName = checkUniqueUserName(inputValue);
 	console.log('..unqiueUserName...',unqiueUserName);
 	return !unqiueUserName;
 }, "Username already exists. Please use different username");
+
 function checkUniqueUserName(value){
 	var retValue = false;
 	$.ajax({
@@ -105,3 +132,10 @@ function registerUser(){
 	}
 }
 
+jQuery.validator.addMethod("alphanumeric", function(value, element) {
+	  return this.optional(element) || /^[a-zA-Z0-9_]+$/i.test(value);
+	}, "Letters, numbers or underscores only please"); 
+
+jQuery.validator.addMethod("lettersonly", function(value, element) {
+	  return this.optional(element) || /^[a-zA-Z]+$/i.test(value);
+	}, "Letters only please"); 

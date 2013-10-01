@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 , Inc. All rights reserved 
+ * Copyright (C) 2013 , Inc. All rights reserved
  */
 package com.service;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 , Inc. All rights reserved 
+ * Copyright (C) 2013 , Inc. All rights reserved
  */
 package com.service.impl;
 
@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
    * @see com.service.BaseService#retrieve(java.lang.Long)
    */
   @Override
-  public User retrieve(Long id) {
+  public User retrieve(final Long id) {
     return userDAO.findOne(id);
   }
 
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
    * @see com.service.BaseService#saveOrUpdate(com.jpa. entities.BaseEntity)
    */
   @Override
-  public User saveOrUpdate(User user) {
+  public User saveOrUpdate(final User user) {
     String encodedPassword = shaPasswordEncoder.encodePassword(user.getPassword(), user.getUserName());
     user.setPassword(encodedPassword);
     Role role = roleDAO.findOne(user.getRoleId());
@@ -115,7 +115,7 @@ public class UserServiceImpl implements UserService {
    * @see com.service.BaseService#delete(com.jpa.entities .BaseEntity)
    */
   @Override
-  public void delete(User baseEntity) {
+  public void delete(final User baseEntity) {
     // User user = userDAO.findOne(baseEntity.getId());
     // userRoleDAO.delete(user.getUserRole());
     userDAO.delete(baseEntity.getId());
@@ -137,7 +137,7 @@ public class UserServiceImpl implements UserService {
    *      java.lang.String)
    */
   @Override
-  public Page<User> findALL(int page, int rows, String sortOrder, String orderByField) {
+  public Page<User> findALL(final int page, final int rows, final String sortOrder, String orderByField) {
     if ("roleId".equals(orderByField)) {
       orderByField = "userRole.role.id";
     }
@@ -181,8 +181,8 @@ public class UserServiceImpl implements UserService {
    *      javax.servlet.http.HttpServletResponse, java.lang.String)
    */
   @Override
-  public void exportUsers(String filterPredicate, Map<String, Object> paramObject,
-      HttpServletResponse httpServletResponse, String attachmentFileName) {
+  public void exportUsers(final String filterPredicate, final Map<String, Object> paramObject,
+      final HttpServletResponse httpServletResponse, final String attachmentFileName) {
 
     // 1. Create new workbook
     HSSFWorkbook workbook = new HSSFWorkbook();
@@ -249,12 +249,12 @@ public class UserServiceImpl implements UserService {
    * @see com.service.UserService#update(com.jpa.entities .User)
    */
   @Override
-  public User update(User user) {
+  public User update(final User user) {
 
     User savedUser = userDAO.findOne(user.getId());
 
     BeanUtils.copyProperties(user, savedUser, new String[] { "id", "roleId", "password", "userRole", "version",
-        "createdAt" });
+    "createdAt" });
 
     if (StringUtils.isNotBlank(user.getPassword())) {
       boolean samePassword =
@@ -291,7 +291,7 @@ public class UserServiceImpl implements UserService {
    *      java.util.Map)
    */
   @Override
-  public Page<User> findALL(int page, int rows, String predicate, Map<String, Object> params) {
+  public Page<User> findALL(final int page, final int rows, final String predicate, final Map<String, Object> params) {
     String ejbql = "from User where " + predicate;
     return genericQueryExecutorDAO.executeQuery(ejbql, User.class, params, page, rows);
   }
@@ -305,12 +305,12 @@ public class UserServiceImpl implements UserService {
    * @see com.service.UserService#findByUserName(java.lang.String)
    */
   @Override
-  public User findByUserName(String userName) {
+  public User findByUserName(final String userName) {
     return userDAO.findByUserName(userName);
   }
 
   @Override
-  public void changePassword(String username, String currentPassword) {
+  public void changePassword(final String username, final String currentPassword) {
     String passwordTobeEncoded = currentPassword;
     User currentUser = userDAO.findByUserName(username);
     String encodedPassword = null;
@@ -326,7 +326,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User findUserBy(String firstName, String lastName, String email, String phone) {
+  public User findUserBy(final String firstName, final String lastName, final String email, final String phone) {
     StringBuilder query = new StringBuilder("from User u where ");
     Map<String, Object> params = new HashMap<String, Object>();
     query.append("u.firstName =:firstName");
@@ -351,7 +351,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public boolean matchPassword(String username, String currentPassword, String newPassword) {
+  public boolean matchPassword(final String username, final String currentPassword, final String newPassword) {
     User currentUser = userDAO.findByUserName(username);
     boolean matchPassword = shaPasswordEncoder.isPasswordValid(currentUser.getPassword(), currentPassword, username);
     if (matchPassword) {
@@ -361,7 +361,10 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User findByMlmAccountId(String mlmAccountId) {
+  public User findByMlmAccountId(final String mlmAccountId) {
     return userDAO.findByMlmAccountId(mlmAccountId);
   }
+
+
+
 }

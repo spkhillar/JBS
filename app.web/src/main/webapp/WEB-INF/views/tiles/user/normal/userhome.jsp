@@ -139,7 +139,7 @@ function selectPage(newPageValue) {
     <td>${currentLoggedInUserEmail}</td>
     <td>Mobile</td>
     <td>${currentLoggedInUserMobile}</td>
-    </tr>
+   </tr>
 </table>
      </td>
      </tr>

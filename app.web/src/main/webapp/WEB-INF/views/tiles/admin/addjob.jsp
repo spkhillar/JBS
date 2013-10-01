@@ -10,95 +10,40 @@
 <head>
 <jsp:include page="../../tiles/base/app.jsp"></jsp:include>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript">
-	
-	$(document).ready(function() {	
-		$("#job\\.postedAt").datepicker({dateFormat: "dd/mm/yy" });
-		$("#save").button();
-		$("#jobForm").validate( {
-		    success : "valid",
-		    ignoreTitle : true,
-		    rules : {
-				"job.jobTitle" : {
-			        required : true
-			   },
-				"job.companyName" : {
-			        required : true
-			   },
-				"job.companyUrl" : {
-			        url : true
-			   },
-				"job.postedAt" : {
-			        required : true
-			   },
-				"job.qualification" : {
-			        required : true
-			   },
-				"job.salary" : {
-			        required : true
-			   },
-				"designation" : {
-			        required : true
-			   },
-				"job.experiance" : {
-			        required : true
-			   },
-				"job.location" : {
-			        required : true
-			   },
-				"job.skill" : {
-			        required : true
-			   },
-				"job.jobDescription" : {
-			        required : true
-			   }
-		    }
-		});
-		
-		handleSelectedQualification();
-	});
-	function postJob(){
-		var isValid = $("#jobForm").valid();
-		console.log('Form Valid...',isValid);
-		$("#selectedDegreeList > option").each(function(index, option) {
-		    $(this).attr("selected",true);   
-		});
-		if(isValid){
-			$("#jobForm").attr("action",webContextPath+"/admin/job/post");
-			$("#jobForm").submit();
-		}
-		
-	}
-	
-	function handleSelectedQualification(){
-		$("#btnRight").button();
-		$("#btnLeft").button();
-		 $('#btnRight').click(function(e) {
-		        var selectedOpts = $('#degreeList option:selected');
-		        if (selectedOpts.length == 0) {
-		            alert("Nothing to move.");
-		            e.preventDefault();
-		        }
+<style>
+input[type="text"],input[type="number"],select,textarea{
+    
+    padding: 5px;   
+    border: 1px solid #DDDDDD;
+    
+    /*Applying CSS3 gradient*/
+    background: -moz-linear-gradient(center top , #FFFFFF,  #EEEEEE 1px, #FFFFFF 20px);    
+    background: -webkit-gradient(linear, left top, left 20, from(#FFFFFF), color-stop(5%, #EEEEEE) to(#FFFFFF));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FBFBFB', endColorstr='#FFFFFF');
+    
+    /*Applying CSS 3radius*/   
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    
+    /*Applying CSS3 box shadow*/
+    -moz-box-shadow: 0 0 2px #DDDDDD;
+    -webkit-box-shadow: 0 0 2px #DDDDDD;
+    box-shadow: 0 0 2px #DDDDDD;
 
-		        $('#selectedDegreeList').append($(selectedOpts).clone());
-		        $(selectedOpts).remove();
-		        e.preventDefault();
-		    });
+}
+input[type="text"]:hover
+{
+    border:1px solid #cccccc;
+}
+input[type="text"]:focus
+{
+    box-shadow:0 0 2px #FFFE00;
+}
 
-		    $('#btnLeft').click(function(e) {
-		        var selectedOpts = $('#selectedDegreeList option:selected');
-		        if (selectedOpts.length == 0) {
-		            alert("Nothing to move.");
-		            e.preventDefault();
-		        }
-
-		        $('#degreeList').append($(selectedOpts).clone());
-		        $(selectedOpts).remove();
-		        e.preventDefault();
-		    });
-	}
-	
-</script>
+</style>
+<spring:url value="/resources/js/addjob.js" var="resourceAddJobJSUrl"/>
+<script type="text/javascript" src="${resourceAddJobJSUrl}"></script>
 </head>
 
 <body>
@@ -111,14 +56,16 @@
   </tr>
  
   <tr>
-    <td width="182" scope="col">Job Title</td>
+   <td>
+     <table id="jobEntryTable">
+     <tr>
+    <td width="182" scope="col">Job Title<em>*</em></td>
     <td scope="col"><form:input path="job.jobTitle" cssClass="formfields"/></td>
-    <td>Company Name</td>
+    <td>Company Name<em>*</em></td>
     <td ><label for="textfield4"></label>
     <form:input path="job.companyName" cssClass="formfields"/></td>
-  </tr>
-  <tr>
-    <td  width="182">Job Type</td>
+    <tr>
+    <td  width="182">Job Type<em>*</em></td>
     <td><label for="textfield"></label>
      <form:select path="job.jobType" items="${jobTypes}" cssClass="formfields"></form:select>
     </td>
@@ -135,14 +82,14 @@
     <form:input path="job.companyJobUrl" cssClass="formfields" size="50"/></td>
   </tr>
   <tr>
-    <td>Posted Date</td>
+    <td>Posted Date<em>*</em></td>
     <td><label for="textfield3"></label>
     <form:input path="job.postedAt" cssClass="formfields"/></td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td>Category</td>
+    <td>Category<em>*</em></td>
     <td><label for="textfield7"></label>
    <form:select path="job.category" items="${jobCategories}" cssClass="formfields"></form:select>
    </td>
@@ -151,16 +98,22 @@
    <form:input path="job.ageLimit" cssClass="formfields" /></td>
   </tr>
   <tr>
-    <td>Sub Category</td>
+    <td width="20%">Sub Category</td>
     <td><label for="textfield8"></label>
    <form:select path="job.subCategory" items="${jobSubCategories}" cssClass="formfields"></form:select>
    </td>
-     <td>Location</td>
+     <td>Location<em>*</em></td>
     <td colspan="3"><label for="textfield12"></label>
     <form:input path="job.location" cssClass="formfields" /></td>
   </tr>
+  </table>
+  </td>
+  </tr>
   <tr>
-    <td>Functional Area</td>
+   <td>
+     <table id="jobRequirementTable">
+       <tr>
+    <td>Functional Area<em>*</em></td>
     <td colspan="3"><label for="textfield9"></label>
     <form:select path="job.industry" items="${jobsFunctionalAreaList}" ></form:select></td>
   </tr>
@@ -169,7 +122,7 @@
     <td colspan="3">&nbsp;</td>
   </tr>
   <tr>
-    <td>Salary</td>
+    <td>Salary<em>*</em></td>
     <td><form:input path="job.salary" cssClass="formfields" />
     </td>
  <td>Experience</td>
@@ -177,7 +130,7 @@
    <form:select path="job.experiance" items="${workExperianceList}"/></td>  
    </tr>
   <tr>
-    <td>Designation</td>
+    <td>Designation<em>*</em></td>
     <td>
       <form:select path="designation" items="${jobDesignations}" cssClass="formfields" ></form:select>
 	</td>
@@ -199,19 +152,25 @@
 	</td>
   </tr>
   <tr>
-    <td>Skills</td>
+    <td width="20%">Skills</td>
     <td colspan="3"><label for="textfield14"></label>
     <form:textarea path="job.skill"/></td>
   </tr>
+  </table>
+  </td>
+  </tr>
+   <tr>
+   <td>
+     <table id="jobDescriptionTable">
   <tr>
-    <td>Job Introduction</td>
+    <td width="20%">Job Introduction</td>
     <td colspan="3"><label for="textarea"></label>
-     <form:textarea path="job.keyword"/></td>
+     <form:textarea path="job.keyword" style="width:100%;"/></td>
   </tr>
   <tr>
-    <td>Job Description</td>
-    <td colspan="3"><label for="textfield15">
-      <form:textarea path="job.jobDescription"/>
+    <td >Job Description<em>*</em></td>
+    <td colspan="3" style="height: 300px;"><label for="textfield15">
+      <form:textarea path="job.jobDescription" style="width:100%; height:100%"/>
     </label></td>
   </tr>
   <tr>
@@ -219,7 +178,7 @@
     <td colspan="3">&nbsp;</td>
   </tr>
   <tr>
-    <td class="qualificationLable">Qualification</td>
+    <td class="qualificationLable">Qualification<em>*</em></td>
     <td width="352"><label for="select"></label>
       <form:select path="degreeList" multiple="multiple" style="width:100%;" size="20" items="${availableDegreeList}"></form:select>
       </td>
@@ -231,6 +190,9 @@
     <td width="493"><label for="select"></label>
         <form:select path="selectedDegreeList" multiple="multiple" style="width:70%;float:left;" size="20" items="${savedDegreeList}"></form:select>
       </td>
+  </tr>
+  </table>
+  </td>
   </tr>
   <tr >
 	<td colspan="3">

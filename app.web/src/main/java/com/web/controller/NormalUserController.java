@@ -67,4 +67,5 @@ public class NormalUserController extends BaseAuthenticatedController {
     return "user.changepassword";
   }
 
+
 }
