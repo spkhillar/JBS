@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jpa.entities.Address;
 import com.jpa.entities.Degree;
+import com.jpa.entities.MlmUserCreditPoint;
 import com.jpa.entities.Qualification;
 import com.jpa.entities.Role;
 import com.jpa.entities.SecurityQuestion;
@@ -28,12 +29,15 @@ import com.jpa.entities.SystemConfiguration;
 import com.jpa.entities.User;
 import com.jpa.entities.UserRole;
 import com.jpa.entities.UserSecurityQuestion;
+import com.jpa.entities.enums.DepositIntimatorStatus;
+import com.jpa.entities.enums.MlmUserCreditPointStatus;
 import com.jpa.entities.enums.UserPosition;
 import com.jpa.repositories.DegreeDAO;
 import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.jpa.repositories.RoleDAO;
 import com.jpa.repositories.SecurityQuestionDAO;
 import com.jpa.repositories.UserDAO;
+import com.service.MlmUserCreditPointService;
 import com.service.SystemConfigurationService;
 import com.service.UserGroupService;
 import com.service.UserRegistrationService;
@@ -69,6 +73,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
   @Autowired
   private SystemConfigurationService systemConfigurationService;
+
+  @Autowired
+  private MlmUserCreditPointService mlmUserCreditPointService;
 
   @Override
   public Set<String> getStates() {
@@ -129,6 +136,16 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     userGroupService.addToGroup(savedUser, parentMlmAccountId, userPosition);
     if (StringUtils.isBlank(parentMlmAccountId)) {
       updateSystemConfigProperties(userPosition);
+    } else {
+      User parentUser = userDao.findByMlmAccountId(parentMlmAccountId);
+      List<MlmUserCreditPoint> mlmUserCreditPoints =
+          mlmUserCreditPointService.listMlmUserCreditPoint(parentUser, MlmUserCreditPointStatus.OPEN,
+            DepositIntimatorStatus.APPROVED);
+      if (CollectionUtils.isEmpty(mlmUserCreditPoints)) {
+        throw new UnsupportedOperationException("User does not have any open records in MlmUserCreditPoint. ");
+      }
+      MlmUserCreditPoint mlmUserCreditPoint = mlmUserCreditPoints.get(0);
+      mlmUserCreditPointService.updateStatus(mlmUserCreditPoint, MlmUserCreditPointStatus.CLOSED);
     }
     return savedUser;
   }

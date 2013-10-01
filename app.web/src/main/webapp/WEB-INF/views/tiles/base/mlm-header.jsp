@@ -99,8 +99,26 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
           </li>
         
         <li>
-          <a class="fNiv" id="paymentlink">Create User</a> </li>
-        
+          <a class="fNiv" id="paymentlink">Add Reseller</a>  
+          	 <c:if test="${creditPointCount eq '2'}">
+	              <ul>
+	              <li>
+	              	 <a class="fNiv" href="${contextPath}/reseller/register/mlm">Reseller 1</a>
+	              </li>
+	              <li>
+	              	 <a class="fNiv" href="${contextPath}/reseller/register/mlm">Reseller 2</a>
+	              </li>
+	              </ul>
+	         </c:if>
+	         <c:if test="${creditPointCount eq '1'}">
+	              <ul>
+	              <li>
+	              	 <a class="fNiv" href="${contextPath}/reseller/register/mlm">Reseller</a>
+	              </li>
+	              </ul>
+	         </c:if>
+          </li>
+	            
         <li>
           <a class="fNiv">Genealogy</a>
           </li>

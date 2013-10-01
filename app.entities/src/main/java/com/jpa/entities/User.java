@@ -103,10 +103,10 @@ public class User implements BaseEntity, java.io.Serializable {
   /** The skills. */
   private Skill skill;
 
-  /** The user groupses for parent group id. */
+  /** The child user groups for parent group id that is current user record. */
   private Set<UserGroups> userGroupsesForParentGroupId = new HashSet<UserGroups>(0);
 
-  /** The user groupses for group id. */
+  /** Refers to itself as a user group. */
   private Set<UserGroups> userGroupsesForGroupId = new HashSet<UserGroups>(0);
 
   /** The qualifications. */

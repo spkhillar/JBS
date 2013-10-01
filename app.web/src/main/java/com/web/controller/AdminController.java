@@ -98,14 +98,6 @@ public class AdminController extends BaseAuthenticatedController {
     return "create.admin.profile";
   }
 
-  private void setBasicAdminRegister(final ModelMap map, final UserRegistrationForm userRegistrationForm) {
-    User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
-    map.put("currentLoggedInAdminId", existingUser.getId());
-    map.put("registration", userRegistrationForm);
-    map.put("qualificationCount", 0);
-    prepareObjectsForRegistration(map);
-  }
-
   @RequestMapping(value = "/view/reseller", method = RequestMethod.GET)
   public String viewReseller() {
     return "admin.view.reseller";

@@ -62,6 +62,12 @@ public class UserRegistrationController extends BaseController {
     } else if (userRegistrationForm.getRegistrationType() == 5) {
       userRegistrationService.saveAdminUser(userRegistrationForm.getUser(), userRegistrationForm.getSecurityQuestion(),
         userRegistrationForm.getSecurityAnswer(), resume, fileName, userRegistrationForm.getDegree());
+    } else if (userRegistrationForm.getRegistrationType() == 3) {
+      User currentUser = userService.findByUserName(getCurrentLoggedinUserName());
+      UserPosition position = userRegistrationForm.getMlmPosition() == 0 ? UserPosition.L : UserPosition.R;
+      userRegistrationService.saveMlmUser(userRegistrationForm.getUser(), userRegistrationForm.getSecurityQuestion(),
+        userRegistrationForm.getSecurityAnswer(), resume, fileName, userRegistrationForm.getDegree(),
+        userRegistrationForm.getRegistrationType(), position, currentUser.getMlmAccountId());
     }
     return "redirect:/";
   }
@@ -80,6 +86,5 @@ public class UserRegistrationController extends BaseController {
     }
     return true;
   }
-
 
 }

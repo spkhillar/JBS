@@ -103,7 +103,7 @@ input[type="text, number"]:focus
       <td width="36%">Username<em>*</em></td>
       <td width="64%">
       <c:choose>
-      <c:when test="${(operation eq 'new_user') or (operation eq 'site_admin')}">
+      <c:when test="${(operation eq 'new_user') or (operation eq 'site_admin') or (operation eq 'mlm_create')}">
        <form:input path="user.userName" />
        </c:when>
        <c:otherwise>
@@ -116,7 +116,7 @@ input[type="text, number"]:focus
       <td width="36%">Enter your Email id<em>*</em></td>
       <td width="64%"> <form:input path="user.email" /></td>
     </tr>
-    <c:if test="${(operation eq 'new_user') or (operation eq 'site_admin')}">
+    <c:if test="${(operation eq 'new_user') or (operation eq 'site_admin')  or (operation eq 'mlm_create')}">
     <tr>
       <td>Create a Password for your account<em>*</em></td>
       <td> <form:password path="user.password" /></td>
@@ -139,6 +139,12 @@ input[type="text, number"]:focus
       <td height="27">Date of Birth<em>*</em></td>
       <td> <form:input path="user.dateOfBirth" /></td>
     </tr>
+    <c:if test="${(operation eq 'mlm_create')}">
+     <tr>
+      <td height="27">Reseller Position<em>*</em></td>
+      <td>  <form:select path="mlmPosition" items="${childPositions}"></form:select>  </td>
+    </tr>
+    </c:if>
   </table>
      <label for="text2"></label>
     </td>
@@ -363,6 +369,11 @@ input[type="text, number"]:focus
 	  <button id="registerBtn" onclick="registerUser();">Create Admin</button>
 	  </td>
   </c:when>
+  <c:when test="${(operation eq 'mlm_create')}">
+	  <td colspan="5" align="center" bgcolor="#FFFFFF">
+	  <button id="registerBtn" onclick="registerUser();">Create Reseller</button>
+	  </td>
+  </c:when>
   <c:otherwise>
 	  <td colspan="5" align="center" bgcolor="#FFFFFF">
 	  <button id="registerBtn" onclick="registerUser();">Update Profile</button>
@@ -375,7 +386,9 @@ input[type="text, number"]:focus
 
 <form:hidden path="user.id" />
 <form:hidden path="registrationType" />
+<c:if test="${(operation ne 'mlm_create')}">
 <form:hidden path="mlmPosition" />
+</c:if>
 </form:form>
 
 <div id="termsandconditiondiv" title="Terms and Conditions">

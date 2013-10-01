@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.jpa.entities.User;
 import com.jpa.entities.enums.PaymentMode;
+import com.web.form.UserRegistrationForm;
 import com.web.form.WebUser;
 
 public class BaseAuthenticatedController extends BaseController {
@@ -37,6 +38,14 @@ public class BaseAuthenticatedController extends BaseController {
         Arrays.asList(new String[] { PaymentMode.CHEQUE.toString(), PaymentMode.DEPOSIT.toString(),
             PaymentMode.MANUAL.toString(), PaymentMode.ONLINE.toString() });
     map.put("paymentModes", paymentModes);
+  }
+
+  protected void setBasicAdminRegister(final ModelMap map, final UserRegistrationForm userRegistrationForm) {
+    User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
+    map.put("currentLoggedInAdminId", existingUser.getId());
+    map.put("registration", userRegistrationForm);
+    map.put("qualificationCount", 0);
+    prepareObjectsForRegistration(map);
   }
 
 }

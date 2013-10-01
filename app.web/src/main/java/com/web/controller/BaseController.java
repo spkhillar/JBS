@@ -87,9 +87,7 @@ public class BaseController {
       map.put("currentLoggedInUserId", user.getId());
       return "admin.home";
     } else if (roleId.equals(3L) || roleId.equals(6L)) {
-      map.put("currentLoggedInUser", username);
-      map.put("currentLoggedInUserId", user.getId());
-      return "mlm.home";
+      return "redirect:/reseller/";
     } else {
       return "redirect:/normal/user/home";
     }

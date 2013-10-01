@@ -184,4 +184,29 @@ public class UserGroups implements BaseEntity, java.io.Serializable {
     return true;
   }
 
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("UserGroups [");
+    if (userByGroupId != null) {
+      builder.append("userByGroupId=");
+      builder.append(userByGroupId.getUserName());
+      builder.append(", ");
+    }
+    if (userByParentGroupId != null) {
+      builder.append("userByParentGroupId=");
+      builder.append(userByParentGroupId.getUserName());
+      builder.append(", ");
+    }
+    builder.append("level=");
+    builder.append(level);
+    builder.append(", ");
+    if (position != null) {
+      builder.append("position=");
+      builder.append(position);
+    }
+    builder.append("]");
+    return builder.toString();
+  }
+
 }
