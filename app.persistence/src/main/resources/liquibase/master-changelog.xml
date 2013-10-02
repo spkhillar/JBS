@@ -1174,5 +1174,15 @@
 			<append value=" after description" />
 		</modifySql>   
     </changeSet>
+    
+    <changeSet author="shiv" id="1367592120330-52">
+		<addColumn tableName="user_groups">
+		    <column name="commision_payed" type="BIT">
+		    </column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after position" />
+		</modifySql>   
+    </changeSet>
    
 </databaseChangeLog>

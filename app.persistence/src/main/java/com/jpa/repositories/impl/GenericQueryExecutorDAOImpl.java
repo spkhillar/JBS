@@ -25,14 +25,13 @@ import com.jpa.repositories.GenericQueryExecutorDAO;
 /**
  * The Class GenericQueryExecutorDAOImpl.
  * 
- * @author 
+ * @author
  */
 @Repository
 public class GenericQueryExecutorDAOImpl implements GenericQueryExecutorDAO {
 
   /** The Constant LOGGER. */
-  private static final Logger LOGGER = Logger
-      .getLogger(GenericQueryExecutorDAOImpl.class);
+  private static final Logger LOGGER = Logger.getLogger(GenericQueryExecutorDAOImpl.class);
 
   /** The entity manager. */
   @PersistenceContext(unitName = "springJpaPersistenceUnit")
@@ -40,14 +39,16 @@ public class GenericQueryExecutorDAOImpl implements GenericQueryExecutorDAO {
 
   /**
    * Execute query.
-   *
-   * @param <T> the generic type
-   * @param ejbql the ejbql
-   * @param clazz the clazz
+   * 
+   * @param <T>
+   *          the generic type
+   * @param ejbql
+   *          the ejbql
+   * @param clazz
+   *          the clazz
    * @return the list
-   * @see
-   * com.jpa.repositories.GenericQueryExecutorDAO#executeQuery
-   * (java.lang.String, java.lang.Class)
+   * @see com.jpa.repositories.GenericQueryExecutorDAO#executeQuery
+   *      (java.lang.String, java.lang.Class)
    */
   @Override
   public <T> List<T> executeQuery(final String ejbql, final Class<T> clazz) {
@@ -56,20 +57,22 @@ public class GenericQueryExecutorDAOImpl implements GenericQueryExecutorDAO {
 
   /**
    * Execute query.
-   *
-   * @param <T> the generic type
-   * @param ejbql the ejbql
-   * @param clazz the clazz
-   * @param params the params
+   * 
+   * @param <T>
+   *          the generic type
+   * @param ejbql
+   *          the ejbql
+   * @param clazz
+   *          the clazz
+   * @param params
+   *          the params
    * @return the list
-   * @see
-   * com.jpa.repositories.GenericQueryExecutorDAO#executeQuery
-   * (java.lang.String, java.lang.Class, java.util.Map)
+   * @see com.jpa.repositories.GenericQueryExecutorDAO#executeQuery
+   *      (java.lang.String, java.lang.Class, java.util.Map)
    */
   @SuppressWarnings("unchecked")
   @Override
-  public <T> List<T> executeQuery(final String ejbql, final Class<T> clazz,
-    final Map<String, Object> params) {
+  public <T> List<T> executeQuery(final String ejbql, final Class<T> clazz, final Map<String, Object> params) {
     LOGGER.debug("Executing Query.." + ejbql);
     Query query = entityManager.createQuery(ejbql, clazz);
     setParameters(query, params);
@@ -78,44 +81,51 @@ public class GenericQueryExecutorDAOImpl implements GenericQueryExecutorDAO {
 
   /**
    * Execute query.
-   *
-   * @param <T> the generic type
-   * @param ejbql the ejbql
-   * @param clazz the clazz
-   * @param page the page
-   * @param pageSize the page size
+   * 
+   * @param <T>
+   *          the generic type
+   * @param ejbql
+   *          the ejbql
+   * @param clazz
+   *          the clazz
+   * @param page
+   *          the page
+   * @param pageSize
+   *          the page size
    * @return the page
-   * @see
-   * com.jpa.repositories.GenericQueryExecutorDAO#executeQuery
-   * (java.lang.String, java.lang.Class, int, int)
+   * @see com.jpa.repositories.GenericQueryExecutorDAO#executeQuery
+   *      (java.lang.String, java.lang.Class, int, int)
    */
   @Override
-  public <T> Page<T> executeQuery(final String ejbql, final Class<T> clazz,
-    final int page, final int pageSize) {
+  public <T> Page<T> executeQuery(final String ejbql, final Class<T> clazz, final int page, final int pageSize) {
     return executeQuery(ejbql, clazz, null, page, pageSize);
   }
 
   /**
    * Execute query.
-   *
-   * @param <T> the generic type
-   * @param ejbql the ejbql
-   * @param clazz the clazz
-   * @param params the params
-   * @param page the page
-   * @param pageSize the page size
+   * 
+   * @param <T>
+   *          the generic type
+   * @param ejbql
+   *          the ejbql
+   * @param clazz
+   *          the clazz
+   * @param params
+   *          the params
+   * @param page
+   *          the page
+   * @param pageSize
+   *          the page size
    * @return the page
-   * @see
-   * com.jpa.repositories.GenericQueryExecutorDAO#executeQuery
-   * (java.lang.String, java.lang.Class, java.util.Map, int, int)
+   * @see com.jpa.repositories.GenericQueryExecutorDAO#executeQuery
+   *      (java.lang.String, java.lang.Class, java.util.Map, int, int)
    */
   @Override
   @SuppressWarnings("unchecked")
-  public <T> Page<T> executeQuery(final String ejbql, final Class<T> clazz,
-    final Map<String, Object> params, final int page, final int pageSize) {
+  public <T> Page<T> executeQuery(final String ejbql, final Class<T> clazz, final Map<String, Object> params,
+      final int page, final int pageSize) {
     LOGGER.debug("Executing Query.." + ejbql);
-    Query countQuery = entityManager
-        .createQuery("select count(*) " + ejbql);
+    Query countQuery = entityManager.createQuery("select count(*) " + ejbql);
     setParameters(countQuery, params);
 
     Long total = (Long) countQuery.getSingleResult();
@@ -134,21 +144,17 @@ public class GenericQueryExecutorDAOImpl implements GenericQueryExecutorDAO {
    * Sets the parameters.
    * 
    * @param query
-   *            the query
+   *          the query
    * @param params
-   *            the params
+   *          the params
    */
-  private void setParameters(final Query query,
-      final Map<String, Object> params) {
+  private void setParameters(final Query query, final Map<String, Object> params) {
     if (MapUtils.isNotEmpty(params)) {
       for (Map.Entry<String, Object> substitute : params.entrySet()) {
-        if (ClassUtils.isAssignableValue(Date.class,
-          substitute.getValue())) {
-          query.setParameter(substitute.getKey(),
-            (Date) substitute.getValue(), TemporalType.DATE);
+        if (ClassUtils.isAssignableValue(Date.class, substitute.getValue())) {
+          query.setParameter(substitute.getKey(), (Date) substitute.getValue(), TemporalType.TIMESTAMP);
         } else {
-          query.setParameter(substitute.getKey(),
-            substitute.getValue());
+          query.setParameter(substitute.getKey(), substitute.getValue());
         }
       }
     }
@@ -156,12 +162,14 @@ public class GenericQueryExecutorDAOImpl implements GenericQueryExecutorDAO {
 
   /**
    * Execute projected query.
-   *
-   * @param <T> the generic type
-   * @param ejbql the ejbql
+   * 
+   * @param <T>
+   *          the generic type
+   * @param ejbql
+   *          the ejbql
    * @return the list
    * @see com.jpa.repositories.GenericQueryExecutorDAO#
-   * executeProjectedQuery(java.lang.String)
+   *      executeProjectedQuery(java.lang.String)
    */
   @Override
   public <T> List<T> executeProjectedQuery(final String ejbql) {
@@ -171,18 +179,20 @@ public class GenericQueryExecutorDAOImpl implements GenericQueryExecutorDAO {
 
   /**
    * Execute projected query.
-   *
-   * @param <T> the generic type
-   * @param ejbql the ejbql
-   * @param params the params
+   * 
+   * @param <T>
+   *          the generic type
+   * @param ejbql
+   *          the ejbql
+   * @param params
+   *          the params
    * @return the list
    * @see com.jpa.repositories.GenericQueryExecutorDAO#
-   * executeProjectedQuery(java.lang.String, java.util.Map)
+   *      executeProjectedQuery(java.lang.String, java.util.Map)
    */
   @SuppressWarnings("unchecked")
   @Override
-  public <T> List<T> executeProjectedQuery(final String ejbql,
-    final Map<String, Object> params) {
+  public <T> List<T> executeProjectedQuery(final String ejbql, final Map<String, Object> params) {
     Query query = entityManager.createQuery(ejbql);
     setParameters(query, params);
     return query.getResultList();
@@ -191,11 +201,14 @@ public class GenericQueryExecutorDAOImpl implements GenericQueryExecutorDAO {
 
   /**
    * Find count.
-   *
-   * @param ejbql the ejbql
-   * @param params the params
+   * 
+   * @param ejbql
+   *          the ejbql
+   * @param params
+   *          the params
    * @return the long
-   * @see com.jpa.repositories.GenericQueryExecutorDAO#findCount(java.lang.String, java.util.Map)
+   * @see com.jpa.repositories.GenericQueryExecutorDAO#findCount(java.lang.String,
+   *      java.util.Map)
    */
   @Override
   public long findCount(final String ejbql, final Map<String, Object> params) {

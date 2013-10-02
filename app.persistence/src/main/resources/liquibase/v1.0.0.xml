@@ -689,4 +689,10 @@
             <column name="version" valueNumeric="0"/>
 		</insert>
 	</changeSet>
+	
+	<changeSet author="shiv" id="1376829106667-16">
+	    <update tableName="user_groups">
+	        <column name="commision_payed" valueBoolean="false"/>
+	    </update>
+	</changeSet>
 </databaseChangeLog>

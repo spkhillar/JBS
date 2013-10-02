@@ -35,6 +35,7 @@ public class UserGroups implements BaseEntity, java.io.Serializable {
   private User userByParentGroupId;
   private int level;
   private UserPosition position;
+  private boolean commisionPayed = false;
   private Date createdAt = new Date();
   private Date updatedAt;
 
@@ -114,8 +115,17 @@ public class UserGroups implements BaseEntity, java.io.Serializable {
     this.position = position;
   }
 
+  @Column(name = "commision_payed")
+  public boolean isCommisionPayed() {
+    return commisionPayed;
+  }
+
+  public void setCommisionPayed(boolean commisionPayed) {
+    this.commisionPayed = commisionPayed;
+  }
+
   @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_at", length = 19)
+  @Column(name = "created_at", nullable = false, updatable = false, length = 19)
   public Date getCreatedAt() {
     return this.createdAt;
   }
@@ -125,7 +135,7 @@ public class UserGroups implements BaseEntity, java.io.Serializable {
   }
 
   @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "updated_at", length = 19)
+  @Column(name = "updated_at", nullable = false, length = 19)
   public Date getUpdatedAt() {
     return this.updatedAt;
   }
