@@ -11,4 +11,6 @@ public interface MlmUserCreditPointDAO extends JpaRepository<MlmUserCreditPoint,
 
   public List<MlmUserCreditPoint> findByMlmUserCreditPointStatus(MlmUserCreditPointStatus mlmUserCreditPointStatus);
 
+
+
 }

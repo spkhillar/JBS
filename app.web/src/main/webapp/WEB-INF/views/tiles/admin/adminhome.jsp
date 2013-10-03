@@ -9,10 +9,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>JOBSbySMS-Administration</title>
+<style type="text/css">
+#adminDiv table tr th {
+	color: #8080FF;
+}
+#adminDiv table tr th {
+	color: #FFF;
+}
+</style>
 </head>
 <body>
-	<h1> Welcome </h1>
-	<div id="adminDiv" style="width: 80%; height: 500px;">
+	
+	<div id="adminDiv" style="width: 80%; height: 500px; margin:auto">
+	<h1> Welcome ${currentLoggedInUser}</h1>
+	<hr color="blue">
+	<table width="678" height="141" border="1" align="center">
+	  <tr bgcolor="#A82B0B">
+	    <th width="125" height="23" style="text-align: left" scope="col">User Information</th>
+	    <th width="179" scope="col">&nbsp;</th>
+	    <th width="152" scope="col">&nbsp;</th>
+	    <th width="194" scope="col">&nbsp;</th>
+      </tr>
+	  <tr>
+	    <td height="23" style="text-align: left"> Site User : </td>
+	    <td>Reseller :</td>
+	    <td>Premium Users :</td>
+	    <td>&nbsp;</td>
+      </tr>
+	  <tr>
+	    <td style="text-align: left">&nbsp;</td>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+	    <td>&nbsp;</td>
+      </tr>
+	  </table>
 	</div>
 </body>
 </html>

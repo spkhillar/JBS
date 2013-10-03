@@ -11,8 +11,9 @@
 <title>JOBSbySMS-Administration</title>
 </head>
 <body>
-	<h1> Welcome MLM</h1>
-	<div id="adminDiv" style="width: 80%; height: 500px;">
+	
+	<div id="adminDiv" style="width: 80%; height: 500px; margin:auto">
+	<h1> Welcome ${currentLoggedInUser}</h1>
 	</div>
 </body>
 </html>

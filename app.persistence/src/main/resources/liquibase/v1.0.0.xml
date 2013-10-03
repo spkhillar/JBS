@@ -695,4 +695,28 @@
 	        <column name="commision_payed" valueBoolean="false"/>
 	    </update>
 	</changeSet>
+	<changeSet author="shiv" id="1376829106667-17">
+	    <insert tableName="system_configuration">
+            <column name="key" value="Comission-payout-level"/>
+            <column name="value" value="11"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+		<insert tableName="system_configuration">
+            <column name="key" value="User-redeem-points"/>
+            <column name="value" value="1000"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+		<insert tableName="system_configuration">
+            <column name="key" value="comission-validity-period"/>
+            <column name="value" value="1 year"/>
+            <column name="created_at" valueDate="now()"/>
+            <column name="updated_at" valueDate="now()"/>
+            <column name="version" valueNumeric="0"/>
+		</insert>
+	</changeSet>
+	
 </databaseChangeLog>

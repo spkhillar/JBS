@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,7 @@ import com.jpa.entities.UserPointsHistory;
 import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.jpa.repositories.UserPointsHistoryDAO;
 import com.service.UserPointsHistoryService;
+import com.service.util.ServiceUtil;
 
 @Service("userPointsHistoryService")
 public class UserPointsHistoryServiceImpl implements UserPointsHistoryService {
@@ -26,13 +29,13 @@ public class UserPointsHistoryServiceImpl implements UserPointsHistoryService {
 
   @Override
   @Transactional
-  public UserPointsHistory save(UserPointsHistory userPointsHistory) {
+  public UserPointsHistory save(final UserPointsHistory userPointsHistory) {
     return userPointsHistoryDAO.save(userPointsHistory);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public int getLastUserPointTotal(User user) {
+  public int getLastUserPointTotal(final User user) {
     // Pageable pageable = ServiceUtil.getPage(1, 1, "desc", "id");
     String ejbql =
         "select uph.total from UserPointsHistory uph where uph.id = (select max(uph1.id) from UserPointsHistory uph1 where uph1.user.id=:userId)";
@@ -50,4 +53,11 @@ public class UserPointsHistoryServiceImpl implements UserPointsHistoryService {
      */
     // return list.iterator().next().getTotal();
   }
+
+  @Override
+  public Page<UserPointsHistory> findUserPointByUserName(final User user,final int page, final int rows, final String sord, final String sidx) {
+    Pageable pageable = ServiceUtil.getPage(page, rows, sord, sidx);
+    return userPointsHistoryDAO.findByUser(user,pageable);
+  }
+
 }

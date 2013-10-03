@@ -26,26 +26,41 @@
 #indextb tr td table {
 	text-align: center;
 }
+input[type="text"],input[type="number"],select,input[type="password"],textarea{
+    
+    padding: 5px;   
+    border: 1px solid #DDDDDD;
+    /*Applying CSS3 gradient*/
+    background: -moz-linear-gradient(center top , #FFFFFF,  #EEEEEE 1px, #FFFFFF 20px);    
+    background: -webkit-gradient(linear, left top, left 20, from(#FFFFFF), color-stop(5%, #EEEEEE) to(#FFFFFF));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FBFBFB', endColorstr='#FFFFFF');
+    
+    /*Applying CSS 3radius*/   
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    
+    /*Applying CSS3 box shadow*/
+    -moz-box-shadow: 0 0 2px #DDDDDD;
+    -webkit-box-shadow: 0 0 2px #DDDDDD;
+    box-shadow: 0 3px 2px #DDDDDD;
+
+}
+input[type="text, number"]:hover
+{
+    border:1px solid #cccccc;
+}
+input[type="text, number"]:focus
+{
+    box-shadow:0 0 2px #FFFE00;
+}
+
 </style>
 
 <script type="text/javascript">
-    function ChangeColor(tableRow, highLight)
-    {
-    if (highLight)
-    {
-      tableRow.style.backgroundColor = '#dcfac9';
-    }
-    else
-    {
-      tableRow.style.backgroundColor = 'white';
-    }
-  }
 
-  function DoNav(theUrl)
-  {
-  document.location.href = theUrl;
-  }
-  </script>
+   
+</script>
 
 </head>
 
@@ -182,10 +197,10 @@
     </td>
    </tr>
     </table>
-    <p align="center"><span>Inorder to apply this job, Please register/login to jobsbysms.com.</span>All Rights Reserved &COPY; 2013 JOBSbySMS</p>
+    <p align="center">All Rights Reserved &COPY; 2013 JOBSbySMS</p>
 </table>
 <div id="applyJobDiv" title="Apply Job">
-    
+    <span>Inorder to apply this job, Please register/login to jobsbysms.com.</span>
    </div>
    <div id="jobdetailsdiv" title="Job Details">
    </div>

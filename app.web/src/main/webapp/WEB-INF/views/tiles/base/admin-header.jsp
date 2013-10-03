@@ -105,7 +105,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
             </ul>
           </li>
         
-        <li>
+       <!--  <li>
           <a class="fNiv">Genealogy</a>
           <ul>
             <li class="arrow"></li>
@@ -141,7 +141,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
             <li></li>
             </ul>
           </li>
-        
+         -->
         <li><a class="fNiv">Jobs</a>
           <ul>
             <li class="arrow"></li>

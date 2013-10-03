@@ -71,17 +71,20 @@ $(document).ready(function(){
     <button id="launcher1"><c:out value="${webUser.firstName} ${webUser.lastName}"></c:out></button>
   </div>
   <ul id="menu1">
-    <li id="opt_1.1">
-    	<a href="${contextPath}/admin/changepassword">Change Password</a>
-    </li>
-    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-    <li id="opt_1.2">
+   <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+     <li id="opt_1.2">
     	<a href="${contextPath}/admin/register/mlm/0">Admin MLM-L</a>
     </li>
     <li id="opt_1.3">
     	<a href="${contextPath}/admin/register/mlm/1">Admin MLM-R</a>
     </li>
     </sec:authorize>
+    <sec:authorize access="hasAnyRole('SITE_ADMIN','MLM_ADMIN','ROLE_MLM')">
+    
+    </sec:authorize>
+    <li id="opt_1.1">
+    	<a href="${contextPath}/admin/changepassword">Change Password</a>
+    </li>
     <li id="opt_1.4">
     	<a href="${contextPath}/j_spring_security_logout">Logout</a>
     </li>

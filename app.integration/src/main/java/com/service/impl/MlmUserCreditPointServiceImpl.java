@@ -39,7 +39,7 @@ public class MlmUserCreditPointServiceImpl implements MlmUserCreditPointService 
 
   @Override
   @Transactional
-  public void save(DepositIntimator depositIntimator) {
+  public void save(final DepositIntimator depositIntimator) {
 
     if (DepositIntimatorType.MLM_CREDIT_POINT.equals(depositIntimator.getDepositIntimatorType())) {
       createCreditPointsForMlm(depositIntimator);
@@ -51,7 +51,7 @@ public class MlmUserCreditPointServiceImpl implements MlmUserCreditPointService 
 
   @Override
   @Transactional(readOnly = true)
-  public long getUserPointCount(User user) {
+  public long getUserPointCount(final User user) {
     String query =
         "select count(*) from MlmUserCreditPoint mucp where mucp.mlmUserCreditPointStatus =:mlmUserCreditPointStatus and "
             + "mucp.user =:user and mucp.depositIntimator.status =:status";
@@ -66,8 +66,8 @@ public class MlmUserCreditPointServiceImpl implements MlmUserCreditPointService 
 
   @Override
   @Transactional(readOnly = true)
-  public List<MlmUserCreditPoint> listMlmUserCreditPoint(User user, MlmUserCreditPointStatus mlmUserCreditPointStatus,
-      DepositIntimatorStatus depositIntimatorStatus) {
+  public List<MlmUserCreditPoint> listMlmUserCreditPoint(final User user, final MlmUserCreditPointStatus mlmUserCreditPointStatus,
+    final DepositIntimatorStatus depositIntimatorStatus) {
     String query =
         "from MlmUserCreditPoint mucp where mucp.mlmUserCreditPointStatus =:mlmUserCreditPointStatus and "
             + "mucp.user =:user and mucp.depositIntimator.status =:status";
@@ -82,19 +82,19 @@ public class MlmUserCreditPointServiceImpl implements MlmUserCreditPointService 
 
   @Override
   @Transactional(readOnly = true)
-  public List<MlmUserCreditPoint> findByMlmUserCreditPointStatus(MlmUserCreditPointStatus mlmUserCreditPointStatus) {
+  public List<MlmUserCreditPoint> findByMlmUserCreditPointStatus(final MlmUserCreditPointStatus mlmUserCreditPointStatus) {
     return mlmUserCreditPointDAO.findByMlmUserCreditPointStatus(mlmUserCreditPointStatus);
   }
 
   @Override
   @Transactional
-  public void updateStatus(MlmUserCreditPoint mlmUserCreditPoint, MlmUserCreditPointStatus mlmUserCreditPointStatus) {
+  public void updateStatus(final MlmUserCreditPoint mlmUserCreditPoint, final MlmUserCreditPointStatus mlmUserCreditPointStatus) {
     MlmUserCreditPoint savedMlmUserCreditPoint = mlmUserCreditPointDAO.findOne(mlmUserCreditPoint.getId());
     savedMlmUserCreditPoint.setMlmUserCreditPointStatus(mlmUserCreditPointStatus);
     mlmUserCreditPointDAO.save(savedMlmUserCreditPoint);
   }
 
-  private void createCreditPointsForMlm(DepositIntimator depositIntimator) {
+  private void createCreditPointsForMlm(final DepositIntimator depositIntimator) {
     SystemConfiguration systemConfiguration =
         systemConfigurationService.findByKey(ApplicationConstants.SUBSCRIPTION_BASE_PRICE);
     int subscriptionBasePrice = Integer.valueOf(systemConfiguration.getValue());
@@ -112,11 +112,12 @@ public class MlmUserCreditPointServiceImpl implements MlmUserCreditPointService 
     }
   }
 
-  private MlmUserCreditPoint mlmUserCreditPointRecord(DepositIntimator depositIntimator, int points) {
+  private MlmUserCreditPoint mlmUserCreditPointRecord(final DepositIntimator depositIntimator, final int points) {
     MlmUserCreditPoint mlmUserCreditPoint =
         new MlmUserCreditPoint(points, MlmUserCreditPointStatus.OPEN, depositIntimator.getUserByUserId(),
           depositIntimator, null, new Date());
     return mlmUserCreditPoint;
   }
+
 
 }

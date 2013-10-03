@@ -145,4 +145,9 @@
 	<definition name="create.mlm.profile" extends="mlm.base.definition">
 		<put-attribute name="body" value="/WEB-INF/views/jsp/newuser.jsp" />
 	</definition>
+	
+	<definition name="mlm.creditpoint.list" extends="mlm.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/mlm/reseller-credit-point-list.jsp" />
+	</definition>
+	
 </tiles-definitions>
