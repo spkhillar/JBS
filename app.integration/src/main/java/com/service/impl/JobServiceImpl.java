@@ -55,7 +55,8 @@ public class JobServiceImpl implements JobService {
   }
 
   @Override
-  public Page<Job> findByCategory(final String category, final int page, final int rows, final String sortOrder, final String orderByField) {
+  public Page<Job> findByCategory(final String category, final int page, final int rows, final String sortOrder,
+      final String orderByField) {
     Pageable pageable = ServiceUtil.getPage(page, rows, sortOrder, orderByField);
     return jobDAO.findByCategory(category, pageable);
   }
@@ -101,7 +102,7 @@ public class JobServiceImpl implements JobService {
       break;
     case 4:
       jpaPredicate =
-      " where j.industry in ('" + ServiceUtil.IT_SOFTWARE_JOBS + "','" + ServiceUtil.IT_HARDWARE_JOBS + "')";
+          " where j.industry in ('" + ServiceUtil.IT_SOFTWARE_JOBS + "','" + ServiceUtil.IT_HARDWARE_JOBS + "')";
       break;
     case 5:
       jpaPredicate = " where j.industry = '" + ServiceUtil.BANK_FINANCE_JOBS + "'";
@@ -123,12 +124,13 @@ public class JobServiceImpl implements JobService {
   }
 
   private String getFilteredJobsQuery(final User user) {
-    String skills = user.getSkill().getSkills();
+    // String skills = user.getSkill().getSkills();
     String qualification = user.getQualifications().get(0).getDegree().getName();
-    List<String> skillList = getSkillsPattern(skills);
+    // List<String> skillList = getSkillsPattern(skills);
     String qualificationCriteria = getQualificationCriteria(qualification);
-    String skillCriteria = "( " + StringUtils.join(skillList, " or ") + " )";
-    String finalCriteria = qualificationCriteria + " and " + skillCriteria;
+    // String skillCriteria = "( " + StringUtils.join(skillList, " or ") + " )";
+    // String finalCriteria = qualificationCriteria + " and " + skillCriteria;
+    String finalCriteria = qualificationCriteria;
     String jpaQuery = finalCriteria + " and j.enabled=1";
     return jpaQuery;
   }
@@ -146,7 +148,5 @@ public class JobServiceImpl implements JobService {
   private String getQualificationCriteria(final String qualification) {
     return "(j.qualification like '%" + qualification + "%')";
   }
-
-
 
 }

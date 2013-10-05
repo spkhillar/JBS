@@ -719,4 +719,12 @@
 		</insert>
 	</changeSet>
 	
+	<changeSet author="shiv" id="1376829106667-18">
+	    <update tableName="user">
+	        <column name="date_of_birth" valueDate="now()"></column>
+	        <column name="signed_for_notification" valueBoolean="false"></column>
+	        <where>id=1</where>	        
+	    </update>
+	</changeSet>
+	
 </databaseChangeLog>

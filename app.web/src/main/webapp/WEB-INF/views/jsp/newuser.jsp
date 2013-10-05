@@ -285,13 +285,13 @@ input[type="text, number"]:focus
       	<form:select path="degree" items="${degreeList}" ></form:select>
       </td>
       <td>
-      	<input type="text" name="user.qualifications.boardOrUniversity"  required/>
+      	<input type="text" name="user.qualifications[0].boardOrUniversity"  required/>
       </td>
       <td>
-       <input type="number" name="user.qualifications.yearOfPassing"  required/>
+       <input type="number" name="user.qualifications[0].yearOfPassing"  required/>
       </td>
       <td>
-       <input type="number" name="user.qualifications.percentage"  required/>
+       <input type="number" name="user.qualifications[0].percentage"  required/>
       </td>
       </tr>
   </c:when>

@@ -429,7 +429,7 @@ public class User implements BaseEntity, java.io.Serializable {
    * 
    * @return the user role
    */
-  @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
   public UserRole getUserRole() {
     return userRole;
   }
@@ -535,7 +535,7 @@ public class User implements BaseEntity, java.io.Serializable {
    * 
    * @return the qualifications
    */
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
   public List<Qualification> getQualifications() {
     return this.qualifications;
   }
@@ -573,7 +573,7 @@ public class User implements BaseEntity, java.io.Serializable {
     }
   }
 
-  @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
   public UserSecurityQuestion getUserSecurityQuestion() {
     return userSecurityQuestion;
   }

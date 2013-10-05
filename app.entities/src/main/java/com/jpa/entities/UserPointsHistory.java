@@ -31,6 +31,7 @@ public class UserPointsHistory implements BaseEntity, java.io.Serializable {
   private User user;
   private int point;
   private int total;
+  private boolean enabled;
   private Date createdAt = new Date();
   private Date updatedAt;
 
@@ -90,6 +91,15 @@ public class UserPointsHistory implements BaseEntity, java.io.Serializable {
 
   public void setTotal(int total) {
     this.total = total;
+  }
+
+  @Column(name = "enabled")
+  public boolean isEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
   }
 
   @Temporal(TemporalType.TIMESTAMP)

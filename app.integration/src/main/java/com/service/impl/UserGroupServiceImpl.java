@@ -146,18 +146,23 @@ public class UserGroupServiceImpl implements UserGroupService {
       userLevel++;
       if (currentLevel == 0) {
         commsionPercentage = BigDecimal.valueOf(100l).subtract(totalPaid);
-        int points = addUserPoints(parentUser, commsionPercentage, subscriptionBasePrice);
+        int points = addUserPoints(parentUser, commsionPercentage, subscriptionBasePrice, true);
         logger.info("...Allocating commision to admin..." + parentUser.getUserName() + " @ " + commsionPercentage
             + ". Points Collected =" + points);
       } else if (parentUser.getUserGroupsesForParentGroupId().size() == 2) {
         commisionLevel = commisionLevelService.findByLevel(userLevel);
         commsionPercentage = commisionLevel.getPercentage();
         totalPaid = totalPaid.add(commisionLevel.getPercentage());
-        int points = addUserPoints(parentUser, commsionPercentage, subscriptionBasePrice);
+        int points = addUserPoints(parentUser, commsionPercentage, subscriptionBasePrice, true);
         logger.info("...Allocating commision to..." + parentUser.getUserName() + " @ " + commsionPercentage
             + ". Points Collected =" + points);
-      } else {
-        logger.info("...No commision to..." + parentUser.getUserName());
+      } else if (parentUser.getUserGroupsesForParentGroupId().size() == 1) {
+        commisionLevel = commisionLevelService.findByLevel(userLevel);
+        commsionPercentage = commisionLevel.getPercentage();
+        totalPaid = totalPaid.add(commisionLevel.getPercentage());
+        int points = addUserPoints(parentUser, commsionPercentage, subscriptionBasePrice, false);
+        logger.info("...Allocating disabled commision to..." + parentUser.getUserName() + " @ " + commsionPercentage
+            + ". Points Collected =" + points);
       }
       if (parentUser != null) {
         userName = parentUser.getUserName();
@@ -167,7 +172,7 @@ public class UserGroupServiceImpl implements UserGroupService {
     logger.info("----ends-----" + userGroup.getUserByGroupId().getUserName());
   }
 
-  private int addUserPoints(User parentUser, BigDecimal commsionPercentage, int subscriptionBasePrice) {
+  private int addUserPoints(User parentUser, BigDecimal commsionPercentage, int subscriptionBasePrice, boolean enabled) {
     BigDecimal finalPoints =
         commsionPercentage.divide(BigDecimal.valueOf(100l)).multiply(BigDecimal.valueOf(subscriptionBasePrice));
     int lastTotal = userPointsHistoryService.getLastUserPointTotal(parentUser);
@@ -176,6 +181,7 @@ public class UserGroupServiceImpl implements UserGroupService {
     logger.info(parentUser.getUserName() + " -- Last points=" + lastTotal + ".currentTotal=" + currentTotal);
     UserPointsHistory userPointsHistory =
         new UserPointsHistory(parentUser, finalPoints.intValue(), currentTotal.intValue(), new Date());
+    userPointsHistory.setEnabled(enabled);
     userPointsHistoryService.save(userPointsHistory);
     return finalPoints.intValue();
   }
