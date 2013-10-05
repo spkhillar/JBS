@@ -72,7 +72,7 @@
 </div>
 	</div>
 	
-	<input type="button" onclick="javascript:triggerCommision()" value="Hello due"/>
+	
 	
 </body>
 </html>

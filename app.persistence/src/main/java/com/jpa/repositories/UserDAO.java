@@ -1,6 +1,8 @@
 /* Copyright (C) 2013 , Inc. All rights reserved */
 package com.jpa.repositories;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -92,7 +94,9 @@ public interface UserDAO extends JpaRepository<User, Long> {
    */
   User findByUserName(String userName);
 
-
   User findByMlmAccountId(String mlmAccountId);
+
+  @Query("select u from User u where u.userRole.role.id = :role")
+  List<User> findByRole(@Param("role") Long role);
 
 }

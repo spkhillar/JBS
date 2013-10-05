@@ -1,13 +1,12 @@
 package com.jpa.entities;
 
-
-
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +18,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+
+import com.jpa.entities.enums.ModeOfRedemption;
+import com.jpa.entities.enums.RedeemStatus;
 
 /**
  * RedeemHistory
@@ -35,39 +37,33 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
   private int version;
   private User user;
   private int points;
-  private String modeOfRedemption;
+  private ModeOfRedemption modeOfRedemption;
   private String modeDetails;
-  private String status;
-  private Date createdAt;
+  private RedeemStatus status;
+  private Date createdAt = new Date();
   private Date updatedAt;
   private Set<Payment> payments = new HashSet<Payment>(0);
 
-  public RedeemHistory() {
-  }
+  public RedeemHistory() {}
 
-  public RedeemHistory(long id, User user, int points,
-      String modeOfRedemption, String modeDetails, String status,
-      Date createdAt, Date updatedAt) {
-    this.id = id;
+  public RedeemHistory(User user, int points, ModeOfRedemption modeOfRedemption, String modeDetails,
+      RedeemStatus status, Date updatedAt) {
     this.user = user;
     this.points = points;
     this.modeOfRedemption = modeOfRedemption;
     this.modeDetails = modeDetails;
     this.status = status;
-    this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
 
-  public RedeemHistory(long id, User user, int points,
-      String modeOfRedemption, String modeDetails, String status,
-      Date createdAt, Date updatedAt, Set<Payment> payments) {
+  public RedeemHistory(long id, User user, int points, ModeOfRedemption modeOfRedemption, String modeDetails,
+      RedeemStatus status, Date updatedAt, Set<Payment> payments) {
     this.id = id;
     this.user = user;
     this.points = points;
     this.modeOfRedemption = modeOfRedemption;
     this.modeDetails = modeDetails;
     this.status = status;
-    this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.payments = payments;
   }
@@ -112,12 +108,13 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     this.points = points;
   }
 
+  @Enumerated
   @Column(name = "mode_of_redemption", nullable = false, length = 100)
-  public String getModeOfRedemption() {
+  public ModeOfRedemption getModeOfRedemption() {
     return this.modeOfRedemption;
   }
 
-  public void setModeOfRedemption(String modeOfRedemption) {
+  public void setModeOfRedemption(ModeOfRedemption modeOfRedemption) {
     this.modeOfRedemption = modeOfRedemption;
   }
 
@@ -130,17 +127,18 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     this.modeDetails = modeDetails;
   }
 
+  @Enumerated
   @Column(name = "status", nullable = false, length = 100)
-  public String getStatus() {
+  public RedeemStatus getStatus() {
     return this.status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(RedeemStatus status) {
     this.status = status;
   }
 
   @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_at", nullable = false, length = 19)
+  @Column(name = "created_at", nullable = false, updatable = false, length = 19)
   public Date getCreatedAt() {
     return this.createdAt;
   }
@@ -166,6 +164,142 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
 
   public void setPayments(Set<Payment> payments) {
     this.payments = payments;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (modeDetails == null ? 0 : modeDetails.hashCode());
+    result = prime * result + (modeOfRedemption == null ? 0 : modeOfRedemption.hashCode());
+    result = prime * result + points;
+    result = prime * result + (status == null ? 0 : status.hashCode());
+    result = prime * result + (user == null ? 0 : user.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    RedeemHistory other = (RedeemHistory) obj;
+    if (modeDetails == null) {
+      if (other.modeDetails != null) {
+        return false;
+      }
+    } else if (!modeDetails.equals(other.modeDetails)) {
+      return false;
+    }
+    if (modeOfRedemption != other.modeOfRedemption) {
+      return false;
+    }
+    if (points != other.points) {
+      return false;
+    }
+    if (status != other.status) {
+      return false;
+    }
+    if (user == null) {
+      if (other.user != null) {
+        return false;
+      }
+    } else if (!user.equals(other.user)) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("RedeemHistory [");
+    if (user != null) {
+      builder.append("user=");
+      builder.append(user);
+      builder.append(", ");
+    }
+    builder.append("points=");
+    builder.append(points);
+    builder.append(", ");
+    if (modeOfRedemption != null) {
+      builder.append("modeOfRedemption=");
+      builder.append(modeOfRedemption);
+      builder.append(", ");
+    }
+    if (modeDetails != null) {
+      builder.append("modeDetails=");
+      builder.append(modeDetails);
+      builder.append(", ");
+    }
+    if (status != null) {
+      builder.append("status=");
+      builder.append(status);
+      builder.append(", ");
+    }
+    builder.append("getId()=");
+    builder.append(getId());
+    builder.append(", getVersion()=");
+    builder.append(getVersion());
+    builder.append(", ");
+    if (getUser() != null) {
+      builder.append("getUser()=");
+      builder.append(getUser());
+      builder.append(", ");
+    }
+    builder.append("getPoints()=");
+    builder.append(getPoints());
+    builder.append(", ");
+    if (getModeOfRedemption() != null) {
+      builder.append("getModeOfRedemption()=");
+      builder.append(getModeOfRedemption());
+      builder.append(", ");
+    }
+    if (getModeDetails() != null) {
+      builder.append("getModeDetails()=");
+      builder.append(getModeDetails());
+      builder.append(", ");
+    }
+    if (getStatus() != null) {
+      builder.append("getStatus()=");
+      builder.append(getStatus());
+      builder.append(", ");
+    }
+    if (getCreatedAt() != null) {
+      builder.append("getCreatedAt()=");
+      builder.append(getCreatedAt());
+      builder.append(", ");
+    }
+    if (getUpdatedAt() != null) {
+      builder.append("getUpdatedAt()=");
+      builder.append(getUpdatedAt());
+      builder.append(", ");
+    }
+    if (getPayments() != null) {
+      builder.append("getPayments()=");
+      builder.append(getPayments());
+      builder.append(", ");
+    }
+    builder.append("hashCode()=");
+    builder.append(hashCode());
+    builder.append(", ");
+    if (getClass() != null) {
+      builder.append("getClass()=");
+      builder.append(getClass());
+      builder.append(", ");
+    }
+    if (super.toString() != null) {
+      builder.append("toString()=");
+      builder.append(super.toString());
+    }
+    builder.append("]");
+    return builder.toString();
   }
 
 }

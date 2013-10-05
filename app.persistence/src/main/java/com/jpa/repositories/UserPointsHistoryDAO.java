@@ -3,6 +3,8 @@
  */
 package com.jpa.repositories;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,5 +22,7 @@ public interface UserPointsHistoryDAO extends JpaRepository<UserPointsHistory, L
   public Page<UserPointsHistory> findByUser(User user, Pageable page);
 
   public Page<UserPointsHistory> findByUserAndEnabled(User user, boolean enabled, Pageable page);
+
+  public Page<UserPointsHistory> findByUserIn(List<User> user, Pageable page);
 
 }

@@ -14,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jpa.entities.User;
 import com.jpa.entities.UserPointsHistory;
 import com.jpa.repositories.GenericQueryExecutorDAO;
+import com.jpa.repositories.UserDAO;
 import com.jpa.repositories.UserPointsHistoryDAO;
+import com.service.RedeemHistoryService;
 import com.service.UserPointsHistoryService;
 import com.service.util.ServiceUtil;
 
@@ -26,6 +28,12 @@ public class UserPointsHistoryServiceImpl implements UserPointsHistoryService {
 
   @Autowired
   private GenericQueryExecutorDAO genericQueryExecutorDAO;
+
+  @Autowired
+  private UserDAO userDAO;
+
+  @Autowired
+  private RedeemHistoryService reedeHistoryService;
 
   @Override
   @Transactional
@@ -60,6 +68,24 @@ public class UserPointsHistoryServiceImpl implements UserPointsHistoryService {
       final String sord, final String sidx) {
     Pageable pageable = ServiceUtil.getPage(page, rows, sord, sidx);
     return userPointsHistoryDAO.findByUserAndEnabled(user, true, pageable);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Page<UserPointsHistory> findSystemIncentivePoint(final int page, final int rows, final String sord,
+      final String sidx) {
+    List<User> userList = userDAO.findByRole(6L);
+    String[] orderByFields = new String[] { "user.userName", "total" };
+    Pageable pageable = ServiceUtil.getPage(page, rows, sord, orderByFields);
+    return userPointsHistoryDAO.findByUserIn(userList, pageable);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public int getUserTotalPoint(final User user) {
+    int totalPoints = getLastUserPointTotal(user);
+    int totalRedeemPoints = reedeHistoryService.sumOfPointBy(user);
+    return totalPoints - totalRedeemPoints;
   }
 
 }

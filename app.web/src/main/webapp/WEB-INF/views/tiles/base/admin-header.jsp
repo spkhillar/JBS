@@ -125,7 +125,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
         <li>
           <a class="fNiv" id="paymentlink">Payment</a> </li>
         
-        <!-- <li>
+        <li>
           <a class="fNiv">Account</a>
           <ul>
             <li class="arrow"></li>
@@ -133,7 +133,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
               <a class="accountlink1" >Credits or Payments</a> 
             </li>
             <li>
-            	<a class="accountlink2">Incentives</a>
+            	<a class="accountlink2" href="${contextPath}/accounts/view/creditpoints">Incentives</a>
             </li>
             <li>
             	<a class="accountlink3">Premium Deposit</a>
@@ -141,7 +141,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
             <li></li>
             </ul>
           </li>
-         -->
+         
         <li><a class="fNiv">Jobs</a>
           <ul>
             <li class="arrow"></li>

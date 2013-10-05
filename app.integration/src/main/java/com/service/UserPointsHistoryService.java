@@ -13,4 +13,8 @@ public interface UserPointsHistoryService {
 
   public Page<UserPointsHistory> findUserPointByUserName(User user, int page, int rows, String sord, String sidx);
 
+  public Page<UserPointsHistory> findSystemIncentivePoint(int page, int rows, String sord, String sidx);
+
+  public int getUserTotalPoint(User user);
+
 }

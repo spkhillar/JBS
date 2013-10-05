@@ -243,7 +243,7 @@ public class ServiceUtil {
    *          the order by field
    * @return the page
    */
-  public static Pageable getPage(final int page, final int rows, final String sortOrder, final String orderByField) {
+  public static Pageable getPage(final int page, final int rows, final String sortOrder, final String... orderByField) {
     Sort.Direction sortDirection = Sort.Direction.ASC;
     if ("desc".equalsIgnoreCase(sortOrder)) {
       sortDirection = Sort.Direction.DESC;
