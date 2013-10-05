@@ -6,11 +6,11 @@
 
 	<bean name="jobFactory"	class="org.springframework.scheduling.quartz.SpringBeanJobFactory" />
 	<bean name="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="triggers">
+		<!-- <property name="triggers">
 			<list>
 				<ref bean="testJobTrigger" />
 			</list>
-		</property>
+		</property> -->
 		<property name="jobFactory" ref="jobFactory" />
 		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
 		<property name="schedulerContextAsMap">
@@ -40,7 +40,7 @@
 				<!-- clustering -->
 
 				<prop key="org.quartz.jobStore.isClustered">true</prop>
-				<prop key="org.quartz.jobStore.clusterCheckinInterval">60000</prop>
+				<prop key="org.quartz.jobStore.clusterCheckinInterval">120000</prop>
 
 				<!-- Plugins -->
 				<prop key="org.quartz.plugin.shutdownhook.class">org.quartz.plugins.management.ShutdownHookPlugin</prop>
