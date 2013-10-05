@@ -165,4 +165,12 @@ public class ResellerController extends BaseAuthenticatedController {
     return "mlm.creditpoint.list";
   }
 
+  @RequestMapping(value = "/redeem/totalpoints", method = RequestMethod.GET)
+  public String redeemPoints(final ModelMap map) {
+    User user=userService.findByUserName(getCurrentLoggedinUserName());
+    int userTotalPoints=userPointsHistoryService.getLastUserPointTotal(user);
+
+    return "reseller-redemption";
+  }
+
 }

@@ -121,11 +121,11 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
             
             </ul>
           </li>
-        
+        -->
         <li>
           <a class="fNiv" id="paymentlink">Payment</a> </li>
         
-        <li>
+        <!-- <li>
           <a class="fNiv">Account</a>
           <ul>
             <li class="arrow"></li>

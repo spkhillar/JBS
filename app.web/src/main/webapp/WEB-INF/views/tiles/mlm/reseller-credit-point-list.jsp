@@ -19,8 +19,8 @@
 						width : 55,
 						hidden : true
 					},{
-						name : 'updatedAt',
-						index : 'updatedAt',
+						name : 'createdAt',
+						index : 'createdAt',
 						width : 60,
 						
 					},{
@@ -76,55 +76,39 @@
 		});
 	});
 	
-	function myHyperLinkFormatter (cellvalue, options, rowObject)
-	{
-		//var value = '<a href="'+webContextPath+'/admin/job/find/'+ rowObject.id +'">'+ cellvalue +'</a>';
-		  var value = '<a href="javascript:void(0);" onclick="javascript:loadDepositDetails('+rowObject.id+')">'+ cellvalue +'</a>';
 		
-		return value;
-	}
-	
-	function loadDepositDetails(depositorIntimatorId){
-		//console.log('..webContextPath+"/mypage/jobdetail"',webContextPath+"/mypage/jobdetail");
+	function initiateRedeemRequest(){
 		
-		//console.log('...'+jobId+'...');
-		 $.ajax({
-			    url: webContextPath+"/admin/view/approval/notification/"+depositorIntimatorId,
-			    dataType:'html',
-			    success: function(data){
-			      //construct the data however, update the HTML of the popup div 
-			      $('#viewDepositdiv').html(data);
-			      $('#viewDepositdiv').dialog({
-			  		modal: 'true',
-			  		height:700,
-			  		width:850,
-			  		closeOnEscape: true,
-			  		buttons: [ { text: "Approve", click: 
-				  			function() {
-				  				$( this ).dialog( "close" ); 
-				  					initiateActionOnDepositIntimatorRecord(depositorIntimatorId,1);
-				  				} 
-			  			},
-			  				{ text: "Reject", click: function() 
-			  				{
-			  					$( this ).dialog( "close" ); 
-			  					initiateActionOnDepositIntimatorRecord(depositorIntimatorId,0);
+		$.ajax({
+		    url: webContextPath+"/reseller/redeem/totalpoints",
+		    dataType:'html',
+		    success: function(data){
+		      //construct the data however, update the HTML of the popup div 
+		      $('#viewRedeemdiv').html(data);
+		      $('#viewRedeemdiv').dialog({
+		  		modal: 'true',
+		  		height:300,
+		  		width:450,
+		  		closeOnEscape: true,
+		  		buttons: [ { text: "Redeem", click: 
+			  			function() {
+			  				$( this ).dialog( "close" ); 
+			  					
 			  				} 
-			  			}]
-			      }).show();
-			    }
-			  });
+		  			},
+		  				{ text: "Reject", click: function() 
+		  				{
+		  					$( this ).dialog( "close" ); 
+		  					
+		  				} 
+		  			}]
+		      }).show();
+		    }
+		    
+		}); 
+		
 	}
 	
-	function initiateActionOnDepositIntimatorRecord(depositorIntimatorId,type){
-		 $.ajax({
-			    url: webContextPath+"/admin/approve/notification/"+depositorIntimatorId+"/"+type,
-			    success: function(data){
-			    	$("#grid").trigger('reloadGrid');
-			    }
-			    
-		 });
-	}
 	
 </script>
 </head>
@@ -132,13 +116,14 @@
 
 <div id="depositListDiv">
  <h4 style="padding: 5px">Home | Incentive | Current Incentive </h4><br/>
+ <button onclick="Javascript:initiateRedeemRequest()">Redeem Points</button>
  <hr color="red"/>
-		<table id='grid'></table>
+ 	<table id='grid'></table>
 		<div id='pager'></div>
 	</div>
-	
-<div id="viewDepositdiv" title="Deposit Notification">
-  </div>	
+  
+  <div id="viewRedeemdiv" title="Redeem Notification">
+  </div>
 </body>
 
 </html>
