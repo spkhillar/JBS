@@ -41,7 +41,7 @@
 					width : 1050,
 					rownumbers : true,
 					pager : '#pager',
-					sortname : 'id',
+					sortname : 'total',
 					viewrecords : true,
 					sortorder : "desc",
 					caption : "Reseller Points Information List",

@@ -19,4 +19,6 @@ public interface UserPointsHistoryDAO extends JpaRepository<UserPointsHistory, L
 
   public Page<UserPointsHistory> findByUser(User user, Pageable page);
 
+  public Page<UserPointsHistory> findByUserAndEnabled(User user, boolean enabled, Pageable page);
+
 }

@@ -1,74 +1,91 @@
 package com.web;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 
 import com.jpa.entities.User;
 import com.web.util.JqGridFilter;
-import com.web.util.JqGridFilterQueryBuilder;
 import com.web.util.JqGridFilter.Rule;
+import com.web.util.JqGridFilterQueryBuilder;
 
 public class TestFilters {
-	  @Test
-	  public void testFilters() {
 
-	    ArrayList<Rule> ruleList = new ArrayList<Rule>();
+  @Test
+  public void test123() throws ParseException {
+    String startDate = "05-10-2013";
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    Date dd = sdf.parse(startDate);
+    Date finaldate = DateUtils.addHours(dd, 23);
+    finaldate = DateUtils.addMinutes(finaldate, 59);
+    finaldate = DateUtils.addSeconds(finaldate, 59);
 
-	    Rule jqRrule = new Rule("", "id", "eq", "23");
-	    ruleList.add(jqRrule);
-	    jqRrule = new Rule("", "userName", "eq", "shiv");
-	    ruleList.add(jqRrule);
-	    jqRrule = new Rule("", "createdAt", "ne", "shiv");
-	    ruleList.add(jqRrule);
-	    jqRrule = new Rule("", "enabled", "gt", "true");
-	    ruleList.add(jqRrule);
-	    jqRrule = new Rule("", "version", "lt", "0");
-	    ruleList.add(jqRrule);
-	    jqRrule = new Rule("", "firstName", "bw", "akshat");
-	    ruleList.add(jqRrule);
-	    jqRrule = new Rule("", "lastName", "ew", "khillar");
-	    ruleList.add(jqRrule);
-	    jqRrule = new Rule("", "lastName", "cn", "khillar123");
-	    ruleList.add(jqRrule);
+    System.err.println(finaldate + "..Date..." + dd);
+  }
 
-	    jqRrule = new Rule("", "roleId", "eq", "1");
-	    ruleList.add(jqRrule);
+  // @Test
+  public void testFilters() {
 
-	    JqGridFilter jqgridFilter = new JqGridFilter();
-	    jqgridFilter.setRules(ruleList);
-	    jqgridFilter.setGroupOp("AND");
-	    Map<String, Object> paramObject = new LinkedHashMap<String, Object>();
-	    String groupOperator = " " +jqgridFilter.getGroupOp() + " ";
-	    List<String> predicateString = new ArrayList<String>();
-	    List<Rule> excludedRules =
-	        JqGridFilterQueryBuilder.getJpqlPredicate(jqgridFilter, new String[] { "roleId" }, paramObject,predicateString, User.class,groupOperator);
+    ArrayList<Rule> ruleList = new ArrayList<Rule>();
 
-	   // System.out.println("EXCLUDED:::"+excludedRules.get(0));
-	    
-	    System.out.println(paramObject.size()+"..MAP.."+paramObject);
-	    
-	    System.out.println("..predicate string"+predicateString.get(0));
-	    List<String> excludedPridicates = new ArrayList<String>(); 
-	    int paramSize = paramObject.size();
-	    String exeRule = null;
-	    for (Rule rule : excludedRules) {
-	      Rule newRule = new Rule(null, "userRole.role.id", rule.getOp(), rule.getData());
-	      exeRule = JqGridFilterQueryBuilder.createRuleString(newRule, paramObject, paramSize, Long.class);
-	      excludedPridicates.add(exeRule);
-	    }
+    Rule jqRrule = new Rule("", "id", "eq", "23");
+    ruleList.add(jqRrule);
+    jqRrule = new Rule("", "userName", "eq", "shiv");
+    ruleList.add(jqRrule);
+    jqRrule = new Rule("", "createdAt", "ne", "shiv");
+    ruleList.add(jqRrule);
+    jqRrule = new Rule("", "enabled", "gt", "true");
+    ruleList.add(jqRrule);
+    jqRrule = new Rule("", "version", "lt", "0");
+    ruleList.add(jqRrule);
+    jqRrule = new Rule("", "firstName", "bw", "akshat");
+    ruleList.add(jqRrule);
+    jqRrule = new Rule("", "lastName", "ew", "khillar");
+    ruleList.add(jqRrule);
+    jqRrule = new Rule("", "lastName", "cn", "khillar123");
+    ruleList.add(jqRrule);
 
-	    String predicateFirstPart = predicateString.get(0);
-	    String predicateSecondPart = StringUtils.join(excludedPridicates,groupOperator);
-	    String finalPredicate = predicateFirstPart + groupOperator + predicateSecondPart;
-	    System.out.println("..Final"+finalPredicate);
+    jqRrule = new Rule("", "roleId", "eq", "1");
+    ruleList.add(jqRrule);
 
-	    
-	    System.out.println(paramObject.size()+"..MAP.."+paramObject);
-	  }
+    JqGridFilter jqgridFilter = new JqGridFilter();
+    jqgridFilter.setRules(ruleList);
+    jqgridFilter.setGroupOp("AND");
+    Map<String, Object> paramObject = new LinkedHashMap<String, Object>();
+    String groupOperator = " " + jqgridFilter.getGroupOp() + " ";
+    List<String> predicateString = new ArrayList<String>();
+    List<Rule> excludedRules =
+        JqGridFilterQueryBuilder.getJpqlPredicate(jqgridFilter, new String[] { "roleId" }, paramObject,
+          predicateString, User.class, groupOperator);
+
+    // System.out.println("EXCLUDED:::"+excludedRules.get(0));
+
+    System.out.println(paramObject.size() + "..MAP.." + paramObject);
+
+    System.out.println("..predicate string" + predicateString.get(0));
+    List<String> excludedPridicates = new ArrayList<String>();
+    int paramSize = paramObject.size();
+    String exeRule = null;
+    for (Rule rule : excludedRules) {
+      Rule newRule = new Rule(null, "userRole.role.id", rule.getOp(), rule.getData());
+      exeRule = JqGridFilterQueryBuilder.createRuleString(newRule, paramObject, paramSize, Long.class);
+      excludedPridicates.add(exeRule);
+    }
+
+    String predicateFirstPart = predicateString.get(0);
+    String predicateSecondPart = StringUtils.join(excludedPridicates, groupOperator);
+    String finalPredicate = predicateFirstPart + groupOperator + predicateSecondPart;
+    System.out.println("..Final" + finalPredicate);
+
+    System.out.println(paramObject.size() + "..MAP.." + paramObject);
+  }
 
 }

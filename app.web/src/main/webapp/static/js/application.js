@@ -129,3 +129,20 @@ function checkAndApplyJob(jobId){
 		  });
 }
 
+function triggerCommision(){
+	alert("...triggered....");
+	
+	 $.ajax({
+		    url: webContextPath+"/admin/commision/06-10-2013",
+		    success: function(data){
+		    	//redirect to the page where he can apply on company website
+		    	console.log('...user in system...',data);
+		    },
+		    error:function(jqXHR,textStatus,errorThrown){
+		    	//ask user to login.
+		    	console.log('...user not in system...');
+		    }
+		  });
+	
+}
+

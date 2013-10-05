@@ -1,9 +1,13 @@
 package com.web.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -156,5 +160,17 @@ public class AdminController extends BaseAuthenticatedController {
       @PathVariable final int type, final ModelMap map) {
     depositIntimatorService.approveOrRejectDepositIntimator(depositorIntimatorId, type);
     return "done with approval";
+  }
+
+  @RequestMapping(value = "/commision/{startDate}", method = RequestMethod.GET)
+  public String commision(@PathVariable final String startDate, final ModelMap map, final HttpServletRequest request)
+      throws ParseException {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    Date start = sdf.parse(startDate);
+    Date finaldate = DateUtils.addHours(start, 23);
+    finaldate = DateUtils.addMinutes(finaldate, 59);
+    finaldate = DateUtils.addSeconds(finaldate, 59);
+    userGroupService.allocateCommision(start, finaldate);
+    return "good";
   }
 }

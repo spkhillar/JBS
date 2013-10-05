@@ -119,8 +119,13 @@ public class UserGroupServiceImpl implements UserGroupService {
         systemConfigurationService.findByKey(ApplicationConstants.SUBSCRIPTION_BASE_PRICE);
     int subscriptionBasePrice = Integer.valueOf(systemConfiguration.getValue());
     List<Long> idList = findUserGroupsBy(startDate, endDate, false);
+    logger.info("Processing IDs..." + idList);
     for (Long userGroupId : idList) {
-      allocateCommisionToUser(userGroupId, subscriptionBasePrice);
+      try {
+        allocateCommisionToUser(userGroupId, subscriptionBasePrice);
+      } catch (Exception e) {
+        logger.error("Exception processing userGroupId=" + userGroupId, e);
+      }
     }
   }
 
@@ -144,12 +149,13 @@ public class UserGroupServiceImpl implements UserGroupService {
       currentLevel = currentUserGrp.getLevel();
       logger.info("Parent of " + userName + " is " + tempUserName + " and is at level " + currentLevel);
       userLevel++;
+
       if (currentLevel == 0) {
         commsionPercentage = BigDecimal.valueOf(100l).subtract(totalPaid);
         int points = addUserPoints(parentUser, commsionPercentage, subscriptionBasePrice, true);
         logger.info("...Allocating commision to admin..." + parentUser.getUserName() + " @ " + commsionPercentage
             + ". Points Collected =" + points);
-      } else if (parentUser.getUserGroupsesForParentGroupId().size() == 2) {
+      } else if (parentUser.getUserGroupsesForParentGroupId().size() == 2 && currentLevel > 0) {
         commisionLevel = commisionLevelService.findByLevel(userLevel);
         commsionPercentage = commisionLevel.getPercentage();
         totalPaid = totalPaid.add(commisionLevel.getPercentage());

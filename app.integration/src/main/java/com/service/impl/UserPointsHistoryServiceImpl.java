@@ -55,9 +55,11 @@ public class UserPointsHistoryServiceImpl implements UserPointsHistoryService {
   }
 
   @Override
-  public Page<UserPointsHistory> findUserPointByUserName(final User user,final int page, final int rows, final String sord, final String sidx) {
+  @Transactional(readOnly = true)
+  public Page<UserPointsHistory> findUserPointByUserName(final User user, final int page, final int rows,
+      final String sord, final String sidx) {
     Pageable pageable = ServiceUtil.getPage(page, rows, sord, sidx);
-    return userPointsHistoryDAO.findByUser(user,pageable);
+    return userPointsHistoryDAO.findByUserAndEnabled(user, true, pageable);
   }
 
 }
