@@ -18,6 +18,9 @@
 #govttb2 tr .pvtinfo strong {
 	font-size: 12px;
 }
+#userjobinfo table tr th {
+	text-align: left;
+}
 </style>
 </head>
 
@@ -25,24 +28,34 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
      <div >
        <c:forEach var="job" items="${jobList}" varStatus="status">
-         <div id="userjobinfo">
-         <c:out value="${job.designation}">
-         </c:out> - <c:out value="${job.location}"></c:out> (<c:out value="${job.experiance}"></c:out> yrs)
-         | Posted date: <fmt:formatDate pattern="dd-MM-yyyy" value="${job.postedAt}"/>
-         <ul>
-         <li>
-         <c:out value="${job.keyword}"></c:out>
-         </li>
-         </ul>
-          <p>
-          <strong>Salary Range:</strong> Rs. <c:out value="${job.salary}"></c:out> p.a.  | 
-          <strong>Industry:</strong> <c:out value="${job.industry}"></c:out><br />
-          Company:<c:out value="${job.companyName}">|</c:out> 
-          </p>
-          <span class="my_modal_open">
-          <a href="javascript:void(0);" onclick="javascript:loadJobDetails(${job.id});">View Details</a>
-          </span>
-          </div>
+         <div >
+         <table width="100%" border="0" id="userjobinfo">
+          <tr>
+              <td width="101" scope="col">Designation</td>
+              <td width="252" scope="col"><c:out value="${job.designation}"></c:out>  - Experience : <c:out value="${job.experiance}"></c:out> yrs</td>
+              <td width="88" scope="col">Posted Date</td>
+              <td width="155" scope="col"><fmt:formatDate pattern="dd-MM-yyyy" value="${job.postedAt}"/></td>
+            </tr>
+            <tr>
+              <td>Key Skills</td>
+              <td colspan="4"><c:out value="${job.keyword}"></c:out></td>
+            </tr>
+            <tr>
+              <td>Salary</td>
+              <td colspan="4">Rs. <c:out value="${job.salary}"></c:out> p.a.</td>
+            </tr>
+            <tr>
+              <td>Company</td>
+              <td width="252"><c:out value="${job.companyName}"></c:out></td>
+              <td width="88">Industry</td>
+              <td><c:out value="${job.industry}"></c:out></td>
+              <td align="right"><a href="javascript:void(0);" onClick="javascript:loadJobDetails(${job.id});">View Details</a></td>
+            </tr>
+            
+          </table>
+          <br>
+         
+         </div>
           </c:forEach>
         </div>
      

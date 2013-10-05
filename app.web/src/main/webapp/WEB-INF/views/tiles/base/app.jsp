@@ -21,6 +21,7 @@
 
 <spring:url value="/resources/css/resellerview.css" var="resourceResellerViewCssUrl"/>
 <spring:url value="/resources/css/msgBoxLight.css" var="resourceMessageBoxCssUrl"/>
+<spring:url value="/resources/css/roothome.css" var="resourceRootHomeCssUrl"/>
 
 
 <spring:url value="/resources/js/jquery-1.9.1.min.js" var="resourceJqUrl"/>
@@ -62,6 +63,7 @@
 <link rel="stylesheet" type="text/css" href="${resourceJqJuiDropDownCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceResellerViewCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceMessageBoxCssUrl}"/>
+<link rel="stylesheet" type="text/css" href="${resourceRootHomeCssUrl}"/>
 
 
 <script type="text/javascript">

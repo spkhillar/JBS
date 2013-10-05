@@ -104,9 +104,14 @@ function selectPage(newPageValue) {
 </head>
 
 <body>
-     
-    <div id="currentSiteJobListDiv"></div>
+  
+    <div id="currentSiteJobListDiv">
+   
+    </div>
 	<div id="smart-paginator" style="margin: auto;"></div>
 	<input id="currrentJobType" type="hidden" value="${currrentJobType}"/>
+   <div id="applyJobDiv" title="Apply Job">
+     
+   </div>	
 </body>
 </html>

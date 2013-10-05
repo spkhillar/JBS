@@ -13,7 +13,40 @@ $(document).ready(function(){
 				'</tr>');
 			qualificationRowIndex = currentIndex;
 		});
-      $("#user\\.dateOfBirth").datepicker({ dateFormat: "dd/mm/yy"});
+      $("#user\\.dateOfBirth").datepicker({ 
+    	      dateFormat: "dd/mm/yy",
+    		  changeMonth: true,
+              changeYear: true,
+              yearRange: '-100y:c+nn',
+              maxDate: '-1d',
+              onClose: function ageVerification() {
+                  var value = document.getElementById('user.dateOfBirth').value;
+                  var birthDate = new Date(document.getElementById('user.dateOfBirth').value);
+                  var currDate = new Date();
+                  var yearDifferential = currDate.getFullYear() - birthDate.getFullYear();
+
+                  var totalMonths = (yearDifferential * 12) + (currDate.getMonth() - birthDate.getMonth());
+
+                  if (value != "") {
+
+                      if (currDate.getDate() < birthDate.getDate()) {
+                          totalMonths--;
+                      }
+
+                  }
+                  else {
+                      window.alert("Please enter your date of birth");
+                  }
+
+                  var age = parseInt(totalMonths / 12);
+                   if (age < 18) {
+                      window.alert("You must be 18 or older to register to JOBSbySMS.  ");
+                      $(this).val="";
+
+                  }
+              }
+           
+      });
        $("#registerBtn").button();
        $("#registrationForm").validate( {
   	    success : "valid",
