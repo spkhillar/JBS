@@ -1,7 +1,5 @@
 package com.jpa.entities;
 
-
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -34,28 +32,21 @@ public class Payment implements BaseEntity, java.io.Serializable {
   private RedeemHistory redeemHistory;
   private BigDecimal amount;
   private Date paymentDate;
-  private Date createdAt;
+  private Date createdAt = new Date();
   private Date updatedAt;
 
-  public Payment() {
-  }
+  public Payment() {}
 
-  public Payment(long id, BigDecimal amount, Date paymentDate,
-      Date createdAt, Date updatedAt) {
-    this.id = id;
+  public Payment(BigDecimal amount, Date paymentDate, Date updatedAt) {
     this.amount = amount;
     this.paymentDate = paymentDate;
-    this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
 
-  public Payment(long id, RedeemHistory redeemHistory, BigDecimal amount,
-      Date paymentDate, Date createdAt, Date updatedAt) {
-    this.id = id;
+  public Payment(RedeemHistory redeemHistory, BigDecimal amount, Date paymentDate, Date updatedAt) {
     this.redeemHistory = redeemHistory;
     this.amount = amount;
     this.paymentDate = paymentDate;
-    this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
 
@@ -110,7 +101,7 @@ public class Payment implements BaseEntity, java.io.Serializable {
   }
 
   @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_at", nullable = false, length = 19)
+  @Column(name = "created_at", nullable = false, updatable = false, length = 19)
   public Date getCreatedAt() {
     return this.createdAt;
   }
@@ -127,6 +118,44 @@ public class Payment implements BaseEntity, java.io.Serializable {
 
   public void setUpdatedAt(Date updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (paymentDate == null ? 0 : paymentDate.hashCode());
+    result = prime * result + (redeemHistory == null ? 0 : redeemHistory.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    Payment other = (Payment) obj;
+    if (paymentDate == null) {
+      if (other.paymentDate != null) {
+        return false;
+      }
+    } else if (!paymentDate.equals(other.paymentDate)) {
+      return false;
+    }
+    if (redeemHistory == null) {
+      if (other.redeemHistory != null) {
+        return false;
+      }
+    } else if (!redeemHistory.equals(other.redeemHistory)) {
+      return false;
+    }
+    return true;
   }
 
 }

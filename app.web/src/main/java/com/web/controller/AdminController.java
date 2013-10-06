@@ -132,11 +132,11 @@ public class AdminController extends BaseAuthenticatedController {
   @RequestMapping(value = "/deposit/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<DepositIntimator> mlmDepositRecords(@RequestParam("_search") final Boolean search,
-    @RequestParam(value = "filters", required = false) final String filters,
-    @RequestParam(value = "page", required = false) final Integer page,
-    @RequestParam(value = "rows", required = false) final Integer rows,
-    @RequestParam(value = "sidx", required = false) final String sidx,
-    @RequestParam(value = "sord", required = false) final String sord) {
+      @RequestParam(value = "filters", required = false) final String filters,
+      @RequestParam(value = "page", required = false) final Integer page,
+      @RequestParam(value = "rows", required = false) final Integer rows,
+      @RequestParam(value = "sidx", required = false) final String sidx,
+      @RequestParam(value = "sord", required = false) final String sord) {
     Page<DepositIntimator> depositIntimator = null;
     if (search == true) {
       depositIntimator = depositIntimatorService.findAll(page, rows, sord, sidx);
@@ -191,15 +191,14 @@ public class AdminController extends BaseAuthenticatedController {
     return "good";
   }
 
-
   @RequestMapping(value = "/redeem/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<RedeemHistory> mlmRedeemRecords(@RequestParam("_search") final Boolean search,
-    @RequestParam(value = "filters", required = false) final String filters,
-    @RequestParam(value = "page", required = false) final Integer page,
-    @RequestParam(value = "rows", required = false) final Integer rows,
-    @RequestParam(value = "sidx", required = false) final String sidx,
-    @RequestParam(value = "sord", required = false) final String sord) {
+      @RequestParam(value = "filters", required = false) final String filters,
+      @RequestParam(value = "page", required = false) final Integer page,
+      @RequestParam(value = "rows", required = false) final Integer rows,
+      @RequestParam(value = "sidx", required = false) final String sidx,
+      @RequestParam(value = "sord", required = false) final String sord) {
     Page<RedeemHistory> redeemHistory = null;
     if (search == true) {
       redeemHistory = redeemHistoryService.findAll(page, rows, sord, sidx);
@@ -220,12 +219,19 @@ public class AdminController extends BaseAuthenticatedController {
     return "redeem.history.list";
   }
 
-  @RequestMapping(value = "/view/redeem/notification/{resellerId}", method = RequestMethod.GET)
-  public String viewRedeemNotification(@PathVariable final long resellerId, final ModelMap map) {
-    RedeemHistory redeemHistory = redeemHistoryService.findById(resellerId);
+  @RequestMapping(value = "/view/redeem/notification/{id}", method = RequestMethod.GET)
+  public String viewRedeemNotification(@PathVariable final long id, final ModelMap map) {
+    RedeemHistory redeemHistory = redeemHistoryService.findById(id);
     map.put("resellerRedeemForm", redeemHistory);
     map.put("modeOfRedemptionList", MODE_OF_REDEEMPTION);
     map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "view");
     return "reseller-redemption";
+  }
+
+  @RequestMapping(value = "/approve/redeem/notification/{id}/{approval}", method = RequestMethod.GET)
+  public String approveOrRejectNotification(@PathVariable final long id, @PathVariable final int approval,
+      final ModelMap map) {
+    redeemHistoryService.approveOrRejectNotification(id, approval);
+    return "redeem.history.list";
   }
 }

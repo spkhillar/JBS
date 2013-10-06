@@ -1201,5 +1201,9 @@
 			<append value=" after total" />
 		</modifySql>   
     </changeSet>
+    
+    <changeSet author="shiv" id="1367592120330-56">
+		<dropNotNullConstraint tableName="payment" columnName="payment_date" columnDataType="DATETIME"/>
+    </changeSet>
    
 </databaseChangeLog>

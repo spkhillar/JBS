@@ -1,31 +1,41 @@
 package com.service.impl;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jpa.entities.Payment;
 import com.jpa.entities.RedeemHistory;
 import com.jpa.entities.User;
 import com.jpa.entities.enums.RedeemStatus;
 import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.jpa.repositories.RedeemHistoryDAO;
+import com.service.PaymentService;
 import com.service.RedeemHistoryService;
 import com.service.util.ServiceUtil;
 
 @Service("redeemHistoryService")
 public class RedeemHistoryServiceImpl implements RedeemHistoryService {
 
+  private static final Logger logger = Logger.getLogger(RedeemHistoryServiceImpl.class);
+
   @Autowired
   private RedeemHistoryDAO redeemHistoryDAO;
 
   @Autowired
   private GenericQueryExecutorDAO genericQueryExecutorDAO;
+
+  @Autowired
+  private PaymentService paymentService;
 
   @Override
   @Transactional
@@ -68,6 +78,28 @@ public class RedeemHistoryServiceImpl implements RedeemHistoryService {
       final String sidx) {
     Pageable pageable = ServiceUtil.getPage(page, rows, sord, sidx);
     return redeemHistoryDAO.findByUser(user, pageable);
+  }
+
+  @Override
+  @Transactional()
+  public void approveOrRejectNotification(long id, int approval) {
+    logger.info("approveOrRejectNotification with id=" + id + " and approval =" + approval);
+    RedeemHistory redeemHistory = findById(id);
+    if (approval == 1) {
+      redeemHistory.setStatus(RedeemStatus.APPROVED);
+    } else {
+      redeemHistory.setStatus(RedeemStatus.REJECTED);
+    }
+    redeemHistory.setUpdatedAt(new Date());
+    RedeemHistory savedRedeemHistory = save(redeemHistory);
+
+    if (approval == 1) {
+      logger.info("Creating Payment Record for Redeem History Id=" + id);
+      Payment payment =
+          new Payment(savedRedeemHistory, BigDecimal.valueOf(savedRedeemHistory.getPoints()), null, new Date());
+      paymentService.save(payment);
+    }
+
   }
 
 }

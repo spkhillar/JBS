@@ -17,4 +17,6 @@ public interface RedeemHistoryService {
 
   public Page<RedeemHistory> findAllByUser(User user, int page, int rows, String sord, String sidx);
 
+  public void approveOrRejectNotification(long id, int approval);
+
 }

@@ -81,16 +81,11 @@
 	
 	function myHyperLinkFormatter (cellvalue, options, rowObject)
 	{
-		//var value = '<a href="'+webContextPath+'/admin/job/find/'+ rowObject.id +'">'+ cellvalue +'</a>';
 		  var value = '<a href="javascript:void(0);" onclick="javascript:loadRedeemDetails('+rowObject.id+')">'+ cellvalue +'</a>';
-		
 		return value;
 	}
 	
 	function loadRedeemDetails(id){
-		//console.log('..webContextPath+"/mypage/jobdetail"',webContextPath+"/mypage/jobdetail");
-		
-		//console.log('...'+jobId+'...');
 		 $.ajax({
 			    url: webContextPath+"/admin/view/redeem/notification/"+id,
 			    dataType:'html',
@@ -102,16 +97,14 @@
 			  		height:350,
 			  		width:400,
 			  		closeOnEscape: true,
-			  		buttons: [ { text: "Approve", click: 
-				  			function() {
+			  		buttons: [ { text: "Approve", click: function() {
 				  				$( this ).dialog( "close" ); 
-				  					initiateActionOnRedeemRecord();
+				  					initiateActionOnRedeemRecord(id,1);
 				  				} 
-			  			},
-			  				{ text: "Reject", click: function() 
-			  				{
+			  				},
+			  				{ text: "Reject", click: function(){
 			  					$( this ).dialog( "close" ); 
-			  					initiateActionOnRedeemRecord();
+			  					initiateActionOnRedeemRecord(id,0);
 			  				} 
 			  			}]
 			      }).show();
@@ -119,16 +112,19 @@
 			  });
 	}
 	
-	function initiateActionOnRedeemRecord(){
+	function initiateActionOnRedeemRecord(id,approval){
 		 $.ajax({
-			    url: webContextPath+"/admin/approve/redeem/notification/",
+			    url: webContextPath+"/admin/approve/redeem/notification/"+id+"/"+approval,
 			    success: function(data){
+			    	showToastSuccessMessage("Record updated sucessfully.");
 			    	$("#grid").trigger('reloadGrid');
+			    },
+			    error:function(jqXHR,textStatus,errorThrown){
+			    	showToastErrorMessage("Record updating failed.");
 			    }
 			    
 		 });
 	}
-	
 </script>
 </head>
 <body>
