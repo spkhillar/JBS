@@ -73,10 +73,10 @@ $(document).ready(function(){
   <ul id="menu1">
    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
      <li id="opt_1.2">
-    	<a href="${contextPath}/admin/register/mlm/0">Admin MLM-L</a>
+    	<a href="${contextPath}/admin/register/mlm/0">Reseller Admin L</a>
     </li>
     <li id="opt_1.3">
-    	<a href="${contextPath}/admin/register/mlm/1">Admin MLM-R</a>
+    	<a href="${contextPath}/admin/register/mlm/1">Reseller Admin R</a>
     </li>
     </sec:authorize>
     <sec:authorize access="hasAnyRole('SITE_ADMIN','MLM_ADMIN','ROLE_MLM')">
