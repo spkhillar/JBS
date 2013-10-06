@@ -37,23 +37,33 @@
 </script>
 </head>
 <body>
+<c:choose>
+<c:when test="${operation eq 'create'}">
+<c:set var="readonly" value="false"/>
+</c:when>
+<c:otherwise>
+<c:set var="readonly" value="true"/>
+</c:otherwise>
+</c:choose>
 <form:form id="resellerRedeemForm" name="resellerRedeemForm" modelAttribute="resellerRedeemForm">
  <table style="border: 0">
-   <tr>
+   <c:if test="${operation eq 'create'}">
+	<tr>
     <td>Total Points</td>
     <td><c:out value="${userTotalPoints}"></c:out> </td>
    </tr>
-   <tr>
+   </c:if>
+    <tr>
     <td>Points to Redeem</td>
-    <td><form:input path="points" /></td>
+    <td><form:input path="points" disabled="${readonly}"/></td>
    </tr>
    <tr>
     <td>Mode of Redemption</td>
-    <td><form:select path="modeOfRedemption" items="${modeOfRedemptionList}" ></form:select></td>
+    <td><form:select path="modeOfRedemption" items="${modeOfRedemptionList}" disabled="${readonly}" ></form:select></td>
    </tr>
    <tr>
     <td>Redemption Details</td>
-    <td><form:textarea path="modeDetails" rows="5" cols="30"/></td>
+    <td><form:textarea path="modeDetails" rows="5" cols="30" disabled="${readonly}"/></td>
    </tr>
  </table>
  </form:form>

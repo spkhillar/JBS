@@ -3,7 +3,9 @@ package com.web.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +24,7 @@ import com.jpa.entities.DepositIntimator;
 import com.jpa.entities.RedeemHistory;
 import com.jpa.entities.SystemConfiguration;
 import com.jpa.entities.User;
+import com.jpa.entities.enums.ModeOfRedemption;
 import com.jpa.entities.enums.UserPosition;
 import com.service.CommisionLevelService;
 import com.service.DepositIntimatorService;
@@ -52,6 +55,15 @@ public class AdminController extends BaseAuthenticatedController {
 
   @Autowired
   private RedeemHistoryService redeemHistoryService;
+
+  private static final Map<String, String> MODE_OF_REDEEMPTION = new LinkedHashMap<String, String>();
+
+  static {
+    MODE_OF_REDEEMPTION.put(ModeOfRedemption.CASH.toString(), "CASH");
+    MODE_OF_REDEEMPTION.put(ModeOfRedemption.ACCOUNT_DEPOSIT.toString(), "DEPOSIT");
+    MODE_OF_REDEEMPTION.put(ModeOfRedemption.ONLINE_TRANSFER.toString(), "ONLINE");
+    MODE_OF_REDEEMPTION.put(ModeOfRedemption.CHEQUE.toString(), "CHEQUE");
+  }
 
   @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
   public String changePassword(final ModelMap map, final HttpServletRequest request) {
@@ -206,5 +218,14 @@ public class AdminController extends BaseAuthenticatedController {
   @RequestMapping(value = "/view/redeem", method = RequestMethod.GET)
   public String viewAllRedeem(final ModelMap map) {
     return "redeem.history.list";
+  }
+
+  @RequestMapping(value = "/view/redeem/notification/{resellerId}", method = RequestMethod.GET)
+  public String viewRedeemNotification(@PathVariable final long resellerId, final ModelMap map) {
+    RedeemHistory redeemHistory = redeemHistoryService.findById(resellerId);
+    map.put("resellerRedeemForm", redeemHistory);
+    map.put("modeOfRedemptionList", MODE_OF_REDEEMPTION);
+    map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "view");
+    return "reseller-redemption";
   }
 }

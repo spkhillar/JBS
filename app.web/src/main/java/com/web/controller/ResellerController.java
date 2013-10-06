@@ -157,11 +157,11 @@ public class ResellerController extends BaseAuthenticatedController {
   @RequestMapping(value = "/deposit/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<UserPointsHistory> mlmCreditRecords(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
     Page<UserPointsHistory> mlmCreditPoints = null;
     User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
     if (search == true) {
@@ -198,6 +198,7 @@ public class ResellerController extends BaseAuthenticatedController {
   public String redeemPoints(final ModelMap map) {
     User user = getCurrentUser();
     int userTotalPoints = userPointsHistoryService.getUserTotalPoint(user);
+    map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "create");
     map.put("userTotalPoints", userTotalPoints);
     map.put("resellerRedeemForm", new RedeemHistory());
     map.put("modeOfRedemptionList", MODE_OF_REDEEMPTION);

@@ -87,31 +87,31 @@
 		return value;
 	}
 	
-	/*function loadRedeemDetails(resellerId){
+	function loadRedeemDetails(resellerId){
 		//console.log('..webContextPath+"/mypage/jobdetail"',webContextPath+"/mypage/jobdetail");
 		
 		//console.log('...'+jobId+'...');
 		 $.ajax({
-			    url: webContextPath+"/admin/view/approval/notification/"+depositorIntimatorId,
+			    url: webContextPath+"/admin/view/redeem/notification/"+resellerId,
 			    dataType:'html',
 			    success: function(data){
 			      //construct the data however, update the HTML of the popup div 
 			      $('#viewDepositdiv').html(data);
 			      $('#viewDepositdiv').dialog({
 			  		modal: 'true',
-			  		height:700,
-			  		width:850,
+			  		height:350,
+			  		width:400,
 			  		closeOnEscape: true,
 			  		buttons: [ { text: "Approve", click: 
 				  			function() {
 				  				$( this ).dialog( "close" ); 
-				  					initiateActionOnDepositIntimatorRecord(depositorIntimatorId,1);
+				  					initiateActionOnRedeemRecord();
 				  				} 
 			  			},
 			  				{ text: "Reject", click: function() 
 			  				{
 			  					$( this ).dialog( "close" ); 
-			  					initiateActionOnDepositIntimatorRecord(depositorIntimatorId,0);
+			  					initiateActionOnRedeemRecord();
 			  				} 
 			  			}]
 			      }).show();
@@ -119,16 +119,16 @@
 			  });
 	}
 	
-	function initiateActionOnDepositIntimatorRecord(depositorIntimatorId,type){
+	function initiateActionOnRedeemRecord(){
 		 $.ajax({
-			    url: webContextPath+"/admin/approve/notification/"+depositorIntimatorId+"/"+type,
+			    url: webContextPath+"/admin/approve/redeem/notification/",
 			    success: function(data){
 			    	$("#grid").trigger('reloadGrid');
 			    }
 			    
 		 });
 	}
-	*/
+	
 </script>
 </head>
 <body>
