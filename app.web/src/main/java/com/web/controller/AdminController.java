@@ -147,11 +147,11 @@ public class AdminController extends BaseAuthenticatedController {
   @RequestMapping(value = "/redeem/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<RedeemHistory> mlmRedeemRecords(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
     Page<RedeemHistory> redeemHistory = null;
     if (search == true) {
       redeemHistory = redeemHistoryService.findAll(page, rows, sord, sidx);
@@ -191,11 +191,11 @@ public class AdminController extends BaseAuthenticatedController {
   @RequestMapping(value = "/payment/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<Payment> paymentRecords(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
     Page<Payment> payment = null;
     if (search == true) {
       payment = paymentService.findAll(page, rows, sord, sidx);
@@ -215,5 +215,12 @@ public class AdminController extends BaseAuthenticatedController {
   public String viewAllPayment(final ModelMap map) {
     return "payment.list";
   }
+
+  @RequestMapping(value = "/update/payment/{id}", method = RequestMethod.GET)
+  public String updatePaymentRecord(@PathVariable final long id, final ModelMap map) {
+    paymentService.updatePaymentDate(id);
+    return "payment.list";
+  }
+
 
 }

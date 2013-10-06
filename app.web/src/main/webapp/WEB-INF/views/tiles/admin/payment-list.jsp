@@ -77,11 +77,11 @@
 	
 	function myHyperLinkFormatter (cellvalue, options, rowObject)
 	{
-		  var value = '<a href="javascript:void(0);" onclick="javascript:loadRedeemDetails('+rowObject.id+')">'+ cellvalue +'</a>';
-		return value;
+		  var value = '<a href="javascript:void(0);" onclick="javascript:viewPaymentDetails('+rowObject.redeemHistory.id+')">'+ cellvalue +'</a>';
+		 return value;
 	}
 	
-	/*function loadRedeemDetails(id){
+	function viewPaymentDetails(id){
 		 $.ajax({
 			    url: webContextPath+"/admin/view/redeem/notification/"+id,
 			    dataType:'html',
@@ -93,14 +93,14 @@
 			  		height:350,
 			  		width:400,
 			  		closeOnEscape: true,
-			  		buttons: [ { text: "Approve", click: function() {
+			  		buttons: [ { text: "Pay", click: function() {
 				  				$( this ).dialog( "close" ); 
-				  					initiateActionOnRedeemRecord(id,1);
+				  				initiateActionOnPaymentRecord(id);
 				  				} 
 			  				},
-			  				{ text: "Reject", click: function(){
+			  				{ text: "Cancel", click: function(){
 			  					$( this ).dialog( "close" ); 
-			  					initiateActionOnRedeemRecord(id,0);
+			  					initiateActionOnPaymentRecord(id);
 			  				} 
 			  			}]
 			      }).show();
@@ -108,9 +108,9 @@
 			  });
 	}
 	
-	function initiateActionOnRedeemRecord(id,approval){
+	function initiateActionOnPaymentRecord(id){
 		 $.ajax({
-			    url: webContextPath+"/admin/approve/redeem/notification/"+id+"/"+approval,
+			    url: webContextPath+"/admin/update/payment/"+id,
 			    success: function(data){
 			    	showToastSuccessMessage("Record updated sucessfully.");
 			    	$("#grid").trigger('reloadGrid');
@@ -121,7 +121,7 @@
 			    
 		 });
 	}
-	*/
+	
 </script>
 </head>
 <body>

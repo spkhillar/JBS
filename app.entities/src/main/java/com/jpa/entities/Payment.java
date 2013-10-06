@@ -35,6 +35,7 @@ public class Payment implements BaseEntity, java.io.Serializable {
   @JsonProperty
   private long id;
   private int version;
+  @JsonProperty
   private RedeemHistory redeemHistory;
   @JsonProperty
   private BigDecimal amount;
