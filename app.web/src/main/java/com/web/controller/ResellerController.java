@@ -214,4 +214,32 @@ public class ResellerController extends BaseAuthenticatedController {
     redeemHistoryService.save(redeemHistory);
     return "Saved Successfuly.";
   }
+
+  @RequestMapping(value = "/view/redeem", method = RequestMethod.GET)
+  public String viewAllRedeem(final ModelMap map) {
+    return "reseller.redeem.history.list";
+  }
+
+  @RequestMapping(value = "/redeem/records", produces = "application/json")
+  public @ResponseBody
+  JqGridResponse<RedeemHistory> mlmRedeemRecords(@RequestParam("_search") final Boolean search,
+      @RequestParam(value = "filters", required = false) final String filters,
+      @RequestParam(value = "page", required = false) final Integer page,
+      @RequestParam(value = "rows", required = false) final Integer rows,
+      @RequestParam(value = "sidx", required = false) final String sidx,
+      @RequestParam(value = "sord", required = false) final String sord) {
+    Page<RedeemHistory> redeemHistory = null;
+    if (search == true) {
+      redeemHistory = redeemHistoryService.findAllByUser(getCurrentUser(), page, rows, sord, sidx);
+    } else {
+      redeemHistory = redeemHistoryService.findAllByUser(getCurrentUser(), page, rows, sord, sidx);
+    }
+    List<Object> list = DomainObjectMapper.listEntities(redeemHistory);
+    JqGridResponse<RedeemHistory> response = new JqGridResponse<RedeemHistory>();
+    response.setRows(list);
+    response.setRecords(Long.valueOf(redeemHistory.getTotalElements()).toString());
+    response.setTotal(Integer.valueOf(redeemHistory.getTotalPages()).toString());
+    response.setPage(Integer.valueOf(redeemHistory.getNumber() + 1).toString());
+    return response;
+  }
 }

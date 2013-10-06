@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.jpa.entities.RedeemHistory;
+import com.jpa.entities.User;
 import com.jpa.entities.enums.RedeemStatus;
 
 /**
@@ -18,5 +19,7 @@ import com.jpa.entities.enums.RedeemStatus;
 public interface RedeemHistoryDAO extends JpaRepository<RedeemHistory, Long> {
 
   public Page<RedeemHistory> findByStatus(RedeemStatus status, Pageable pageable);
+
+  public Page<RedeemHistory> findByUser(User user, Pageable pageable);
 
 }

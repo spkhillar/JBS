@@ -14,6 +14,7 @@
 <spring:url value="/resources/css/ui.jqgrid.css" var="resourceJqGridCssUrl"/>
 <spring:url value="/resources/css/menu.css" var="resourceMenuCssUrl"/>
 <spring:url value="/resources/css/jquery.jui_dropdown.css" var="resourceJqJuiDropDownCssUrl"/>
+<spring:url value="/resources/css/jquery.toastmessage.css" var="resourceJqToastMessageCssUrl"/>
 <!-- Index Page CSS -->
 <spring:url value="/resources/css/style1.css" var="resourceStyle1CssUrl"/>
 <spring:url value="/resources/css/indexpage.css" var="resourceIndexPageCssUrl"/>
@@ -37,8 +38,7 @@
 <spring:url value="/resources/js/jquery.jui_dropdown.min.js" var="resourceJqJuiDropDownJsUrl"/>
 <spring:url value="/resources/js/splitter.js" var="resourceJqSplitterJsUrl"/>
 <spring:url value="/resources/js/jquery.msgBox.js" var="resourceJqMessageBoxJsUrl"/>
-
-
+<spring:url value="/resources/js/jquery.toastmessage.js" var="resourceJqToastMessageJsUrl"/>
 
 <script type="text/javascript" src="${resourceJqUrl}"></script>
 <script type="text/javascript" src="${resourceAppJsUrl}"></script>
@@ -52,6 +52,7 @@
 <script type="text/javascript" src="${resourceJqJuiDropDownJsUrl}"></script>
 <script type="text/javascript" src="${resourceJqSplitterJsUrl}"></script>
 <script type="text/javascript" src="${resourceJqMessageBoxJsUrl}"></script>
+<script type="text/javascript" src="${resourceJqToastMessageJsUrl}"></script>
 
 <link rel="stylesheet" type="text/css" href="${resourceCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceMenuCssUrl}"/>
@@ -64,7 +65,7 @@
 <link rel="stylesheet" type="text/css" href="${resourceResellerViewCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceMessageBoxCssUrl}"/>
 <link rel="stylesheet" type="text/css" href="${resourceRootHomeCssUrl}"/>
-
+<link rel="stylesheet" type="text/css" href="${resourceJqToastMessageCssUrl}"/>
 
 <script type="text/javascript">
 webContextPath="${pageContext.request.contextPath}";

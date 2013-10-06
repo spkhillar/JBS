@@ -87,16 +87,16 @@ $(document).ready(function(){
   		   },
   			"user.address.addressLine1" : {
   		        required : true,
-  		      alphanumeric: true,
+  		      addressvalid: true,
   		      maxlength: 200,
   		   },
   		   "user.address.addressLine2" : {
- 		          alphanumeric: true,
- 	  		      maxlength: 200,
+  			 addressvalid: true,
+ 	  		 maxlength: 200,
  	  		},
   			"user.address.city" : {
   		        required : true,
-  		        lettersonly:true,
+  		      addressvalid:true,
   		        maxlength: 100,
   		   },
   			"user.phone" : {
@@ -167,8 +167,12 @@ function registerUser(){
 
 jQuery.validator.addMethod("alphanumeric", function(value, element) {
 	  return this.optional(element) || /^[a-zA-Z0-9_]+$/i.test(value);
-	}, "Letters, numbers or underscores only please"); 
+	}, "Letters, numbers or underscores only please."); 
 
 jQuery.validator.addMethod("lettersonly", function(value, element) {
 	  return this.optional(element) || /^[a-zA-Z]+$/i.test(value);
-	}, "Letters only please"); 
+	}, "Letters only please."); 
+
+jQuery.validator.addMethod("addressvalid", function(value, element) {
+	  return this.optional(element) || /^[a-zA-Z0-9 ,&]+$/i.test(value);
+	}, "Letters, numbers, space, comma, & are valid."); 

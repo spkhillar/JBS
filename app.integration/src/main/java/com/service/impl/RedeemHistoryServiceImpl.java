@@ -60,7 +60,14 @@ public class RedeemHistoryServiceImpl implements RedeemHistoryService {
   @Transactional(readOnly = true)
   public RedeemHistory findById(long id) {
     return redeemHistoryDAO.findOne(id);
+  }
 
+  @Override
+  @Transactional(readOnly = true)
+  public Page<RedeemHistory> findAllByUser(final User user, final int page, final int rows, final String sord,
+      final String sidx) {
+    Pageable pageable = ServiceUtil.getPage(page, rows, sord, sidx);
+    return redeemHistoryDAO.findByUser(user, pageable);
   }
 
 }

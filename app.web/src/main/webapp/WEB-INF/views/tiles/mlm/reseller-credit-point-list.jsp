@@ -133,6 +133,7 @@
 		    url:actionUrl,
 		    async: false,
 		    success: function(data, textStatus){
+		    	showToastSuccessMessage("Notification saved and sent to Administrator.");
 		    	console.log('....Saved...');
 		    },
 		    error: function(textStatus,errorThrown){

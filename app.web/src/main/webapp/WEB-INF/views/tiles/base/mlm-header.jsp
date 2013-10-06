@@ -86,7 +86,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
             <li>
               <a class="configlink1" href="${contextPath}/reseller/view/creditpoints">Current </a> 
              </li>
-            <li><a class="configlink2" href="#">Reedem History</a></li>
+            <li><a class="configlink2" href="${contextPath}/reseller/view/redeem"">Reedem History</a></li>
            </ul>
           </li>
         

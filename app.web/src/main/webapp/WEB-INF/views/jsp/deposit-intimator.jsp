@@ -11,8 +11,11 @@
 <head>
 <script>
 $(document).ready(function(){
-    $("#depositIntimator\\.transactedDate").datepicker({dateFormat: "dd/mm/yy" });
-    $("#depositIntimator\\.chequeDate").datepicker({dateFormat: "dd/mm/yy" });
+	var currentDepId= $("#depositIntimator\\.id").val();
+	if(currentDepId == 0){
+    	$("#depositIntimator\\.transactedDate").datepicker({dateFormat: "dd/mm/yy" });
+    	$("#depositIntimator\\.chequeDate").datepicker({dateFormat: "dd/mm/yy" });
+	}
     $("#initDeposit").button();
 });
 function initiateDeposit(){
@@ -250,6 +253,7 @@ jQuery.validator.addMethod("lettersonly", function(value, element) {
   	</td>
   </tr>
 </table>
+<form:hidden path="depositIntimator.id" />
 </form:form>
 </body>
 </html>
