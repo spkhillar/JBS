@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jpa.entities.DepositIntimator;
+import com.jpa.entities.RedeemHistory;
 import com.jpa.entities.SystemConfiguration;
 import com.jpa.entities.User;
 import com.jpa.entities.enums.UserPosition;
 import com.service.CommisionLevelService;
 import com.service.DepositIntimatorService;
+import com.service.RedeemHistoryService;
 import com.service.SystemConfigurationService;
 import com.service.UserGroupService;
 import com.service.util.ApplicationConstants;
@@ -47,6 +49,9 @@ public class AdminController extends BaseAuthenticatedController {
 
   @Autowired
   private DepositIntimatorService depositIntimatorService;
+
+  @Autowired
+  private RedeemHistoryService redeemHistoryService;
 
   @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
   public String changePassword(final ModelMap map, final HttpServletRequest request) {
@@ -115,11 +120,11 @@ public class AdminController extends BaseAuthenticatedController {
   @RequestMapping(value = "/deposit/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<DepositIntimator> mlmDepositRecords(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
     Page<DepositIntimator> depositIntimator = null;
     if (search == true) {
       depositIntimator = depositIntimatorService.findAll(page, rows, sord, sidx);
@@ -172,5 +177,34 @@ public class AdminController extends BaseAuthenticatedController {
     finaldate = DateUtils.addSeconds(finaldate, 59);
     userGroupService.allocateCommision(start, finaldate);
     return "good";
+  }
+
+
+  @RequestMapping(value = "/redeem/records", produces = "application/json")
+  public @ResponseBody
+  JqGridResponse<RedeemHistory> mlmRedeemRecords(@RequestParam("_search") final Boolean search,
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
+    Page<RedeemHistory> redeemHistory = null;
+    if (search == true) {
+      redeemHistory = redeemHistoryService.findAll(page, rows, sord, sidx);
+    } else {
+      redeemHistory = redeemHistoryService.findAll(page, rows, sord, sidx);
+    }
+    List<Object> list = DomainObjectMapper.listEntities(redeemHistory);
+    JqGridResponse<RedeemHistory> response = new JqGridResponse<RedeemHistory>();
+    response.setRows(list);
+    response.setRecords(Long.valueOf(redeemHistory.getTotalElements()).toString());
+    response.setTotal(Integer.valueOf(redeemHistory.getTotalPages()).toString());
+    response.setPage(Integer.valueOf(redeemHistory.getNumber() + 1).toString());
+    return response;
+  }
+
+  @RequestMapping(value = "/view/redeem", method = RequestMethod.GET)
+  public String viewAllRedeem(final ModelMap map) {
+    return "redeem.history.list";
   }
 }

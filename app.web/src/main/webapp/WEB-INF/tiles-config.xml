@@ -154,4 +154,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/admin-credit-point-list.jsp" />
 	</definition>
 	
+	<definition name="redeem.history.list" extends="admin.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/reseller-redeem-list.jsp" />
+	</definition>
+	
 </tiles-definitions>

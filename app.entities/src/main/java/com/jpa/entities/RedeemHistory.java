@@ -19,6 +19,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonMethod;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import com.jpa.entities.enums.ModeOfRedemption;
 import com.jpa.entities.enums.RedeemStatus;
 
@@ -27,27 +31,35 @@ import com.jpa.entities.enums.RedeemStatus;
  */
 @Entity
 @Table(name = "redeem_history")
+@JsonAutoDetect(JsonMethod.NONE)
 public class RedeemHistory implements BaseEntity, java.io.Serializable {
 
   /**
    * 
    */
   private static final long serialVersionUID = 3782555847645505912L;
+  @JsonProperty
   private long id;
   private int version;
+  @JsonProperty
   private User user;
+  @JsonProperty
   private int points;
+  @JsonProperty
   private ModeOfRedemption modeOfRedemption;
+  @JsonProperty
   private String modeDetails;
+  @JsonProperty
   private RedeemStatus status;
+  @JsonProperty
   private Date createdAt = new Date();
   private Date updatedAt;
   private Set<Payment> payments = new HashSet<Payment>(0);
 
   public RedeemHistory() {}
 
-  public RedeemHistory(User user, int points, ModeOfRedemption modeOfRedemption, String modeDetails,
-      RedeemStatus status, Date updatedAt) {
+  public RedeemHistory(final User user, final int points, final ModeOfRedemption modeOfRedemption, final String modeDetails,
+      final RedeemStatus status, final Date updatedAt) {
     this.user = user;
     this.points = points;
     this.modeOfRedemption = modeOfRedemption;
@@ -56,8 +68,8 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     this.updatedAt = updatedAt;
   }
 
-  public RedeemHistory(long id, User user, int points, ModeOfRedemption modeOfRedemption, String modeDetails,
-      RedeemStatus status, Date updatedAt, Set<Payment> payments) {
+  public RedeemHistory(final long id, final User user, final int points, final ModeOfRedemption modeOfRedemption, final String modeDetails,
+      final RedeemStatus status, final Date updatedAt, final Set<Payment> payments) {
     this.id = id;
     this.user = user;
     this.points = points;
@@ -75,7 +87,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     return this.id;
   }
 
-  public void setId(long id) {
+  public void setId(final long id) {
     this.id = id;
   }
 
@@ -85,7 +97,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     return this.version;
   }
 
-  public void setVersion(int version) {
+  public void setVersion(final int version) {
     this.version = version;
   }
 
@@ -95,7 +107,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     return this.user;
   }
 
-  public void setUser(User user) {
+  public void setUser(final User user) {
     this.user = user;
   }
 
@@ -104,7 +116,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     return this.points;
   }
 
-  public void setPoints(int points) {
+  public void setPoints(final int points) {
     this.points = points;
   }
 
@@ -114,7 +126,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     return this.modeOfRedemption;
   }
 
-  public void setModeOfRedemption(ModeOfRedemption modeOfRedemption) {
+  public void setModeOfRedemption(final ModeOfRedemption modeOfRedemption) {
     this.modeOfRedemption = modeOfRedemption;
   }
 
@@ -123,7 +135,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     return this.modeDetails;
   }
 
-  public void setModeDetails(String modeDetails) {
+  public void setModeDetails(final String modeDetails) {
     this.modeDetails = modeDetails;
   }
 
@@ -133,7 +145,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     return this.status;
   }
 
-  public void setStatus(RedeemStatus status) {
+  public void setStatus(final RedeemStatus status) {
     this.status = status;
   }
 
@@ -143,7 +155,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     return this.createdAt;
   }
 
-  public void setCreatedAt(Date createdAt) {
+  public void setCreatedAt(final Date createdAt) {
     this.createdAt = createdAt;
   }
 
@@ -153,7 +165,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     return this.updatedAt;
   }
 
-  public void setUpdatedAt(Date updatedAt) {
+  public void setUpdatedAt(final Date updatedAt) {
     this.updatedAt = updatedAt;
   }
 
@@ -162,7 +174,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     return this.payments;
   }
 
-  public void setPayments(Set<Payment> payments) {
+  public void setPayments(final Set<Payment> payments) {
     this.payments = payments;
   }
 
@@ -179,7 +191,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
     }

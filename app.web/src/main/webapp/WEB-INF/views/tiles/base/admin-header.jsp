@@ -100,7 +100,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
             <li>
               <a class="notifylink1" href="${contextPath}/admin/view/deposit">Approval Notification</a> </li>
             <li>
-              <a class="notifylink2">Redeem Notification</a> </li>
+              <a class="notifylink2" href="${contextPath}/admin/view/redeem">Redeem Notification</a> </li>
             <li></li>
             </ul>
           </li>
