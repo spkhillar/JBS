@@ -310,7 +310,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void changePassword(final String username, final String currentPassword) {
+  public String changePassword(final String username, final String currentPassword) {
     String passwordTobeEncoded = currentPassword;
     User currentUser = userDAO.findByUserName(username);
     String encodedPassword = null;
@@ -323,6 +323,7 @@ public class UserServiceImpl implements UserService {
     logger.debug("..Password.. encoded.." + passwordTobeEncoded);
     currentUser.setPassword(encodedPassword);
     userDAO.save(currentUser);
+    return passwordTobeEncoded;
   }
 
   @Override

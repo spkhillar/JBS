@@ -30,6 +30,9 @@ public class UserRegistrationForm {
 
   private int mlmPosition = 0;
 
+  private String changePassword;
+
+
   public UserRegistrationForm() {
     super();
     createUserRegistrationForm();
@@ -47,7 +50,7 @@ public class UserRegistrationForm {
     return user;
   }
 
-  public void setUser(User user) {
+  public void setUser(final User user) {
     this.user = user;
   }
 
@@ -55,7 +58,7 @@ public class UserRegistrationForm {
     return confirmPassword;
   }
 
-  public void setConfirmPassword(String confirmPassword) {
+  public void setConfirmPassword(final String confirmPassword) {
     this.confirmPassword = confirmPassword;
   }
 
@@ -63,7 +66,7 @@ public class UserRegistrationForm {
     return securityQuestion;
   }
 
-  public void setSecurityQuestion(Long securityQuestion) {
+  public void setSecurityQuestion(final Long securityQuestion) {
     this.securityQuestion = securityQuestion;
   }
 
@@ -71,7 +74,7 @@ public class UserRegistrationForm {
     return securityAnswer;
   }
 
-  public void setSecurityAnswer(String securityAnswer) {
+  public void setSecurityAnswer(final String securityAnswer) {
     this.securityAnswer = securityAnswer;
   }
 
@@ -79,7 +82,7 @@ public class UserRegistrationForm {
     return resume;
   }
 
-  public void setResume(MultipartFile resume) {
+  public void setResume(final MultipartFile resume) {
     this.resume = resume;
   }
 
@@ -87,7 +90,7 @@ public class UserRegistrationForm {
     return notifySms;
   }
 
-  public void setNotifySms(String notifySms) {
+  public void setNotifySms(final String notifySms) {
     this.notifySms = notifySms;
   }
 
@@ -95,7 +98,7 @@ public class UserRegistrationForm {
     return degree;
   }
 
-  public void setDegree(String degree) {
+  public void setDegree(final String degree) {
     this.degree = degree;
   }
 
@@ -103,7 +106,7 @@ public class UserRegistrationForm {
     return terms;
   }
 
-  public void setTerms(boolean terms) {
+  public void setTerms(final boolean terms) {
     this.terms = terms;
   }
 
@@ -111,7 +114,7 @@ public class UserRegistrationForm {
     return newPassword;
   }
 
-  public void setNewPassword(String newPassword) {
+  public void setNewPassword(final String newPassword) {
     this.newPassword = newPassword;
   }
 
@@ -119,7 +122,7 @@ public class UserRegistrationForm {
     return registrationType;
   }
 
-  public void setRegistrationType(int registrationType) {
+  public void setRegistrationType(final int registrationType) {
     this.registrationType = registrationType;
   }
 
@@ -127,8 +130,17 @@ public class UserRegistrationForm {
     return mlmPosition;
   }
 
-  public void setMlmPosition(int mlmPosition) {
+  public void setMlmPosition(final int mlmPosition) {
     this.mlmPosition = mlmPosition;
   }
+
+  public String getChangePassword() {
+    return changePassword;
+  }
+
+  public void setChangePassword(final String changePassword) {
+    this.changePassword = changePassword;
+  }
+
 
 }

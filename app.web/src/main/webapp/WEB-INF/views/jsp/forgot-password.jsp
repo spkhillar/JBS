@@ -39,25 +39,48 @@ tr.pwdhead{
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
+	
  $('#radio1').change(function(){
 	 $('#pwdtb').show();
 	 $('#useridtb').hide();
 	 
-  })
+  });
   
   $('#radio2').change(function(){
 	 $('#useridtb').show();
 	 $('#pwdtb').hide();
 	 
-  })
+  });
   
   
+  var changePasswordOption=$('#changePassword').val();
+  console.log("radio.."+changePasswordOption);
+     if(changePasswordOption==null || changePasswordOption=="" ){
+    	 $('#retrievePasswordDiv').show();
+     }else if(changePasswordOption=="1"){
+    	 $('#retrievePasswordDiv').show();
+    	 $("#radio1").prop("checked", true);
+		 $('#pwdtb').show();
+	 } else if(changePasswordOption=="2"){
+		 $('#retrievePasswordDiv').show();
+		 $('#radio2').prop('checked',true);
+		 $('#useridtb').show();
+	 } else if(changePasswordOption=="3"){
+		 $('#retrievePasswordDiv').hide();
+		 $('#newPasswordDiv').show();
+	 } 
+	 
+  	 
+	 
+
+ 	 
 });
 </script>
 </head>
 <body>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<div id="retrievePasswordDiv" hidden="true">
 <table id="passwordtb">
 <tr>
 <td>
@@ -81,19 +104,8 @@ $(document).ready(function(){
     </td>
   </tr>
   <tr>
-    <td height="30" colspan="2">
-    <p> 
-    	You can now easily retrieve your password if you have forgotten. 
-    	Please provide your valid security details mentioned during registration and submit. 
-        The password will be sent to your valid registered email id and mobile number
-    </p>
-    
-      <hr />
-     <form:form name="registrationForm" commandName="registration" id="registrationForm" method="POST" action="${contextPath}/manage/forgotpwd/password">
-      <table width="751" border="0" align="center" id="pwdtb" title="Recover Password" hidden="true">
-      <tr>
-      <td>
-      <div id="messages">
+  <td>
+  <div id="messages">
        <spring:hasBindErrors name="registration">
         <div class="formerror">
             <ul>
@@ -104,7 +116,21 @@ $(document).ready(function(){
         </div>
   	  </spring:hasBindErrors>
 	</div>
-      </td>
+  </td>
+  </tr>
+  <tr>
+    <td height="30" colspan="2">
+    <p> 
+    	You can now easily retrieve your password if you have forgotten. 
+    	Please provide your valid security details mentioned during registration and submit. 
+    </p>
+    
+      <hr />
+     <form:form name="registrationForm" commandName="registration" id="registrationForm" method="POST" action="${contextPath}/manage/forgotpwd/password">
+      <table width="751" border="0" align="center" id="pwdtb" title="Recover Password" hidden="true">
+      <tr>
+      <td>
+       </td>
       </tr>
         <tr>
         <td width="204">Enter your userid<em>*</em></td>
@@ -117,11 +143,11 @@ $(document).ready(function(){
         </td>
         </tr>
       <tr>
-        <td>Enter Security Question<em>*</em></td>
+        <td>Enter Security Question</td>
         <td><form:select path="securityQuestion" items="${securityQuestions}" ></form:select></td>
       </tr>
       <tr>
-        <td>Enter your security answer<em>*</em></td>
+        <td>Enter your security answer</td>
         <td><form:input path="securityAnswer" /></td>
       </tr>
       <tr>
@@ -138,29 +164,19 @@ $(document).ready(function(){
       <table width="751" border="0" align="center" id="useridtb" title="Recover Password" hidden="true">
       <tr>
       <td colspan="2">
-      <div id="messages">
-       <spring:hasBindErrors name="registration">
-        <div class="formerror">
-            <ul>
-            <c:forEach var="error" items="${errors.allErrors}">
-                <li>${error.defaultMessage}</li>
-            </c:forEach>
-            </ul>
-        </div>
-  	  </spring:hasBindErrors>
-	</div>
+      
       </td>
       </tr>
         <tr>
           <td width="204">Enter your first name<em>*</em></td>
           <td width="184"><form:input path="user.firstName" id="userFirstName"></form:input></td>
-          <td width="221">Enter your last name<em>*</em></td>
+          <td width="221">Enter your last name</td>
           <td width="151"><form:input path="user.lastName" id="userLastName"></form:input></td>
         </tr>
         <tr>
-          <td>Enter your Email id</td>
+          <td>Enter your Email id<em>*</em></td>
           <td><form:input path="user.email" id="userEmail" /></td>
-          <td>Enter Mobile number</td>
+          <td>Enter Mobile number<em>*</em></td>
           <td><form:input path="user.phone" id="userPhone"></form:input></td>
         </tr>
         <tr>
@@ -174,6 +190,7 @@ $(document).ready(function(){
           <button id="passwordBtn1">Submit</button></td>
         </tr>
       </table>
+      <form:hidden path="changePassword" />
 	</form:form>
     <p>&nbsp;</p></td>
   </tr>
@@ -182,6 +199,14 @@ $(document).ready(function(){
   </td>
   </tr>
 </table>
+</div>
+<div id="newPasswordDiv" hidden="true" style="margin:auto; width:80%; height:50%">
+<br>
+<br>
+<p></p>
+ <center><h3>Your new password is ${changePassword}</h3></center>
+ 
+</div>
 
 </body>
 </html>

@@ -31,34 +31,40 @@ public class PasswordController extends BaseController {
 
   @RequestMapping(value = "/forgotpwd/password", method = RequestMethod.POST)
   public String forgotPassword(final ModelMap map,
-      @ModelAttribute("registration") final UserRegistrationForm userRegistrationForm, BindingResult result) {
+      @ModelAttribute("registration") final UserRegistrationForm userRegistrationForm, final BindingResult result) {
     validateUserFormForPassword(userRegistrationForm, result);
     if (result.hasErrors()) {
+      userRegistrationForm.setChangePassword("1");
       map.put("registration", userRegistrationForm);
       prepareRenderObject(map);
       return "user.forgotpassword";
     }
-    userService.changePassword(userRegistrationForm.getUser().getUserName(), userRegistrationForm.getUser()
+    String changePassword=userService.changePassword(userRegistrationForm.getUser().getUserName(), userRegistrationForm.getUser()
       .getPassword());
-    return "redirect:/login";
+    map.put("changePassword", changePassword);
+    userRegistrationForm.setChangePassword("3");
+    return "user.forgotpassword";
   }
 
   @RequestMapping(value = "/forgotpwd/username", method = RequestMethod.POST)
   public String forgotUsername(final ModelMap map,
-      @ModelAttribute("registration") final UserRegistrationForm userRegistrationForm, BindingResult result) {
+      @ModelAttribute("registration") final UserRegistrationForm userRegistrationForm, final BindingResult result) {
     String username = validateUserFormForUserName(userRegistrationForm, result);
     if (result.hasErrors()) {
+      userRegistrationForm.setChangePassword("2");
       map.put("registration", userRegistrationForm);
       prepareRenderObject(map);
       return "user.forgotpassword";
     }
-    userService.changePassword(username, userRegistrationForm.getUser().getPassword());
-    return "redirect:/login";
+    String changePassword=userService.changePassword(username, userRegistrationForm.getUser().getPassword());
+    map.put("changePassword", changePassword);
+    userRegistrationForm.setChangePassword("3");
+    return "user.forgotpassword";
   }
 
   @RequestMapping(value = "/changepassword", method = RequestMethod.POST)
   public String changePassword(final ModelMap map,
-      @ModelAttribute("registration") final UserRegistrationForm userRegistrationForm, BindingResult result) {
+      @ModelAttribute("registration") final UserRegistrationForm userRegistrationForm, final BindingResult result) {
     boolean matchPassword =
         userService.matchPassword(getCurrentLoggedinUserName(), userRegistrationForm.getUser().getPassword(),
           userRegistrationForm.getNewPassword());
@@ -77,7 +83,7 @@ public class PasswordController extends BaseController {
     return showView;
   }
 
-  private void prepareRenderObject(ModelMap map) {
+  private void prepareRenderObject(final ModelMap map) {
     Map<String, String> questionMap = securityQuestionService.getSecurityQuestions();
     Map<String, String> modifiedQuestionMap = new LinkedHashMap<String, String>();
     modifiedQuestionMap.put("-1", "");
@@ -85,7 +91,7 @@ public class PasswordController extends BaseController {
     map.put("securityQuestions", modifiedQuestionMap);
   }
 
-  private String validateUserFormForUserName(UserRegistrationForm userRegistrationForm, BindingResult result) {
+  private String validateUserFormForUserName(final UserRegistrationForm userRegistrationForm, final BindingResult result) {
     String firstName = userRegistrationForm.getUser().getFirstName();
     String lastName = userRegistrationForm.getUser().getLastName();
     String emailAddress = userRegistrationForm.getUser().getEmail();
@@ -101,7 +107,7 @@ public class PasswordController extends BaseController {
     return username;
   }
 
-  private void validateUserFormForPassword(UserRegistrationForm userRegistrationForm, BindingResult result) {
+  private void validateUserFormForPassword(final UserRegistrationForm userRegistrationForm, final BindingResult result) {
     User user = userService.findByUserName(userRegistrationForm.getUser().getUserName());
     if (user == null) {
       result.addError(new ObjectError("registration", "User doesnot exists with given userid"));
@@ -109,7 +115,7 @@ public class PasswordController extends BaseController {
     checkUserSecurityQuestion(user, userRegistrationForm, result);
   }
 
-  private void checkUserSecurityQuestion(User user, UserRegistrationForm userRegistrationForm, BindingResult result) {
+  private void checkUserSecurityQuestion(final User user, final UserRegistrationForm userRegistrationForm, final BindingResult result) {
     Long nullQuestion = new Long(-1l);
     if (!nullQuestion.equals(userRegistrationForm.getSecurityQuestion())) {
       UserSecurityQuestion userSecurityQuestion = user.getUserSecurityQuestion();
