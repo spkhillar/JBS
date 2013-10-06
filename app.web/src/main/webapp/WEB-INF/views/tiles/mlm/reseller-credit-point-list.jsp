@@ -74,11 +74,22 @@
 			multipleSearch : false,
 			closeAfterSearch : false
 		});
+		
+		var canRedeem = $("#canRedeem").val();
+		if(canRedeem == "1"){
+			$("#grid").navButtonAdd('#pager', {
+				caption : "Redeem",
+				buttonicon : "ui-icon-newwin",
+				onClickButton : initiateRedeemRequest,
+				position : "last",
+				title : "",
+				cursor : "pointer"
+			});
+		}
+			
 	});
-	
 		
 	function initiateRedeemRequest(){
-		
 		$.ajax({
 		    url: webContextPath+"/reseller/redeem/totalpoints",
 		    dataType:'html',
@@ -88,27 +99,48 @@
 		      $('#viewRedeemdiv').dialog({
 		  		modal: 'true',
 		  		height:300,
-		  		width:450,
+		  		width:500,
 		  		closeOnEscape: true,
 		  		buttons: [ { text: "Redeem", click: 
 			  			function() {
-			  				$( this ).dialog( "close" ); 
-			  					
+			  					checkAndSubmitRedeemPoints(this);
 			  				} 
 		  			},
-		  				{ text: "Reject", click: function() 
-		  				{
+		  				{ text: "Reject", click: function()	{
 		  					$( this ).dialog( "close" ); 
-		  					
 		  				} 
 		  			}]
 		      }).show();
 		    }
-		    
 		}); 
-		
 	}
 	
+	function checkAndSubmitRedeemPoints(currentDialog){
+		var isValid = $("#resellerRedeemForm").valid();
+		console.log('Form Valid...',isValid);
+		if(isValid){
+			saveRedeemInfo();
+			$(currentDialog).dialog( "close"); 
+		}
+	}
+	
+	function saveRedeemInfo(){
+		var actionUrl = webContextPath+"/reseller/redeem/save";
+		var str = $("#resellerRedeemForm").serialize();
+		$.ajax({
+		    type:"post",
+		    data:str,
+		    url:actionUrl,
+		    async: false,
+		    success: function(data, textStatus){
+		    	console.log('....Saved...');
+		    },
+		    error: function(textStatus,errorThrown){
+		    	console.log('....Failed...',textStatus);
+			}
+		});
+		
+	}
 	
 </script>
 </head>
@@ -116,7 +148,6 @@
 
 <div id="depositListDiv">
  <h4 style="padding: 5px">Home | Incentive | Current Incentive </h4><br/>
- <button onclick="Javascript:initiateRedeemRequest()">Redeem Points</button>
  <hr color="red"/>
  	<table id='grid'></table>
 		<div id='pager'></div>
@@ -124,6 +155,7 @@
   
   <div id="viewRedeemdiv" title="Redeem Notification">
   </div>
+  <input id="canRedeem" name="canRedeem" value="${canRedeem}" type="hidden">
 </body>
 
 </html>

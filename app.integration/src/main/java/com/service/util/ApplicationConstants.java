@@ -33,4 +33,6 @@ public interface ApplicationConstants {
 
   String SUBSCRIPTION_BASE_PRICE = "subscription-base-price";
 
+  String MIN_USER_REDEEM_POINTS_CHECK = "User-redeem-points";
+
 }

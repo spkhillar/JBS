@@ -2,7 +2,7 @@ package com.web.controller;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,15 +21,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jpa.entities.DepositIntimator;
+import com.jpa.entities.RedeemHistory;
+import com.jpa.entities.SystemConfiguration;
 import com.jpa.entities.User;
 import com.jpa.entities.UserGroups;
 import com.jpa.entities.UserPointsHistory;
 import com.jpa.entities.enums.DepositIntimatorStatus;
 import com.jpa.entities.enums.DepositIntimatorType;
+import com.jpa.entities.enums.ModeOfRedemption;
 import com.jpa.entities.enums.PaymentMode;
+import com.jpa.entities.enums.RedeemStatus;
 import com.jpa.entities.enums.UserPosition;
 import com.service.DepositIntimatorService;
 import com.service.MlmUserCreditPointService;
+import com.service.RedeemHistoryService;
+import com.service.SystemConfigurationService;
 import com.service.UserPointsHistoryService;
 import com.service.util.ApplicationConstants;
 import com.web.form.ResellerForm;
@@ -50,17 +56,29 @@ public class ResellerController extends BaseAuthenticatedController {
   @Autowired
   private UserPointsHistoryService userPointsHistoryService;
 
-  private static final Map<String, String> L_R_CHILD_POSITION = new HashMap<String, String>(2);
+  @Autowired
+  private RedeemHistoryService redeemHistoryService;
 
-  private static final Map<String, String> L_CHILD_POSITION = new HashMap<String, String>();
+  @Autowired
+  private SystemConfigurationService systemConfigurationService;
 
-  private static final Map<String, String> R_CHILD_POSITION = new HashMap<String, String>();
+  private static final Map<String, String> L_R_CHILD_POSITION = new LinkedHashMap<String, String>(2);
+
+  private static final Map<String, String> L_CHILD_POSITION = new LinkedHashMap<String, String>();
+
+  private static final Map<String, String> R_CHILD_POSITION = new LinkedHashMap<String, String>();
+
+  private static final Map<String, String> MODE_OF_REDEEMPTION = new LinkedHashMap<String, String>();
 
   static {
     L_R_CHILD_POSITION.put("0", "LEFT");
     L_R_CHILD_POSITION.put("1", "RIGHT");
     L_CHILD_POSITION.put("0", "LEFT");
     R_CHILD_POSITION.put("1", "RIGHT");
+    MODE_OF_REDEEMPTION.put(ModeOfRedemption.CASH.toString(), "CASH");
+    MODE_OF_REDEEMPTION.put(ModeOfRedemption.ACCOUNT_DEPOSIT.toString(), "DEPOSIT");
+    MODE_OF_REDEEMPTION.put(ModeOfRedemption.ONLINE_TRANSFER.toString(), "ONLINE");
+    MODE_OF_REDEEMPTION.put(ModeOfRedemption.CHEQUE.toString(), "CHEQUE");
   }
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -162,6 +180,17 @@ public class ResellerController extends BaseAuthenticatedController {
 
   @RequestMapping(value = "/view/creditpoints", method = RequestMethod.GET)
   public String viewAllDeposit(final ModelMap map) {
+    User user = getCurrentUser();
+    int userTotalPoints = userPointsHistoryService.getUserTotalPoint(user);
+    map.put("userTotalPoints", userTotalPoints);
+    SystemConfiguration systemConfiguration =
+        systemConfigurationService.findByKey(ApplicationConstants.MIN_USER_REDEEM_POINTS_CHECK);
+    int basePointsToRedeem = Integer.parseInt(systemConfiguration.getValue());
+    if (userTotalPoints < basePointsToRedeem) {
+      map.put("canRedeem", 0);
+    } else {
+      map.put("canRedeem", 1);
+    }
     return "mlm.creditpoint.list";
   }
 
@@ -170,6 +199,18 @@ public class ResellerController extends BaseAuthenticatedController {
     User user = getCurrentUser();
     int userTotalPoints = userPointsHistoryService.getUserTotalPoint(user);
     map.put("userTotalPoints", userTotalPoints);
+    map.put("resellerRedeemForm", new RedeemHistory());
+    map.put("modeOfRedemptionList", MODE_OF_REDEEMPTION);
     return "reseller-redemption";
+  }
+
+  @RequestMapping(value = "/redeem/save", method = RequestMethod.POST)
+  @ResponseBody
+  public String save(final RedeemHistory redeemHistory) {
+    redeemHistory.setUpdatedAt(new Date());
+    redeemHistory.setStatus(RedeemStatus.NEW);
+    redeemHistory.setUser(getCurrentUser());
+    redeemHistoryService.save(redeemHistory);
+    return "Saved Successfuly.";
   }
 }
