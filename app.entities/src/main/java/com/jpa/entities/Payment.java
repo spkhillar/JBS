@@ -16,34 +16,42 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonMethod;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 /**
  * Payment
  */
 @Entity
 @Table(name = "payment")
+@JsonAutoDetect(JsonMethod.NONE)
 public class Payment implements BaseEntity, java.io.Serializable {
 
   /**
    * 
    */
   private static final long serialVersionUID = 539478124505992361L;
+  @JsonProperty
   private long id;
   private int version;
   private RedeemHistory redeemHistory;
+  @JsonProperty
   private BigDecimal amount;
   private Date paymentDate;
+  @JsonProperty
   private Date createdAt = new Date();
   private Date updatedAt;
 
   public Payment() {}
 
-  public Payment(BigDecimal amount, Date paymentDate, Date updatedAt) {
+  public Payment(final BigDecimal amount, final Date paymentDate, final Date updatedAt) {
     this.amount = amount;
     this.paymentDate = paymentDate;
     this.updatedAt = updatedAt;
   }
 
-  public Payment(RedeemHistory redeemHistory, BigDecimal amount, Date paymentDate, Date updatedAt) {
+  public Payment(final RedeemHistory redeemHistory, final BigDecimal amount, final Date paymentDate, final Date updatedAt) {
     this.redeemHistory = redeemHistory;
     this.amount = amount;
     this.paymentDate = paymentDate;
@@ -57,7 +65,7 @@ public class Payment implements BaseEntity, java.io.Serializable {
     return this.id;
   }
 
-  public void setId(long id) {
+  public void setId(final long id) {
     this.id = id;
   }
 
@@ -67,17 +75,17 @@ public class Payment implements BaseEntity, java.io.Serializable {
     return this.version;
   }
 
-  public void setVersion(int version) {
+  public void setVersion(final int version) {
     this.version = version;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "redeem_id")
   public RedeemHistory getRedeemHistory() {
     return this.redeemHistory;
   }
 
-  public void setRedeemHistory(RedeemHistory redeemHistory) {
+  public void setRedeemHistory(final RedeemHistory redeemHistory) {
     this.redeemHistory = redeemHistory;
   }
 
@@ -86,7 +94,7 @@ public class Payment implements BaseEntity, java.io.Serializable {
     return this.amount;
   }
 
-  public void setAmount(BigDecimal amount) {
+  public void setAmount(final BigDecimal amount) {
     this.amount = amount;
   }
 
@@ -96,7 +104,7 @@ public class Payment implements BaseEntity, java.io.Serializable {
     return this.paymentDate;
   }
 
-  public void setPaymentDate(Date paymentDate) {
+  public void setPaymentDate(final Date paymentDate) {
     this.paymentDate = paymentDate;
   }
 
@@ -106,7 +114,7 @@ public class Payment implements BaseEntity, java.io.Serializable {
     return this.createdAt;
   }
 
-  public void setCreatedAt(Date createdAt) {
+  public void setCreatedAt(final Date createdAt) {
     this.createdAt = createdAt;
   }
 
@@ -116,7 +124,7 @@ public class Payment implements BaseEntity, java.io.Serializable {
     return this.updatedAt;
   }
 
-  public void setUpdatedAt(Date updatedAt) {
+  public void setUpdatedAt(final Date updatedAt) {
     this.updatedAt = updatedAt;
   }
 
@@ -130,7 +138,7 @@ public class Payment implements BaseEntity, java.io.Serializable {
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
     }

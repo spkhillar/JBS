@@ -162,4 +162,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/tiles/mlm/reseller-redeem-history-list.jsp" />
 	</definition>
 	
+	<definition name="payment.list" extends="admin.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/payment-list.jsp" />
+	</definition>
+	
 </tiles-definitions>

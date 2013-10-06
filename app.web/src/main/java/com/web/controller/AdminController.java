@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jpa.entities.DepositIntimator;
+import com.jpa.entities.Payment;
 import com.jpa.entities.RedeemHistory;
 import com.jpa.entities.SystemConfiguration;
 import com.jpa.entities.User;
@@ -28,6 +29,7 @@ import com.jpa.entities.enums.ModeOfRedemption;
 import com.jpa.entities.enums.UserPosition;
 import com.service.CommisionLevelService;
 import com.service.DepositIntimatorService;
+import com.service.PaymentService;
 import com.service.RedeemHistoryService;
 import com.service.SystemConfigurationService;
 import com.service.UserGroupService;
@@ -55,6 +57,10 @@ public class AdminController extends BaseAuthenticatedController {
 
   @Autowired
   private RedeemHistoryService redeemHistoryService;
+
+  @Autowired
+  private PaymentService paymentService;
+
 
   private static final Map<String, String> MODE_OF_REDEEMPTION = new LinkedHashMap<String, String>();
 
@@ -132,11 +138,11 @@ public class AdminController extends BaseAuthenticatedController {
   @RequestMapping(value = "/deposit/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<DepositIntimator> mlmDepositRecords(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
     Page<DepositIntimator> depositIntimator = null;
     if (search == true) {
       depositIntimator = depositIntimatorService.findAll(page, rows, sord, sidx);
@@ -194,11 +200,11 @@ public class AdminController extends BaseAuthenticatedController {
   @RequestMapping(value = "/redeem/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<RedeemHistory> mlmRedeemRecords(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
     Page<RedeemHistory> redeemHistory = null;
     if (search == true) {
       redeemHistory = redeemHistoryService.findAll(page, rows, sord, sidx);
@@ -234,4 +240,33 @@ public class AdminController extends BaseAuthenticatedController {
     redeemHistoryService.approveOrRejectNotification(id, approval);
     return "redeem.history.list";
   }
+
+  @RequestMapping(value = "/payment/records", produces = "application/json")
+  public @ResponseBody
+  JqGridResponse<Payment> paymentRecords(@RequestParam("_search") final Boolean search,
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
+    Page<Payment> payment = null;
+    if (search == true) {
+      payment = paymentService.findAll(page, rows, sord, sidx);
+    } else {
+      payment = paymentService.findAll(page, rows, sord, sidx);
+    }
+    List<Object> list = DomainObjectMapper.listEntities(payment);
+    JqGridResponse<Payment> response = new JqGridResponse<Payment>();
+    response.setRows(list);
+    response.setRecords(Long.valueOf(payment.getTotalElements()).toString());
+    response.setTotal(Integer.valueOf(payment.getTotalPages()).toString());
+    response.setPage(Integer.valueOf(payment.getNumber() + 1).toString());
+    return response;
+  }
+
+  @RequestMapping(value = "/view/payment", method = RequestMethod.GET)
+  public String viewAllPayment(final ModelMap map) {
+    return "payment.list";
+  }
+
 }

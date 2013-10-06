@@ -123,7 +123,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
           </li>
         -->
         <li>
-          <a class="fNiv" id="paymentlink">Payment</a> </li>
+          <a class="fNiv" id="paymentlink" href="${contextPath}/admin/view/payment">Payment</a> </li>
         
         <li>
           <a class="fNiv">Account</a>
