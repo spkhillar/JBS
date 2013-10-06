@@ -83,14 +83,14 @@ input[type="text, number"]:focus
     <th scope="col"><div id="site_title"></div></th>
     <th scope="col"><div id="site_title1"></div></th>
     <td scope="col" colspan="2" class="siteheadercells">
-    <label style="font-size: 12px;color: blue;">Login</label>
-    <form action="${contextPath}/j_spring_security_check" method="post">
-    	  <input type="text" name="j_username" placeholder="Enter your username"/>
-	      <input type="password" placeholder="Enter your Password" name="j_password" style="float: right"/>
-	      <br><label style="font-size: 13px;color: blue; font-style: normal;">
-	      <a href="${contextPath}/manage/forgotpassword">Forgot Password</a>
+     <form action="${contextPath}/j_spring_security_check" method="post">
+    	  <input type="text" name="j_username" placeholder="Enter your username" style="float: left"/>
+    	  <input type="password" placeholder="Enter your Password" name="j_password" style="text-align:center; margin-left: 6px"/>
+	      <input type="submit" value="Login" style="width:20%; height:28px; float: right"/> 
+	      <br><label style="font-size: 12px;color: blue; font-style: normal;">
+	      <br><a href="${contextPath}/manage/forgotpassword">Forgot Password</a>
 	      </label>
-	      <input type="submit" value="Login" style="float: right"/> 
+	      
 				<c:choose>
 				    <c:when test="${empty message}">
 				      <div class="message">${emptySring}</div>

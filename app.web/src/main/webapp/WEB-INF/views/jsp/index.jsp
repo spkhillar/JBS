@@ -171,9 +171,9 @@
     </table>
     <p align="center">All Rights Reserved &COPY; 2013 JOBSbySMS</p>
 </table>
-<div id="applyJobDiv" title="Apply Job">
-    <span>Inorder to apply this job, Please register/login to jobsbysms.com.</span>
-   </div>
+  <div id="applyJobDiv" title="Apply Job">
+    <center><span>Inorder to apply, Please register/login to jobsbysms.com.</span></center>
+  </div>
    <div id="jobdetailsdiv" title="Job Details">
    </div>
 </body>    
