@@ -12,5 +12,5 @@ public interface DepositIntimatorService {
 
   public DepositIntimator findById(long depositorIntimatorId);
 
-  public void approveOrRejectDepositIntimator(long depositorIntimatorId, int type);
+  public void approveOrRejectDepositIntimator(long depositorIntimatorId, int type, String memo);
 }

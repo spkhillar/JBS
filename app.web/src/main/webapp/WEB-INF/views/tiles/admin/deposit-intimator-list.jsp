@@ -108,16 +108,14 @@
 			  		height:700,
 			  		width:850,
 			  		closeOnEscape: true,
-			  		buttons: [ { text: "Approve", click: 
-				  			function() {
-				  				$( this ).dialog( "close" ); 
+			  		buttons: [ { text: "Approve", click: function() {
 				  					initiateActionOnDepositIntimatorRecord(depositorIntimatorId,1);
+					  				$( this ).dialog( "close" ); 
 				  				} 
-			  			},
-			  				{ text: "Reject", click: function() 
-			  				{
-			  					$( this ).dialog( "close" ); 
+			  				},
+			  				{ text: "Reject", click: function(){
 			  					initiateActionOnDepositIntimatorRecord(depositorIntimatorId,0);
+			  					$( this ).dialog( "close" ); 
 			  				} 
 			  			}]
 			      }).show();
@@ -126,12 +124,20 @@
 	}
 	
 	function initiateActionOnDepositIntimatorRecord(depositorIntimatorId,type){
+		var memo = $('#depositIntimator\\.memo').val();
+		console.log('...memo...',memo);
 		 $.ajax({
+			    type:"post",
+			    data:memo,
+			    contentType: "text/plain", 
 			    url: webContextPath+"/admin/approve/notification/"+depositorIntimatorId+"/"+type,
 			    success: function(data){
+			    	showToastSuccessMessage("Record updated sucessfully.");
 			    	$("#grid").trigger('reloadGrid');
+			    },
+			    error:function(jqXHR,textStatus,errorThrown){
+			    	showToastErrorMessage("Record updating failed.");
 			    }
-			    
 		 });
 	}
 	

@@ -46,7 +46,7 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
 
   @Override
   @Transactional
-  public void approveOrRejectDepositIntimator(long depositorIntimatorId, int type) {
+  public void approveOrRejectDepositIntimator(long depositorIntimatorId, int type, String memo) {
     DepositIntimator depositIntimator = this.findById(depositorIntimatorId);
     if (type == 1) {
       depositIntimator.setStatus(DepositIntimatorStatus.APPROVED);
@@ -56,6 +56,7 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
       throw new UnsupportedOperationException("Type " + type + " is not an identified operation");
     }
     depositIntimator.setUpdatedAt(new Date());
+    depositIntimator.setMemo(memo);
     DepositIntimator savedDepositIntimator = this.save(depositIntimator);
     if (type == 1) {
       mlmUserCreditPointService.save(savedDepositIntimator);

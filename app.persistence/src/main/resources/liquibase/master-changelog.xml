@@ -1205,5 +1205,13 @@
     <changeSet author="shiv" id="1367592120330-56">
 		<dropNotNullConstraint tableName="payment" columnName="payment_date" columnDataType="DATETIME"/>
     </changeSet>
-   
+    <changeSet author="shiv" id="1367592120330-57">
+		<addColumn tableName="deposit_intimator">
+		    <column name="memo" type="VARCHAR(512)">
+		    </column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after description" />
+		</modifySql>   
+    </changeSet>
 </databaseChangeLog>

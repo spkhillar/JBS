@@ -60,6 +60,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
   private DepositIntimatorType depositIntimatorType;
   private String description;
   private String cashDepositedBankName;
+  private String memo;
   private Date createdAt = new Date();
   private Date updatedAt;
 
@@ -261,6 +262,15 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
 
   public void setCashDepositedBankName(final String cashDepositedBankName) {
     this.cashDepositedBankName = cashDepositedBankName;
+  }
+
+  @Column(name = "memo")
+  public String getMemo() {
+    return memo;
+  }
+
+  public void setMemo(String memo) {
+    this.memo = memo;
   }
 
   @Temporal(TemporalType.TIMESTAMP)

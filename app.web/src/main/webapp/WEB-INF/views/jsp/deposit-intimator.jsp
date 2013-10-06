@@ -245,6 +245,23 @@ jQuery.validator.addMethod("lettersonly", function(value, element) {
     </table>
     </td>
   </tr>
+  <c:if test="${operation eq 'view' }">
+   <tr>
+    <td><strong>Approve or Reject Memo</strong><br/>
+    <hr color="red"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <table width="200" border="0" id="memoTable" class="paymentTable" >
+      <tr>
+        <td width="253">Memo</td>
+        <td width="374"><form:textarea  path="depositIntimator.memo" cols="45" rows="5"/></td>
+      </tr>
+      </table>
+      </td>
+  </tr>
+  </c:if>
   <tr>
   <td>
  	<c:if test="${operation eq 'create' }">
