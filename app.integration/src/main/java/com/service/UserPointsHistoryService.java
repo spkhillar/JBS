@@ -1,6 +1,7 @@
 package com.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.jpa.entities.User;
 import com.jpa.entities.UserPointsHistory;
@@ -16,5 +17,7 @@ public interface UserPointsHistoryService {
   public Page<UserPointsHistory> findSystemIncentivePoint(int page, int rows, String sord, String sidx);
 
   public int getUserTotalPoint(User user);
+
+  public Page<UserPointsHistory> findUserPointByUserName(User user, Pageable page);
 
 }

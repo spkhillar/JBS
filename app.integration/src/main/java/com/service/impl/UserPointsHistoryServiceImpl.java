@@ -88,4 +88,10 @@ public class UserPointsHistoryServiceImpl implements UserPointsHistoryService {
     return totalPoints - totalRedeemPoints;
   }
 
+  @Override
+  @Transactional(readOnly = true)
+  public Page<UserPointsHistory> findUserPointByUserName(final User user, Pageable page) {
+    return userPointsHistoryDAO.findByUserAndEnabled(user, false, page);
+  }
+
 }

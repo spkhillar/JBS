@@ -1,14 +1,24 @@
 package com.service.test;
 
-import org.junit.Test;
+import java.util.Calendar;
+import java.util.Date;
 
-import com.jpa.entities.enums.PaymentMode;
+import org.apache.commons.lang.time.DateUtils;
+import org.junit.Test;
 
 public class SimpleTest {
 
   @Test
   public void test() {
 
-    System.err.println("..." + PaymentMode.valueOf("CHEQUE"));
+    Date date1 = DateUtils.addHours(new Date(), -24);
+    Date startDate = DateUtils.truncate(date1, Calendar.HOUR_OF_DAY);
+    startDate = DateUtils.truncate(startDate, Calendar.MINUTE);
+    startDate = DateUtils.truncate(startDate, Calendar.SECOND);
+    Date endDate = DateUtils.addHours(startDate, 23);
+    endDate = DateUtils.addMinutes(endDate, 59);
+    endDate = DateUtils.addSeconds(endDate, 59);
+    System.err.println("..a..." + startDate + "...to..." + endDate);
+
   }
 }

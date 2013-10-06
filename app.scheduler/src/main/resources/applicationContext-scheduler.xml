@@ -6,11 +6,11 @@
 
 	<bean name="jobFactory"	class="org.springframework.scheduling.quartz.SpringBeanJobFactory" />
 	<bean name="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<!-- <property name="triggers">
+		<property name="triggers">
 			<list>
-				<ref bean="testJobTrigger" />
+				<ref bean="commisionDistributionJobTrigger" />
 			</list>
-		</property> -->
+		</property>
 		<property name="jobFactory" ref="jobFactory" />
 		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
 		<property name="schedulerContextAsMap">
@@ -18,9 +18,11 @@
 				<entry key="userService">
 					<ref bean="userService" />
 				</entry>
-				
 				<entry key="jobHistoryService">
 					<ref bean="jobHistoryService" />
+				</entry>
+				<entry key="userGroupService">
+					<ref bean="userGroupService" />
 				</entry>
 			</map>
 		</property>

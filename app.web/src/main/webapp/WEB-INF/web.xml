@@ -29,7 +29,9 @@
 		classpath:spring-data-jpa-config.xml,
 		classpath:applicationContext-rest-client.xml,
 		classpath:applicationContext-service.xml,
-		/WEB-INF/spring/spring-security.xml
+		/WEB-INF/spring/spring-security.xml,
+		classpath:applicationContext-scheduler-jobs.xml,
+		classpath:applicationContext-scheduler.xml
 	</param-value>
   </context-param>
   <listener>

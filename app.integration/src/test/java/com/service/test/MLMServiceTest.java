@@ -63,7 +63,8 @@ public class MLMServiceTest extends BaseServiceTest {
     addMlmToGroups(savedUserList, mlmMap);
 
     Date endDate = new Date();
-    userGroupService.allocateCommision(startDate, endDate);
+    List<Long> ids = userGroupService.allocateCommision(startDate, endDate);
+    userGroupService.updateCommisionForCurrentDay(ids);
     System.err.println("..yes,,,");
     // userGroupService.findChild("A8");
   }

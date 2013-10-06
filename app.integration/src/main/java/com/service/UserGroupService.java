@@ -16,5 +16,7 @@ public interface UserGroupService {
 
   public List<Long> findUserGroupsBy(Date startDate, Date endDate, boolean commisionPayed);
 
-  public void allocateCommision(Date startDate, Date endDate);
+  public List<Long> allocateCommision(Date startDate, Date endDate);
+
+  public void updateCommisionForCurrentDay(List<Long> idList);
 }

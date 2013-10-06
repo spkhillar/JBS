@@ -11,6 +11,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,7 @@ import com.service.SystemConfigurationService;
 import com.service.UserGroupService;
 import com.service.UserPointsHistoryService;
 import com.service.util.ApplicationConstants;
+import com.service.util.ServiceUtil;
 
 @Service("userGroupService")
 public class UserGroupServiceImpl implements UserGroupService {
@@ -114,7 +117,8 @@ public class UserGroupServiceImpl implements UserGroupService {
 
   @Override
   @Transactional
-  public void allocateCommision(Date startDate, Date endDate) {
+  public List<Long> allocateCommision(Date startDate, Date endDate) {
+    logger.info("####start allocateCommision from " + startDate + " TO " + endDate);
     SystemConfiguration systemConfiguration =
         systemConfigurationService.findByKey(ApplicationConstants.SUBSCRIPTION_BASE_PRICE);
     int subscriptionBasePrice = Integer.valueOf(systemConfiguration.getValue());
@@ -127,6 +131,50 @@ public class UserGroupServiceImpl implements UserGroupService {
         logger.error("Exception processing userGroupId=" + userGroupId, e);
       }
     }
+    logger.info("###end allocateCommision ");
+    return idList;
+  }
+
+  @Override
+  @Transactional
+  public void updateCommisionForCurrentDay(List<Long> idList) {
+    for (Long userGroupId : idList) {
+      try {
+        checkForBinaryCompletionOfParents(userGroupId);
+      } catch (Exception e) {
+        logger.error("Exception processing updateCommisionForCurrentDay for userGroupId=" + userGroupId, e);
+      }
+    }
+  }
+
+  private void checkForBinaryCompletionOfParents(Long userGroupId) {
+    UserGroups userGroup = userGroupsDAO.findOne(userGroupId);
+    int currentLevel = userGroup.getLevel();
+    if (currentLevel > 0) {
+      User user = userGroup.getUserByParentGroupId();
+      if (user.getUserGroupsesForParentGroupId().size() == 2) {
+        checkForDisabledUserPoints(user);
+      }
+    }
+  }
+
+  private void checkForDisabledUserPoints(User user) {
+    logger.info("..checkForDisabledUserPoints starts for User=" + user.getUserName());
+    int page = 1;
+    Pageable pageable = ServiceUtil.getPage(page, 10);
+    Page<UserPointsHistory> list = userPointsHistoryService.findUserPointByUserName(user, pageable);
+    while (list.hasContent()) {
+      logger.info("..Processing Page =" + page);
+      for (UserPointsHistory userPointsHistory : list) {
+        userPointsHistory.setEnabled(true);
+        userPointsHistory.setUpdatedAt(new Date());
+        userPointsHistoryService.save(userPointsHistory);
+      }
+      page++;
+      pageable = ServiceUtil.getPage(page, 10);
+      list = userPointsHistoryService.findUserPointByUserName(user, pageable);
+    }
+    logger.info("..checkForDisabledUserPoints ends for User=" + user.getUserName());
   }
 
   private void allocateCommisionToUser(Long userGroupId, int subscriptionBasePrice) {
