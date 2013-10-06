@@ -58,8 +58,8 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
 
   public RedeemHistory() {}
 
-  public RedeemHistory(final User user, final int points, final ModeOfRedemption modeOfRedemption, final String modeDetails,
-      final RedeemStatus status, final Date updatedAt) {
+  public RedeemHistory(final User user, final int points, final ModeOfRedemption modeOfRedemption,
+      final String modeDetails, final RedeemStatus status, final Date updatedAt) {
     this.user = user;
     this.points = points;
     this.modeOfRedemption = modeOfRedemption;
@@ -68,8 +68,8 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     this.updatedAt = updatedAt;
   }
 
-  public RedeemHistory(final long id, final User user, final int points, final ModeOfRedemption modeOfRedemption, final String modeDetails,
-      final RedeemStatus status, final Date updatedAt, final Set<Payment> payments) {
+  public RedeemHistory(final long id, final User user, final int points, final ModeOfRedemption modeOfRedemption,
+      final String modeDetails, final RedeemStatus status, final Date updatedAt, final Set<Payment> payments) {
     this.id = id;
     this.user = user;
     this.points = points;
@@ -101,7 +101,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
     this.version = version;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id", nullable = false)
   public User getUser() {
     return this.user;

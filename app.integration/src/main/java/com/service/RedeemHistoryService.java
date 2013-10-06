@@ -13,5 +13,6 @@ public interface RedeemHistoryService {
 
   public Page<RedeemHistory> findAll(int page, int rows, String sord, String sidx);
 
+  public RedeemHistory findById(long id);
 
 }

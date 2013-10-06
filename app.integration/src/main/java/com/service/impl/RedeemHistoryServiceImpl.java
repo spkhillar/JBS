@@ -36,9 +36,12 @@ public class RedeemHistoryServiceImpl implements RedeemHistoryService {
   @Override
   @Transactional(readOnly = true)
   public int sumOfPointBy(final User user) {
-    String ejbql = "select sum(rh.points) from RedeemHistory rh where rh.user.id = :userId";
+    String ejbql =
+        "select sum(rh.points) from RedeemHistory rh where rh.user.id = :userId and (rh.status =:status1 or rh.status =:status2)";
     Map<String, Object> params = new HashMap<String, Object>(1);
     params.put("userId", user.getId());
+    params.put("status1", RedeemStatus.NEW);
+    params.put("status2", RedeemStatus.APPROVED);
     List<Long> list = genericQueryExecutorDAO.executeProjectedQuery(ejbql, params);
     if (list.get(0) == null) {
       return 0;
@@ -51,6 +54,12 @@ public class RedeemHistoryServiceImpl implements RedeemHistoryService {
   public Page<RedeemHistory> findAll(final int page, final int rows, final String sord, final String sidx) {
     Pageable pageable = ServiceUtil.getPage(page, rows, sord, sidx);
     return redeemHistoryDAO.findByStatus(RedeemStatus.NEW, pageable);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public RedeemHistory findById(long id) {
+    return redeemHistoryDAO.findOne(id);
 
   }
 

@@ -38,9 +38,18 @@ public class RedeemHistoryServiceTest extends BaseServiceTest {
 
     redeemHistory = new RedeemHistory(user, 300, ModeOfRedemption.CASH, "none", RedeemStatus.NEW, new Date());
     redeemHistory = redeemHistoryService.save(redeemHistory);
+    long revertId = redeemHistory.getId();
     System.err.println("...ID..." + redeemHistory.getId());
 
     sum = redeemHistoryService.sumOfPointBy(user);
     System.err.println("..third.." + sum);
+
+    redeemHistory = redeemHistoryService.findById(revertId);
+    redeemHistory.setStatus(RedeemStatus.REJECTED);
+    redeemHistoryService.save(redeemHistory);
+
+    sum = redeemHistoryService.sumOfPointBy(user);
+    System.err.println("..4th.." + sum);
+
   }
 }
