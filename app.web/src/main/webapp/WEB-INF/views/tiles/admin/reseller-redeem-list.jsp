@@ -87,12 +87,12 @@
 		return value;
 	}
 	
-	function loadRedeemDetails(resellerId){
+	function loadRedeemDetails(id){
 		//console.log('..webContextPath+"/mypage/jobdetail"',webContextPath+"/mypage/jobdetail");
 		
 		//console.log('...'+jobId+'...');
 		 $.ajax({
-			    url: webContextPath+"/admin/view/redeem/notification/"+resellerId,
+			    url: webContextPath+"/admin/view/redeem/notification/"+id,
 			    dataType:'html',
 			    success: function(data){
 			      //construct the data however, update the HTML of the popup div 
