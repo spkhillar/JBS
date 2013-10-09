@@ -1,6 +1,10 @@
 package com.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,8 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jpa.entities.DepositIntimator;
+import com.jpa.entities.User;
 import com.jpa.entities.enums.DepositIntimatorStatus;
 import com.jpa.repositories.DepositIntimatorDAO;
+import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.service.DepositIntimatorService;
 import com.service.MlmUserCreditPointService;
 import com.service.util.ServiceUtil;
@@ -23,6 +29,9 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
 
   @Autowired
   private MlmUserCreditPointService mlmUserCreditPointService;
+
+  @Autowired
+  private GenericQueryExecutorDAO genericQueryExecutorDAO;
 
   @Override
   @Transactional
@@ -61,6 +70,19 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
     if (type == 1) {
       mlmUserCreditPointService.save(savedDepositIntimator);
     }
+  }
+
+  @Transactional(readOnly = true)
+  @Override
+  public int calculateTotalSumForDepositIntimatorUser(User user) {
+    String ejbql = "select sum(di.amountDeposited) from DepositIntimator di where di.userByUserId.id=:userId";
+    Map<String, Object> params = new HashMap<String, Object>(1);
+    params.put("userId", user.getId());
+    List<BigDecimal> list = genericQueryExecutorDAO.executeProjectedQuery(ejbql, params);
+    if (list.get(0) == null) {
+      return 0;
+    }
+    return list.get(0).intValue();
   }
 
 }

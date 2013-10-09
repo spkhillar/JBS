@@ -3,6 +3,7 @@ package com.service;
 import org.springframework.data.domain.Page;
 
 import com.jpa.entities.DepositIntimator;
+import com.jpa.entities.User;
 
 public interface DepositIntimatorService {
 
@@ -13,4 +14,6 @@ public interface DepositIntimatorService {
   public DepositIntimator findById(long depositorIntimatorId);
 
   public void approveOrRejectDepositIntimator(long depositorIntimatorId, int type, String memo);
+
+  public int calculateTotalSumForDepositIntimatorUser(User user);
 }

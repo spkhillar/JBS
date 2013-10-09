@@ -19,4 +19,6 @@ public interface UserGroupService {
   public List<Long> allocateCommision(Date startDate, Date endDate);
 
   public void updateCommisionForCurrentDay(List<Long> idList);
+
+  public boolean checkIfUserHasBinary(User user);
 }

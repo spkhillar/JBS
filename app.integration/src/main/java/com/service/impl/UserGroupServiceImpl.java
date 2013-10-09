@@ -147,6 +147,15 @@ public class UserGroupServiceImpl implements UserGroupService {
     }
   }
 
+  @Override
+  @Transactional(readOnly = true)
+  public boolean checkIfUserHasBinary(User user) {
+    if (user.getUserGroupsesForParentGroupId().size() < 2) {
+      return false;
+    }
+    return true;
+  }
+
   private void checkForBinaryCompletionOfParents(Long userGroupId) {
     UserGroups userGroup = userGroupsDAO.findOne(userGroupId);
     int currentLevel = userGroup.getLevel();
@@ -198,7 +207,9 @@ public class UserGroupServiceImpl implements UserGroupService {
       logger.info("Parent of " + userName + " is " + tempUserName + " and is at level " + currentLevel);
       userLevel++;
 
-      if (currentLevel == 0) {
+      if (currentLevel == -1) {
+        // do nothing
+      } else if (currentLevel == 0) {
         commsionPercentage = BigDecimal.valueOf(100l).subtract(totalPaid);
         int points = addUserPoints(parentUser, commsionPercentage, subscriptionBasePrice, true);
         logger.info("...Allocating commision to admin..." + parentUser.getUserName() + " @ " + commsionPercentage

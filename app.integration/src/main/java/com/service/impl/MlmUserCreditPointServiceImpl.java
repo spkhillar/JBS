@@ -19,8 +19,10 @@ import com.jpa.entities.enums.DepositIntimatorType;
 import com.jpa.entities.enums.MlmUserCreditPointStatus;
 import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.jpa.repositories.MlmUserCreditPointDAO;
+import com.service.DepositIntimatorService;
 import com.service.MlmUserCreditPointService;
 import com.service.SystemConfigurationService;
+import com.service.UserGroupService;
 import com.service.util.ApplicationConstants;
 
 @Service("mlmUserCreditPointService")
@@ -37,37 +39,56 @@ public class MlmUserCreditPointServiceImpl implements MlmUserCreditPointService 
   @Autowired
   private GenericQueryExecutorDAO genericQueryExecutorDAO;
 
+  @Autowired
+  private DepositIntimatorService depositIntimatorService;
+
+  @Autowired
+  private UserGroupService userGroupService;
+
   @Override
   @Transactional
   public void save(final DepositIntimator depositIntimator) {
-
     if (DepositIntimatorType.MLM_CREDIT_POINT.equals(depositIntimator.getDepositIntimatorType())) {
-      createCreditPointsForMlm(depositIntimator);
+      boolean hasBinary = userGroupService.checkIfUserHasBinary(depositIntimator.getUserByUserId());
+      if (!hasBinary) {
+        createCreditPointsForMlm(depositIntimator);
+      } else {
+        logger.debug("Not creating MlmUserCreditPoint");
+      }
     } else {
       throw new UnsupportedOperationException("Only Mlm type is allowed as of now");
     }
-
   }
 
   @Override
   @Transactional(readOnly = true)
   public long getUserPointCount(final User user) {
-    String query =
-        "select count(*) from MlmUserCreditPoint mucp where mucp.mlmUserCreditPointStatus =:mlmUserCreditPointStatus and "
-            + "mucp.user =:user and mucp.depositIntimator.status =:status";
-
-    Map<String, Object> params = new HashMap<String, Object>();
-    params.put("mlmUserCreditPointStatus", MlmUserCreditPointStatus.OPEN);
-    params.put("user", user);
-    params.put("status", DepositIntimatorStatus.APPROVED);
-
-    return genericQueryExecutorDAO.findCount(query, params);
+    long count = 0;
+    int numOfChilds = user.getUserGroupsesForParentGroupId().size();
+    if (numOfChilds < 2) {
+      String query =
+          "select count(*) from MlmUserCreditPoint mucp where mucp.mlmUserCreditPointStatus =:mlmUserCreditPointStatus and "
+              + "mucp.user =:user and mucp.depositIntimator.status =:status";
+      Map<String, Object> params = new HashMap<String, Object>();
+      params.put("mlmUserCreditPointStatus", MlmUserCreditPointStatus.OPEN);
+      params.put("user", user);
+      params.put("status", DepositIntimatorStatus.APPROVED);
+      count = genericQueryExecutorDAO.findCount(query, params);
+      if (count >= 2 && numOfChilds == 0) {
+        count = 2;
+      } else if (count >= 2 && numOfChilds == 1) {
+        count = 1;
+      } else if (count == 1 && numOfChilds == 0) {
+        count = 1;
+      }
+    }
+    return count;
   }
 
   @Override
   @Transactional(readOnly = true)
-  public List<MlmUserCreditPoint> listMlmUserCreditPoint(final User user, final MlmUserCreditPointStatus mlmUserCreditPointStatus,
-    final DepositIntimatorStatus depositIntimatorStatus) {
+  public List<MlmUserCreditPoint> listMlmUserCreditPoint(final User user,
+      final MlmUserCreditPointStatus mlmUserCreditPointStatus, final DepositIntimatorStatus depositIntimatorStatus) {
     String query =
         "from MlmUserCreditPoint mucp where mucp.mlmUserCreditPointStatus =:mlmUserCreditPointStatus and "
             + "mucp.user =:user and mucp.depositIntimator.status =:status";
@@ -88,7 +109,8 @@ public class MlmUserCreditPointServiceImpl implements MlmUserCreditPointService 
 
   @Override
   @Transactional
-  public void updateStatus(final MlmUserCreditPoint mlmUserCreditPoint, final MlmUserCreditPointStatus mlmUserCreditPointStatus) {
+  public void updateStatus(final MlmUserCreditPoint mlmUserCreditPoint,
+      final MlmUserCreditPointStatus mlmUserCreditPointStatus) {
     MlmUserCreditPoint savedMlmUserCreditPoint = mlmUserCreditPointDAO.findOne(mlmUserCreditPoint.getId());
     savedMlmUserCreditPoint.setMlmUserCreditPointStatus(mlmUserCreditPointStatus);
     mlmUserCreditPointDAO.save(savedMlmUserCreditPoint);
@@ -98,18 +120,43 @@ public class MlmUserCreditPointServiceImpl implements MlmUserCreditPointService 
     SystemConfiguration systemConfiguration =
         systemConfigurationService.findByKey(ApplicationConstants.SUBSCRIPTION_BASE_PRICE);
     int subscriptionBasePrice = Integer.valueOf(systemConfiguration.getValue());
-
-    int numOfRecords = depositIntimator.getAmountDeposited().intValue() / subscriptionBasePrice;
-    logger.debug("...creating " + numOfRecords + "mlm credit points ");
-    if (numOfRecords == 2) {
+    int totalSum = depositIntimatorService.calculateTotalSumForDepositIntimatorUser(depositIntimator.getUserByUserId());
+    int numOfRecords = totalSum / subscriptionBasePrice;
+    logger.debug("...creating " + numOfRecords + " mlm credit points ");
+    int numberOfOpenRecords =
+        findNumberOfOpenMLMCreditRecords(depositIntimator.getUserByUserId(), MlmUserCreditPointStatus.OPEN);
+    int numberOfCloseRecords =
+        findNumberOfOpenMLMCreditRecords(depositIntimator.getUserByUserId(), MlmUserCreditPointStatus.CLOSED);
+    logger.debug("...creating " + numOfRecords + " mlm credit points. numberOfOpenRecords=" + numberOfOpenRecords
+        + ".numberOfCloseRecords=" + numberOfCloseRecords);
+    if (numOfRecords >= 2 && numberOfOpenRecords == 1 && numberOfCloseRecords == 0) {
+      MlmUserCreditPoint mlmUserCreditPoint1 = mlmUserCreditPointRecord(depositIntimator, subscriptionBasePrice);
+      mlmUserCreditPointDAO.save(mlmUserCreditPoint1);
+    } else if (numOfRecords >= 2 && numberOfOpenRecords == 0) {
       MlmUserCreditPoint mlmUserCreditPoint1 = mlmUserCreditPointRecord(depositIntimator, subscriptionBasePrice);
       MlmUserCreditPoint mlmUserCreditPoint2 = mlmUserCreditPointRecord(depositIntimator, subscriptionBasePrice);
       mlmUserCreditPointDAO.save(mlmUserCreditPoint1);
       mlmUserCreditPointDAO.save(mlmUserCreditPoint2);
-    } else {
+    } else if (numOfRecords >= 1 && numberOfOpenRecords == 0) {
       MlmUserCreditPoint mlmUserCreditPoint1 = mlmUserCreditPointRecord(depositIntimator, subscriptionBasePrice);
       mlmUserCreditPointDAO.save(mlmUserCreditPoint1);
+    } else {
+      logger.debug("Cannot assign to mlm user creedit points as total amount is " + totalSum);
     }
+  }
+
+  private int findNumberOfOpenMLMCreditRecords(User user, MlmUserCreditPointStatus mlmUserCreditPointStatus) {
+    String ejbql =
+        "select count(*) from MlmUserCreditPoint mcp where mcp.user.id=:userId and mcp.mlmUserCreditPointStatus =:status";
+    Map<String, Object> params = new HashMap<String, Object>(2);
+    params.put("userId", user.getId());
+    params.put("status", mlmUserCreditPointStatus);
+    List<Long> list = genericQueryExecutorDAO.executeProjectedQuery(ejbql, params);
+    if (list.get(0) == null) {
+      return 0;
+    }
+    return list.get(0).intValue();
+
   }
 
   private MlmUserCreditPoint mlmUserCreditPointRecord(final DepositIntimator depositIntimator, final int points) {
@@ -118,6 +165,5 @@ public class MlmUserCreditPointServiceImpl implements MlmUserCreditPointService 
           depositIntimator, null, new Date());
     return mlmUserCreditPoint;
   }
-
 
 }
