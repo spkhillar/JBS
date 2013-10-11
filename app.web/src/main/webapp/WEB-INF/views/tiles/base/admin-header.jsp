@@ -15,20 +15,7 @@
 <style type="text/css">    
 * { margin: 0; padding: 0; }
 
-html { height: 100%; font-size: 62.5% }
 
-body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helvetica, sans-serif; }
-
-
-#indextb tr td #jobtb tr .joblist form fieldset label {
-	text-align: left;
-}
-#indextb tr td #infotb .footer td img {
-	text-align: center;
-}
-#indextb tr td table {
-	text-align: center;
-}
 		
 </style>
 

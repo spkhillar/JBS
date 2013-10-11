@@ -66,7 +66,7 @@ $(document).ready(function(){
   			"user.password" : {
   		        required : true,
   		        minlength: 6,
-  		        maxlength: 8,
+  		        maxlength: 20,
   		      alphanumeric: true
   		        
   		   },

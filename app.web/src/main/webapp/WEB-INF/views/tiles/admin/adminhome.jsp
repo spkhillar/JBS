@@ -19,7 +19,7 @@
 </style>
 </head>
 <body>
-	
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>	
 	<div id="adminDiv" style="width: 80%; height: 500px; margin:auto">
 	<h1> Welcome ${currentLoggedInUser}</h1>
 	<hr color="blue">
@@ -34,7 +34,7 @@
         <div class="entry">
           <h4>Website Users</h4>
           <p> </p>
-          <h4>Reseller Users</h4>
+          <h4><a href="${pageContext.request.contextPath}/admin/view/users/">Reseller Users</a></h4>
           <p></p>
           <h4>Premium Users</h4>
           <p></p>

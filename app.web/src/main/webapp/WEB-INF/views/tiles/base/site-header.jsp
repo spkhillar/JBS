@@ -10,50 +10,11 @@
 <head>
 <spring:url value="/" var="homeUrl" htmlEscape="true"/>
 <style>    
-* { margin: 0; padding: 0; }
+
 
 html { height: 100%; font-size: 62.5% }
 
-body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helvetica, sans-serif; }
 
-
-#indextb tr td #jobtb tr .joblist form fieldset label {
-	text-align: left;
-}
-#indextb tr td #infotb .footer td img {
-	text-align: center;
-}
-#indextb tr td table {
-	text-align: center;
-}
-input[type="text"],input[type="number"],select,input[type="password"],textarea{
-    
-    padding: 5px;   
-    border: 1px solid #DDDDDD;
-    /*Applying CSS3 gradient*/
-    background: -moz-linear-gradient(center top , #FFFFFF,  #EEEEEE 1px, #FFFFFF 20px);    
-    background: -webkit-gradient(linear, left top, left 20, from(#FFFFFF), color-stop(5%, #EEEEEE) to(#FFFFFF));
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FBFBFB', endColorstr='#FFFFFF');
-    
-    /*Applying CSS 3radius*/   
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    
-    /*Applying CSS3 box shadow*/
-    -moz-box-shadow: 0 0 2px #DDDDDD;
-    -webkit-box-shadow: 0 0 2px #DDDDDD;
-    box-shadow: 0 3px 2px #DDDDDD;
-
-}
-input[type="text, number"]:hover
-{
-    border:1px solid #cccccc;
-}
-input[type="text, number"]:focus
-{
-    box-shadow:0 0 2px #FFFE00;
-}
 
 </style>
 
@@ -80,7 +41,7 @@ input[type="text, number"]:focus
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <table border="0" id="indextb">
   <tr>
-    <th scope="col"><div id="site_title"></div></th>
+    <th scope="col"><a href="http://www.jobsbysms.com" title="Premium Website for Job Opportunities,Business Network etc.."><div id="site_title"></div></a></th>
     <th scope="col"><div id="site_title1"></div></th>
     <td scope="col" colspan="2" class="siteheadercells">
      <form action="${contextPath}/j_spring_security_check" method="post">
@@ -88,7 +49,7 @@ input[type="text, number"]:focus
     	  <input type="password" placeholder="Enter your Password" name="j_password" style="text-align:center; margin-left: 6px"/>
 	      <input type="submit" value="Login" style="width:20%; height:28px; float: right"/> 
 	      <br><label style="font-size: 12px;color: blue; font-style: normal;">
-	      <br><a href="${contextPath}/manage/forgotpassword">Forgot Password</a>
+	      <br><a href="${contextPath}/manage/forgotpassword" style="float:left">Forgot Password</a>
 	      </label>
 	      
 				<c:choose>

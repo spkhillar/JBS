@@ -26,7 +26,7 @@ public class BaseAuthenticatedController extends BaseController {
     try {
       user = getCurrentUser();
       webUser =
-          new WebUser(user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhone());
+          new WebUser(user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhone(),user.getMlmAccountId());
     } catch (Exception e) {
       webUser = new WebUser();
     }

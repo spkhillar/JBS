@@ -68,13 +68,47 @@ $(document).ready(function(){
 	 } else if(changePasswordOption=="3"){
 		 $('#retrievePasswordDiv').hide();
 		 $('#newPasswordDiv').show();
+	 } else if(changePasswordOption=="4"){
+		 $('#retrievePasswordDiv').hide();
+		 $('#newPasswordDiv').hide();
+		 $('#usernameDiv').show();
 	 } 
-	 
-  	 
-	 
+     
+     $("#registrationForm").validate( {
+   	    success : "valid",
+   	    ignoreTitle : true,
+   	    rules : {
+   			"user.userName" : {
+   		        required : true
+   		     }
+   	    }
+     });
+     
+     $("#forgotUserIdForm").validate( {
+    	    success : "valid",
+    	    ignoreTitle : true,
+    	    rules : {
+    			"user.firstName" : {
+    		        required : true,
+    		        lettersonly:true
+    		     },"user.email" : {
+    		        required : true,
+    		        email:true
+    		     },"user.phone" : {
+    		        required : true,
+    		        number:true
+    		     }
+    	    }
+      });
+     
+     jQuery.validator.addMethod("lettersonly", function(value, element) {
+   	  return this.optional(element) || /^[a-z]+$/i.test(value);
+   	}, "Letters only please."); 
 
- 	 
+	 
 });
+
+
 </script>
 </head>
 <body>
@@ -159,7 +193,7 @@ $(document).ready(function(){
       </table>
            </form:form>
       <p>&nbsp;</p>
-       <form:form name="registrationForm" commandName="registration" id="registrationForm" method="POST" action="${contextPath}/manage/forgotpwd/username">
+       <form:form name="forgotUserIdForm" commandName="registration" id="forgotUserIdForm" method="POST" action="${contextPath}/manage/forgotpwd/username">
      
       <table width="751" border="0" align="center" id="useridtb" title="Recover Password" hidden="true">
       <tr>
@@ -204,9 +238,17 @@ $(document).ready(function(){
 <br>
 <br>
 <p></p>
- <center><h3>Your new password is ${changePassword}</h3></center>
- 
+ <center>
+ <h3>Your new password: ${changePassword}</h3>
+  </center>
 </div>
-
+<div id="usernameDiv" hidden="true" style="margin:auto; width:80%; height:50%">
+<br>
+<br>
+<p></p>
+ <center>
+ <h3>Your Username: ${username}</h3>
+  </center>
+</div>
 </body>
 </html>

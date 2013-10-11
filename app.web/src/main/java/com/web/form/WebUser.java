@@ -12,22 +12,26 @@ public class WebUser {
 
   private String phone;
 
+  private String mlmId;
+
+
   public WebUser() {}
 
-  public WebUser(String username, String firstName, String lastName, String email, String phone) {
+  public WebUser(final String username, final String firstName, final String lastName, final String email, final String phone, final String mlmid) {
     super();
     this.username = username;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.phone = phone;
+    this.mlmId=mlmid;
   }
 
   public String getUsername() {
     return username;
   }
 
-  public void setUsername(String username) {
+  public void setUsername(final String username) {
     this.username = username;
   }
 
@@ -35,7 +39,7 @@ public class WebUser {
     return firstName;
   }
 
-  public void setFirstName(String firstName) {
+  public void setFirstName(final String firstName) {
     this.firstName = firstName;
   }
 
@@ -43,7 +47,7 @@ public class WebUser {
     return lastName;
   }
 
-  public void setLastName(String lastName) {
+  public void setLastName(final String lastName) {
     this.lastName = lastName;
   }
 
@@ -51,7 +55,7 @@ public class WebUser {
     return email;
   }
 
-  public void setEmail(String email) {
+  public void setEmail(final String email) {
     this.email = email;
   }
 
@@ -59,8 +63,17 @@ public class WebUser {
     return phone;
   }
 
-  public void setPhone(String phone) {
+  public void setPhone(final String phone) {
     this.phone = phone;
+  }
+
+
+  public String getMlmId() {
+    return mlmId;
+  }
+
+  public void setMlmId(final String mlmId) {
+    this.mlmId = mlmId;
   }
 
   @Override
@@ -91,8 +104,13 @@ public class WebUser {
       builder.append("phone=");
       builder.append(phone);
     }
+    if (mlmId != null) {
+      builder.append("mlmId=");
+      builder.append(mlmId);
+    }
     builder.append("]");
     return builder.toString();
   }
+
 
 }

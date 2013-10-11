@@ -81,6 +81,7 @@ public class BaseController {
   protected String getHomePage(final ModelMap map) {
     String username = this.getCurrentLoggedinUserName();
     User user = userService.findByUserName(username);
+
     Long roleId = user.getUserRole().getRole().getId();
     if (roleId.equals(1L) || roleId.equals(5L)) {
       map.put("currentLoggedInUser", username);

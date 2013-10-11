@@ -17,11 +17,11 @@
 }
 .pager div.short input
 {
-    width: 28px;
-    height: 18px;
-    border: none;
-    margin-left: 8px;
+    border: medium none;
     float: left;
+    height: 18px;
+    margin-left: 5px;
+    width: 10px;
 }
 .pager ul
 {

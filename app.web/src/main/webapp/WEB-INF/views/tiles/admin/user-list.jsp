@@ -6,65 +6,52 @@
 <script type='text/javascript'>
 
 	$(function() {
-		var lastsel="";
-		var actionUrl = webContextPath + "/commission/records";
+		var actionUrl = webContextPath + "/admin/view/userdetails";
 		$("#grid").jqGrid(
 				{
 					url : actionUrl,
 					datatype : 'json',
 					mtype : 'GET',
-					colNames : [ 'Id', 'Level', 'Description','Percentage', 'Capping'],
+					colNames : [ 'Id', 'First Name', 'Last Name','Email', 'Phone','Created Date'],
 					colModel : [ {
 						name : 'id',
 						index : 'id',
 						width : 55,
 						hidden : true
 					}, {
-						name : 'level',
-						index : 'level',
+						name : 'user.firstName',
+						index : 'user.firstName',
 						width : 60,
-						editable: true,
-						editrules : {
-							required : true,
-							integer:true
-						}
+						formatter:myHyperLinkFormatter
+					},  {
+						name : 'user.lastName',
+						index : 'user.lastName',
+						width : 60
 					}, {
-						name : 'description',
-						index : 'description',
-						width : 60,
-						editable: true,
-						editrules : {
-							required : true,
-						}
-					}, {
-						name : 'percentage',
-						index : 'Percentage',
-						width : 60,
-						editable: true,
-						editrules : {
-							required : true,
-							number:true
-						}
-					}, {
-						name : 'cap',
-						index : 'cap',
-						width : 60,
-						editable: true,
-						edittype:"select",
-							editoptions:{value:"true:true;false:false"}
-						}  
+						name : 'user.email',
+						index : 'user.email',
+						width : 60
+					},{
+						name : 'user.phone',
+						index : 'user.phone',
+						width : 60
+					},{
+						name : 'createdAt',
+						index : 'createdAt',
+						width : 60
+					},				
 					  ],
 					postData : {},
 					rowNum : 20,
 					rowList : [ 20, 30, 40,30 ],
-					height : 400,
+					height : 500,
 					width : 1050,
 					rownumbers : true,
 					pager : '#pager',
-					sortname : 'level',
+					sortname : 'createdAt',
 					viewrecords : true,
-					sortorder : "asc",
-					caption : "Commission Structure",
+					sortorder : "desc",
+					caption : "User Information List",
 					emptyrecords : "Empty records",
 					loadonce : false,
 					hidegrid : false,
@@ -78,15 +65,7 @@
 						repeatitems : false,
 						cell : "cell",
 						id : "id"
-					},
-					onSelectRow: function(id){
-						if(id && id!==lastsel){
-							$('#grid').jqGrid('restoreRow',lastsel);
-							$('#grid').jqGrid('editRow',id,true);
-							lastsel=id;
-						}
-					},
-					editurl: webContextPath + "/commission/update"
+					}
 				});
 
 		$("#grid").jqGrid('navGrid', '#pager', {
@@ -104,16 +83,24 @@
 		});
 	});
 	
+	function myHyperLinkFormatter (cellvalue, options, rowObject)
+	{
+		 // var value = '<a href="javascript:void(0);" onclick="javascript:viewPaymentDetails('+rowObject.redeemHistory.id+')">'+ cellvalue +'</a>';
+		// return value;
+	}
 	
 </script>
 </head>
 <body>
 
-<div id="commissionListDiv">
- <h4 style="padding: 5px">Home | Configuration | Network Configuration | Commission Structure </h4><br/>
+<div id="depositListDiv">
+ <h4 style="padding: 5px">Home | Payments </h4><br/>
  <hr color="red"/>
 		<table id='grid'></table>
 		<div id='pager'></div>
 	</div>
+	
+<div id="viewDepositdiv" title="Redeem Notification">
+  </div>	
 </body>
 </html>

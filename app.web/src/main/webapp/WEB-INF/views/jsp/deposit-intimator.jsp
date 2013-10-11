@@ -65,7 +65,8 @@ $(document).ready(function(){
  		    	 required:function(element){
  	    			return $("#paymentMode option:selected").val()=="ONLINE"
  	    		},
-  		    	 number:true
+  		    	 number:true,
+  		    	 alphanumeric:true
  		    },
  		   "depositIntimator.chequeNumber" : {
  		    	number:true,
@@ -119,7 +120,10 @@ $(document).ready(function(){
 jQuery.validator.addMethod("lettersonly", function(value, element) {
 	  return this.optional(element) || /^[a-zA-Z ]+$/i.test(value);
 	}, "Alphabets & Space are valid characters."); 
-	
+
+jQuery.validator.addMethod("alphanumeric", function(value, element) {
+	  return this.optional(element) || /^[a-zA-Z0-9]+$/i.test(value);
+	}, "Alphabets and Numbers only applicable"
 	
 </script>
 </head>
@@ -133,7 +137,7 @@ jQuery.validator.addMethod("lettersonly", function(value, element) {
 </c:otherwise>
 </c:choose>
 <form:form name="depositIntimator" id="depositIntimator" commandName="depositIntimator" enctype="multipart/form-data" method="POST">
-<table border="0" width="80%" style="margin:auto">
+<table border="0" style="margin:auto; width:1100px">
   <tr>
     <td scope="col" width="48"><strong id="h3">Payment Intimator</strong><br/>
     <hr color="red"/>

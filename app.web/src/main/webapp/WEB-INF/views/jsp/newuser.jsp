@@ -37,36 +37,7 @@
 	margin: auto;
 }
 
-input[type="text"],input[type="number"],select,input[type="password"],textarea{
-    
-    padding: 5px;   
-    border: 1px solid #DDDDDD;
-    /*Applying CSS3 gradient*/
-    background: -moz-linear-gradient(center top , #FFFFFF,  #EEEEEE 1px, #FFFFFF 20px);    
-    background: -webkit-gradient(linear, left top, left 20, from(#FFFFFF), color-stop(5%, #EEEEEE) to(#FFFFFF));
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FBFBFB', endColorstr='#FFFFFF');
-    
-    /*Applying CSS 3radius*/   
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    
-    /*Applying CSS3 box shadow*/
-    -moz-box-shadow: 0 0 2px #DDDDDD;
-    -webkit-box-shadow: 0 0 2px #DDDDDD;
-    box-shadow: 0 3px 2px #DDDDDD;
 
-}
-input[type="text, number"]:hover
-{
-    border:1px solid #cccccc;
-}
-input[type="text, number"]:focus
-{
-    box-shadow:0 0 2px #FFFE00;
-}
-
- 
 </style>
 
 <spring:url value="/resources/js/userregister.js" var="resourceUserRegisterJqUrl"/>
@@ -101,48 +72,48 @@ input[type="text, number"]:focus
   <table border="0" id="logininfotb">
     <tr>
       <td width="36%">Username<em>*</em></td>
-      <td width="64%">
+      <td width="64%" class="td">
       <c:choose>
       <c:when test="${(operation eq 'new_user') or (operation eq 'site_admin') or (operation eq 'mlm_create')}">
-       <form:input path="user.userName" />
+       <form:input path="user.userName" class="size"/>
        </c:when>
        <c:otherwise>
-       <form:input path="user.userName" disabled="true"/>
+       <form:input path="user.userName" disabled="true" class="size"/>
        </c:otherwise>
        </c:choose>
        </td>
     </tr>
-    <tr>
-      <td width="36%">Enter your Email id<em>*</em></td>
-      <td width="64%"> <form:input path="user.email" /></td>
-    </tr>
-    <c:if test="${(operation eq 'new_user') or (operation eq 'site_admin')  or (operation eq 'mlm_create')}">
+     <c:if test="${(operation eq 'new_user') or (operation eq 'site_admin')  or (operation eq 'mlm_create')}">
     <tr>
       <td>Create a Password for your account<em>*</em></td>
-      <td> <form:password path="user.password" /></td>
+      <td class="td"> <form:password path="user.password" class="size"/></td>
     </tr>
     <tr>
       <td height="27">Confirm the Password<em>*</em></td>
-      <td> <form:password path="confirmPassword" /></td>
+      <td class="td"> <form:password path="confirmPassword" class="size"/></td>
     </tr>
     </c:if>
+    <tr>
+      <td width="36%">Enter your Email id<em>*</em></td>
+      <td width="64%" class="td"> <form:input path="user.email" class="size"/></td>
+    </tr>
      <tr>
       <td height="27">Select your security Question</td>
-      <td> <form:select path="securityQuestion" items="${securityQuestions}" ></form:select>
+      <td class="td"> <form:select path="securityQuestion" items="${securityQuestions}" ></form:select>
       </td>
     </tr>
     <tr>
       <td height="27">Answer<em>*</em></td>
-      <td> <form:input path="securityAnswer" /></td>
+      <td class="td"> <form:input path="securityAnswer" class="size"/></td>
     </tr>
      <tr>
       <td height="27">Date of Birth<em>*</em></td>
-      <td> <form:input path="user.dateOfBirth" /></td>
+      <td class="td"> <form:input path="user.dateOfBirth" class="size"/></td>
     </tr>
     <c:if test="${(operation eq 'mlm_create')}">
      <tr>
       <td height="27">Reseller Position<em>*</em></td>
-      <td>  <form:select path="mlmPosition" items="${childPositions}"></form:select>  </td>
+      <td class="td">  <form:select path="mlmPosition" items="${childPositions}"></form:select>  </td>
     </tr>
     </c:if>
   </table>
@@ -160,7 +131,7 @@ input[type="text, number"]:focus
   <td>&nbsp;</td>
 </tr>
 <tr bgcolor="#FFFFFF" class="header2">
-  <td height="21" colspan="7"><h4>Address Information</h4></td>
+  <td  height="21" colspan="7"><h4>Address Information</h4></td>
   </tr>
 <tr class="header">
   <td>&nbsp;</td>
@@ -170,36 +141,36 @@ input[type="text, number"]:focus
     <table width="206" border="0" id="addressinfotb">
       <tr>
         <td width="270">First Name<em>*</em></td>
-        <td width="480"> <form:input path="user.firstName" ></form:input></td>
+        <td class="td" width="480"> <form:input path="user.firstName" class="size"></form:input></td>
       </tr>
       <tr>
         <td>Last Name</td>
-        <td><form:input path="user.lastName" ></form:input></td>
+        <td class="td"><form:input path="user.lastName" class="size"></form:input></td>
       </tr>
       <tr>
         <td>Address Line1<em>*</em></td>
-        <td><form:input path="user.address.addressLine1" ></form:input> </td>
+        <td class="td"><form:input path="user.address.addressLine1" class="size"></form:input> </td>
       </tr>
       <tr>
         <td>Address Line2</td>
-        <td><form:input path="user.address.addressLine2" ></form:input> </td>
+        <td class="td"><form:input path="user.address.addressLine2" class="size"></form:input> </td>
       </tr>
       <tr>
         <td>State</td>
-        <td><form:select path="user.address.state" items="${states}" ></form:select> </td>
+        <td class="td"><form:select path="user.address.state" items="${states}" class="size"></form:select> </td>
       </tr>
       <tr>
         <td>City<em>*</em></td>
-        <td>
-          <form:input path="user.address.city" ></form:input></td>
+        <td class="td">
+          <form:input path="user.address.city" class="size"></form:input></td>
       </tr>
       <tr>
         <td>Mobile Number<em>*</em></td>
-        <td><form:input path="user.phone" ></form:input></td>
+        <td class="td"><form:input path="user.phone" class="size"></form:input></td>
       </tr>
       <tr>
         <td>Pin code<em>*</em></td>
-        <td><form:input path="user.address.pin" ></form:input></td>
+        <td class="td"><form:input path="user.address.pin" class="size"></form:input></td>
       </tr>
     </table></td>
   <td>&nbsp;</td>
@@ -243,19 +214,19 @@ input[type="text, number"]:focus
   <td colspan="5"><table width="695" border="0" id="workinfotb">
     <tr>
       <td width="274">Work Experience</td>
-      <td width="476">
+      <td width="476" class="td">
       <form:select path="user.skill.yearOfExperiance" items="${workExperianceList}" ></form:select>
       </td>
     </tr>
     <tr>
       <td>Key Skills<em>*</em></td>
-      <td>
+      <td class="td">
       <form:textarea path="user.skill.skills" />
       </td>
     </tr>
     <tr>
       <td>Which Functional area do you work in?</td>
-      <td>
+      <td class="td">
       <form:select path="user.skill.functionalArea" items="${jobsFunctionalAreaList}" ></form:select>
       </td>
     </tr>

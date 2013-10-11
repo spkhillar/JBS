@@ -39,6 +39,41 @@ tr.pwdhead{
  border-top-style: solid;
 }
 </style>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+$("#registrationForm").validate( {
+	    success : "valid",
+	    ignoreTitle : true,
+	    rules : {
+			"user.password" : {
+		        required : true,
+		        minlength: 6,
+		        maxlength: 20,
+		        alphanumeric: true
+		        
+		   },"newPassword" : {
+		        required : true,
+		        minlength: 6,
+		        maxlength: 20,
+		        alphanumeric: true
+		        
+		   },"confirmPassword" : {
+		        required : true,
+		        equalTo: "#newPassword"
+		   }
+		   
+	    }
+
+});
+
+jQuery.validator.addMethod("alphanumeric", function(value, element) {
+	  return this.optional(element) || /^[a-zA-Z0-9_]+$/i.test(value);
+	}, "Letters, numbers or underscores only please."); 
+
+
+});
+</script>
 </head>
 <body>
 <table id="passwordtb">

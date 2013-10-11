@@ -17,16 +17,6 @@
 <style>    
 * { margin: 0; padding: 0; }
 
-#indextb tr td #jobtb tr .joblist form fieldset label {
-	text-align: left;
-}
-#indextb tr td #infotb .footer td img {
-	text-align: center;
-}
-#indextb tr td table {
-	text-align: center;
-}
-
 </style>
 
 <script type="text/javascript">
@@ -38,6 +28,7 @@
 
 <body>
    <table id="indextb">
+   
    <tr>
      <td>
       <table id="privatetb">
@@ -49,20 +40,10 @@
          <c:forEach var="privateJob" items="${privateJobList}" varStatus="status">
          <div id="indexjobinfo">
            <ul>
-           	<li>
-           	<strong>
-         	
-				<c:out value="${privateJob.companyName}"></c:out>, 
-				
-				<c:out value="${privateJob.designation}"></c:out>, 
-				
-				<c:out value="${privateJob.location}"></c:out>
-				(<c:out value="${privateJob.experiance}"></c:out> years)
-
-			</strong> | 
+           	<li class="title"><c:out value="${privateJob.designation}"></c:out>(<c:out value="${privateJob.experiance}"></c:out> years)</li>
+           	<li class="company"><c:out value="${privateJob.companyName}"></c:out> 
+			<li class="loc"><c:out value="${privateJob.location}"></c:out></li>
 			<a href="javascript:void(0);" onclick="javascript:loadJobDetails(${privateJob.id});">View Details</a>
-			</li> 
-			
 		 </ul>
         </div>
          </c:forEach>
@@ -76,19 +57,14 @@
          <tr>
            <td class="pvtinfo">
            <c:forEach var="publicJob" items="${publicJobList}" varStatus="status">
-           <div id="indexjobinfo" title="View Detail">
-         <ul>
-	           	<li>
-	           	<strong>
-	           		<c:out value="${publicJob.companyName}"></c:out>, 
-	           		<c:out value="${publicJob.designation}"></c:out>, 
-	           		<c:out value="${publicJob.location}"></c:out>
-	         	 (<c:out value="${publicJob.experiance}"></c:out> yrs)
-	         	</strong> | 
-	         	<a href="javascript:void(0);" onclick="javascript:loadJobDetails(${publicJob.id});">View Details</a>
-	         	 </li>
-	        
-	      </ul>
+           <div id="indexjobinfo">
+           <ul>
+           	<li class="title"><c:out value="${publicJob.designation}"></c:out>(<c:out value="${publicJob.experiance}"></c:out> years)</li>
+           	<li class="company"><c:out value="${publicJob.companyName}"></c:out> 
+			<li class="loc"><c:out value="${publicJob.location}"></c:out></li>
+			<a href="javascript:void(0);" onclick="javascript:loadJobDetails(${publicJob.id});">View Details</a>
+		 </ul>
+        </div>
         </div>
         </c:forEach> 
          

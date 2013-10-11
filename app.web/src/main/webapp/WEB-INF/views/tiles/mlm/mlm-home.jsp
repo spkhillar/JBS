@@ -8,12 +8,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>JOBSbySMS-Administration</title>
+<spring:url value="/resources/css/userpage.css" var="resourceUserPageCssUrl"/>
+<link rel="stylesheet" type="text/css" href="${resourceUserPageCssUrl}"/>
 </head>
 <body>
 	
-	<div id="adminDiv" style="width: 80%; height: 500px; margin:auto">
-	<h1> Welcome ${currentLoggedInUser}</h1>
+	<div id="mlmusertable" >
+	
+		<p> Welcome ${currentLoggedInUser}</p>
+	
+	
 	</div>
 </body>
 </html>

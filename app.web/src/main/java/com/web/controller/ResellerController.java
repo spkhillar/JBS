@@ -87,6 +87,7 @@ public class ResellerController extends BaseAuthenticatedController {
     User user = userService.findByUserName(username);
     map.put("currentLoggedInUser", username);
     map.put("currentLoggedInUserId", user.getId());
+
     long creditPointCount = mlmUserCreditPointService.getUserPointCount(user);
     map.put("creditPointCount", creditPointCount);
     return "mlm.home";
@@ -223,11 +224,11 @@ public class ResellerController extends BaseAuthenticatedController {
   @RequestMapping(value = "/redeem/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<RedeemHistory> mlmRedeemRecords(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
     Page<RedeemHistory> redeemHistory = null;
     if (search == true) {
       redeemHistory = redeemHistoryService.findAllByUser(getCurrentUser(), page, rows, sord, sidx);
@@ -241,5 +242,14 @@ public class ResellerController extends BaseAuthenticatedController {
     response.setTotal(Integer.valueOf(redeemHistory.getTotalPages()).toString());
     response.setPage(Integer.valueOf(redeemHistory.getNumber() + 1).toString());
     return response;
+  }
+
+  @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
+  public String changePassword(final ModelMap map, final HttpServletRequest request) {
+    User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
+    map.put("currentLoggedInAdminId", existingUser.getId());
+    UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
+    map.put("registration", userRegistrationForm);
+    return "mlm.changepassword";
   }
 }

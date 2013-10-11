@@ -3,16 +3,20 @@ package com.web.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jpa.entities.SystemConfiguration;
 import com.jpa.entities.User;
@@ -21,8 +25,11 @@ import com.service.CommisionLevelService;
 import com.service.DepositIntimatorService;
 import com.service.SystemConfigurationService;
 import com.service.UserGroupService;
+import com.service.UserService;
 import com.service.util.ApplicationConstants;
 import com.web.form.UserRegistrationForm;
+import com.web.util.DomainObjectMapper;
+import com.web.util.JqGridResponse;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -39,6 +46,9 @@ public class AdminController extends BaseAuthenticatedController {
 
   @Autowired
   private DepositIntimatorService depositIntimatorService;
+
+  @Autowired
+  private UserService userService;
 
   @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
   public String changePassword(final ModelMap map, final HttpServletRequest request) {
@@ -121,9 +131,39 @@ public class AdminController extends BaseAuthenticatedController {
     return "redeem.history.list";
   }
 
+
   @RequestMapping(value = "/view/payment", method = RequestMethod.GET)
   public String viewAllPayment(final ModelMap map) {
     return "payment.list";
+  }
+
+  @RequestMapping(value = "/view/userdetails", produces = "application/json")
+  public @ResponseBody
+  JqGridResponse<User> viewUsers(@RequestParam("_search") final Boolean search,
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
+    long role=2l;
+    Page<User> userList = null;
+    if (search == true) {
+      userList = userService.findByUserRoleId(role, page, rows, sord, sidx);
+    } else {
+      userList = userService.findByUserRoleId(role, page, rows, sord, sidx);
+    }
+    List<Object> list = DomainObjectMapper.listEntities(userList);
+    JqGridResponse<User> response = new JqGridResponse<User>();
+    response.setRows(list);
+    response.setRecords(Long.valueOf(userList.getTotalElements()).toString());
+    response.setTotal(Integer.valueOf(userList.getTotalPages()).toString());
+    response.setPage(Integer.valueOf(userList.getNumber() + 1).toString());
+    return response;
+  }
+
+  @RequestMapping(value = "/view/users", method = RequestMethod.GET)
+  public String viewAllUsers(final ModelMap map) {
+    return "user.list";
   }
 
 }

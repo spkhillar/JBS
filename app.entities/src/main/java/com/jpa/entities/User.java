@@ -259,6 +259,7 @@ public class User implements BaseEntity, java.io.Serializable {
    * 
    * @return the first name
    */
+
   @Column(name = "first_name", length = 250)
   public String getFirstName() {
     return firstName;
@@ -401,7 +402,7 @@ public class User implements BaseEntity, java.io.Serializable {
     return signedForNotification;
   }
 
-  public void setSignedForNotification(boolean signedForNotification) {
+  public void setSignedForNotification(final boolean signedForNotification) {
     this.signedForNotification = signedForNotification;
   }
 
@@ -410,7 +411,7 @@ public class User implements BaseEntity, java.io.Serializable {
     return mlmAccountId;
   }
 
-  public void setMlmAccountId(String mlmAccountId) {
+  public void setMlmAccountId(final String mlmAccountId) {
     this.mlmAccountId = mlmAccountId;
   }
 
@@ -420,7 +421,7 @@ public class User implements BaseEntity, java.io.Serializable {
     return dateOfBirth;
   }
 
-  public void setDateOfBirth(Date dateOfBirth) {
+  public void setDateOfBirth(final Date dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
   }
 
@@ -483,7 +484,7 @@ public class User implements BaseEntity, java.io.Serializable {
    * @param address
    *          the new address
    */
-  public void setAddress(Address address) {
+  public void setAddress(final Address address) {
     this.address = address;
     if (this.address != null) {
       this.address.setUser(this);
@@ -506,7 +507,7 @@ public class User implements BaseEntity, java.io.Serializable {
    * @param userGroupsesForParentGroupId
    *          the new user groupses for parent group id
    */
-  public void setUserGroupsesForParentGroupId(Set<UserGroups> userGroupsesForParentGroupId) {
+  public void setUserGroupsesForParentGroupId(final Set<UserGroups> userGroupsesForParentGroupId) {
     this.userGroupsesForParentGroupId = userGroupsesForParentGroupId;
   }
 
@@ -526,7 +527,7 @@ public class User implements BaseEntity, java.io.Serializable {
    * @param userGroupsesForGroupId
    *          the new user groupses for group id
    */
-  public void setUserGroupsesForGroupId(Set<UserGroups> userGroupsesForGroupId) {
+  public void setUserGroupsesForGroupId(final Set<UserGroups> userGroupsesForGroupId) {
     this.userGroupsesForGroupId = userGroupsesForGroupId;
   }
 
@@ -546,7 +547,7 @@ public class User implements BaseEntity, java.io.Serializable {
    * @param qualifications
    *          the new qualifications
    */
-  public void setQualifications(List<Qualification> qualifications) {
+  public void setQualifications(final List<Qualification> qualifications) {
     this.qualifications = qualifications;
   }
 
@@ -566,7 +567,7 @@ public class User implements BaseEntity, java.io.Serializable {
    * @param skills
    *          the new skills
    */
-  public void setSkill(Skill skill) {
+  public void setSkill(final Skill skill) {
     this.skill = skill;
     if (this.skill != null) {
       this.skill.setUser(this);
@@ -578,7 +579,7 @@ public class User implements BaseEntity, java.io.Serializable {
     return userSecurityQuestion;
   }
 
-  public void setUserSecurityQuestion(UserSecurityQuestion userSecurityQuestion) {
+  public void setUserSecurityQuestion(final UserSecurityQuestion userSecurityQuestion) {
     this.userSecurityQuestion = userSecurityQuestion;
     if (this.userSecurityQuestion != null) {
       this.userSecurityQuestion.setUser(this);

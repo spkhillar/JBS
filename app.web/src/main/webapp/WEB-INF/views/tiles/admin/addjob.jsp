@@ -14,7 +14,7 @@
 input[type="text"],input[type="number"],select,textarea{
     
     padding: 5px;   
-    border: 1px solid #DDDDDD;
+    border: 1px solid green;
     
     /*Applying CSS3 gradient*/
     background: -moz-linear-gradient(center top , #FFFFFF,  #EEEEEE 1px, #FFFFFF 20px);    

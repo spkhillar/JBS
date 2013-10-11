@@ -66,25 +66,36 @@ $(document).ready(function(){
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<div id="demo_drop1">
-  <div id="launcher1_container" style="float: right">
+<div id="mlm" style="text-align: center;">
+ <sec:authorize access="hasAnyRole('MLM_ADMIN','ROLE_MLM')">
+    
+    	Reseller Id:<c:out value="${webUser.mlmId}" />
+    
+ </sec:authorize>
+ </div>
+<div id="demo_drop1" style="float: right">
+   <div id="launcher1_container" style="float: right">
     <button id="launcher1"><c:out value="${webUser.firstName} ${webUser.lastName}"></c:out></button>
   </div>
   <ul id="menu1">
    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
      <li id="opt_1.2">
-    	<a href="${contextPath}/admin/register/mlm/0">Reseller Admin L</a>
+    	<a href="${contextPath}/admin/register/mlm/0">Reseller Admin - Marketing</a>
     </li>
     <li id="opt_1.3">
-    	<a href="${contextPath}/admin/register/mlm/1">Reseller Admin R</a>
+    	<a href="${contextPath}/admin/register/mlm/1">Reseller Admin - Business</a>
     </li>
     </sec:authorize>
-    <sec:authorize access="hasAnyRole('SITE_ADMIN','MLM_ADMIN','ROLE_MLM')">
-    
-    </sec:authorize>
+    <sec:authorize access="hasAnyRole('SITE_ADMIN','ROLE_ADMIN')">
     <li id="opt_1.1">
     	<a href="${contextPath}/admin/changepassword">Change Password</a>
     </li>
+    </sec:authorize>
+    <sec:authorize access="hasAnyRole('ROLE_MLM','MLM_ADMIN')">
+    <li id="opt_1.1">
+    	<a href="${contextPath}/reseller/changepassword">Change Password</a>
+    </li>
+    </sec:authorize>
     <li id="opt_1.4">
     	<a href="${contextPath}/j_spring_security_logout">Logout</a>
     </li>

@@ -105,4 +105,6 @@ public interface UserService extends BaseService<User> {
 
   public User findByMlmAccountId(String mlmAccountId);
 
+  Page<User> findByUserRoleId(Long role, int page, int rows, String sord,String sidx);
+
 }

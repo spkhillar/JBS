@@ -56,9 +56,10 @@ public class PasswordController extends BaseController {
       prepareRenderObject(map);
       return "user.forgotpassword";
     }
-    String changePassword=userService.changePassword(username, userRegistrationForm.getUser().getPassword());
-    map.put("changePassword", changePassword);
-    userRegistrationForm.setChangePassword("3");
+    // String changePassword=userService.changePassword(username, userRegistrationForm.getUser().getPassword());
+    //map.put("changePassword", changePassword);
+    map.put("username", username);
+    userRegistrationForm.setChangePassword("4");
     return "user.forgotpassword";
   }
 
