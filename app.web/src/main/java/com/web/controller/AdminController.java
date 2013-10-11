@@ -145,12 +145,12 @@ public class AdminController extends BaseAuthenticatedController {
     @RequestParam(value = "rows", required = false) final Integer rows,
     @RequestParam(value = "sidx", required = false) final String sidx,
     @RequestParam(value = "sord", required = false) final String sord) {
-    long role=2l;
+
     Page<User> userList = null;
     if (search == true) {
-      userList = userService.findByUserRoleId(role, page, rows, sord, sidx);
+      userList = userService.findALL(page, rows, sord, sidx);
     } else {
-      userList = userService.findByUserRoleId(role, page, rows, sord, sidx);
+      userList = userService.findALL(page, rows, sord, sidx);
     }
     List<Object> list = DomainObjectMapper.listEntities(userList);
     JqGridResponse<User> response = new JqGridResponse<User>();

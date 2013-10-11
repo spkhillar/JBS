@@ -75,6 +75,7 @@ public class User implements BaseEntity, java.io.Serializable {
   @JsonProperty
   private String phone;
 
+  @JsonProperty
   private String mlmAccountId;
 
   /** The created at. */

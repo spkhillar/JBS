@@ -12,7 +12,7 @@
 					url : actionUrl,
 					datatype : 'json',
 					mtype : 'GET',
-					colNames : [ 'Id', 'First Name', 'Last Name','Email', 'Phone','Created Date'],
+					colNames : [ 'Id', 'First Name', 'Last Name','Email','Phone','Created Date'],
 					colModel : [ {
 						name : 'id',
 						index : 'id',
@@ -94,7 +94,7 @@
 <body>
 
 <div id="depositListDiv">
- <h4 style="padding: 5px">Home | Payments </h4><br/>
+ <h4 style="padding: 5px">Home | Users</h4><br/>
  <hr color="red"/>
 		<table id='grid'></table>
 		<div id='pager'></div>
