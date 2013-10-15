@@ -31,7 +31,6 @@ $(document).ready(function(){
 	$("#depositIntimator").validate( {
 	    success : "valid",
 	    ignoreTitle : true,
-	    
 	    rules : {
 	    	 "depositIntimator.transactedDate" : {
   		        required : true
@@ -39,7 +38,8 @@ $(document).ready(function(){
   		      
   		    "depositIntimator.amountDeposited" : {
   		    	required : true,
-  		    	 number:true
+  		    	 number:true,
+  		    	verifyDepositAmount:true
   		    },
 	    	    		
 	    	"receiverResellerId" : {
@@ -64,9 +64,7 @@ $(document).ready(function(){
  		      "depositIntimator.transactionNumber":{
  		    	 required:function(element){
  	    			return $("#paymentMode option:selected").val()=="ONLINE"
- 	    		},
-  		    	 number:true,
-  		    	 alphanumeric:true
+ 	    		}
  		    },
  		   "depositIntimator.chequeNumber" : {
  		    	number:true,
@@ -123,7 +121,33 @@ jQuery.validator.addMethod("lettersonly", function(value, element) {
 
 jQuery.validator.addMethod("alphanumeric", function(value, element) {
 	  return this.optional(element) || /^[a-zA-Z0-9]+$/i.test(value);
-	}, "Alphabets and Numbers only applicable"
+	}, "Alphabets and Numbers only applicable");
+	
+jQuery.validator.addMethod('verifyDepositAmount', function(inputValue) {
+	var valid = false;
+	var correct="";
+	correct = checkDepositAmount(inputValue);
+	if(correct == ""){
+		valid = true;
+	}
+	console.log('..verifyDepositAmount...',correct);
+	return valid;
+}, "Amount should be in multiples of base price (600) as notified.");
+
+function checkDepositAmount(value){
+	var retValue="";
+	$.ajax({
+		type : "get",
+		url : webContextPath + '/admin/verify/'+value,
+		async : false,
+		success : function(data, textStatus) {
+			console.log("...checkDepositAmount...",data);
+			retValue = data;
+		}
+	});
+	
+	return retValue;
+}
 	
 </script>
 </head>

@@ -19,7 +19,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -255,7 +254,7 @@ public class UserServiceImpl implements UserService {
     User savedUser = userDAO.findOne(user.getId());
 
     BeanUtils.copyProperties(user, savedUser, new String[] { "id", "roleId", "password", "userRole", "version",
-    "createdAt" });
+        "createdAt" });
 
     if (StringUtils.isNotBlank(user.getPassword())) {
       boolean samePassword =
@@ -368,16 +367,8 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public Page<User> findByUserRoleId(final Long role,final int page, final int rows, final String sord,final String sidx) {
-    // StringBuilder query = new StringBuilder("from User u, user_role ur where ");
-    // Map<String, Object> params = new HashMap<String, Object>();
-    // query.append("u.id =ur.user_id and ur.role_id="+role);
-    // List<User> userList = genericQueryExecutorDAO.executeProjectedQuery(query.toString(), params);
-    Pageable pageable=ServiceUtil.getPage(page, rows,sord,sidx);
-    return userDAO.findByRole(role, pageable);
+  public Page<User> findByRole(long roleId, int page, int rows, String sortOrder, String orderByField) {
+    return userDAO.findByRole(roleId, ServiceUtil.getPage(page, rows, sortOrder, orderByField));
   }
-
-
-
 
 }

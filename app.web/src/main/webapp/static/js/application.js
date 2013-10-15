@@ -130,10 +130,9 @@ function checkAndApplyJob(jobId){
 }
 
 function triggerCommision(){
-	alert("...triggered....");
-	
+	//alert("...triggered....");
 	 $.ajax({
-		    url: webContextPath+"/admin/commision/06-10-2013",
+		    url: webContextPath+"/admin/commision/11-10-2013",
 		    success: function(data){
 		    	//redirect to the page where he can apply on company website
 		    	console.log('...user in system...',data);

@@ -6,50 +6,64 @@
 <script type='text/javascript'>
 
 	$(function() {
-		var actionUrl = webContextPath + "/accounts/deposit/records";
+		var actionUrl = webContextPath + "/user/normal";
 		$("#grid").jqGrid(
 				{
 					url : actionUrl,
 					datatype : 'json',
 					mtype : 'GET',
-					colNames : [ 'Id','Date','Particular','Username','Reseller ID','Debit','Commision Payed','Commission Incured'],
+					colNames : [ 'Id','Username','Created On','First Name', 'Last Name','Email','Phone','Date of Birth','City','State','Pin'],
 					colModel : [ {
 						name : 'id',
 						index : 'id',
 						width : 55,
 						hidden : true
 					},{
+						name : 'userName',
+						index : 'userName',
+						width : 60,
+						
+					},{
 						name : 'createdAt',
 						index : 'createdAt',
 						width : 60,
 						
 					},{
-						name : 'particular',
-						index : 'particular',
+						name : 'firstName',
+						index : 'firstName',
 						width : 60,
 						
 					},{
-						name : 'user.userName',
-						index : 'user.userName',
+						name : 'lastName',
+						index : 'lastName',
+						width : 60
+					},{
+						name : 'email',
+						index : 'email',
 						width : 60,
 						
 					},{
-						name : 'user.mlmAccountId',
-						index : 'user.mlmAccountId',
+						name : 'phone',
+						index : 'phone',
 						width : 60,
 						
 					},{
-						name : 'debit',
-						index : 'debit',
+						name : 'dateOfBirth',
+						index : 'dateOfBirth',
+						width : 60
+					},{
+						name : 'address.city',
+						index : 'address.city',
+						width : 60,
+						
+					},{
+						name : 'address.state',
+						index : 'address.state',
 						width : 60,
 						
 					}, {
-						name : 'creditCommision',
-						index : 'creditCommision',
-						width : 60
-					},{
-						name : 'creditToRoot',
-						index : 'creditToRoot',
+						name : 'address.pin',
+						index : 'address.pin',
 						width : 60
 					}					
 					  ],
@@ -63,7 +77,7 @@
 					sortname : 'createdAt',
 					viewrecords : true,
 					sortorder : "desc",
-					caption : "Commssion Payed",
+					caption : "Users",
 					emptyrecords : "Empty records",
 					loadonce : false,
 					hidegrid : false,
@@ -100,14 +114,10 @@
 <body>
 
 <div id="depositListDiv">
- <h4 style="padding: 5px">Home | Account | Incentive </h4><br/>
+ <h4 style="padding: 5px">Home | Users | Resellers </h4><br/>
  <hr color="red"/>
 		<table id='grid'></table>
 		<div id='pager'></div>
 	</div>
-	
-<div id="viewDepositdiv" title="Points or Commission History">
-  </div>	
-</body>
 
 </html>

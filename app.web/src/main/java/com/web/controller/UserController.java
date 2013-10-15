@@ -274,4 +274,46 @@ public class UserController extends AbstractJqGridFilterController {
     return getHomePage(map);
   }
 
+  @RequestMapping(value = "/resellers", produces = "application/json")
+  public @ResponseBody
+  JqGridResponse<User> resellers(@RequestParam("_search") final Boolean search,
+      @RequestParam(value = "filters", required = false) final String filters,
+      @RequestParam(value = "page", required = false) final Integer page,
+      @RequestParam(value = "rows", required = false) final Integer rows,
+      @RequestParam(value = "sidx", required = false) final String sidx,
+      @RequestParam(value = "sord", required = false) final String sord) {
+
+    return fetchUserListByRole(search, filters, page, rows, sidx, sord, 3);
+  }
+
+  @RequestMapping(value = "/normal", produces = "application/json")
+  public @ResponseBody
+  JqGridResponse<User> normalUsers(@RequestParam("_search") final Boolean search,
+      @RequestParam(value = "filters", required = false) final String filters,
+      @RequestParam(value = "page", required = false) final Integer page,
+      @RequestParam(value = "rows", required = false) final Integer rows,
+      @RequestParam(value = "sidx", required = false) final String sidx,
+      @RequestParam(value = "sord", required = false) final String sord) {
+
+    return fetchUserListByRole(search, filters, page, rows, sidx, sord, 2);
+  }
+
+  private JqGridResponse<User> fetchUserListByRole(final Boolean search, final String filters, final Integer page,
+      final Integer rows, final String sidx, final String sord, long roleId) {
+    Page<User> users = null;
+    /*
+     * if (search == true) { users = userService.findALL(page, rows,
+     * filterPredicate, paramObject); } else { users = userService.findALL(page,
+     * rows, sord, sidx); }
+     */
+    users = userService.findByRole(roleId, page, rows, sord, sidx);
+    List<Object> list = DomainObjectMapper.listEntities(users);
+    JqGridResponse<User> response = new JqGridResponse<User>();
+    response.setRows(list);
+    response.setRecords(Long.valueOf(users.getTotalElements()).toString());
+    response.setTotal(Integer.valueOf(users.getTotalPages()).toString());
+    response.setPage(Integer.valueOf(users.getNumber() + 1).toString());
+    return response;
+  }
+
 }

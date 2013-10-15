@@ -97,6 +97,8 @@ public class User implements BaseEntity, java.io.Serializable {
   private Long roleId;
 
   /** The address. */
+
+  @JsonProperty
   private Address address;
 
   private UserSecurityQuestion userSecurityQuestion;

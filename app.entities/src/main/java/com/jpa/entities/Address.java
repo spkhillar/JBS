@@ -14,6 +14,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonMethod;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -22,21 +26,30 @@ import org.hibernate.annotations.Parameter;
  */
 @Entity
 @Table(name = "address")
+@JsonAutoDetect(JsonMethod.NONE)
 public class Address implements BaseEntity, java.io.Serializable {
 
   /**
    * 
    */
   private static final long serialVersionUID = -6009026565404413496L;
+
+  @JsonIgnore
   private Long id;
+
+  @JsonIgnore
   private Integer version;
   private String addressLine1;
   private String addressLine2;
+  @JsonProperty
   private String city;
+  @JsonProperty
   private String state;
+  @JsonProperty
   private String pin;
   private Date createdAt = new Date();
   private Date updatedAt;
+  @JsonIgnore
   private User user;
 
   public Address() {}

@@ -166,12 +166,15 @@
 		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/payment-list.jsp" />
 	</definition>
 	
+	<definition name="admin.reseller.user.list" extends="admin.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/reseller-user-list.jsp" />
+	</definition>
+	
+	<definition name="admin.normal.user.list" extends="admin.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/normal-user-list.jsp" />
+	</definition>
+	
 	<definition name="mlm.changepassword" extends="mlm.base.definition">
 		<put-attribute name="body" value="/WEB-INF/views/jsp/change-password.jsp" />
 	</definition>
-	
-	<definition name="user.list" extends="admin.base.definition">
-		<put-attribute name="body" value="/WEB-INF/views/tiles/admin/user-list.jsp" />
-	</definition>
-	
 </tiles-definitions>

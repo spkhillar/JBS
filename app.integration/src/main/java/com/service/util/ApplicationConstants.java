@@ -35,6 +35,6 @@ public interface ApplicationConstants {
 
   String MIN_USER_REDEEM_POINTS_CHECK = "User-redeem-points";
 
-
+  String MLM_ACCOUNTS_PARTICULAR = "RESELLER COMMISSION";
 
 }

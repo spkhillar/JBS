@@ -56,7 +56,7 @@ $(document).ready(function(){
   		        required : true,
   		        userNameCheck: true,
   		        minlength: 4,
-  		        maxlength: 10,
+  		        maxlength: 20,
   		        alphanumeric: true
   		      },
   			"user.email" : {
@@ -65,7 +65,7 @@ $(document).ready(function(){
   		   },
   			"user.password" : {
   		        required : true,
-  		        minlength: 6,
+  		        minlength: 4,
   		        maxlength: 20,
   		      alphanumeric: true
   		        
@@ -102,12 +102,12 @@ $(document).ready(function(){
   			"user.phone" : {
   		        required : true,
   		        number:true,
-  		        minlength: 10
+  		        maxlength: 10
   		   },
   			"user.address.pin" : {
   		        required : true,
   		        number:true,
-  		        minlength:5
+  		        maxlength:6
   		   },
   			"user.skill.skills" : {
   		        required : true

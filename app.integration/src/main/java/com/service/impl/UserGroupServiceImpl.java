@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jpa.entities.Accounts;
 import com.jpa.entities.CommisionLevel;
 import com.jpa.entities.SystemConfiguration;
 import com.jpa.entities.User;
@@ -25,6 +26,7 @@ import com.jpa.entities.enums.UserPosition;
 import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.jpa.repositories.UserDAO;
 import com.jpa.repositories.UserGroupsDAO;
+import com.service.AccountsService;
 import com.service.CommisionLevelService;
 import com.service.SystemConfigurationService;
 import com.service.UserGroupService;
@@ -54,6 +56,9 @@ public class UserGroupServiceImpl implements UserGroupService {
 
   @Autowired
   private UserPointsHistoryService userPointsHistoryService;
+
+  @Autowired
+  private AccountsService accountsService;
 
   @Override
   @Transactional
@@ -214,6 +219,7 @@ public class UserGroupServiceImpl implements UserGroupService {
         int points = addUserPoints(parentUser, commsionPercentage, subscriptionBasePrice, true);
         logger.info("...Allocating commision to admin..." + parentUser.getUserName() + " @ " + commsionPercentage
             + ". Points Collected =" + points);
+        createAccountsRecord(userGroup.getUserByGroupId(), commsionPercentage, totalPaid, subscriptionBasePrice);
       } else if (parentUser.getUserGroupsesForParentGroupId().size() == 2 && currentLevel > 0) {
         commisionLevel = commisionLevelService.findByLevel(userLevel);
         commsionPercentage = commisionLevel.getPercentage();
@@ -235,6 +241,18 @@ public class UserGroupServiceImpl implements UserGroupService {
     } while (currentLevel > 0 && userLevel < 19);
 
     logger.info("----ends-----" + userGroup.getUserByGroupId().getUserName());
+  }
+
+  private void createAccountsRecord(User user, BigDecimal commsionPercentage, BigDecimal totalPaid,
+      int subscriptionBasePrice) {
+    BigDecimal debit = BigDecimal.valueOf(subscriptionBasePrice);
+    BigDecimal creditCommision = totalPaid.divide(BigDecimal.valueOf(100l)).multiply(debit);
+    BigDecimal creditToRoot = debit.subtract(creditCommision);
+    Accounts accounts =
+        new Accounts(user, ApplicationConstants.MLM_ACCOUNTS_PARTICULAR, debit, creditCommision, creditToRoot,
+          new Date());
+    accountsService.save(accounts);
+    logger.info("Created Accounts record from user" + user.getUserName() + ". Accounts=" + accounts);
   }
 
   private int addUserPoints(User parentUser, BigDecimal commsionPercentage, int subscriptionBasePrice, boolean enabled) {

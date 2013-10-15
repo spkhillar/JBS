@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jpa.entities.UserPointsHistory;
+import com.jpa.entities.Accounts;
+import com.service.AccountsService;
 import com.service.UserPointsHistoryService;
 import com.web.util.DomainObjectMapper;
 import com.web.util.JqGridResponse;
@@ -23,6 +24,9 @@ public class AccountsController extends BaseAuthenticatedController {
   @Autowired
   private UserPointsHistoryService userPointsHistoryService;
 
+  @Autowired
+  private AccountsService accountsService;
+
   @RequestMapping(value = "/view/creditpoints", method = RequestMethod.GET)
   public String viewAllDeposit(final ModelMap map) {
     return "admin.creditpoint.list";
@@ -30,25 +34,25 @@ public class AccountsController extends BaseAuthenticatedController {
 
   @RequestMapping(value = "/deposit/records", produces = "application/json")
   public @ResponseBody
-  JqGridResponse<UserPointsHistory> mlmCreditRecords(@RequestParam("_search") final Boolean search,
+  JqGridResponse<Accounts> mlmCreditRecords(@RequestParam("_search") final Boolean search,
       @RequestParam(value = "filters", required = false) final String filters,
       @RequestParam(value = "page", required = false) final Integer page,
       @RequestParam(value = "rows", required = false) final Integer rows,
       @RequestParam(value = "sidx", required = false) final String sidx,
       @RequestParam(value = "sord", required = false) final String sord) {
-    Page<UserPointsHistory> mlmCreditPoints = null;
+    Page<Accounts> accountRecords = null;
 
     if (search == true) {
-      mlmCreditPoints = userPointsHistoryService.findSystemIncentivePoint(page, rows, sord, sidx);
+      accountRecords = accountsService.findAll(page, rows, sord, sidx);
     } else {
-      mlmCreditPoints = userPointsHistoryService.findSystemIncentivePoint(page, rows, sord, sidx);
+      accountRecords = accountsService.findAll(page, rows, sord, sidx);
     }
-    List<Object> list = DomainObjectMapper.listEntities(mlmCreditPoints);
-    JqGridResponse<UserPointsHistory> response = new JqGridResponse<UserPointsHistory>();
+    List<Object> list = DomainObjectMapper.listEntities(accountRecords);
+    JqGridResponse<Accounts> response = new JqGridResponse<Accounts>();
     response.setRows(list);
-    response.setRecords(Long.valueOf(mlmCreditPoints.getTotalElements()).toString());
-    response.setTotal(Integer.valueOf(mlmCreditPoints.getTotalPages()).toString());
-    response.setPage(Integer.valueOf(mlmCreditPoints.getNumber() + 1).toString());
+    response.setRecords(Long.valueOf(accountRecords.getTotalElements()).toString());
+    response.setTotal(Integer.valueOf(accountRecords.getTotalPages()).toString());
+    response.setPage(Integer.valueOf(accountRecords.getNumber() + 1).toString());
     return response;
   }
 

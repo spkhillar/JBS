@@ -91,6 +91,18 @@
             <li></li>
             </ul>
           </li>
+          
+           <li>
+          <a class="fNiv" >Users</a>
+          <ul>
+            <li class="arrow"></li>
+            <li>
+              <a class="notifylink1" href="${contextPath}/admin/view/reseller/list">Resellers</a> 
+            </li>
+            <li>
+              <a class="notifylink2" href="${contextPath}/admin/view/user/list">Job Seekers</a> </li>
+            </ul>
+          </li>
         
        <!--  <li>
           <a class="fNiv">Genealogy</a>

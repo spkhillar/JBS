@@ -1,5 +1,6 @@
 package com.web.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jpa.entities.DepositIntimator;
+import com.jpa.entities.SystemConfiguration;
 import com.service.DepositIntimatorService;
 import com.service.util.ApplicationConstants;
 import com.web.form.ResellerForm;
@@ -72,5 +74,18 @@ public class DepositIntimatorController extends BaseAuthenticatedController {
       @PathVariable final long depositorIntimatorId, @PathVariable final int type, final ModelMap map) {
     depositIntimatorService.approveOrRejectDepositIntimator(depositorIntimatorId, type, memo);
     return "done with approval";
+  }
+
+  @RequestMapping(value = "/verify/{depositorAmount}", method = RequestMethod.GET)
+  @ResponseBody
+  public String verifyAmount(@PathVariable final BigDecimal depositorAmount, final ModelMap map) {
+    SystemConfiguration systemConfiguration =
+        systemConfigurationService.findByKey(ApplicationConstants.SUBSCRIPTION_BASE_PRICE);
+    BigDecimal divisor = new BigDecimal(systemConfiguration.getValue());
+    BigDecimal reminder = depositorAmount.remainder(divisor);
+    if (reminder.intValue() > 0) {
+      return "Amount should be in multiples of " + systemConfiguration.getValue() + ".";
+    }
+    return "";
   }
 }

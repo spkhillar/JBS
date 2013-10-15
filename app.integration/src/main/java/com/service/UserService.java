@@ -105,6 +105,19 @@ public interface UserService extends BaseService<User> {
 
   public User findByMlmAccountId(String mlmAccountId);
 
-  Page<User> findByUserRoleId(Long role, int page, int rows, String sord,String sidx);
+  /**
+   * Find all.
+   * 
+   * @param page
+   *          the page
+   * @param rows
+   *          the rows
+   * @param sortOrder
+   *          the sort order
+   * @param orderByField
+   *          the order by field
+   * @return the page
+   */
+  Page<User> findByRole(long roleId, int page, int rows, String sortOrder, String orderByField);
 
 }

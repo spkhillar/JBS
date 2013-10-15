@@ -36,6 +36,5 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>	
-	<task:executor id="executorThreadPoolHandler" pool-size="5-25"  queue-capacity="100"  rejection-policy="CALLER_RUNS"/>
 	
 </beans>
