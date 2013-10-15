@@ -60,7 +60,7 @@
 					} ],
 					postData : {},
 					rowNum : 20,
-					rowList : [ 20, 30, 40,30 ],
+					rowList : [ 20, 30, 40],
 					height : 400,
 					width :1070,
 					rownumbers : true,
