@@ -84,7 +84,7 @@ $(document).ready(function(){
 	    	<a href="${contextPath}/admin/changepassword">Change Password</a>
 	    </li>
     </sec:authorize>
-    <sec:authorize access="hasAnyRole('MLM_ADMIN')">
+    <sec:authorize access="hasAnyRole('MLM_ADMIN','ROLE_MLM')">
 	    <li id="opt_1.1">
 	    	<a href="${contextPath}/admin/changepassword/reseller">Change Password</a>
 	    </li>
