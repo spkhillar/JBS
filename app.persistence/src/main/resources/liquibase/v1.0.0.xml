@@ -737,4 +737,10 @@
 		</insert>
 	</changeSet>
 	
+	<changeSet author="shiv" id="1376829106667-20">
+	    <update tableName="redeem_history">
+	        <column name="redeem_type" valueNumeric="0"></column>
+	    </update>
+	</changeSet>
+	
 </databaseChangeLog>

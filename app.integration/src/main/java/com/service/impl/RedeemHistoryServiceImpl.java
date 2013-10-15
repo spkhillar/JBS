@@ -17,6 +17,7 @@ import com.jpa.entities.Payment;
 import com.jpa.entities.RedeemHistory;
 import com.jpa.entities.User;
 import com.jpa.entities.enums.RedeemStatus;
+import com.jpa.entities.enums.RedeemType;
 import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.jpa.repositories.RedeemHistoryDAO;
 import com.service.PaymentService;
@@ -47,11 +48,14 @@ public class RedeemHistoryServiceImpl implements RedeemHistoryService {
   @Transactional(readOnly = true)
   public int sumOfPointBy(final User user) {
     String ejbql =
-        "select sum(rh.points) from RedeemHistory rh where rh.user.id = :userId and (rh.status =:status1 or rh.status =:status2)";
+        "select sum(rh.points) from RedeemHistory rh where rh.user.id = :userId and (rh.status =:status1 or rh.status =:status2) "
+            + "and (rh.redeemType =:redeemType1 or rh.redeemType =:redeemType2)";
     Map<String, Object> params = new HashMap<String, Object>(1);
     params.put("userId", user.getId());
     params.put("status1", RedeemStatus.NEW);
     params.put("status2", RedeemStatus.APPROVED);
+    params.put("redeemType1", RedeemType.COMMISSION);
+    params.put("redeemType2", RedeemType.COMMISSION_TRANSFER);
     List<Long> list = genericQueryExecutorDAO.executeProjectedQuery(ejbql, params);
     if (list.get(0) == null) {
       return 0;
@@ -99,7 +103,23 @@ public class RedeemHistoryServiceImpl implements RedeemHistoryService {
           new Payment(savedRedeemHistory, BigDecimal.valueOf(savedRedeemHistory.getPoints()), null, new Date());
       paymentService.save(payment);
     }
-
   }
 
+  @Override
+  @Transactional(readOnly = true)
+  public int sumOfPointBalanceBy(final User user) {
+    String ejbql =
+        "select sum(rh.points) from RedeemHistory rh where rh.user.id = :userId and (rh.status =:status1 or rh.status =:status2) "
+            + "and (rh.redeemType =:redeemType1)";
+    Map<String, Object> params = new HashMap<String, Object>(1);
+    params.put("userId", user.getId());
+    params.put("status1", RedeemStatus.NEW);
+    params.put("status2", RedeemStatus.APPROVED);
+    params.put("redeemType1", RedeemType.DEPOSIT_TRANSFER);
+    List<Long> list = genericQueryExecutorDAO.executeProjectedQuery(ejbql, params);
+    if (list.get(0) == null) {
+      return 0;
+    }
+    return list.get(0).intValue();
+  }
 }

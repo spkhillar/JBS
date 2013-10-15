@@ -25,6 +25,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 import com.jpa.entities.enums.ModeOfRedemption;
 import com.jpa.entities.enums.RedeemStatus;
+import com.jpa.entities.enums.RedeemType;
 
 /**
  * RedeemHistory
@@ -55,6 +56,7 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
   private Date createdAt = new Date();
   private Date updatedAt;
   private Set<Payment> payments = new HashSet<Payment>(0);
+  private RedeemType redeemType = RedeemType.COMMISSION;
 
   public RedeemHistory() {}
 
@@ -176,6 +178,16 @@ public class RedeemHistory implements BaseEntity, java.io.Serializable {
 
   public void setPayments(final Set<Payment> payments) {
     this.payments = payments;
+  }
+
+  @Enumerated
+  @Column(name = "redeem_type", nullable = false, length = 100)
+  public RedeemType getRedeemType() {
+    return redeemType;
+  }
+
+  public void setRedeemType(RedeemType redeemType) {
+    this.redeemType = redeemType;
   }
 
   @Override

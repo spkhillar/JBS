@@ -182,7 +182,7 @@ public class ResellerController extends BaseAuthenticatedController {
   @RequestMapping(value = "/view/creditpoints", method = RequestMethod.GET)
   public String viewAllDeposit(final ModelMap map) {
     User user = getCurrentUser();
-    int userTotalPoints = userPointsHistoryService.getUserTotalPoint(user);
+    int userTotalPoints = userPointsHistoryService.getUserTotalCommsionPoint(user);
     map.put("userTotalPoints", userTotalPoints);
     SystemConfiguration systemConfiguration =
         systemConfigurationService.findByKey(ApplicationConstants.MIN_USER_REDEEM_POINTS_CHECK);
@@ -198,7 +198,7 @@ public class ResellerController extends BaseAuthenticatedController {
   @RequestMapping(value = "/redeem/totalpoints", method = RequestMethod.GET)
   public String redeemPoints(final ModelMap map) {
     User user = getCurrentUser();
-    int userTotalPoints = userPointsHistoryService.getUserTotalPoint(user);
+    int userTotalPoints = userPointsHistoryService.getUserTotalCommsionPoint(user);
     map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "create");
     map.put("userTotalPoints", userTotalPoints);
     map.put("resellerRedeemForm", new RedeemHistory());

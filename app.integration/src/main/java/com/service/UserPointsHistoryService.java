@@ -16,7 +16,7 @@ public interface UserPointsHistoryService {
 
   public Page<UserPointsHistory> findSystemIncentivePoint(int page, int rows, String sord, String sidx);
 
-  public int getUserTotalPoint(User user);
+  public int getUserTotalCommsionPoint(User user);
 
   public Page<UserPointsHistory> findUserPointByUserName(User user, Pageable page);
 

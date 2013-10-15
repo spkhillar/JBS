@@ -16,4 +16,6 @@ public interface DepositIntimatorService {
   public void approveOrRejectDepositIntimator(long depositorIntimatorId, int type, String memo);
 
   public int calculateTotalSumForDepositIntimatorUser(User user);
+
+  public int getBalanceDeposit(User user);
 }

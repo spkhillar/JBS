@@ -44,10 +44,9 @@ public class UserPointsHistoryServiceImpl implements UserPointsHistoryService {
   @Override
   @Transactional(readOnly = true)
   public int getLastUserPointTotal(final User user) {
-    // Pageable pageable = ServiceUtil.getPage(1, 1, "desc", "id");
     String ejbql =
-        "select uph.total from UserPointsHistory uph where uph.id = (select max(uph1.id) from UserPointsHistory uph1 where uph1.user.id=:userId)";
-
+        "select uph.total from UserPointsHistory uph where uph.id = "
+            + "(select max(uph1.id) from UserPointsHistory uph1 where uph1.user.id=:userId)";
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("userId", user.getId());
     List<Integer> list = genericQueryExecutorDAO.executeProjectedQuery(ejbql, params);
@@ -55,11 +54,6 @@ public class UserPointsHistoryServiceImpl implements UserPointsHistoryService {
       return 0;
     }
     return list.get(0);
-    /*
-     * Page<UserPointsHistory> list = userPointsHistoryDAO.findByUser(user,
-     * pageable); if (list.getTotalElements() == 0l) { return 0; }
-     */
-    // return list.iterator().next().getTotal();
   }
 
   @Override
@@ -82,7 +76,7 @@ public class UserPointsHistoryServiceImpl implements UserPointsHistoryService {
 
   @Override
   @Transactional(readOnly = true)
-  public int getUserTotalPoint(final User user) {
+  public int getUserTotalCommsionPoint(final User user) {
     int totalPoints = getLastUserPointTotal(user);
     int totalRedeemPoints = reedeHistoryService.sumOfPointBy(user);
     return totalPoints - totalRedeemPoints;

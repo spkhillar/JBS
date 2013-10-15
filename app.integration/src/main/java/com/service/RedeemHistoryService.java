@@ -19,4 +19,6 @@ public interface RedeemHistoryService {
 
   public void approveOrRejectNotification(long id, int approval);
 
+  public int sumOfPointBalanceBy(User user);
+
 }

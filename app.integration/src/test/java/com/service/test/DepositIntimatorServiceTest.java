@@ -18,6 +18,6 @@ public class DepositIntimatorServiceTest extends BaseServiceTest {
   @Test
   public void testFindAll() {
     User user = userService.findByUserName("root");
-    depositIntimatorService.calculateTotalSumForDepositIntimatorUser(user);
+    depositIntimatorService.getBalanceDeposit(user);
   }
 }

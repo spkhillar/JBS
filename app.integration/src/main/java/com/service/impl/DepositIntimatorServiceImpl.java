@@ -19,6 +19,7 @@ import com.jpa.repositories.DepositIntimatorDAO;
 import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.service.DepositIntimatorService;
 import com.service.MlmUserCreditPointService;
+import com.service.RedeemHistoryService;
 import com.service.util.ServiceUtil;
 
 @Service("depositIntimatorService")
@@ -32,6 +33,9 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
 
   @Autowired
   private GenericQueryExecutorDAO genericQueryExecutorDAO;
+
+  @Autowired
+  private RedeemHistoryService redeemHistoryService;
 
   @Override
   @Transactional
@@ -75,9 +79,13 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
   @Transactional(readOnly = true)
   @Override
   public int calculateTotalSumForDepositIntimatorUser(User user) {
-    String ejbql = "select sum(di.amountDeposited) from DepositIntimator di where di.userByUserId.id=:userId";
+    String ejbql =
+        "select sum(di.amountDeposited) from DepositIntimator di where di.userByUserId.id=:userId and "
+            + "(di.status =:status1 or di.status =:status2)";
     Map<String, Object> params = new HashMap<String, Object>(1);
     params.put("userId", user.getId());
+    params.put("status1", DepositIntimatorStatus.NEW);
+    params.put("status2", DepositIntimatorStatus.APPROVED);
     List<BigDecimal> list = genericQueryExecutorDAO.executeProjectedQuery(ejbql, params);
     if (list.get(0) == null) {
       return 0;
@@ -85,4 +93,11 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
     return list.get(0).intValue();
   }
 
+  @Transactional(readOnly = true)
+  @Override
+  public int getBalanceDeposit(User user) {
+    int total = calculateTotalSumForDepositIntimatorUser(user);
+    int redeemed = redeemHistoryService.sumOfPointBalanceBy(user);
+    return total - redeemed;
+  }
 }

@@ -1214,4 +1214,14 @@
 			<append value=" after description" />
 		</modifySql>   
     </changeSet>
+     <changeSet author="shiv" id="1367592120330-58">
+		<addColumn tableName="redeem_history">
+		    <column name="redeem_type" type="INT">
+		        <constraints nullable="false" />
+		    </column>
+		</addColumn>
+		<modifySql dbms="mysql">
+			<append value=" after status" />
+		</modifySql>   
+    </changeSet>
 </databaseChangeLog>
