@@ -192,7 +192,7 @@ input[type="text, number"]:focus
 </c:otherwise>
 </c:choose>
 <form:form name="depositIntimator" id="depositIntimator" commandName="depositIntimator" enctype="multipart/form-data" method="POST">
-<table border="0" style="margin:auto; width:1100px">
+<table id="paymenttb" style="margin:auto; width:1100px">
   <tr>
     <td scope="col" width="48"><strong id="h3">Payment Intimator</strong><br/>
      

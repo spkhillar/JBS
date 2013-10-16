@@ -177,11 +177,11 @@ $(document).ready(function(){
         </td>
         </tr>
       <tr>
-        <td>Enter Security Question</td>
+        <td>Enter Security Question<em>*</em></td>
         <td><form:select path="securityQuestion" items="${securityQuestions}" ></form:select></td>
       </tr>
       <tr>
-        <td>Enter your security answer</td>
+        <td>Enter your security answer<em>*</em></td>
         <td><form:input path="securityAnswer" /></td>
       </tr>
       <tr>

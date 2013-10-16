@@ -28,7 +28,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
      <div >
        <c:forEach var="job" items="${jobList}" varStatus="status">
-         <div >
+        <div>
          <table width="100%" border="0" id="userjobinfo">
           <tr>
               <td width="101" scope="col">Designation</td>

@@ -152,7 +152,7 @@
 		<div id='pager'></div>
 	</div>
 	
-<div id="viewDepositdiv" title="Deposit Notification">
+<div id="viewDepositdiv" title="Deposit Notification" style="margin:auto; width:80%">
   </div>	
 </body>
 </html>

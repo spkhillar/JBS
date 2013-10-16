@@ -85,7 +85,7 @@ width:1100px;
 	margin:auto;
 	
 }
-#jobListDiv,#commissionListDiv,#systemConfigDiv,#depositListDiv{
+#jobListDiv,#commissionListDiv,#systemConfigDiv,#depositListDiv,#paymenttb{
 	
 	width:1100px;
 	border-radius: 3px 3px 3px 3px;
@@ -211,5 +211,6 @@ table.paymentTable{
 	border-radius: 12px 12px 12px 12px;
 	padding: 5px;
 }
+
 
 

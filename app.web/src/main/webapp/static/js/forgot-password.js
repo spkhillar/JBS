@@ -16,6 +16,10 @@ $(document).ready(function(){
   		        required : true,
   		        email:true
   		   },
+ 			
+ 			"securityQuestion" : {
+ 		        required : true
+ 		   },
   			
   			"securityAnswer" : {
   		        required : true
