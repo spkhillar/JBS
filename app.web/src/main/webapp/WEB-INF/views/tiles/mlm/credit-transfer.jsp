@@ -31,6 +31,7 @@ function prev1(){
 	$('#thirdDiv').hide();
 }
 function submitCredit(){
+	
 	validateB4SubmitCredit();
 	console.log('Done');
 }
@@ -129,7 +130,11 @@ function initiateCreditTransfer(depositAmount,commissionAmount){
 		}
 	});
 	if(retValue == ""){
-		return true;
+		
+		$('#firstDiv').hide();
+		$('#secondDiv').hide();
+		$('#thirdDiv').hide();
+		$('#fourthDiv').show();
 	}else{
 		showToastErrorMessage(retValue);
 	}
@@ -159,59 +164,146 @@ function checkForNumeric(value){
 	 return /^[0-9]+$/i.test(value);
 }
 </script>
+<style>
+input[type="text"],input[type="number"],select,input[type="password"],textarea
+	{
+	padding: 5px;
+	border: 1px solid green;
+	/*Applying CSS3 gradient*/
+	background: -moz-linear-gradient(center top, #FFFFFF, #EEEEEE 1px, #FFFFFF 20px);
+	background: -webkit-gradient(linear, left top, left 20, from(#FFFFFF),
+		color-stop(5%, #EEEEEE) to(#FFFFFF));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FBFBFB',
+		endColorstr='#FFFFFF');
+	/*Applying CSS 3radius*/
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	/*Applying CSS3 box shadow*/
+	-moz-box-shadow: 0 0 2px #DDDDDD;
+	-webkit-box-shadow: 0 0 2px #DDDDDD;
+	box-shadow: 0 3px 2px #DDDDDD;
+}
+
+input[type="text, number"]:hover {
+	border: 1px solid #cccccc;
+}
+
+input[type="text, number"]:focus {
+	box-shadow: 0 0 2px #FFFE00;
+}
+</style>
 </head>
 <body>
-<div class="mainContentDiv">
+<div id="mainContentDiv">
 <br/> <br/>
+
 	<div id="firstDiv">
-		<table border="0">
+	  <h3>Step 1: Enter Reseller Id</h3>
+	  <hr color="blue"><br/>
+		<table border="0" id="resellerIdInfo">
 			<tr>
-				<td width="36%">MLM Id</td>
+				<td width="36%">Reseller Id</td>
 				<td width="64%"> <input type="text" id="mlmId"/> </td>
 			</tr>
+			<tr>
+			<td colspan="2">
+			<input type="button" id="firstButton" value="Next" onclick="javascript:step1();"/>
+			</td>
+			</tr>
 		</table>
-		<input type="button" id="firstButton" value="Next" onclick="javascript:step1();"/>
+		
 	</div>
 	<div id="secondDiv" hidden="true">
-		<table border="0" id="tableCreditDetails" style="width: inherit;">
+	<h3>Step 2: Confirm Reseller Information</h3>
+	<hr color="blue"><br/>
+		<table width="25%" border="0" id="tableCreditDetails">
 			<tr>
-				<td width="36%">MLM Id</td>
-				<td width="64%">mlmid</td>
+				<td width="32%"><strong>Reseller Id</strong></td>
+				<td width="68%">mlmid</td>
 			</tr>
 			<tr>
-				<td width="36%">First Name</td>
-				<td width="64%">firstname</td>
+				<td  ><strong>First Name</strong></td>
+				<td  >firstname</td>
 			</tr>
 			<tr>
-				<td width="36%">Last Name</td>
-				<td width="64%">lastname</td>
+				<td  ><strong>Last Name</strong></td>
+				<td  >lastname</td>
 			</tr>
 			<tr>
-				<td width="36%">Phone</td>
-				<td width="64%">phonenum</td>
+				<td  ><strong>Phone</strong></td>
+				<td  >phonenum</td>
 			</tr>
 			<tr>
-				<td width="36%">Email</td>
-				<td width="64%">emailid</td>
+				<td  ><strong>Email</strong></td>
+				<td  >emailid</td>
+			</tr>
+			<tr>
+			<td>
+			  <strong>
+			  <input type="button" id="secondButton" value="Previous" onclick="javascript:prev1();"/>
+			  </strong></td>
+			<td>
+			<input type="button" id="thirdButton" value="Next" onclick="javascript:step2();"/>
+			</td>
 			</tr>
 		</table>
-		<input type="button" id="secondButton" value="Previous" onclick="javascript:prev1();"/>
-		<input type="button" id="thirdButton" value="Next" onclick="javascript:step2();"/>
+		
+		
 	</div>
 	<div id="thirdDiv" hidden="true">
-		<table border="0" id="creditTransferDetails">
+	<h3>Step 3: Enter amount to Transfer</h3>
+	<hr color="blue"><br/>
+		<table width="74%" border="0" id="creditTransferDetails">
 			<tr>
-				<td width="36%">Deposit Balance</td>
-				<td width="20%">(${webUser.currentBalance})</td>
-				<td width="44%"><input type="text" id="depositbalance" value="0"/> </td>
+				<td width="27%">Deposit Balance</td>
+				<td width="10%">(${webUser.currentBalance})</td>
+				<td width="45%"><input type="text" id="depositbalance" value="0"/> </td>
 			</tr>
 			<tr>
-				<td width="36%">Commission Balance</td>
-				<td width="20%">(${webUser.currentComissionBalance})</td>
-				<td width="44%"><input type="text" id="commissionbalance" value="0"/> </td>
+				<td width="27%">Commission Balance</td>
+				<td width="10%">(${webUser.currentComissionBalance})</td>
+				<td width="45%"><input type="text" id="commissionbalance" value="0"/> </td>
+			</tr>
+			<tr>
+			<td colspan="3">
+				<input type="button" id="fourthButton" value="Transfer" onclick="javascript:submitCredit();"/>	
+			</td>
 			</tr>
 		</table>
-		<input type="button" id="fourthButton" value="Submit" onclick="javascript:submitCredit();"/>
+		
+	</div>
+	<div id="fourthDiv" hidden="true">
+	<h3>Transaction Summary</h3>
+	<hr color="blue"><br/>
+    <div class="successLogo">
+      <div class="message">
+        Successfully Transferred
+     </div>
+     </div>
+     
+		<table width="74%" border="0" id="verifyTransferDetails">
+			<tr>
+				<td width="34%">From Reseller Id</td>
+				<td width="66%"></td>
+			
+			</tr>
+			<tr>
+				<td width="34%">To Reseller Id</td>
+				<td width="66%"></td>
+				
+			</tr>
+			<tr>
+				<td width="34%">Transferred Amount</td>
+				<td width="66%"></td>
+				
+			</tr>
+			
+			<tr>
+			<td height="124" colspan="2">Amount Successfully Transferred </td>
+			</tr>
+		</table>
+		
 	</div>
 </div>
 <input type="hidden" value="${webUser.currentBalance}" id="depositBal"/>

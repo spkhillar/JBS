@@ -211,6 +211,43 @@ table.paymentTable{
 	border-radius: 12px 12px 12px 12px;
 	padding: 5px;
 }
+#mainContentDiv{
+	
+	width:1100px;
+	border-radius: 3px 3px 3px 3px;
+	border:0px solid #CCC;
+	box-shadow:  4px 4px 4px 4px;
+	font-size: 14px;
+	font-family:Arial;	
+	margin:auto;
+	height:400px
+	
+}
 
+#resellerIdInfo,#tableCreditDetails,#creditTransferDetails,#verifyTransferDetails{
+	
+	width:50%;
+	border-radius: 3px 3px 3px 3px;
+	border:0px solid #CCC;
+	box-shadow:  4px 4px 4px 4px;
+	font-size: 14px;
+	font-family:Arial;	
+	margin:auto;
+}
 
+div.successLogo{
+	background-image: url("../images/tick.png");
+     background-repeat: no-repeat;
+     background-size: 50px 50px;
+     margin: auto;
+     padding-top: 50px;
+     text-align: center;
+     width: 30%;
+     
+}
+
+div.message{
+	text-align: right;
+	color:green;
+}
 
