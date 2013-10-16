@@ -70,12 +70,8 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
   </tr>
  <tr>
     <td height="27" colspan="4" class="menutd">
-    <div class="wrap1">
-    <table id="submenu">
-      <tr>
-      <td>
-    <nav>
-      <ul class="menu">
+    <div id="menu1">
+      <ul id="menu">
       <li>
        <a class="fNiv" href="${homeUrl}">Home</a>
       </li>
@@ -123,9 +119,6 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
           <a class="fNiv">Genealogy</a>
           </li>
         </ul>
-      <div class="wrap1"></div>
-      </nav>
-    </td></tr></table>
     </div>
     </td>
     </tr>

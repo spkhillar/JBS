@@ -42,12 +42,15 @@ $(document).ready(function(){
   display: inline-block;
   list-style: none;
   border-radius:1px 1px 1px 1px;
+ 
+  
 }
  
 /* SELECTED OPTION INDICATOR ------------------------------------------------ */
 #opt_selected {
   margin-top: 10px;
   font-size: 10px;
+  
 }
  
 /* DEMO_DROPDOWN 1 ---------------------------------------------------------- */
@@ -55,12 +58,16 @@ $(document).ready(function(){
   margin: 20px 30px 10px 30px ;
   display: inline-block;
   width:200px;
+  z-index: 9999
 }
  
 .menu1 {
   position: absolute;
   width: 240px !important;
   margin-top: 6px !important;
+}
+li{
+  z-index:2
 }
 </style>
 </head>

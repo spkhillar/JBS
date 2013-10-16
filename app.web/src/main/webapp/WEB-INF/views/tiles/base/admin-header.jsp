@@ -57,12 +57,8 @@
   </tr>
  <tr>
     <td height="27" colspan="4" class="menutd">
-    <div class="wrap1">
-    <table id="submenu">
-      <tr>
-      <td>
-    <nav>
-      <ul class="menu">
+     <div id="menu1">
+      <ul id="menu">
       <li>
        <a class="fNiv" href="${homeUrl}">Home</a>
       </li>
@@ -151,7 +147,7 @@
           </li>
         
         <li> <a class="fNiv" id="adlink">Ad Management</a> </li>
-        <li> <a class="fNiv">Support Center</a> 
+      <!--   <li> <a class="fNiv">Support Center</a> 
           <ul>
             <li class="arrow"></li>
             <li>
@@ -162,11 +158,10 @@
             <li><a class="supportlink5">Tickets</a></li>
             </ul>
           </li>
+           -->
         </ul>
-      <div class="wrap1"></div>
-      </nav>
-    </td></tr></table>
-    </div>
+        </div>
+      
     </td>
     </tr>
     </table>
