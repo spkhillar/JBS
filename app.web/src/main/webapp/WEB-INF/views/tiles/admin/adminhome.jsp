@@ -20,7 +20,7 @@
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>	
-	<div id="adminDiv" style="width: 80%; height: 500px; margin:auto">
+	<div id="adminDiv" style="width: 100%; height: 500px; margin:auto">
 	<h1> Welcome ${currentLoggedInUser}</h1>
 	<hr color="blue">
 	<div id="main">

@@ -14,10 +14,15 @@ public class WebUser {
 
   private String mlmId;
 
+  private String currentBalance;
+
+  private String currentComissionBalance;
+
 
   public WebUser() {}
 
-  public WebUser(final String username, final String firstName, final String lastName, final String email, final String phone, final String mlmid) {
+  public WebUser(final String username, final String firstName, final String lastName, final String email,
+      final String phone, final String mlmid, final String currentBalance, final String currentComissionBalance) {
     super();
     this.username = username;
     this.firstName = firstName;
@@ -25,6 +30,8 @@ public class WebUser {
     this.email = email;
     this.phone = phone;
     this.mlmId=mlmid;
+    this.currentBalance=currentBalance;
+    this.currentComissionBalance=currentComissionBalance;
   }
 
   public String getUsername() {
@@ -76,6 +83,24 @@ public class WebUser {
     this.mlmId = mlmId;
   }
 
+
+
+  public String getCurrentBalance() {
+    return currentBalance;
+  }
+
+  public void setCurrentBalance(final String currentBalance) {
+    this.currentBalance = currentBalance;
+  }
+
+  public String getCurrentComissionBalance() {
+    return currentComissionBalance;
+  }
+
+  public void setCurrentComissionBalance(final String currentComissionBalance) {
+    this.currentComissionBalance = currentComissionBalance;
+  }
+
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
@@ -107,6 +132,14 @@ public class WebUser {
     if (mlmId != null) {
       builder.append("mlmId=");
       builder.append(mlmId);
+    }
+    if (currentBalance != null) {
+      builder.append("currentBalance=");
+      builder.append(currentBalance);
+    }
+    if (currentComissionBalance != null) {
+      builder.append("currentComissionBalance=");
+      builder.append(currentComissionBalance);
     }
     builder.append("]");
     return builder.toString();

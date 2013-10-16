@@ -106,7 +106,7 @@ function selectPage(newPageValue) {
 </head>
 
 <body>
-     <div id="usernamediv" style="width:80%;margin: auto;">
+     <div id="usernamediv" style="width:100%;margin: auto;">
      <h3>Welcome ${currentLoggedInUser} </h3>
      </div>
      <table id="userjobtable">

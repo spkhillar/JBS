@@ -13,7 +13,7 @@
 </head>
 <body>
 	
-	<div id="mlmusertable" >
+	<div id="mlmusertable" style="width:100%">
 	
 		<p> Welcome ${currentLoggedInUser}</p>
 	

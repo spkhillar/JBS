@@ -14,6 +14,34 @@
 
 html { height: 100%; font-size: 62.5% }
 
+input[type="text"],input[type="number"],select,input[type="password"],textarea{
+    
+    padding: 5px;   
+    border: 1px solid green;
+    /*Applying CSS3 gradient*/
+    background: -moz-linear-gradient(center top , #FFFFFF,  #EEEEEE 1px, #FFFFFF 20px);    
+    background: -webkit-gradient(linear, left top, left 20, from(#FFFFFF), color-stop(5%, #EEEEEE) to(#FFFFFF));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FBFBFB', endColorstr='#FFFFFF');
+    
+    /*Applying CSS 3radius*/   
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    
+    /*Applying CSS3 box shadow*/
+    -moz-box-shadow: 0 0 2px #DDDDDD;
+    -webkit-box-shadow: 0 0 2px #DDDDDD;
+    box-shadow: 0 3px 2px #DDDDDD;
+
+}
+input[type="text, number"]:hover
+{
+    border:1px solid #cccccc;
+}
+input[type="text, number"]:focus
+{
+    box-shadow:0 0 2px #FFFE00;
+}
 
 
 </style>

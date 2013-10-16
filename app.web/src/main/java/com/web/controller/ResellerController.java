@@ -252,4 +252,12 @@ public class ResellerController extends BaseAuthenticatedController {
     map.put("registration", userRegistrationForm);
     return "mlm.changepassword";
   }
+
+  @RequestMapping(value = "/retrieveuser", method = RequestMethod.GET)
+  public String retrieveUser(final ModelMap map, final HttpServletRequest request) {
+    User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
+    retrieveAndPopulateUser(map, existingUser);
+    map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "user_update");
+    return "mlm.user.profile";
+  }
 }

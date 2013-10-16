@@ -177,4 +177,9 @@
 	<definition name="mlm.changepassword" extends="mlm.base.definition">
 		<put-attribute name="body" value="/WEB-INF/views/jsp/change-password.jsp" />
 	</definition>
+	
+	<definition name="mlm.user.profile" extends="mlm.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/newuser.jsp" />
+	</definition>
+	
 </tiles-definitions>

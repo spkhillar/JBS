@@ -150,6 +150,37 @@ function checkDepositAmount(value){
 }
 	
 </script>
+<style>
+input[type="text"],input[type="number"],select,input[type="password"],textarea{
+    
+    padding: 5px;   
+    border: 1px solid green;
+    /*Applying CSS3 gradient*/
+    background: -moz-linear-gradient(center top , #FFFFFF,  #EEEEEE 1px, #FFFFFF 20px);    
+    background: -webkit-gradient(linear, left top, left 20, from(#FFFFFF), color-stop(5%, #EEEEEE) to(#FFFFFF));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FBFBFB', endColorstr='#FFFFFF');
+    
+    /*Applying CSS 3radius*/   
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    
+    /*Applying CSS3 box shadow*/
+    -moz-box-shadow: 0 0 2px #DDDDDD;
+    -webkit-box-shadow: 0 0 2px #DDDDDD;
+    box-shadow: 0 3px 2px #DDDDDD;
+
+}
+input[type="text, number"]:hover
+{
+    border:1px solid #cccccc;
+}
+input[type="text, number"]:focus
+{
+    box-shadow:0 0 2px #FFFE00;
+}
+
+</style>
 </head>
 <body>
 <c:choose>
@@ -164,7 +195,7 @@ function checkDepositAmount(value){
 <table border="0" style="margin:auto; width:1100px">
   <tr>
     <td scope="col" width="48"><strong id="h3">Payment Intimator</strong><br/>
-    <hr color="red"/>
+     
     </td>
   </tr>
   <tr>
@@ -200,7 +231,7 @@ function checkDepositAmount(value){
   </tr>
   <tr>
    <td><strong>Cash Deposit in Hand<em>*</em></strong><br/>
-   <hr color="red"/>
+    
    </td>
   </tr>
   <tr>
@@ -216,7 +247,7 @@ function checkDepositAmount(value){
   </tr>
   <tr>
     <td><strong>Cash Deposit in Bank</strong><br/>
-    <hr color="red"/></td>
+     </td>
   </tr>
   <tr>
     <td>
@@ -234,7 +265,7 @@ function checkDepositAmount(value){
   </tr>
   <tr>
     <td><strong>Details for NEFT/RTGS/Online Transfer</strong><br/>
-    <hr color="red"/></td>
+     </td>
   </tr>
   <tr>
     <td>
@@ -248,7 +279,7 @@ function checkDepositAmount(value){
   </tr>
   <tr>
     <td><strong>Details for Cheque Transfer<em>*</em></strong><br/>
-    <hr color="red"/>
+     
     </td>
   </tr>
   <tr>
@@ -276,7 +307,7 @@ function checkDepositAmount(value){
   <c:if test="${operation eq 'view' }">
    <tr>
     <td><strong>Approve or Reject Memo</strong><br/>
-    <hr color="red"/>
+     
     </td>
   </tr>
   <tr>

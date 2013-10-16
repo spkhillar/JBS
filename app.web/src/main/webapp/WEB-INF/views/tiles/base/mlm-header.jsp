@@ -129,6 +129,18 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
     </div>
     </td>
     </tr>
+    <tr>
+    <td colspan="4">
+    	<div style="text-align: right">
+    	<ul>
+    	  <li><b>Reseller ID:</b><c:out value="${webUser.mlmId}"></c:out> |
+    	  <b>Deposit Balance:</b><c:out value="${webUser.currentBalance}"></c:out> |
+    	  <b>Commission Balance:</b><c:out value="${webUser.currentComissionBalance}"></c:out>
+    	  </li>
+    	 </ul> 
+    	</div>
+    </td>
+    </tr>
     </table>
     
 </body>

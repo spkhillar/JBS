@@ -11,7 +11,9 @@
 <body>
 
 <tiles:insertAttribute name="main-content" />
+<div id="bodyContent" style="width:1100px; margin: auto">
 <tiles:insertAttribute name="body"/>
+</div>
 <tiles:insertAttribute name="footer" />
 
 

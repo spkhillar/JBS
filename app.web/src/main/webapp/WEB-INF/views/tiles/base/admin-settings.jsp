@@ -73,10 +73,10 @@ $(document).ready(function(){
   <ul id="menu1">
    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
      <li id="opt_1.2">
-    	<a href="${contextPath}/admin/register/mlm/0">Reseller Admin L</a>
+    	<a href="${contextPath}/admin/register/mlm/0">Reseller Admin - Marketing</a>
     </li>
     <li id="opt_1.3">
-    	<a href="${contextPath}/admin/register/mlm/1">Reseller Admin R</a>
+    	<a href="${contextPath}/admin/register/mlm/1">Reseller Admin - Business</a>
     </li>
     </sec:authorize>
     <sec:authorize access="hasAnyRole('SITE_ADMIN','ROLE_ADMIN')">
@@ -85,6 +85,9 @@ $(document).ready(function(){
 	    </li>
     </sec:authorize>
     <sec:authorize access="hasAnyRole('MLM_ADMIN','ROLE_MLM')">
+     <li id="opt_1.1">
+	    	<a href="${contextPath}/reseller/retrieveuser">My Profile</a>
+	    </li>
 	    <li id="opt_1.1">
 	    	<a href="${contextPath}/admin/changepassword/reseller">Change Password</a>
 	    </li>
