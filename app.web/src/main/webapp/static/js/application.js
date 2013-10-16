@@ -163,7 +163,7 @@ function showToastSuccessMessage(message){
 	 $().toastmessage('showToast', {
          text     : message,
          sticky   : false,
-         position : 'top-right',
+         position : 'middle-center',
          type     : 'success',
          closeText: '',
          close    : function () {
@@ -176,7 +176,7 @@ function showToastErrorMessage(message){
 	 $().toastmessage('showToast', {
          text     : message,
          sticky   : false,
-         position : 'top-right',
+         position : 'middle-center',
          type     : 'error',
          closeText: '',
          close    : function () {

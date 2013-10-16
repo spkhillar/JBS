@@ -316,4 +316,12 @@ public class UserController extends AbstractJqGridFilterController {
     return response;
   }
 
+  @RequestMapping(value = "/reseller/{resellerId}", method = RequestMethod.GET, produces = "application/json")
+  @ResponseBody
+  public User getUserByMlmId(@PathVariable String resellerId) {
+    User user = userService.findByMlmAccountId(resellerId);
+    return user;
+
+  }
+
 }

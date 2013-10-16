@@ -90,8 +90,8 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
           <a class="fNiv" href="${contextPath}/reseller/paymentintimator">Payment Intimator</a>
             </li>
         
-        <li>
-          <a class="fNiv">Credit Transfer</a>
+       	 <li>
+          <a class="fNiv" href="${contextPath}/reseller/credit/transfer">Credit Transfer</a>
           </li>
         
         <li>

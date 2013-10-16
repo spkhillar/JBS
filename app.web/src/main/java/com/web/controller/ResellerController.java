@@ -158,11 +158,11 @@ public class ResellerController extends BaseAuthenticatedController {
   @RequestMapping(value = "/deposit/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<UserPointsHistory> mlmCreditRecords(@RequestParam("_search") final Boolean search,
-    @RequestParam(value = "filters", required = false) final String filters,
-    @RequestParam(value = "page", required = false) final Integer page,
-    @RequestParam(value = "rows", required = false) final Integer rows,
-    @RequestParam(value = "sidx", required = false) final String sidx,
-    @RequestParam(value = "sord", required = false) final String sord) {
+      @RequestParam(value = "filters", required = false) final String filters,
+      @RequestParam(value = "page", required = false) final Integer page,
+      @RequestParam(value = "rows", required = false) final Integer rows,
+      @RequestParam(value = "sidx", required = false) final String sidx,
+      @RequestParam(value = "sord", required = false) final String sord) {
     Page<UserPointsHistory> mlmCreditPoints = null;
     User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
     if (search == true) {
@@ -224,11 +224,11 @@ public class ResellerController extends BaseAuthenticatedController {
   @RequestMapping(value = "/redeem/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<RedeemHistory> mlmRedeemRecords(@RequestParam("_search") final Boolean search,
-    @RequestParam(value = "filters", required = false) final String filters,
-    @RequestParam(value = "page", required = false) final Integer page,
-    @RequestParam(value = "rows", required = false) final Integer rows,
-    @RequestParam(value = "sidx", required = false) final String sidx,
-    @RequestParam(value = "sord", required = false) final String sord) {
+      @RequestParam(value = "filters", required = false) final String filters,
+      @RequestParam(value = "page", required = false) final Integer page,
+      @RequestParam(value = "rows", required = false) final Integer rows,
+      @RequestParam(value = "sidx", required = false) final String sidx,
+      @RequestParam(value = "sord", required = false) final String sord) {
     Page<RedeemHistory> redeemHistory = null;
     if (search == true) {
       redeemHistory = redeemHistoryService.findAllByUser(getCurrentUser(), page, rows, sord, sidx);
@@ -253,6 +253,10 @@ public class ResellerController extends BaseAuthenticatedController {
     return "mlm.changepassword";
   }
 
+  @RequestMapping(value = "/credit/transfer", method = RequestMethod.GET)
+  public String creditTransfer(final ModelMap map, final HttpServletRequest request) {
+    return "mlm.credit.transfer";
+  }
   @RequestMapping(value = "/retrieveuser", method = RequestMethod.GET)
   public String retrieveUser(final ModelMap map, final HttpServletRequest request) {
     User existingUser = userService.findByUserName(getCurrentLoggedinUserName());

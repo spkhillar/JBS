@@ -22,7 +22,6 @@ public class BaseAuthenticatedController extends BaseController {
   @Autowired
   private DepositIntimatorService depositIntimatorService;
 
-
   public User getCurrentUser() {
     String userName = getCurrentLoggedinUserName();
     User user = userService.findByUserName(userName);
@@ -32,17 +31,18 @@ public class BaseAuthenticatedController extends BaseController {
   @ModelAttribute("webUser")
   public WebUser getWebUser() {
     User user;
-    Integer currentBalance=0;
-    Integer currentComissionBalance=0;
+    Integer currentBalance = 0;
+    Integer currentComissionBalance = 0;
     WebUser webUser = null;
     try {
       user = getCurrentUser();
-      if(user.getRoleId().equals(3L) && user.getRoleId().equals(6L)){
-        currentBalance=depositIntimatorService.getBalanceDeposit(user);
-        currentComissionBalance=userPointsHistoryService.getUserTotalCommsionPoint(user);
+      if (user.getRoleId().equals(3L) || user.getRoleId().equals(6L)) {
+        currentBalance = depositIntimatorService.getBalanceDeposit(user);
+        currentComissionBalance = userPointsHistoryService.getUserTotalCommsionPoint(user);
       }
       webUser =
-          new WebUser(user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhone(),user.getMlmAccountId(), currentBalance.toString(), currentComissionBalance.toString());
+          new WebUser(user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhone(),
+            user.getMlmAccountId(), currentBalance.toString(), currentComissionBalance.toString());
     } catch (Exception e) {
       webUser = new WebUser();
     }

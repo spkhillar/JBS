@@ -82,10 +82,22 @@ public class DepositIntimatorController extends BaseAuthenticatedController {
     SystemConfiguration systemConfiguration =
         systemConfigurationService.findByKey(ApplicationConstants.SUBSCRIPTION_BASE_PRICE);
     BigDecimal divisor = new BigDecimal(systemConfiguration.getValue());
+
+    if (depositorAmount.intValue() < divisor.intValue()) {
+      return "Amount should be in multiples of " + systemConfiguration.getValue() + ".";
+    }
     BigDecimal reminder = depositorAmount.remainder(divisor);
     if (reminder.intValue() > 0) {
       return "Amount should be in multiples of " + systemConfiguration.getValue() + ".";
     }
+    return "";
+  }
+
+  @RequestMapping(value = "/credit/transfer/{depositAmount}/{commissionAmount}/{resellerId}", method = RequestMethod.POST)
+  @ResponseBody
+  public String creditTransfer(@PathVariable final BigDecimal depositAmount,
+      @PathVariable final BigDecimal commissionAmount, @PathVariable final String resellerId, final ModelMap map) {
+
     return "";
   }
 }
