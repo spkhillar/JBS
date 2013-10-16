@@ -14,24 +14,23 @@ public class WebUser {
 
   private String mlmId;
 
-  private String currentBalance;
+  private int currentBalance;
 
-  private String currentComissionBalance;
-
+  private int currentComissionBalance;
 
   public WebUser() {}
 
   public WebUser(final String username, final String firstName, final String lastName, final String email,
-      final String phone, final String mlmid, final String currentBalance, final String currentComissionBalance) {
+      final String phone, final String mlmid, final int currentBalance, final int currentComissionBalance) {
     super();
     this.username = username;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.phone = phone;
-    this.mlmId=mlmid;
-    this.currentBalance=currentBalance;
-    this.currentComissionBalance=currentComissionBalance;
+    this.mlmId = mlmid;
+    this.currentBalance = currentBalance;
+    this.currentComissionBalance = currentComissionBalance;
   }
 
   public String getUsername() {
@@ -74,7 +73,6 @@ public class WebUser {
     this.phone = phone;
   }
 
-
   public String getMlmId() {
     return mlmId;
   }
@@ -83,21 +81,19 @@ public class WebUser {
     this.mlmId = mlmId;
   }
 
-
-
-  public String getCurrentBalance() {
+  public int getCurrentBalance() {
     return currentBalance;
   }
 
-  public void setCurrentBalance(final String currentBalance) {
+  public void setCurrentBalance(final int currentBalance) {
     this.currentBalance = currentBalance;
   }
 
-  public String getCurrentComissionBalance() {
+  public int getCurrentComissionBalance() {
     return currentComissionBalance;
   }
 
-  public void setCurrentComissionBalance(final String currentComissionBalance) {
+  public void setCurrentComissionBalance(final int currentComissionBalance) {
     this.currentComissionBalance = currentComissionBalance;
   }
 
@@ -133,17 +129,12 @@ public class WebUser {
       builder.append("mlmId=");
       builder.append(mlmId);
     }
-    if (currentBalance != null) {
-      builder.append("currentBalance=");
-      builder.append(currentBalance);
-    }
-    if (currentComissionBalance != null) {
-      builder.append("currentComissionBalance=");
-      builder.append(currentComissionBalance);
-    }
+    builder.append("currentBalance=");
+    builder.append(currentBalance);
+    builder.append("currentComissionBalance=");
+    builder.append(currentComissionBalance);
     builder.append("]");
     return builder.toString();
   }
-
 
 }

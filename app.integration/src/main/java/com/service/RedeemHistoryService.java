@@ -1,5 +1,7 @@
 package com.service;
 
+import java.math.BigDecimal;
+
 import org.springframework.data.domain.Page;
 
 import com.jpa.entities.RedeemHistory;
@@ -20,5 +22,8 @@ public interface RedeemHistoryService {
   public void approveOrRejectNotification(long id, int approval);
 
   public int sumOfPointBalanceBy(User user);
+
+  public void createCreditTransferRecord(BigDecimal depositAmount, BigDecimal commissionAmount, String resellerId,
+      String currentUser);
 
 }

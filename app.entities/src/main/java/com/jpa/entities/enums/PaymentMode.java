@@ -16,6 +16,8 @@ public enum PaymentMode {
 
   MANUAL,
 
-  ONLINE;
+  ONLINE,
+
+  TRANSFER;
 
 }

@@ -19,8 +19,8 @@ public interface MlmUserCreditPointService {
   public void updateStatus(MlmUserCreditPoint mlmUserCreditPoint, MlmUserCreditPointStatus mlmUserCreditPointStatus);
 
   public List<MlmUserCreditPoint> listMlmUserCreditPoint(User user, MlmUserCreditPointStatus mlmUserCreditPointStatus,
-    DepositIntimatorStatus depositIntimatorStatus);
+      DepositIntimatorStatus depositIntimatorStatus);
 
-
+  public int findNumberOfOpenMLMCreditRecords(User user);
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jpa.entities.DepositIntimator;
 import com.jpa.entities.SystemConfiguration;
 import com.service.DepositIntimatorService;
+import com.service.RedeemHistoryService;
 import com.service.util.ApplicationConstants;
 import com.web.form.ResellerForm;
 import com.web.util.DomainObjectMapper;
@@ -28,6 +29,9 @@ public class DepositIntimatorController extends BaseAuthenticatedController {
 
   @Autowired
   private DepositIntimatorService depositIntimatorService;
+
+  @Autowired
+  private RedeemHistoryService redeemHistoryService;
 
   @RequestMapping(value = "/deposit/records", produces = "application/json")
   public @ResponseBody
@@ -97,7 +101,8 @@ public class DepositIntimatorController extends BaseAuthenticatedController {
   @ResponseBody
   public String creditTransfer(@PathVariable final BigDecimal depositAmount,
       @PathVariable final BigDecimal commissionAmount, @PathVariable final String resellerId, final ModelMap map) {
-
+    redeemHistoryService.createCreditTransferRecord(depositAmount, commissionAmount, resellerId,
+      getCurrentLoggedinUserName());
     return "";
   }
 }

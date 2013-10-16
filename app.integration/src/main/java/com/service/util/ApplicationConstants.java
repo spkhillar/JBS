@@ -37,4 +37,6 @@ public interface ApplicationConstants {
 
   String MLM_ACCOUNTS_PARTICULAR = "RESELLER COMMISSION";
 
+  String CREDIT_TRANSFER = "CREDIT TRANSFER";
+
 }

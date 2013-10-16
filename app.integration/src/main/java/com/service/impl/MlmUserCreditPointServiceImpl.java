@@ -116,32 +116,55 @@ public class MlmUserCreditPointServiceImpl implements MlmUserCreditPointService 
     mlmUserCreditPointDAO.save(savedMlmUserCreditPoint);
   }
 
+  @Override
+  @Transactional(readOnly = true)
+  public int findNumberOfOpenMLMCreditRecords(User user) {
+    String ejbql =
+        "select sum(mcp.points) from MlmUserCreditPoint mcp where mcp.user.id=:userId and (mcp.mlmUserCreditPointStatus =:status1 or mcp.mlmUserCreditPointStatus =:status2)";
+    Map<String, Object> params = new HashMap<String, Object>(2);
+    params.put("userId", user.getId());
+    params.put("status1", MlmUserCreditPointStatus.OPEN);
+    params.put("status2", MlmUserCreditPointStatus.OPEN);
+    List<Long> list = genericQueryExecutorDAO.executeProjectedQuery(ejbql, params);
+    if (list.get(0) == null) {
+      return 0;
+    }
+    return list.get(0).intValue();
+
+  }
+
   private void createCreditPointsForMlm(final DepositIntimator depositIntimator) {
     SystemConfiguration systemConfiguration =
         systemConfigurationService.findByKey(ApplicationConstants.SUBSCRIPTION_BASE_PRICE);
     int subscriptionBasePrice = Integer.valueOf(systemConfiguration.getValue());
     int totalSum = depositIntimatorService.calculateTotalSumForDepositIntimatorUser(depositIntimator.getUserByUserId());
     int numOfRecords = totalSum / subscriptionBasePrice;
-    logger.debug("...creating " + numOfRecords + " mlm credit points ");
     int numberOfOpenRecords =
         findNumberOfOpenMLMCreditRecords(depositIntimator.getUserByUserId(), MlmUserCreditPointStatus.OPEN);
     int numberOfCloseRecords =
         findNumberOfOpenMLMCreditRecords(depositIntimator.getUserByUserId(), MlmUserCreditPointStatus.CLOSED);
-    logger.debug("...creating " + numOfRecords + " mlm credit points. numberOfOpenRecords=" + numberOfOpenRecords
+    logger.debug("...Division count=" + numOfRecords + " mlm credit points. numberOfOpenRecords=" + numberOfOpenRecords
         + ".numberOfCloseRecords=" + numberOfCloseRecords);
     if (numOfRecords >= 2 && numberOfOpenRecords == 1 && numberOfCloseRecords == 0) {
+      logger.debug("...creating " + 1 + " mlm credit points ");
+      MlmUserCreditPoint mlmUserCreditPoint1 = mlmUserCreditPointRecord(depositIntimator, subscriptionBasePrice);
+      mlmUserCreditPointDAO.save(mlmUserCreditPoint1);
+    } else if (numOfRecords >= 2 && numberOfOpenRecords == 0 && numberOfCloseRecords == 1) {
+      logger.debug("...creating " + 1 + " mlm credit points ");
       MlmUserCreditPoint mlmUserCreditPoint1 = mlmUserCreditPointRecord(depositIntimator, subscriptionBasePrice);
       mlmUserCreditPointDAO.save(mlmUserCreditPoint1);
     } else if (numOfRecords >= 2 && numberOfOpenRecords == 0) {
+      logger.debug("...creating " + 2 + " mlm credit points ");
       MlmUserCreditPoint mlmUserCreditPoint1 = mlmUserCreditPointRecord(depositIntimator, subscriptionBasePrice);
       MlmUserCreditPoint mlmUserCreditPoint2 = mlmUserCreditPointRecord(depositIntimator, subscriptionBasePrice);
       mlmUserCreditPointDAO.save(mlmUserCreditPoint1);
       mlmUserCreditPointDAO.save(mlmUserCreditPoint2);
     } else if (numOfRecords >= 1 && numberOfOpenRecords == 0) {
+      logger.debug("...creating " + 1 + " mlm credit points ");
       MlmUserCreditPoint mlmUserCreditPoint1 = mlmUserCreditPointRecord(depositIntimator, subscriptionBasePrice);
       mlmUserCreditPointDAO.save(mlmUserCreditPoint1);
     } else {
-      logger.debug("Cannot assign to mlm user creedit points as total amount is " + totalSum);
+      logger.debug("Cannot create MLM User Credit Points as Both the nodes are complete");
     }
   }
 

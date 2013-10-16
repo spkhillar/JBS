@@ -1,5 +1,6 @@
 package com.service.test;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.junit.Test;
@@ -10,7 +11,10 @@ import com.jpa.entities.User;
 import com.jpa.entities.enums.ModeOfRedemption;
 import com.jpa.entities.enums.RedeemStatus;
 import com.jpa.entities.enums.RedeemType;
+import com.service.DepositIntimatorService;
+import com.service.MlmUserCreditPointService;
 import com.service.RedeemHistoryService;
+import com.service.UserRegistrationService;
 import com.service.UserService;
 
 public class RedeemHistoryServiceTest extends BaseServiceTest {
@@ -21,7 +25,16 @@ public class RedeemHistoryServiceTest extends BaseServiceTest {
   @Autowired
   private UserService userService;
 
-  @Test
+  @Autowired
+  private UserRegistrationService userRegistrationService;
+
+  @Autowired
+  private MlmUserCreditPointService mlmUserCreditPointService;
+
+  @Autowired
+  private DepositIntimatorService depositIntimatorService;
+
+  // @Test
   public void test1() {
     User user = userService.findByUserName("root");
 
@@ -52,6 +65,24 @@ public class RedeemHistoryServiceTest extends BaseServiceTest {
 
     sum = redeemHistoryService.sumOfPointBy(user);
     System.err.println("..4th.." + sum);
+  }
 
+  @Test
+  public void test2() {
+    User newUser = getUser("shiv3421");
+    newUser = userRegistrationService.saveMlmUser(newUser, 1L, "shiv", null, null, null, 3l);
+    User user = userService.findByUserName("root");
+    redeemHistoryService.createCreditTransferRecord(BigDecimal.valueOf(600), BigDecimal.ZERO,
+      newUser.getMlmAccountId(), "root");
+    redeemHistoryService.createCreditTransferRecord(BigDecimal.ZERO, BigDecimal.valueOf(600),
+      newUser.getMlmAccountId(), "root");
+    redeemHistoryService.createCreditTransferRecord(BigDecimal.valueOf(200), BigDecimal.valueOf(600),
+      newUser.getMlmAccountId(), "root");
+    int total = mlmUserCreditPointService.findNumberOfOpenMLMCreditRecords(newUser);
+    int balance = redeemHistoryService.sumOfPointBalanceBy(user);
+    int commission = redeemHistoryService.sumOfPointBy(user);
+    int depBalance = depositIntimatorService.getBalanceDeposit(newUser);
+    System.err.println("..total mlm credpoints=" + total + ":balance=" + balance + ":commission:" + commission
+        + ":depBalance=" + depBalance);
   }
 }

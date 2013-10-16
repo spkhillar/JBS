@@ -9,7 +9,6 @@ import java.util.Map;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.jpa.entities.Address;
 import com.jpa.entities.User;
 import com.jpa.entities.enums.UserPosition;
 import com.service.UserGroupService;
@@ -126,14 +125,6 @@ public class MLMServiceTest extends BaseServiceTest {
     waitFor();
     userGroupService.addToGroup(currentUser, parentMlmId, UserPosition.R);
 
-  }
-
-  private User getUser(String username) {
-    User newUser = new User(username, "shivsambhu1234", "fname1", "lastName1", "abc@gmail.com", true, "98887655");
-    newUser.setDateOfBirth(new Date());
-    Address address = new Address("add1", null, "city", "state", "67777", newUser);
-    newUser.setAddress(address);
-    return newUser;
   }
 
   private void waitFor() {

@@ -13,15 +13,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jpa.entities.DepositIntimator;
 import com.jpa.entities.Payment;
 import com.jpa.entities.RedeemHistory;
 import com.jpa.entities.User;
+import com.jpa.entities.enums.DepositIntimatorStatus;
+import com.jpa.entities.enums.DepositIntimatorType;
+import com.jpa.entities.enums.ModeOfRedemption;
+import com.jpa.entities.enums.PaymentMode;
 import com.jpa.entities.enums.RedeemStatus;
 import com.jpa.entities.enums.RedeemType;
 import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.jpa.repositories.RedeemHistoryDAO;
+import com.service.DepositIntimatorService;
+import com.service.MlmUserCreditPointService;
 import com.service.PaymentService;
 import com.service.RedeemHistoryService;
+import com.service.UserService;
+import com.service.util.ApplicationConstants;
 import com.service.util.ServiceUtil;
 
 @Service("redeemHistoryService")
@@ -37,6 +46,15 @@ public class RedeemHistoryServiceImpl implements RedeemHistoryService {
 
   @Autowired
   private PaymentService paymentService;
+
+  @Autowired
+  private UserService userService;
+
+  @Autowired
+  private DepositIntimatorService depositIntimatorService;
+
+  @Autowired
+  private MlmUserCreditPointService mlmUserCreditPointService;
 
   @Override
   @Transactional
@@ -121,5 +139,44 @@ public class RedeemHistoryServiceImpl implements RedeemHistoryService {
       return 0;
     }
     return list.get(0).intValue();
+  }
+
+  @Override
+  @Transactional
+  public void createCreditTransferRecord(final BigDecimal depositAmount, final BigDecimal commissionAmount,
+      final String resellerId, final String currentUsername) {
+    logger.info("createCreditTransferRecord starts ## ");
+    logger.info("depositAmount=" + depositAmount + ".commissionAmount=" + commissionAmount + ".resellerId="
+        + resellerId + ".currentUsername=" + currentUsername);
+    User targetUser = userService.findByMlmAccountId(resellerId);
+    User sourceUser = userService.findByUserName(currentUsername);
+    BigDecimal total = depositAmount.add(commissionAmount);
+    DepositIntimator depositIntimator =
+        new DepositIntimator(0, targetUser, total, new Date(), PaymentMode.TRANSFER, DepositIntimatorStatus.APPROVED,
+          new Date(), new Date());
+    depositIntimator.setUserByReceiverUserId(sourceUser);
+    depositIntimator.setDepositIntimatorType(DepositIntimatorType.MLM_CREDIT_POINT);
+    depositIntimator.setMemo(ApplicationConstants.CREDIT_TRANSFER);
+    depositIntimator = depositIntimatorService.save(depositIntimator);
+    mlmUserCreditPointService.save(depositIntimator);
+    RedeemHistory redeemHistory = null;
+    if (depositAmount.intValue() > 0) {
+      logger.info("creating DEPOSIT_TRANSFER RedeemHistory ## ");
+      redeemHistory =
+          new RedeemHistory(sourceUser, depositAmount.intValue(), ModeOfRedemption.CASH,
+            ApplicationConstants.CREDIT_TRANSFER, RedeemStatus.APPROVED, new Date());
+      redeemHistory.setRedeemType(RedeemType.DEPOSIT_TRANSFER);
+      save(redeemHistory);
+    }
+    if (commissionAmount.intValue() > 0) {
+      logger.info("creating COMMISSION_TRANSFER RedeemHistory ## ");
+      redeemHistory =
+          new RedeemHistory(sourceUser, commissionAmount.intValue(), ModeOfRedemption.CASH,
+            ApplicationConstants.CREDIT_TRANSFER, RedeemStatus.APPROVED, new Date());
+      redeemHistory.setRedeemType(RedeemType.COMMISSION_TRANSFER);
+      save(redeemHistory);
+    }
+
+    logger.info("createCreditTransferRecord ends ## ");
   }
 }

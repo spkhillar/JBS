@@ -97,7 +97,8 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
   @Override
   public int getBalanceDeposit(User user) {
     int total = calculateTotalSumForDepositIntimatorUser(user);
+    int mlmUserCredPoints = mlmUserCreditPointService.findNumberOfOpenMLMCreditRecords(user);
     int redeemed = redeemHistoryService.sumOfPointBalanceBy(user);
-    return total - redeemed;
+    return total - mlmUserCredPoints - redeemed;
   }
 }
