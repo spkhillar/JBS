@@ -11,6 +11,7 @@ $(document).ready(function(){
 	$("#secondButton").button();
 	$("#thirdButton").button();
 	$("#fourthButton").button();
+	$("#Back").button();
 });
 function step1(){
 	var valid = checkStep1Validity();
@@ -28,6 +29,12 @@ function step2(){
 function prev1(){
 	$('#firstDiv').show();
 	$('#secondDiv').hide();
+	$('#thirdDiv').hide();
+}
+
+function back(){
+	$('#firstDiv').hide();
+	$('#secondDiv').show();
 	$('#thirdDiv').hide();
 }
 function submitCredit(){
@@ -199,7 +206,7 @@ input[type="text, number"]:focus {
 <br/> <br/>
 
 	<div id="firstDiv">
-	  <h3>Step 1: Enter Reseller Id</h3>
+	   <div id="step1"></div>
 	  <hr color="blue"><br/>
 		<table border="0" id="resellerIdInfo">
 			<tr>
@@ -215,7 +222,7 @@ input[type="text, number"]:focus {
 		
 	</div>
 	<div id="secondDiv" hidden="true">
-	<h3>Step 2: Confirm Reseller Information</h3>
+	<div id="step2"></div>
 	<hr color="blue"><br/>
 		<table width="25%" border="0" id="tableCreditDetails">
 			<tr>
@@ -252,7 +259,7 @@ input[type="text, number"]:focus {
 		
 	</div>
 	<div id="thirdDiv" hidden="true">
-	<h3>Step 3: Enter amount to Transfer</h3>
+	<div id="step3"></div>
 	<hr color="blue"><br/>
 		<table width="74%" border="0" id="creditTransferDetails">
 			<tr>
@@ -267,6 +274,7 @@ input[type="text, number"]:focus {
 			</tr>
 			<tr>
 			<td colspan="3">
+				<input type="button" id="Back" value="Back" onclick="javascript:back();"/>
 				<input type="button" id="fourthButton" value="Transfer" onclick="javascript:submitCredit();"/>	
 			</td>
 			</tr>
@@ -274,12 +282,10 @@ input[type="text, number"]:focus {
 		
 	</div>
 	<div id="fourthDiv" hidden="true">
-	<h3>Transaction Summary</h3>
+	 <div id="step4"></div>
 	<hr color="blue"><br/>
     <div class="successLogo">
-      <div class="message">
-        Successfully Transferred
-     </div>
+      <p class="message1">Successfully Transferred </p>
      </div>
      
 		<table width="74%" border="0" id="verifyTransferDetails">
@@ -299,9 +305,6 @@ input[type="text, number"]:focus {
 				
 			</tr>
 			
-			<tr>
-			<td height="124" colspan="2">Amount Successfully Transferred </td>
-			</tr>
 		</table>
 		
 	</div>

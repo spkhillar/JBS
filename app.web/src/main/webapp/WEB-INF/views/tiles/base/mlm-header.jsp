@@ -126,9 +126,9 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
     <td colspan="4">
     	<div style="text-align: right">
     	<ul>
-    	  <li><b>Reseller ID:</b><c:out value="${webUser.mlmId}"></c:out> |
-    	  <b>Deposit Balance:</b><c:out value="${webUser.currentBalance}"></c:out> |
-    	  <b>Commission Balance:</b><c:out value="${webUser.currentComissionBalance}"></c:out>
+    	  <li><b>Reseller ID:</b><span class="texture"><c:out value="${webUser.mlmId}"></c:out></span> |
+    	  <b>Deposit Balance:</b><span class="texture"><c:out value="${webUser.currentBalance}"></c:out></span> |
+    	  <b>Commission Balance:</b><span class="texture"><c:out value="${webUser.currentComissionBalance}"></c:out></span>
     	  </li>
     	 </ul> 
     	</div>

@@ -62,6 +62,7 @@ $(document).ready(function(){
 	    			
  		    },
  		      "depositIntimator.transactionNumber":{
+ 		    	 alphanumeric:true,
  		    	 required:function(element){
  	    			return $("#paymentMode option:selected").val()=="ONLINE"
  	    		}

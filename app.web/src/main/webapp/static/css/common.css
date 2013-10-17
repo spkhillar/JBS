@@ -246,8 +246,53 @@ div.successLogo{
      
 }
 
-div.message{
+div.message1{
 	text-align: right;
 	color:green;
+	
 }
 
+#step1{
+	background-image: url("../images/step1.png");
+     background-repeat: no-repeat;
+     background-size: 1100px 60px;
+     margin: auto;
+     padding-top: 50px;
+     text-align: center;
+     
+    
+}
+
+#step2{
+	background-image: url("../images/step2.png");
+     background-repeat: no-repeat;
+     background-size: 1100px 60px;
+     margin: auto;
+     padding-top: 50px;
+     text-align: center;
+     
+    
+}
+
+#step3{
+	background-image: url("../images/step3.png");
+     background-repeat: no-repeat;
+     background-size: 1100px 60px;
+     margin: auto;
+     padding-top: 50px;
+     text-align: center;
+    
+}
+
+#step4{
+	background-image: url("../images/step4.png");
+     background-repeat: no-repeat;
+     background-size: 1100px 60px;
+     margin: auto;
+     padding-top: 50px;
+     text-align: center;
+}
+
+span.texture{
+	color:blue;
+}
