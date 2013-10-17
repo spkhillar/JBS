@@ -110,7 +110,7 @@ input[type="text, number"]:focus {
 							<li><a class="fNiv" href="${contextPath}/register/">Register</a>
 							</li>
 							<li><a class="fNiv" id="enquiry"
-								href="${contextPath}/mypage/enquiry/">Enquiry</a></li>
+								href="${contextPath}/enquiry">Enquiry</a></li>
 						</ul>
 						<div class="clearfix"></div>
 					</nav>

@@ -129,7 +129,7 @@ $(document).ready(function() {
 	
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
 		  return this.optional(element) || /^[a-zA-Z]+$/i.test(value);
-		}, "Letters only please"); 
+		}, "Only Letters are allowed"); 
 	
 	jQuery.validator.addMethod("numericHyphenCheck", function(value, element) {
 		  return this.optional(element) || /^[a-zA-Z0-9-]+$/i.test(value);

@@ -57,11 +57,12 @@ $(document).ready(function(){
   		        userNameCheck: true,
   		        minlength: 4,
   		        maxlength: 20,
-  		        alphanumeric: true
+  		        alphanumeric: true,
+  		        notNumber:true
   		      },
   			"user.email" : {
   		        required : true,
-  		        email:true
+  		      emailCheck:true
   		   },
   			"user.password" : {
   		        required : true,
@@ -96,22 +97,22 @@ $(document).ready(function(){
  	  		},
   			"user.address.city" : {
   		        required : true,
-  		      addressvalid:true,
+  		      notNumber:true,
   		        maxlength: 100,
   		   },
   			"user.phone" : {
   		        required : true,
-  		        number:true,
-  		        maxlength: 10
+  		        	number:true,
+  		      mobileNumberLength: true
   		   },
   			"user.address.pin" : {
   		        required : true,
   		        number:true,
-  		        maxlength:6
+  		        zipCode:true
   		   },
   			"user.skill.skills" : {
   		        required : true
-  		   },
+  		    },
   		    "terms" : {
   		        required : true
   		   }
@@ -171,8 +172,42 @@ jQuery.validator.addMethod("alphanumeric", function(value, element) {
 
 jQuery.validator.addMethod("lettersonly", function(value, element) {
 	  return this.optional(element) || /^[a-zA-Z]+$/i.test(value);
-	}, "Letters only please."); 
+	}, "Only Letters are allowed"); 
 
 jQuery.validator.addMethod("addressvalid", function(value, element) {
-	  return this.optional(element) || /^[a-zA-Z0-9 ,&]+$/i.test(value);
-	}, "Letters, numbers, space, comma, & are valid."); 
+	  return this.optional(element) || /^[a-zA-Z0-9 ,&-]+$/i.test(value);
+	}, "Letters, numbers, space, comma are valid entries."); 
+
+jQuery.validator.addMethod("mobileNumberLength", function(value, element) {
+	var mobpattern = /^\d{10}$/;
+	if (mobpattern.test(value)) {
+		return true;
+    }
+    return false;
+}, "Mobile Number Should be of 10 digits");
+
+jQuery.validator.addMethod("zipCode", function(value, element) {
+	var pinpattern = /^\d{6}$/;
+	if (pinpattern.test(value)) {
+        return true;
+    }
+    return false;
+}, "Pin Code should of 6 digits");
+
+jQuery.validator.addMethod("notNumber", function(value, element, param) {
+    var reg = /[0-9]/;
+    if(reg.test(value)){
+          return false;
+    }else{
+            return true;
+    }
+}, "Number is not permitted");
+
+jQuery.validator.addMethod("emailCheck", function(value, element) {
+	var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+	if (pattern.test(value)) {
+        return false;
+    }
+    return true;
+}, "Please enter a valid email address");
+

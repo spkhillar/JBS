@@ -86,7 +86,7 @@
      <c:if test="${(operation eq 'new_user') or (operation eq 'site_admin')  or (operation eq 'mlm_create')}">
     <tr>
       <td>Create a Password for your account<em>*</em></td>
-      <td class="td"> <form:password path="user.password" class="size"/></td>
+      <td class="td"> <form:password path="user.password" class="size" placeholder="Example: mgk356jk"/></td>
     </tr>
     <tr>
       <td height="27">Confirm the Password<em>*</em></td>
@@ -149,8 +149,8 @@
       </tr>
       <tr>
         <td>Address Line1<em>*</em></td>
-        <td class="td"><form:input path="user.address.addressLine1" class="size"></form:input> </td>
-      </tr>
+        <td class="td"><form:input path="user.address.addressLine1" class="size" placeholder="Example: D-6, Sector-18, Noida"></form:input></td>
+        </tr>
       <tr>
         <td>Address Line2</td>
         <td class="td"><form:input path="user.address.addressLine2" class="size"></form:input> </td>
@@ -221,7 +221,7 @@
     <tr>
       <td>Key Skills<em>*</em></td>
       <td class="td">
-      <form:textarea path="user.skill.skills" />
+      <form:textarea path="user.skill.skills" placeholder="Example: Banking, Finance, CA, etc"/>
       </td>
     </tr>
     <tr>

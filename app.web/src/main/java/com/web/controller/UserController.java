@@ -83,11 +83,11 @@ public class UserController extends AbstractJqGridFilterController {
   @RequestMapping(value = "/records", produces = "application/json")
   public @ResponseBody
   JqGridResponse<User> records(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
     Page<User> users = null;
     if (search == true) {
       Map<String, Object> paramObject = new LinkedHashMap<String, Object>();
@@ -277,11 +277,11 @@ public class UserController extends AbstractJqGridFilterController {
   @RequestMapping(value = "/resellers", produces = "application/json")
   public @ResponseBody
   JqGridResponse<User> resellers(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
 
     return fetchUserListByRole(search, filters, page, rows, sidx, sord, 3);
   }
@@ -289,17 +289,17 @@ public class UserController extends AbstractJqGridFilterController {
   @RequestMapping(value = "/normal", produces = "application/json")
   public @ResponseBody
   JqGridResponse<User> normalUsers(@RequestParam("_search") final Boolean search,
-      @RequestParam(value = "filters", required = false) final String filters,
-      @RequestParam(value = "page", required = false) final Integer page,
-      @RequestParam(value = "rows", required = false) final Integer rows,
-      @RequestParam(value = "sidx", required = false) final String sidx,
-      @RequestParam(value = "sord", required = false) final String sord) {
+    @RequestParam(value = "filters", required = false) final String filters,
+    @RequestParam(value = "page", required = false) final Integer page,
+    @RequestParam(value = "rows", required = false) final Integer rows,
+    @RequestParam(value = "sidx", required = false) final String sidx,
+    @RequestParam(value = "sord", required = false) final String sord) {
 
     return fetchUserListByRole(search, filters, page, rows, sidx, sord, 2);
   }
 
   private JqGridResponse<User> fetchUserListByRole(final Boolean search, final String filters, final Integer page,
-      final Integer rows, final String sidx, final String sord, long roleId) {
+    final Integer rows, final String sidx, final String sord, final long roleId) {
     Page<User> users = null;
     /*
      * if (search == true) { users = userService.findALL(page, rows,
@@ -318,7 +318,7 @@ public class UserController extends AbstractJqGridFilterController {
 
   @RequestMapping(value = "/reseller/{resellerId}", method = RequestMethod.GET, produces = "application/json")
   @ResponseBody
-  public User getUserByMlmId(@PathVariable String resellerId) {
+  public User getUserByMlmId(@PathVariable final String resellerId) {
     User user = userService.findByMlmAccountId(resellerId);
     return user;
 

@@ -181,7 +181,14 @@
 	<definition name="mlm.user.profile" extends="mlm.base.definition">
 		<put-attribute name="body" value="/WEB-INF/views/jsp/newuser.jsp" />
 	</definition>
+	
 	<definition name="mlm.credit.transfer" extends="mlm.base.definition">
 		<put-attribute name="body" value="/WEB-INF/views/tiles/mlm/credit-transfer.jsp" />
 	</definition>
+	
+	<definition name="enquiry" extends="site.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/enquiry.jsp" />
+	</definition>
+	
+	
 </tiles-definitions>

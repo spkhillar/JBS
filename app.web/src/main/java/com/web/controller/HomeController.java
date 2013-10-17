@@ -80,4 +80,8 @@ public class HomeController extends BaseAuthenticatedController {
     return "under.construction";
   }
 
+  @RequestMapping(value = "/enquiry", method = RequestMethod.GET)
+  public String home() {
+    return "enquiry";
+  }
 }
