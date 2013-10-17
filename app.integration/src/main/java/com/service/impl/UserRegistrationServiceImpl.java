@@ -200,7 +200,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
   @Override
   @Transactional
-  public void updateInternetUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
+  public void updateUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
       String fileName, String degree) {
     User dbUser = this.retrieveUser(newUser.getId());
 
@@ -219,12 +219,12 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     Address currAddress = newUser.getAddress();
     BeanUtils.copyProperties(currAddress, dbAddress, new String[] { "id", "version", "createdAt", "user" });
     dbAddress.setUpdatedAt(new Date());
-    if (StringUtils.isNotBlank(fileName)) {
+    if (StringUtils.isNotBlank(fileName) && dbUser.getSkill() != null) {
       dbUser.getSkill().setResume(resume);
       dbUser.getSkill().setResumeFileName(fileName);
     }
     // For admin user and mlm admin user
-    if (dbUser.getSkill() != null) {
+    if (dbUser.getSkill() != null && newUser.getSkill() != null) {
       dbUser.getSkill().setSkills(newUser.getSkill().getSkills());
       dbUser.getSkill().setUpdatedAt(new Date());
       Qualification currQualification = newUser.getQualifications().get(0);

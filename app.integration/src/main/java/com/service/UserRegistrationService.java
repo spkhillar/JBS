@@ -19,7 +19,7 @@ public interface UserRegistrationService {
 
   public List<String> getDegrees();
 
-  public void updateInternetUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
+  public void updateUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
       String fileName, String degree);
 
   public void saveAdminUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,

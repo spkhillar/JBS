@@ -35,15 +35,7 @@ public class NormalUserController extends BaseAuthenticatedController {
 
   @RequestMapping(value = "/home", method = RequestMethod.GET)
   public String home(final Locale locale, final ModelMap map) {
-    String username = this.getCurrentLoggedinUserName();
-    User user = userService.findByUserName(username);
-    map.put("currentLoggedInUser", username);
-    map.put("currentLoggedInUserId", user.getId());
-    map.put("currentLoggedInUserEmail", user.getEmail());
-    map.put("currentLoggedInUserMobile", user.getPhone());
-    map.put("currentLoggedInUserSkill", user.getSkill().getSkills());
-    map.put("currentLoggedInUserExperience", user.getSkill().getYearOfExperiance());
-    map.put("currentLoggedInUserFunctionalArea", user.getSkill().getFunctionalArea());
+    setJobSearchHomePage(map);
     return "normal.user.home";
   }
 
@@ -66,6 +58,5 @@ public class NormalUserController extends BaseAuthenticatedController {
     map.put("registration", userRegistrationForm);
     return "user.changepassword";
   }
-
 
 }

@@ -87,8 +87,10 @@ public class BaseController {
       map.put("currentLoggedInUser", username);
       map.put("currentLoggedInUserId", user.getId());
       return "admin.home";
-    } else if (roleId.equals(3L) || roleId.equals(6L)) {
+    } else if (roleId.equals(3L)) {
       return "redirect:/reseller/";
+    } else if (roleId.equals(6L)) {
+      return "redirect:/reseller/admin";
     } else {
       return "redirect:/normal/user/home";
     }
@@ -120,6 +122,16 @@ public class BaseController {
       userRegistrationForm.setDegree(existingUser.getQualifications().get(0).getDegree().getName());
       map.put("qualifications", existingUser.getQualifications());
       map.put("qualificationCount", existingUser.getQualifications().size() - 1);
+    }
+    Long roleId = existingUser.getUserRole().getRole().getId();
+    if (roleId.equals(3L)) {
+      userRegistrationForm.setRegistrationType(3);
+    } else if (roleId.equals(6L)) {
+      userRegistrationForm.setRegistrationType(6);
+    } else if (roleId.equals(2L)) {
+      userRegistrationForm.setRegistrationType(2);
+    } else if (roleId.equals(5L)) {
+      userRegistrationForm.setRegistrationType(5);
     }
     userRegistrationForm.setTerms(true);
     map.put("registration", userRegistrationForm);

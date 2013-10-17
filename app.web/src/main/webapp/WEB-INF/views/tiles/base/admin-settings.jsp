@@ -96,7 +96,7 @@ li{
 	    	<a href="${contextPath}/reseller/retrieveuser">My Profile</a>
 	    </li>
 	    <li id="opt_1.1">
-	    	<a href="${contextPath}/admin/changepassword/reseller">Change Password</a>
+	    	<a href="${contextPath}/reseller/changepassword">Change Password</a>
 	    </li>
     </sec:authorize>
     <li id="opt_1.4">

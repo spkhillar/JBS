@@ -268,7 +268,7 @@ public class UserController extends AbstractJqGridFilterController {
       resume = multipartFile.getBytes();
       fileName = multipartFile.getOriginalFilename();
     }
-    userRegistrationService.updateInternetUser(userRegistrationForm.getUser(),
+    userRegistrationService.updateUser(userRegistrationForm.getUser(),
       userRegistrationForm.getSecurityQuestion(), userRegistrationForm.getSecurityAnswer(), resume, fileName,
       userRegistrationForm.getDegree());
     return getHomePage(map);

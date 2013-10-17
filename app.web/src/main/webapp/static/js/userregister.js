@@ -62,7 +62,7 @@ $(document).ready(function(){
   		      },
   			"user.email" : {
   		        required : true,
-  		      emailCheck:true
+  		        email:true
   		   },
   			"user.password" : {
   		        required : true,
@@ -202,12 +202,3 @@ jQuery.validator.addMethod("notNumber", function(value, element, param) {
             return true;
     }
 }, "Number is not permitted");
-
-jQuery.validator.addMethod("emailCheck", function(value, element) {
-	var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-	if (pattern.test(value)) {
-        return false;
-    }
-    return true;
-}, "Please enter a valid email address");
-

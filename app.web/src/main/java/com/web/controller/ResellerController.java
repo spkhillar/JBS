@@ -79,12 +79,15 @@ public class ResellerController extends BaseAuthenticatedController {
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String resellerHome(final ModelMap map, final HttpServletRequest request) {
-    String username = this.getCurrentLoggedinUserName();
-    User user = userService.findByUserName(username);
-    map.put("currentLoggedInUser", username);
-    map.put("currentLoggedInUserId", user.getId());
     checkAndResellerChild(map);
+    setJobSearchHomePage(map);
     return "mlm.home";
+  }
+
+  @RequestMapping(value = "/admin", method = RequestMethod.GET)
+  public String resellerAdminHome(final ModelMap map, final HttpServletRequest request) {
+    checkAndResellerChild(map);
+    return "mlm.admin.home";
   }
 
   @RequestMapping(value = "/paymentintimator", method = RequestMethod.GET)
@@ -246,8 +249,6 @@ public class ResellerController extends BaseAuthenticatedController {
 
   @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
   public String changePassword(final ModelMap map, final HttpServletRequest request) {
-    User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
-    map.put("currentLoggedInAdminId", existingUser.getId());
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
     map.put("registration", userRegistrationForm);
     checkAndResellerChild(map);
@@ -264,7 +265,12 @@ public class ResellerController extends BaseAuthenticatedController {
   public String retrieveUser(final ModelMap map, final HttpServletRequest request) {
     User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
     retrieveAndPopulateUser(map, existingUser);
-    map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "user_update");
+    Long roleId = existingUser.getUserRole().getRole().getId();
+    if (roleId.equals(3L)) {
+      map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "user_update");
+    } else if (roleId.equals(6L)) {
+      map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "mlm_admin_update");
+    }
     checkAndResellerChild(map);
     return "mlm.user.profile";
   }

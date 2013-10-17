@@ -127,7 +127,7 @@
 	</definition>
 	
 	<definition name="mlm.home" extends="mlm.base.definition">
-		<put-attribute name="body" value="/WEB-INF/views/tiles/mlm/mlm-home.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/tiles/user/normal/userhome.jsp" />
 	</definition>
 	
 	<definition name="mlm.payment.intimator" extends="mlm.base.definition">
@@ -190,5 +190,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/jsp/enquiry.jsp" />
 	</definition>
 	
+	<definition name="mlm.admin.home" extends="mlm.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/mlm/mlm-home.jsp" />
+	</definition>
 	
 </tiles-definitions>

@@ -136,13 +136,4 @@ public class AdminController extends BaseAuthenticatedController {
     return "admin.normal.user.list";
   }
 
-  @RequestMapping(value = "/changepassword/reseller", method = RequestMethod.GET)
-  public String changePasswordReseller(final ModelMap map, final HttpServletRequest request) {
-    User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
-    map.put("currentLoggedInAdminId", existingUser.getId());
-    UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
-    map.put("registration", userRegistrationForm);
-    return "mlm.changepassword";
-  }
-
 }

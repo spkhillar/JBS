@@ -73,4 +73,15 @@ public class BaseAuthenticatedController extends BaseController {
     map.put("creditPointCount", creditPointCount);
   }
 
+  protected void setJobSearchHomePage(final ModelMap map) {
+    User user = getCurrentUser();
+    map.put("currentLoggedInUser", user.getUserName());
+    map.put("currentLoggedInUserId", user.getId());
+    map.put("currentLoggedInUserEmail", user.getEmail());
+    map.put("currentLoggedInUserMobile", user.getPhone());
+    map.put("currentLoggedInUserSkill", user.getSkill().getSkills());
+    map.put("currentLoggedInUserExperience", user.getSkill().getYearOfExperiance());
+    map.put("currentLoggedInUserFunctionalArea", user.getSkill().getFunctionalArea());
+  }
+
 }
