@@ -234,17 +234,21 @@ $(document).ready(function(){
   </tr>
 </table>
 </div>
-<div id="newPasswordDiv" hidden="true" style="margin:auto; width:80%; height:50%">
+<div id="newPasswordDiv" class="forgotpasswordresult">
 <br>
 <br>
+ <div class="successLogo"></div>
+ <div class="transfersuccessmessage">Successfully changed </div>  
 <p></p>
  <center>
  <h3>Your new password: ${changePassword}</h3>
   </center>
 </div>
-<div id="usernameDiv" hidden="true" style="margin:auto; width:80%; height:50%">
+<div id="usernameDiv" class="forgotpasswordresult">
 <br>
 <br>
+ <div class="successLogo"></div>
+ <div class="transfersuccessmessage">Successfully retrieved </div>  
 <p></p>
  <center>
  <h3>Your Username: ${username}</h3>

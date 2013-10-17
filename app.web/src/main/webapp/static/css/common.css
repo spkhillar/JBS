@@ -235,21 +235,20 @@ table.paymentTable{
 	margin:auto;
 }
 
-div.successLogo{
+.successLogo{
 	background-image: url("../images/tick.png");
      background-repeat: no-repeat;
      background-size: 50px 50px;
-     margin: auto;
+     margin-left: 260px;
      padding-top: 50px;
      text-align: center;
      width: 30%;
      
 }
 
-div.message1{
-	text-align: right;
+.transfersuccessmessage{
 	color:green;
-	
+	margin-left: 200px;
 }
 
 #step1{
@@ -297,3 +296,45 @@ span.texture{
 	color:blue;
 }
 
+.firstColBold{
+	font-weight: bold;
+}
+
+.forgotpasswordresult{
+margin: auto; 
+width: 1100px;
+height: 50%;
+display: none;
+}
+
+.forgotpasswordresult .transfersuccessmessage{
+	color:green;
+	margin-left: 500px;
+}
+
+.forgotpasswordresult .transfersuccessmessage{
+	color:green;
+	margin-left: 480px;
+}
+
+.forgotpasswordresult .successLogo{
+	background-image: url("../images/tick.png");
+     background-repeat: no-repeat;
+     background-size: 50px 50px;
+     margin-left: 530px;
+     padding-top: 50px;
+     text-align: center;
+     width: 30%;
+     
+}
+
+.forgotpasswordresulttable{
+	display: none;
+	width:50%;
+	border-radius: 3px 3px 3px 3px;
+	border:0px solid #CCC;
+	box-shadow:  4px 4px 4px 4px;
+	font-size: 14px;
+	font-family:Arial;	
+	margin:auto;
+}

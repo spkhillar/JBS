@@ -33,7 +33,6 @@ import com.jpa.entities.enums.PaymentMode;
 import com.jpa.entities.enums.RedeemStatus;
 import com.jpa.entities.enums.UserPosition;
 import com.service.DepositIntimatorService;
-import com.service.MlmUserCreditPointService;
 import com.service.RedeemHistoryService;
 import com.service.SystemConfigurationService;
 import com.service.UserPointsHistoryService;
@@ -49,9 +48,6 @@ public class ResellerController extends BaseAuthenticatedController {
 
   @Autowired
   private DepositIntimatorService depositIntimatorService;
-
-  @Autowired
-  private MlmUserCreditPointService mlmUserCreditPointService;
 
   @Autowired
   private UserPointsHistoryService userPointsHistoryService;
@@ -87,9 +83,7 @@ public class ResellerController extends BaseAuthenticatedController {
     User user = userService.findByUserName(username);
     map.put("currentLoggedInUser", username);
     map.put("currentLoggedInUserId", user.getId());
-
-    long creditPointCount = mlmUserCreditPointService.getUserPointCount(user);
-    map.put("creditPointCount", creditPointCount);
+    checkAndResellerChild(map);
     return "mlm.home";
   }
 
@@ -99,6 +93,7 @@ public class ResellerController extends BaseAuthenticatedController {
     map.put("depositIntimator", resellerForm);
     map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "create");
     prepareResellerForm(map);
+    checkAndResellerChild(map);
     return "mlm.payment.intimator";
   }
 
@@ -125,6 +120,7 @@ public class ResellerController extends BaseAuthenticatedController {
     depositIntimator.setDepositIntimatorType(DepositIntimatorType.MLM_CREDIT_POINT);
     depositIntimator.setStatus(DepositIntimatorStatus.NEW);
     depositIntimatorService.save(depositIntimator);
+    checkAndResellerChild(map);
     return "redirect:/";
   }
 
@@ -152,6 +148,7 @@ public class ResellerController extends BaseAuthenticatedController {
       }
     }
     setBasicAdminRegister(map, userRegistrationForm);
+    checkAndResellerChild(map);
     return "create.mlm.profile";
   }
 
@@ -192,6 +189,7 @@ public class ResellerController extends BaseAuthenticatedController {
     } else {
       map.put("canRedeem", 1);
     }
+    checkAndResellerChild(map);
     return "mlm.creditpoint.list";
   }
 
@@ -203,6 +201,7 @@ public class ResellerController extends BaseAuthenticatedController {
     map.put("userTotalPoints", userTotalPoints);
     map.put("resellerRedeemForm", new RedeemHistory());
     map.put("modeOfRedemptionList", MODE_OF_REDEEMPTION);
+    checkAndResellerChild(map);
     return "reseller-redemption";
   }
 
@@ -218,6 +217,7 @@ public class ResellerController extends BaseAuthenticatedController {
 
   @RequestMapping(value = "/view/redeem", method = RequestMethod.GET)
   public String viewAllRedeem(final ModelMap map) {
+    checkAndResellerChild(map);
     return "reseller.redeem.history.list";
   }
 
@@ -250,18 +250,22 @@ public class ResellerController extends BaseAuthenticatedController {
     map.put("currentLoggedInAdminId", existingUser.getId());
     UserRegistrationForm userRegistrationForm = new UserRegistrationForm();
     map.put("registration", userRegistrationForm);
+    checkAndResellerChild(map);
     return "mlm.changepassword";
   }
 
   @RequestMapping(value = "/credit/transfer", method = RequestMethod.GET)
   public String creditTransfer(final ModelMap map, final HttpServletRequest request) {
+    checkAndResellerChild(map);
     return "mlm.credit.transfer";
   }
+
   @RequestMapping(value = "/retrieveuser", method = RequestMethod.GET)
   public String retrieveUser(final ModelMap map, final HttpServletRequest request) {
     User existingUser = userService.findByUserName(getCurrentLoggedinUserName());
     retrieveAndPopulateUser(map, existingUser);
     map.put(ApplicationConstants.USER_OPERATION_ON_SCREEN, "user_update");
+    checkAndResellerChild(map);
     return "mlm.user.profile";
   }
 }

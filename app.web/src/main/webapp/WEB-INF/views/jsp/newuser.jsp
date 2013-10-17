@@ -203,7 +203,7 @@
   <td height="21"><h4>&nbsp;</h4></td>
   <td><h4>&nbsp;</h4></td>
 </tr>
- <c:if test="${(operation eq 'new_user') or (operation eq 'user_update')}">
+ <c:if test="${(operation eq 'new_user') or (operation eq 'user_update') or (operation eq 'mlm_create')}">
 <tr bgcolor="#FFFFFF" class="header2">
   <td colspan="7"><h4>
     <label for="othercity"></label>
@@ -234,7 +234,7 @@
   <td>&nbsp;</td>
 </tr>
 </c:if>
- <c:if test="${(operation eq 'new_user') or (operation eq 'user_update')}">
+ <c:if test="${(operation eq 'new_user') or (operation eq 'user_update') or (operation eq 'mlm_create')}">
 <tr bgcolor="#FFFFFF" class="header2">
   <td colspan="7"><h4> Educational Qualification</h4></td>
   </tr>
@@ -250,7 +250,7 @@
       </tr>
       
      <c:choose>
-  <c:when test="${operation eq 'new_user'}">
+  <c:when test="${operation eq 'new_user' or (operation eq 'mlm_create')}">
       <tr>
       <td>
       	<form:select path="degree" items="${degreeList}" ></form:select>
@@ -290,7 +290,7 @@
   <td>&nbsp;</td>
 </tr>
 </c:if>
- <c:if test="${(operation eq 'new_user') or (operation eq 'user_update')}">
+ <c:if test="${(operation eq 'new_user') or (operation eq 'user_update') or (operation eq 'mlm_create')}">
 <tr bgcolor="#FFFFFF" class="header2">
   <td>&nbsp;</td>	
   <td colspan="2" align="right">Upload Your Detailed Resume Document</td>

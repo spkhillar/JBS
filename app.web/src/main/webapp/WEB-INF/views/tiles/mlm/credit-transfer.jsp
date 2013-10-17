@@ -142,6 +142,12 @@ function initiateCreditTransfer(depositAmount,commissionAmount){
 		$('#secondDiv').hide();
 		$('#thirdDiv').hide();
 		$('#fourthDiv').show();
+		var date = new Date();
+		replaceTableVerifyTransferDetails('transactiondate',(date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear()));
+		replaceTableVerifyTransferDetails('fromreseller',$('#loggedInMlmId').val());
+		replaceTableVerifyTransferDetails('toreseller',mlmIdValue);
+		replaceTableVerifyTransferDetails('transactionamt',depositAmount+commissionAmount);
+		
 	}else{
 		showToastErrorMessage(retValue);
 	}
@@ -169,6 +175,11 @@ function checkTransferAmount(value){
 
 function checkForNumeric(value){
 	 return /^[0-9]+$/i.test(value);
+}
+
+function replaceTableVerifyTransferDetails(find, replace)
+{
+    $("#verifyTransferDetails td:contains('" + find + "')").html(replace);
 }
 </script>
 <style>
@@ -226,24 +237,24 @@ input[type="text, number"]:focus {
 	<hr color="blue"><br/>
 		<table width="25%" border="0" id="tableCreditDetails">
 			<tr>
-				<td width="32%"><strong>Reseller Id</strong></td>
+				<td width="32%" class="firstColBold">Reseller Id</td>
 				<td width="68%">mlmid</td>
 			</tr>
 			<tr>
-				<td  ><strong>First Name</strong></td>
-				<td  >firstname</td>
+				<td class="firstColBold">First Name</td>
+				<td>firstname</td>
 			</tr>
 			<tr>
-				<td  ><strong>Last Name</strong></td>
-				<td  >lastname</td>
+				<td class="firstColBold">Last Name</strong></td>
+				<td>lastname</td>
 			</tr>
 			<tr>
-				<td  ><strong>Phone</strong></td>
-				<td  >phonenum</td>
+				<td class="firstColBold">Phone</strong></td>
+				<td>phonenum</td>
 			</tr>
 			<tr>
-				<td  ><strong>Email</strong></td>
-				<td  >emailid</td>
+				<td class="firstColBold">Email</strong></td>
+				<td>emailid</td>
 			</tr>
 			<tr>
 			<td>
@@ -284,24 +295,32 @@ input[type="text, number"]:focus {
 	<div id="fourthDiv" hidden="true">
 	 <div id="step4"></div>
 	<hr color="blue"><br/>
-    <div class="successLogo">
-      <p class="message1">Successfully Transferred </p>
-     </div>
-     
+	     
 		<table width="74%" border="0" id="verifyTransferDetails">
+		<tr>
+		<td colspan="2">
+		    <div class="successLogo"></div>
+		    <div class="transfersuccessmessage">Successfully Transferred </div>  
+		</td>
+		</tr>
 			<tr>
-				<td width="34%">From Reseller Id</td>
-				<td width="66%"></td>
+				<td width="34%" class="firstColBold">Transaction Date</td>
+				<td width="66%">transactiondate</td>
 			
 			</tr>
 			<tr>
-				<td width="34%">To Reseller Id</td>
-				<td width="66%"></td>
+				<td width="34%" class="firstColBold">From Reseller Id</td>
+				<td width="66%">fromreseller</td>
+			
+			</tr>
+			<tr>
+				<td width="34%" class="firstColBold">To Reseller Id</td>
+				<td width="66%">toreseller</td>
 				
 			</tr>
 			<tr>
-				<td width="34%">Transferred Amount</td>
-				<td width="66%"></td>
+				<td width="34%" class="firstColBold">Transferred Amount</td>
+				<td width="66%">transactionamt</td>
 				
 			</tr>
 			
@@ -311,5 +330,6 @@ input[type="text, number"]:focus {
 </div>
 <input type="hidden" value="${webUser.currentBalance}" id="depositBal"/>
 <input type="hidden" value="${webUser.currentComissionBalance}" id="commissionBal"/>
+<input type="hidden" value="${webUser.mlmId}" id="loggedInMlmId"/>
 </body>
 </html>

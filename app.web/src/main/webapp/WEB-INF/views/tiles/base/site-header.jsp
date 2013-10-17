@@ -73,12 +73,12 @@ input[type="text, number"]:focus {
 				title="Premium Website for Job Opportunities,Business Network etc.."><div
 						id="site_title"></div></a></th>
 			<th scope="col"><div id="site_title1"></div></th>
-			<td scope="col" colspan="2" class="siteheadercells">
+			<th scope="col">
 				<form action="${contextPath}/j_spring_security_check" method="post">
 					<input type="text" name="j_username"
 						placeholder="Enter your username" style="float: left" /> <input
 						type="password" placeholder="Enter your Password"
-						name="j_password" style="text-align: center; margin-left: 6px" />
+						name="j_password" style="text-align: left; margin-left: -30px" />
 					<input type="submit" value="Login"
 						style="width: 20%; height: 28px; float: right" /> <br>
 					<label style="font-size: 12px; color: blue; font-style: normal;">
@@ -97,7 +97,7 @@ input[type="text, number"]:focus {
 					</c:choose>
 				</form>
 
-			</td>
+			</th>
 		</tr>
 		<tr>
 			<td class="siteheadercells"></td>

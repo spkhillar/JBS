@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.jpa.entities.User;
 import com.jpa.entities.enums.PaymentMode;
 import com.service.DepositIntimatorService;
+import com.service.MlmUserCreditPointService;
 import com.service.UserPointsHistoryService;
 import com.web.form.UserRegistrationForm;
 import com.web.form.WebUser;
@@ -21,6 +22,9 @@ public class BaseAuthenticatedController extends BaseController {
 
   @Autowired
   private DepositIntimatorService depositIntimatorService;
+
+  @Autowired
+  protected MlmUserCreditPointService mlmUserCreditPointService;
 
   public User getCurrentUser() {
     String userName = getCurrentLoggedinUserName();
@@ -62,6 +66,11 @@ public class BaseAuthenticatedController extends BaseController {
     map.put("registration", userRegistrationForm);
     map.put("qualificationCount", 0);
     prepareObjectsForRegistration(map);
+  }
+
+  protected void checkAndResellerChild(final ModelMap map) {
+    long creditPointCount = mlmUserCreditPointService.getUserPointCount(getCurrentUser());
+    map.put("creditPointCount", creditPointCount);
   }
 
 }
