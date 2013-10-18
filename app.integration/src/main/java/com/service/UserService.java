@@ -99,7 +99,8 @@ public interface UserService extends BaseService<User> {
 
   public String changePassword(String username, String currentPassword);
 
-  public User findUserBy(String firstName, String lastName, String email, String phone);
+  public List<User> findUserBy(String firstName, String lastName, String email, String phone, long securityQuestionId,
+      String securityAnswer);
 
   public boolean matchPassword(String username, String currentPassword, String newPassword);
 

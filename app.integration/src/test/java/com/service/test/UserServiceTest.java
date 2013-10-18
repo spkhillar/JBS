@@ -1,5 +1,8 @@
 package com.service.test;
 
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,12 +16,22 @@ public class UserServiceTest extends BaseServiceTest {
 
   @Test
   public void test() {
-    User u = userService.findUserBy("root", null, null, null);
-    u = userService.findUserBy("root", "root", null, null);
-    u = userService.findUserBy("root", null, "root@gmail.com", null);
-    u = userService.findUserBy("root", null, null, "11111");
-    u = userService.findUserBy("root", "root", "root@gmail.com", "11111");
-
+    List<User> u = userService.findUserBy("root", null, null, null, -1, null);
+    Assert.assertTrue(u.size() == 1);
+    u = userService.findUserBy("root", "root", null, null, -1, null);
+    Assert.assertTrue(u.size() == 1);
+    u = userService.findUserBy("root", null, "root@gmail.com", null, -1, null);
+    Assert.assertTrue(u.size() == 1);
+    u = userService.findUserBy("root", null, null, "11111", -1, null);
+    Assert.assertTrue(u.size() == 1);
+    u = userService.findUserBy("root", "root", "root@gmail.com", "11111", -1, null);
+    Assert.assertTrue(u.size() == 1);
+    u = userService.findUserBy("root", "root", "root@gmail.com", "11111", 3, "none");
+    Assert.assertTrue(u.size() == 1);
+    u = userService.findUserBy("root", "root", "root@gmail.com", "11111", 3, "none");
+    Assert.assertTrue(u.size() == 1);
+    u = userService.findUserBy("root1", "root", "root@gmail.com", "11111", 3, "none");
+    Assert.assertTrue(u == null);
   }
 
   @Test

@@ -327,7 +327,8 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User findUserBy(final String firstName, final String lastName, final String email, final String phone) {
+  public List<User> findUserBy(final String firstName, final String lastName, final String email, final String phone,
+      long securityQuestionId, String securityAnswer) {
     StringBuilder query = new StringBuilder("from User u where ");
     Map<String, Object> params = new HashMap<String, Object>();
     query.append("u.firstName =:firstName");
@@ -344,11 +345,18 @@ public class UserServiceImpl implements UserService {
       query.append(" and u.phone =:phone");
       params.put("phone", phone);
     }
+
+    if (securityQuestionId > 0) {
+      query.append(" and u.userSecurityQuestion.securityQuestion.id =:securityQuestionId");
+      query.append(" and u.userSecurityQuestion.answer =:securityAnswer");
+      params.put("securityQuestionId", securityQuestionId);
+      params.put("securityAnswer", securityAnswer);
+    }
     List<User> userList = genericQueryExecutorDAO.executeProjectedQuery(query.toString(), params);
     if (CollectionUtils.isEmpty(userList)) {
       return null;
     }
-    return userList.get(0);
+    return userList;
   }
 
   @Override

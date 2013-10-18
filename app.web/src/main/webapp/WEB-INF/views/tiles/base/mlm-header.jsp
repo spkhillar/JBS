@@ -91,7 +91,7 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
             </li>
         
        	 <li>
-          <a class="fNiv" href="${contextPath}/reseller/credit/transfer">Credit Transfer</a>
+          <a class="fNiv" href="${contextPath}/reseller/credit/transfer">Push Balance</a>
           </li>
         
         <li>

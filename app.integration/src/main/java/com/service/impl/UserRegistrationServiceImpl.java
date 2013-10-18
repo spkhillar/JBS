@@ -97,7 +97,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
   }
 
   @Override
-  @Transactional
+  @Transactional(rollbackFor = Exception.class)
   public void saveInternetUser(User newUser, Long securityQuestionId, String securityQuestionAnswer, byte[] resume,
       String fileName, String degree) {
     Role role = roleDAO.findOne(2L);

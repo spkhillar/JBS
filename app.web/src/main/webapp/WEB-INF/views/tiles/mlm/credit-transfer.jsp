@@ -84,7 +84,8 @@ function replaceTableCreditDetailsCellContent(find, replace)
 function validateB4SubmitCredit(){
 	$( ".error" ).remove();
 	var inputDepositBalance = $("#depositbalance").val();
-	var inputCommissionBalance = $("#commissionbalance").val();
+	//var inputCommissionBalance = $("#commissionbalance").val();
+	var inputCommissionBalance = 0;
 	var maxDepositBal = $("#depositBal").val();
 	var maxCommissionBal = $("#commissionBal").val();
 	var valid = true;
@@ -98,18 +99,18 @@ function validateB4SubmitCredit(){
 		$("#depositbalance").after('<label class="error">Field must contain only numbers.</label>');
 		valid = false;	
 	}
-	if(!checkForNumeric(inputCommissionBalance)){
+	/* if(!checkForNumeric(inputCommissionBalance)){
 		$("#commissionbalance").after('<label class="error">Field must contain only numbers.</label>');	
 		valid = false;
-	}
+	} */
 	if(parseInt(inputDepositBalance) > parseInt(maxDepositBal)){
 		$("#depositbalance").after('<label class="error">Value must less than '+maxDepositBal+' </label>');
 		valid = false;
 	}
-	if(parseInt(inputCommissionBalance) > parseInt(maxCommissionBal)){
+	/* if(parseInt(inputCommissionBalance) > parseInt(maxCommissionBal)){
 		$("#commissionbalance").after('<label class="error">Value must less than '+maxCommissionBal+' </label>');
 		valid = false;
-	}
+	} */
 	
 	if(valid){
 		var total = parseInt(inputDepositBalance)+parseInt(inputCommissionBalance);
@@ -278,11 +279,11 @@ input[type="text, number"]:focus {
 				<td width="10%">(${webUser.currentBalance})</td>
 				<td width="45%"><input type="text" id="depositbalance" value="0"/> </td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<td width="27%">Commission Balance</td>
 				<td width="10%">(${webUser.currentComissionBalance})</td>
 				<td width="45%"><input type="text" id="commissionbalance" value="0"/> </td>
-			</tr>
+			</tr> --%>
 			<tr>
 			<td colspan="3">
 				<input type="button" id="Back" value="Back" onclick="javascript:back();"/>

@@ -80,8 +80,17 @@ $(document).ready(function(){
    	    rules : {
    			"user.userName" : {
    		        required : true
+   		     },"securityQuestion":{
+   		    	 min:0
+   		     },"securityAnswer":{
+   		    	 required:true
    		     }
-   	    }
+   	    },
+  	    messages: {
+  	    	securityQuestion: {
+  				min: "Please select your security question from the list."
+  			}
+  	    }
      });
      
      $("#forgotUserIdForm").validate( {
@@ -104,8 +113,6 @@ $(document).ready(function(){
      jQuery.validator.addMethod("lettersonly", function(value, element) {
    	  return this.optional(element) || /^[a-z]+$/i.test(value);
    	}, "Letters only please."); 
-
-	 
 });
 
 

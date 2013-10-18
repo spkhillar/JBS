@@ -58,7 +58,7 @@ $(document).ready(function(){
   		        minlength: 4,
   		        maxlength: 20,
   		        alphanumeric: true,
-  		        notNumber:true
+  		      userNameValidCheck:true
   		      },
   			"user.email" : {
   		        required : true,
@@ -97,18 +97,17 @@ $(document).ready(function(){
  	  		},
   			"user.address.city" : {
   		        required : true,
-  		      notNumber:true,
   		        maxlength: 100,
   		   },
   			"user.phone" : {
   		        required : true,
   		        	number:true,
-  		      mobileNumberLength: true
+  	  		      maxlength:10
   		   },
   			"user.address.pin" : {
   		        required : true,
   		        number:true,
-  		        zipCode:true
+  		      maxlength:6
   		   },
   			"user.skill.skills" : {
   		        required : true
@@ -178,27 +177,6 @@ jQuery.validator.addMethod("addressvalid", function(value, element) {
 	  return this.optional(element) || /^[a-zA-Z0-9 ,&-]+$/i.test(value);
 	}, "Letters, numbers, space, comma are valid entries."); 
 
-jQuery.validator.addMethod("mobileNumberLength", function(value, element) {
-	var mobpattern = /^\d{10}$/;
-	if (mobpattern.test(value)) {
-		return true;
-    }
-    return false;
-}, "Mobile Number Should be of 10 digits");
-
-jQuery.validator.addMethod("zipCode", function(value, element) {
-	var pinpattern = /^\d{6}$/;
-	if (pinpattern.test(value)) {
-        return true;
-    }
-    return false;
-}, "Pin Code should of 6 digits");
-
-jQuery.validator.addMethod("notNumber", function(value, element, param) {
-    var reg = /[0-9]/;
-    if(reg.test(value)){
-          return false;
-    }else{
-            return true;
-    }
-}, "Number is not permitted");
+jQuery.validator.addMethod("userNameValidCheck", function(value, element) {
+    return this.optional(element) || /^[A-Za-z][A-Za-z0-9]+$/.test(value);
+}, "Username not valid, Must start with a alphabet. Only aplhabets and digits are valid.");

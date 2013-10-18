@@ -1,8 +1,10 @@
 package com.web.controller;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -39,8 +41,9 @@ public class PasswordController extends BaseController {
       prepareRenderObject(map);
       return "user.forgotpassword";
     }
-    String changePassword=userService.changePassword(userRegistrationForm.getUser().getUserName(), userRegistrationForm.getUser()
-      .getPassword());
+    String changePassword =
+        userService.changePassword(userRegistrationForm.getUser().getUserName(), userRegistrationForm.getUser()
+          .getPassword());
     map.put("changePassword", changePassword);
     userRegistrationForm.setChangePassword("3");
     return "user.forgotpassword";
@@ -56,8 +59,9 @@ public class PasswordController extends BaseController {
       prepareRenderObject(map);
       return "user.forgotpassword";
     }
-    // String changePassword=userService.changePassword(username, userRegistrationForm.getUser().getPassword());
-    //map.put("changePassword", changePassword);
+    // String changePassword=userService.changePassword(username,
+    // userRegistrationForm.getUser().getPassword());
+    // map.put("changePassword", changePassword);
     map.put("username", username);
     userRegistrationForm.setChangePassword("4");
     return "user.forgotpassword";
@@ -87,7 +91,7 @@ public class PasswordController extends BaseController {
   private void prepareRenderObject(final ModelMap map) {
     Map<String, String> questionMap = securityQuestionService.getSecurityQuestions();
     Map<String, String> modifiedQuestionMap = new LinkedHashMap<String, String>();
-    modifiedQuestionMap.put("-1", "");
+    modifiedQuestionMap.put("-1", "Select...");
     modifiedQuestionMap.putAll(questionMap);
     map.put("securityQuestions", modifiedQuestionMap);
   }
@@ -97,15 +101,19 @@ public class PasswordController extends BaseController {
     String lastName = userRegistrationForm.getUser().getLastName();
     String emailAddress = userRegistrationForm.getUser().getEmail();
     String phoneNumber = userRegistrationForm.getUser().getPhone();
-    User user = userService.findUserBy(firstName, lastName, emailAddress, phoneNumber);
+    List<User> userList =
+        userService.findUserBy(firstName, lastName, emailAddress, phoneNumber, userRegistrationForm
+          .getSecurityQuestion().longValue(), userRegistrationForm.getSecurityAnswer());
     String username = null;
-    if (user == null) {
+    if (CollectionUtils.isEmpty(userList)) {
       result.addError(new ObjectError("registration", "User doesnot exists with given userid"));
       return username;
+    } else if (userList.size() > 1) {
+      result.addError(new ObjectError("registration",
+        "More than 1 user exist with given criteria. Please provide more details."));
+      return username;
     }
-    username = user.getUserName();
-    checkUserSecurityQuestion(user, userRegistrationForm, result);
-    return username;
+    return userList.get(0).getUserName();
   }
 
   private void validateUserFormForPassword(final UserRegistrationForm userRegistrationForm, final BindingResult result) {
@@ -116,7 +124,8 @@ public class PasswordController extends BaseController {
     checkUserSecurityQuestion(user, userRegistrationForm, result);
   }
 
-  private void checkUserSecurityQuestion(final User user, final UserRegistrationForm userRegistrationForm, final BindingResult result) {
+  private void checkUserSecurityQuestion(final User user, final UserRegistrationForm userRegistrationForm,
+      final BindingResult result) {
     Long nullQuestion = new Long(-1l);
     if (!nullQuestion.equals(userRegistrationForm.getSecurityQuestion())) {
       UserSecurityQuestion userSecurityQuestion = user.getUserSecurityQuestion();
