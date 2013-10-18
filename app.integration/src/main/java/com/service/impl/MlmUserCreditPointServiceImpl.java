@@ -124,7 +124,7 @@ public class MlmUserCreditPointServiceImpl implements MlmUserCreditPointService 
     Map<String, Object> params = new HashMap<String, Object>(2);
     params.put("userId", user.getId());
     params.put("status1", MlmUserCreditPointStatus.OPEN);
-    params.put("status2", MlmUserCreditPointStatus.OPEN);
+    params.put("status2", MlmUserCreditPointStatus.CLOSED);
     List<Long> list = genericQueryExecutorDAO.executeProjectedQuery(ejbql, params);
     if (list.get(0) == null) {
       return 0;

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jpa.entities.DepositIntimator;
 import com.jpa.entities.SystemConfiguration;
+import com.jpa.entities.enums.DepositIntimatorStatus;
 import com.service.DepositIntimatorService;
 import com.service.RedeemHistoryService;
 import com.service.util.ApplicationConstants;
@@ -33,19 +34,25 @@ public class DepositIntimatorController extends BaseAuthenticatedController {
   @Autowired
   private RedeemHistoryService redeemHistoryService;
 
-  @RequestMapping(value = "/deposit/records", produces = "application/json")
+  @RequestMapping(value = "/deposit/records/{type}", produces = "application/json")
   public @ResponseBody
-  JqGridResponse<DepositIntimator> mlmDepositRecords(@RequestParam("_search") final Boolean search,
+  JqGridResponse<DepositIntimator> mlmDepositRecords(@PathVariable final int type,
+      @RequestParam("_search") final Boolean search,
       @RequestParam(value = "filters", required = false) final String filters,
       @RequestParam(value = "page", required = false) final Integer page,
       @RequestParam(value = "rows", required = false) final Integer rows,
       @RequestParam(value = "sidx", required = false) final String sidx,
       @RequestParam(value = "sord", required = false) final String sord) {
     Page<DepositIntimator> depositIntimator = null;
-    if (search == true) {
-      depositIntimator = depositIntimatorService.findAll(page, rows, sord, sidx);
+    DepositIntimatorStatus depositIntimatorStatus = null;
+    if (type == 1) {
+      depositIntimatorStatus = DepositIntimatorStatus.NEW;
+    }
+    if (type == 0 || type == 1) {
+      depositIntimator =
+          depositIntimatorService.findAll(page, rows, sord, sidx, depositIntimatorStatus, getCurrentUser());
     } else {
-      depositIntimator = depositIntimatorService.findAll(page, rows, sord, sidx);
+      depositIntimator = depositIntimatorService.findAllCreditTransferBy(getCurrentUser(), page, rows, sord, sidx);
     }
     List<Object> list = DomainObjectMapper.listEntities(depositIntimator);
     JqGridResponse<DepositIntimator> response = new JqGridResponse<DepositIntimator>();

@@ -6,7 +6,7 @@
 <script type='text/javascript'>
 
 	$(function() {
-		var actionUrl = webContextPath + "/admin/deposit/records";
+		var actionUrl = webContextPath + "/admin/deposit/records/1";
 		$("#grid").jqGrid(
 				{
 					url : actionUrl,

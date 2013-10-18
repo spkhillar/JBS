@@ -274,4 +274,16 @@ public class ResellerController extends BaseAuthenticatedController {
     checkAndResellerChild(map);
     return "mlm.user.profile";
   }
+
+  @RequestMapping(value = "/deposits", method = RequestMethod.GET)
+  public String resellerDeposits(final ModelMap map, final HttpServletRequest request) {
+    checkAndResellerChild(map);
+    return "mlm.payment.deposit.list";
+  }
+
+  @RequestMapping(value = "/credit/transfer/list", method = RequestMethod.GET)
+  public String creditTransferList(final ModelMap map, final HttpServletRequest request) {
+    checkAndResellerChild(map);
+    return "mlm.credit.transfer.list";
+  }
 }

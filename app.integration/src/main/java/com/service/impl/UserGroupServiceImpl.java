@@ -79,15 +79,15 @@ public class UserGroupServiceImpl implements UserGroupService {
 
   @Override
   @Transactional(readOnly = true)
-  public void findChild(String username) {
+  public void findChild(String username, List<User> userList) {
     User grp = userDAO.findByUserName(username);
     if (grp != null) {
       Set<UserGroups> groups = grp.getUserGroupsesForParentGroupId();
       if (CollectionUtils.isNotEmpty(groups)) {
         for (UserGroups groups2 : groups) {
           if (groups2.getUserByGroupId() != null) {
-            logger.info("...child groups2..." + groups2.getUserByGroupId().getUserName());
-            findChild(groups2.getUserByGroupId().getUserName());
+            userList.add(groups2.getUserByGroupId());
+            findChild(groups2.getUserByGroupId().getUserName(), userList);
           }
         }
       }

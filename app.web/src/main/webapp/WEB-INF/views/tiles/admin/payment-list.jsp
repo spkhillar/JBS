@@ -77,11 +77,11 @@
 	
 	function myHyperLinkFormatter (cellvalue, options, rowObject)
 	{
-		  var value = '<a href="javascript:void(0);" onclick="javascript:viewPaymentDetails('+rowObject.redeemHistory.id+')">'+ cellvalue +'</a>';
+		  var value = '<a href="javascript:void(0);" onclick="javascript:viewPaymentDetails('+rowObject.id+','+rowObject.redeemHistory.id+')">'+ cellvalue +'</a>';
 		 return value;
 	}
 	
-	function viewPaymentDetails(id){
+	function viewPaymentDetails(paymentId,id){
 		 $.ajax({
 			    url: webContextPath+"/admin/view/redeem/notification/"+id,
 			    dataType:'html',
@@ -95,12 +95,11 @@
 			  		closeOnEscape: true,
 			  		buttons: [ { text: "Pay", click: function() {
 				  				$( this ).dialog( "close" ); 
-				  				initiateActionOnPaymentRecord(id);
+				  				initiateActionOnPaymentRecord(paymentId);
 				  				} 
 			  				},
 			  				{ text: "Cancel", click: function(){
 			  					$( this ).dialog( "close" ); 
-			  					initiateActionOnPaymentRecord(id);
 			  				} 
 			  			}]
 			      }).show();

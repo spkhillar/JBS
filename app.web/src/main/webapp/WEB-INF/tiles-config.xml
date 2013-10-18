@@ -194,4 +194,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/tiles/mlm/mlm-home.jsp" />
 	</definition>
 	
+	<definition name="mlm.payment.deposit.list" extends="mlm.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/mlm/deposit-intimator-list.jsp" />
+	</definition>
+	
+	<definition name="mlm.credit.transfer.list" extends="mlm.base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/tiles/mlm/credit-transfer-list.jsp" />
+	</definition>
+	
 </tiles-definitions>

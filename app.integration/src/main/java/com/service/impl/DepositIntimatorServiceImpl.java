@@ -1,6 +1,7 @@
 package com.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.jpa.repositories.GenericQueryExecutorDAO;
 import com.service.DepositIntimatorService;
 import com.service.MlmUserCreditPointService;
 import com.service.RedeemHistoryService;
+import com.service.util.ApplicationConstants;
 import com.service.util.ServiceUtil;
 
 @Service("depositIntimatorService")
@@ -46,9 +48,17 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
 
   @Override
   @Transactional(readOnly = true)
-  public Page<DepositIntimator> findAll(final int page, final int rows, final String sord, final String sidx) {
+  public Page<DepositIntimator> findAll(final int page, final int rows, final String sord, final String sidx,
+      DepositIntimatorStatus depositIntimatorStatus, User user) {
     Pageable pageable = ServiceUtil.getPage(page, rows, sord, sidx);
-    return depositIntimatorDAO.findByStatus(DepositIntimatorStatus.NEW, pageable);
+    if (depositIntimatorStatus != null) {
+      return depositIntimatorDAO.findByStatus(depositIntimatorStatus, pageable);
+    }
+    List<DepositIntimatorStatus> deposIntimatorStatusList = new ArrayList<DepositIntimatorStatus>();
+    deposIntimatorStatusList.add(DepositIntimatorStatus.NEW);
+    deposIntimatorStatusList.add(DepositIntimatorStatus.APPROVED);
+    deposIntimatorStatusList.add(DepositIntimatorStatus.REJECTED);
+    return depositIntimatorDAO.findByUserByUserIdAndStatusIn(user, deposIntimatorStatusList, pageable);
   }
 
   @Override
@@ -100,5 +110,13 @@ public class DepositIntimatorServiceImpl implements DepositIntimatorService {
     int mlmUserCredPoints = mlmUserCreditPointService.findNumberOfOpenMLMCreditRecords(user);
     int redeemed = redeemHistoryService.sumOfPointBalanceBy(user);
     return total - mlmUserCredPoints - redeemed;
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Page<DepositIntimator> findAllCreditTransferBy(User user, final int page, final int rows, final String sord,
+      final String sidx) {
+    Pageable pageable = ServiceUtil.getPage(page, rows, sord, sidx);
+    return depositIntimatorDAO.findByUserByReceiverUserIdAndMemo(user, ApplicationConstants.CREDIT_TRANSFER, pageable);
   }
 }

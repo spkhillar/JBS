@@ -42,6 +42,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
   private int version;
   @JsonProperty
   private User userByUserId;
+  @JsonProperty
   private User userByReceiverUserId;
   @JsonProperty
   private BigDecimal amountDeposited;
@@ -55,6 +56,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
   private Date chequeDate;
   private String chequeDrawnOnBank;
   private String chequeDrawnBranch;
+  @JsonProperty
   private DepositIntimatorStatus status;
   @JsonProperty
   private DepositIntimatorType depositIntimatorType;
@@ -132,7 +134,7 @@ public class DepositIntimator implements BaseEntity, java.io.Serializable {
     this.userByUserId = userByUserId;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "receiver_user_id")
   public User getUserByReceiverUserId() {
     return this.userByReceiverUserId;

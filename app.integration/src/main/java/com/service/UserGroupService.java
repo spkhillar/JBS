@@ -10,7 +10,7 @@ public interface UserGroupService {
 
   public void addToGroup(User currentUser, String parentMlmId, UserPosition position);
 
-  public void findChild(String username);
+  public void findChild(String username, List<User> userList);
 
   public User findMlmAdminUser(User parentUser, UserPosition userPosition);
 

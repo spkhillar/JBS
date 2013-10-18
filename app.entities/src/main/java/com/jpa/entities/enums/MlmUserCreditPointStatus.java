@@ -17,6 +17,6 @@ public enum MlmUserCreditPointStatus {
   CLOSED,
 
   /** The failed. */
-  TRANSFERRED;
+  REJECTED;
 
 }
